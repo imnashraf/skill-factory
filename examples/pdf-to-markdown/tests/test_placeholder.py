@@ -1,0 +1,24 @@
+"""Unit test harness for pdf-to-markdown."""
+from __future__ import annotations
+
+import unittest
+from pathlib import Path
+
+
+class TransformSkillTests(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(__file__).resolve().parent.parent
+
+    def test_skill_structure(self):
+        """Verify standard file transformation skill files exist."""
+        self.assertTrue((self.root / "SKILL.md").exists(), "SKILL.md must exist")
+        self.assertTrue((self.root / "README.md").exists(), "README.md must exist")
+        self.assertTrue((self.root / "scripts" / "main.py").exists(), "scripts/main.py must exist")
+
+    def test_transformation_logic_stub(self):
+        """Functional test stub. Replace with verified transformation tests upon implementation."""
+        self.skipTest("Implement format-specific transformation tests before publishing as verified")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,25 @@
+{
+  "name": "git-release-helper",
+  "description": "Automates GitHub release preparation, changelog extraction, and semantic version tagging when releasing software.",
+  "template_family": "workflow-runbook",
+  "version": "0.1.0",
+  "author": "Skill Factory Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": false,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

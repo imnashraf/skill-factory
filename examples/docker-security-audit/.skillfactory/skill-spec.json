@@ -1,0 +1,25 @@
+{
+  "name": "docker-security-audit",
+  "description": "Audits Dockerfiles and container configurations for root user execution, sensitive volume mounts, and security vulnerabilities.",
+  "template_family": "checklist-review",
+  "version": "0.1.0",
+  "author": "Skill Factory Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": false,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

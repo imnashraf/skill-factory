@@ -6,14 +6,15 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 5 (Skill Testing and Validation) Completed; Entering Phase 6 (Skill Library and Discovery).
+- **Current Active Milestone:** Phase 6 (Skill Library and Discovery) Completed; Entering Phase 7 (Beginner Experience).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 3 Status:** **Completed** (Commit `890688d`, 6/6 tasks complete, 6/6 ACs passed).
 - **Phase 4 Status:** **Completed** (Commit `74bc178`, 9/9 tasks complete, 9/9 ACs passed).
-- **Phase 5 Status:** **Completed** (7/7 tasks complete, 7/7 ACs passed, 86 unit tests passing).
-- **Phases 6 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 5 Status:** **Completed** (Commit `f3a4f56`, 7/7 tasks complete, 7/7 ACs passed).
+- **Phase 6 Status:** **Completed** (7/7 tasks complete, 7/7 ACs passed, 92 unit tests passing).
+- **Phases 7 – 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -88,14 +89,14 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 6 — Skill Library and Discovery (`PLANNED`)
-- [ ] **T6.01** Local Catalog Indexer: Build searchable offline `index.json`.
-- [ ] **T6.02** Search Command: Implement `skillfactory search`.
-- [ ] **T6.03** Zip Export Engine: Implement `skillfactory export` with SHA-256 checksums.
-- [ ] **T6.04** Safe Zip Importer: Implement `skillfactory import` with Zip-Slip defense.
-- [ ] **T6.05** GitHub Publish Prep: Implement `skillfactory publish` standalone generator.
-- [ ] **T6.06** Curated Examples: Ship ≥ 5 reference skills in `examples/`.
-- [ ] **T6.07** Library Test Suite: Test indexing, export, import, and publish scaffolding.
+### Phase 6 — Skill Library and Discovery (`COMPLETED`)
+- [x] **T6.01** Local Catalog Indexer: Build searchable offline `index.json`.
+- [x] **T6.02** Search Command: Implement `skillfactory search`.
+- [x] **T6.03** Zip Export Engine: Implement `skillfactory export` with SHA-256 checksums.
+- [x] **T6.04** Safe Zip Importer: Implement `skillfactory import` with Zip-Slip defense.
+- [x] **T6.05** GitHub Publish Prep: Implement `skillfactory publish` standalone generator.
+- [x] **T6.06** Curated Examples: Ship ≥ 5 reference skills in `examples/`.
+- [x] **T6.07** Library Test Suite: Test indexing, export, import, and publish scaffolding.
 
 ---
 

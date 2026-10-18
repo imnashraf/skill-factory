@@ -607,6 +607,144 @@ def cmd_scan(args: argparse.Namespace) -> int:
     return 0 if report.is_clean else 1
 
 
+def cmd_search(args: argparse.Namespace) -> int:
+    """Handle `skillfactory search` command (Phase 6, Task T6.02, AC6.02)."""
+    from skillfactory.library import index_directory, search_catalog
+
+    search_dir = Path(getattr(args, "dir", ".") or ".")
+    if not any(search_dir.glob("*/SKILL.md")) and Path("examples").is_dir():
+        search_dir = Path("examples")
+
+    index = index_directory(search_dir, include_eval=False)
+    results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
+
+    if getattr(args, "json", False):
+        print(json.dumps({
+            "query": args.query,
+            "total_matches": len(results),
+            "results": [
+                {
+                    "name": entry.name,
+                    "description": entry.description,
+                    "path": entry.path,
+                    "relevance_score": score,
+                    "tags": entry.tags,
+                    "template_family": entry.template_family,
+                }
+                for entry, score in results
+            ],
+        }, indent=2))
+    else:
+        if not results:
+            print(format_msg("INFO", f"No skills found matching '{args.query}' in {search_dir}"))
+            return 0
+
+        print(f"Skill Factory Search Results for: '{args.query}' ({len(results)} matches)")
+        print("=" * 70)
+        for entry, score in results:
+            score_str = f"[{score} pts]"
+            print(f"• {entry.name:<25} {score_str:>10}")
+            print(f"  {entry.description}")
+            if entry.tags:
+                print(f"  Tags: {', '.join(entry.tags)}")
+            print(f"  Path: {entry.path}")
+            print("-" * 70)
+
+    return 0
+
+
+def cmd_export(args: argparse.Namespace) -> int:
+    """Handle `skillfactory export` command (Phase 6, Task T6.03, AC6.03)."""
+    from skillfactory.packaging import export_skill
+
+    skill_path = Path(args.path)
+    output_zip = Path(args.output) if getattr(args, "output", None) else None
+    try:
+        res = export_skill(skill_path, output_zip=output_zip, create_sidecar=True)
+        if getattr(args, "json", False):
+            print(json.dumps(res.to_dict(), indent=2))
+        else:
+            print(format_msg("OK", f"Exported skill to '{res.zip_path}'"))
+            print(f"  Files packed: {res.file_count}")
+            print(f"  Archive size: {res.size_bytes:,} bytes")
+            print(f"  SHA-256:      {res.sha256_hash}")
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_import(args: argparse.Namespace) -> int:
+    """Handle `skillfactory import` command (Phase 6, Task T6.04, AC6.04)."""
+    from skillfactory.packaging import import_skill
+
+    archive_path = Path(args.archive)
+    dest_dir = Path(getattr(args, "dest", ".") or ".")
+    verify_checksum = getattr(args, "sha256", None)
+    force = getattr(args, "force", False)
+
+    try:
+        res = import_skill(
+            archive_path,
+            dest_dir=dest_dir,
+            verify_checksum=verify_checksum,
+            force=force,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(res.to_dict(), indent=2))
+        else:
+            print(format_msg("OK", f"Safely imported skill '{res.skill_name}' into {res.installed_path}"))
+            print(f"  Files extracted: {res.file_count}")
+            print(f"  Spec validated:  {'Yes' if res.validation_valid else 'No'}")
+            print(f"  Safety scan:     {'Clean' if res.safety_clean else 'Warnings'}")
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_publish(args: argparse.Namespace) -> int:
+    """Handle `skillfactory publish` command (Phase 6, Task T6.05, AC6.05)."""
+    from skillfactory.publish import prepare_publish_repository
+
+    skill_path = Path(args.path)
+    output_dir = Path(args.output) if getattr(args, "output", None) else Path("dist") / f"{skill_path.name}-repo"
+    github_repo = getattr(args, "repo", None)
+    force = getattr(args, "force", False)
+
+    try:
+        res = prepare_publish_repository(
+            skill_dir=skill_path,
+            output_dir=output_dir,
+            github_repo=github_repo,
+            force=force,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(res.to_dict(), indent=2))
+        else:
+            print(format_msg("OK", f"Pre-publish checks passed: Quality score {res.quality_score}/100 [{res.grade}]"))
+            print(format_msg("OK", f"Prepared standalone publish repository at: {res.output_dir}"))
+            print("\nNext Steps (Execute manually to publish to GitHub):")
+            print("=" * 60)
+            for step in res.instructions:
+                print(f"  $ {step}")
+            print("=" * 60)
+            print("Notice: Skill Factory never automatically pushes code without your explicit action.")
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -713,6 +851,31 @@ def create_parser() -> argparse.ArgumentParser:
     self_parser.add_argument("--scope", default="user", choices=["project", "user"], help="Installation scope (default: user)")
     self_parser.add_argument("--link", action="store_true", help="Use symbolic link instead of copying files")
 
+    # Command: search
+    search_parser = subparsers.add_parser("search", parents=[common_parser], help="Search skills offline in catalog by keyword or tag (<100ms)")
+    search_parser.add_argument("query", help="Keyword, tag, or topic to search for")
+    search_parser.add_argument("--dir", default=".", help="Directory of skills to search (default: . or examples)")
+    search_parser.add_argument("--tag", help="Filter by specific tag")
+
+    # Command: export
+    export_parser = subparsers.add_parser("export", parents=[common_parser], help="Export an Agent Skill to portable .zip with SHA-256")
+    export_parser.add_argument("path", help="Path to skill directory to package")
+    export_parser.add_argument("--output", help="Target .zip path (default: <name>.zip)")
+
+    # Command: import
+    import_parser = subparsers.add_parser("import", parents=[common_parser], help="Safely import an Agent Skill from .zip with Zip-Slip defense")
+    import_parser.add_argument("archive", help="Path to .zip archive to import")
+    import_parser.add_argument("--dest", default=".", help="Target destination directory (default: .)")
+    import_parser.add_argument("--sha256", help="Expected SHA-256 checksum to verify before extracting")
+    import_parser.add_argument("--force", action="store_true", help="Overwrite existing folder if present")
+
+    # Command: publish
+    publish_parser = subparsers.add_parser("publish", parents=[common_parser], help="Prepare a standalone Git repository scaffold for publishing")
+    publish_parser.add_argument("path", help="Path to skill directory to prepare")
+    publish_parser.add_argument("--output", help="Target output repository directory")
+    publish_parser.add_argument("--repo", help="Target GitHub repository (e.g. username/skill-name)")
+    publish_parser.add_argument("--force", action="store_true", help="Overwrite output directory if it exists")
+
     # Command: version
     subparsers.add_parser("version", help="Show Skill Factory version")
 
@@ -740,6 +903,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         return cmd_eval(args)
     elif args.command == "scan":
         return cmd_scan(args)
+    elif args.command == "search":
+        return cmd_search(args)
+    elif args.command == "export":
+        return cmd_export(args)
+    elif args.command == "import":
+        return cmd_import(args)
+    elif args.command == "publish":
+        return cmd_publish(args)
     elif args.command == "doctor":
         return cmd_doctor(args)
     elif args.command == "install":

@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-18T22:16:51.973467+00:00",
+  "success": true,
+  "tests_run": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.044,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_required_files_present (test_runbook.GitReleaseHelperTests) ... ok\ntest_runbook_content_has_release_phases (test_runbook.GitReleaseHelperTests) ... ok\ntest_runbook_references_exist (test_runbook.GitReleaseHelperTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+}

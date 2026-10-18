@@ -90,15 +90,15 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 6 — Skill Library and Discovery
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC6.01** | Local catalog indexer builds searchable `index.json` from a skills folder. | Indexing unit test. | Valid index with names, tags, and versions. |
-| **AC6.02** | `search` finds skills by keyword or tag offline in < 100ms. | Search execution test. | Relevant skills returned in < 0.1s. |
-| **AC6.03** | `export` creates valid `.zip` package with manifest and SHA-256 checksum. | Zip export verification test. | Archive extracts and verifies checksum cleanly. |
-| **AC6.04** | `import` rejects malicious archives containing Zip-Slip paths (`../`). | Security test with synthetic malicious zip. | 100% of path traversal attempts blocked. |
-| **AC6.05** | `publish` generates standalone Git repository structure with README, license, CI. | Publish generator test. | Standalone skill repo ready for `git push`. |
-| **AC6.06** | ≥ 5 curated reference skills included in `examples/` covering all template families. | Manual inspection and `eval` test. | All 5 examples score ≥ 90 (Grade A). |
-| **AC6.07** | Library test suite passes 100%. | Unit tests in `test_library.py`. | 100% passing tests. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC6.01** | Local catalog indexer builds searchable `index.json` from a skills folder. | Indexing unit test. | Valid index with names, tags, and versions. | **Passed** |
+| **AC6.02** | `search` finds skills by keyword or tag offline in < 100ms. | Search execution test. | Relevant skills returned in < 0.1s (measured: < 1ms). | **Passed** |
+| **AC6.03** | `export` creates valid `.zip` package with manifest and SHA-256 checksum. | Zip export verification test. | Archive extracts and verifies checksum cleanly. | **Passed** |
+| **AC6.04** | `import` rejects malicious archives containing Zip-Slip paths (`../`). | Security test with synthetic malicious zip. | 100% of path traversal attempts blocked. | **Passed** |
+| **AC6.05** | `publish` generates standalone Git repository structure with README, license, CI. | Publish generator test. | Standalone skill repo ready for `git push`. | **Passed** |
+| **AC6.06** | ≥ 5 curated reference skills included in `examples/` covering all template families. | Manual inspection and `eval` test. | All 5 examples score ≥ 90 (Grade A). | **Passed** |
+| **AC6.07** | Library test suite passes 100%. | Unit tests in `test_library.py`. | 100% passing tests (6/6 passed). | **Passed** |
 
 ---
 

@@ -1,0 +1,25 @@
+{
+  "name": "api-schema-validator",
+  "description": "Validates JSON payloads and REST API request bodies against JSON Schema and OpenAPI specifications during API development.",
+  "template_family": "python-script",
+  "version": "0.1.0",
+  "author": "Skill Factory Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

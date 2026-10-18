@@ -1,0 +1,25 @@
+{
+  "name": "sql-migration-linter",
+  "description": "Reviews and lints relational database SQL migration scripts for backward-incompatible table locks and dropped columns.",
+  "template_family": "instructions-only",
+  "version": "0.1.0",
+  "author": "Skill Factory Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": false,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

@@ -1,0 +1,25 @@
+{
+  "name": "pdf-to-markdown",
+  "description": "Extracts and converts PDF document text and tables into clean Markdown format with structured headings when requested.",
+  "template_family": "file-transform",
+  "version": "0.1.0",
+  "author": "Skill Factory Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

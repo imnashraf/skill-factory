@@ -1,0 +1,45 @@
+{
+  "skill_name": "git-release-helper",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "0.1.0",
+  "template_id": "workflow-runbook",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-18T22:15:12.277332+00:00",
+  "updated_at": "2026-10-18T22:15:12.277332+00:00",
+  "files": {
+    ".skillfactory/evaluation.json": {
+      "sha256": "0c292080e9676992b08a0a8de45274d8ca03564f3aa949f52af3c2d1087e54c6",
+      "bytes": 4404
+    },
+    ".skillfactory/skill-spec.json": {
+      "sha256": "597dae61ea8aec825598a5029683a30f6dd9001a3aa24e4c2344262a5497d565",
+      "bytes": 613
+    },
+    "LICENSE": {
+      "sha256": "d10bfde7b6ab387d27840c94b94f88228230b015e36e1de34a72e8dc3f216898",
+      "bytes": 1075
+    },
+    "README.md": {
+      "sha256": "17020ac5da921ffa12bd16260616bf2ac06a4fb88f3819c97da6a6847df5ecf1",
+      "bytes": 968
+    },
+    "SKILL.md": {
+      "sha256": "53b89dab9b4f60415d2ccc6f25f67749513d135b6146ca467e18af4742342534",
+      "bytes": 1681
+    },
+    "examples/example.md": {
+      "sha256": "038a5c539cc659cf2f5f21b70ac79870a6e18a6b0c5bd20364255d0040921d4a",
+      "bytes": 575
+    },
+    "references/guide.md": {
+      "sha256": "9489b4e1fe2ca3ebe0aa09ac71f94d2d686c6870fe5bf7552ec7233529c9a23b",
+      "bytes": 764
+    },
+    "tests/test_runbook.py": {
+      "sha256": "b3d8f48906ba690545de59d80a76ba69f53bf730967bab4a5935092895e4313e",
+      "bytes": 1047
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "skill_name": "api-schema-validator",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "0.1.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-18T22:15:12.162133+00:00",
+  "updated_at": "2026-10-18T22:15:12.162133+00:00",
+  "files": {
+    ".skillfactory/evaluation.json": {
+      "sha256": "b2d2dcb9b6ae2a57d7bbe266d85d273b0bb31b2b3a2e17354d00df8d3f935eb4",
+      "bytes": 5164
+    },
+    ".skillfactory/skill-spec.json": {
+      "sha256": "d2c3f6391862c5ca796e89a28af9b4d72ef7729daea4771f217be9f10526e428",
+      "bytes": 620
+    },
+    ".skillfactory/test-results.json": {
+      "sha256": "08bfd093d30c66e4b2bd34c9638e1e8734d07aeab102b1386f7c26919a98e6e7",
+      "bytes": 709
+    },
+    "LICENSE": {
+      "sha256": "d10bfde7b6ab387d27840c94b94f88228230b015e36e1de34a72e8dc3f216898",
+      "bytes": 1075
+    },
+    "README.md": {
+      "sha256": "ee015a722d80e8920638ff0414edcfc5292d17dab7562945dcbedb6d890790ac",
+      "bytes": 1012
+    },
+    "SKILL.md": {
+      "sha256": "4a9c900c0c6e637cb834f705364d6f5f17cae02c41519819032b62ce531f5b8d",
+      "bytes": 1291
+    },
+    "examples/example.md": {
+      "sha256": "9d3e7c9972d3589fd5b3e2e1e8678f0a58f57bd011ada35fa7ef76ea77cd2ae8",
+      "bytes": 286
+    },
+    "references/guide.md": {
+      "sha256": "97235ae84fb56b46c6032012070bafb903c17b23f2c28785036c0a000e88491a",
+      "bytes": 394
+    },
+    "scripts/main.py": {
+      "sha256": "41d1611a7fec670f2e2276c9393830223b968941f08b82e464b294c5229c2107",
+      "bytes": 792
+    },
+    "tests/test_placeholder.py": {
+      "sha256": "5e938bbbbbcbd24f7ecc3f7eb98ee88c9abb74023009367aaf87253388ba778b",
+      "bytes": 879
+    }
+  }
+}
