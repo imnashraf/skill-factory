@@ -876,22 +876,103 @@ def create_parser() -> argparse.ArgumentParser:
     publish_parser.add_argument("--repo", help="Target GitHub repository (e.g. username/skill-name)")
     publish_parser.add_argument("--force", action="store_true", help="Overwrite output directory if it exists")
 
+    # Command: menu
+    subparsers.add_parser("menu", help="Open the interactive beginner top menu (AC7.01)")
+
     # Command: version
     subparsers.add_parser("version", help="Show Skill Factory version")
 
     return parser
 
 
+def cmd_interactive_top_menu() -> int:
+    """Display clean numbered top-level menu when invoked without arguments (AC7.01)."""
+    from skillfactory.ui_util import format_header
+    print(format_header(f"Skill Factory — Agent Skills Generator & Manager (v{__version__})"))
+    print("Welcome! Select an action to get started:")
+    print("  [1] Create a new skill (interactive interview)")
+    print("  [2] Search local skill library")
+    print("  [3] Validate an existing skill folder")
+    print("  [4] Run skill automated tests")
+    print("  [5] Evaluate skill quality score (0–100)")
+    print("  [6] Scan skill for secrets and safety issues")
+    print("  [7] Platform health doctor (check AI agents)")
+    print("  [8] Install a skill into an AI tool")
+    print("  [9] List installed skills")
+    print("  [0] Exit")
+    print("-" * 74)
+
+    try:
+        choice = input("Enter your choice [0-9]: ").strip()
+    except (EOFError, KeyboardInterrupt):
+        print("\nExiting Skill Factory. Goodbye!")
+        return 0
+
+    if choice in ("0", "exit", "q", "quit"):
+        print("Goodbye!")
+        return 0
+    elif choice == "1":
+        return cmd_interview(argparse.Namespace(answers=None, output="generated-skills", spec_only=False, json=False, dry_run=False))
+    elif choice == "2":
+        try:
+            q = input("Enter search query (keyword or tag): ").strip()
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_search(argparse.Namespace(query=q, dir=".", tag=None, json=False))
+    elif choice == "3":
+        try:
+            p = input("Enter path to skill directory [default: .]: ").strip() or "."
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_validate(argparse.Namespace(path=p, no_hashes=False, record=False, json=False))
+    elif choice == "4":
+        try:
+            p = input("Enter path to skill directory [default: .]: ").strip() or "."
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_test(argparse.Namespace(path=p, timeout=10.0, json=False))
+    elif choice == "5":
+        try:
+            p = input("Enter path to skill directory [default: .]: ").strip() or "."
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_eval(argparse.Namespace(path=p, no_test=False, timeout=10.0, json=False))
+    elif choice == "6":
+        try:
+            p = input("Enter path to skill directory [default: .]: ").strip() or "."
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_scan(argparse.Namespace(path=p, json=False))
+    elif choice == "7":
+        return cmd_doctor(argparse.Namespace(project=".", json=False))
+    elif choice == "8":
+        try:
+            p = input("Enter path to skill directory to install: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            return 0
+        return cmd_install(argparse.Namespace(path=p, target=None, scope="project", project=".", link=False, force=False, yes=False, json=False))
+    elif choice == "9":
+        return cmd_list(argparse.Namespace(json=False))
+    else:
+        print(f"Unknown choice '{choice}'. Run with --help for command line usage.")
+        return 1
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     """Main CLI entrypoint."""
+    is_interactive_shell = (argv is None) and (len(sys.argv) <= 1) and sys.stdin.isatty()
     parser = create_parser()
     args = parser.parse_args(argv)
 
     if not args.command:
+        if is_interactive_shell:
+            return cmd_interactive_top_menu()
         parser.print_help()
         return 0
 
-    if args.command == "new":
+    if args.command == "menu":
+        return cmd_interactive_top_menu()
+    elif args.command == "new":
         return cmd_new(args)
     elif args.command == "interview":
         return cmd_interview(args)

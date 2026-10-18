@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-18T22:16:52.074013+00:00",
+  "timestamp": "2026-10-18T22:24:43.211942+00:00",
   "success": true,
   "tests_run": 2,
   "failures": 0,
   "errors": 0,
   "skipped": 1,
-  "duration_sec": 0.046,
+  "duration_sec": 0.001,
   "timed_out": false,
   "test_files_found": 1,
   "error_message": null,
   "stdout": "",
-  "stderr": "test_skill_structure (test_placeholder.SkillStructureTests)\nVerify standard Agent Skill files exist. ... ok\ntest_task_logic_stub (test_placeholder.SkillStructureTests)\nFunctional test stub. Replace with verified domain tests upon implementation. ... skipped 'Implement task-specific behavior before publishing as verified'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK (skipped=1)\n"
+  "stderr": "test_skill_structure (test_placeholder.SkillStructureTests.test_skill_structure)\nVerify standard Agent Skill files exist. ... ok\ntest_task_logic_stub (test_placeholder.SkillStructureTests.test_task_logic_stub)\nFunctional test stub. Replace with verified domain tests upon implementation. ... skipped 'Implement task-specific behavior before publishing as verified'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK (skipped=1)\n"
 }

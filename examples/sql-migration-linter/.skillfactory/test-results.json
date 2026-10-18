@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-18T22:16:52.023066+00:00",
+  "timestamp": "2026-10-18T22:24:43.085077+00:00",
   "success": true,
   "tests_run": 3,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
-  "duration_sec": 0.045,
+  "duration_sec": 0.001,
   "timed_out": false,
   "test_files_found": 1,
   "error_message": null,
   "stdout": "",
-  "stderr": "test_migration_guidelines_content (test_migration_linter.SqlMigrationLinterTests) ... ok\ntest_references_and_examples_exist (test_migration_linter.SqlMigrationLinterTests) ... ok\ntest_required_files_present (test_migration_linter.SqlMigrationLinterTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+  "stderr": "test_migration_guidelines_content (test_migration_linter.SqlMigrationLinterTests.test_migration_guidelines_content) ... ok\ntest_references_and_examples_exist (test_migration_linter.SqlMigrationLinterTests.test_references_and_examples_exist) ... ok\ntest_required_files_present (test_migration_linter.SqlMigrationLinterTests.test_required_files_present) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
 }

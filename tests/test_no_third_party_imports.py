@@ -17,7 +17,7 @@ class NoThirdPartyImportsTests(unittest.TestCase):
             "importlib", "inspect", "io", "itertools", "json", "logging",
             "math", "os", "pathlib", "platform", "posixpath", "pprint",
             "random", "re", "shlex", "shutil", "socket", "stat", "string",
-            "struct", "subprocess", "sys", "tempfile", "time", "traceback",
+            "struct", "subprocess", "sys", "tempfile", "textwrap", "time", "traceback",
             "types", "typing", "unittest", "urllib", "uuid", "warnings",
             "weakref", "zipfile", "__future__",
         }

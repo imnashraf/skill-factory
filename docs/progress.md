@@ -6,15 +6,16 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 6 (Skill Library and Discovery) Completed; Entering Phase 7 (Beginner Experience).
+- **Current Active Milestone:** Phase 7 (Beginner Experience) Completed; Entering Phase 8 (Security and Reliability).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 3 Status:** **Completed** (Commit `890688d`, 6/6 tasks complete, 6/6 ACs passed).
 - **Phase 4 Status:** **Completed** (Commit `74bc178`, 9/9 tasks complete, 9/9 ACs passed).
 - **Phase 5 Status:** **Completed** (Commit `f3a4f56`, 7/7 tasks complete, 7/7 ACs passed).
-- **Phase 6 Status:** **Completed** (7/7 tasks complete, 7/7 ACs passed, 92 unit tests passing).
-- **Phases 7 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 6 Status:** **Completed** (Commit `cf7e071`, 7/7 tasks complete, 7/7 ACs passed).
+- **Phase 7 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 101 unit tests passing).
+- **Phases 8 – 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -100,13 +101,13 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 7 — Beginner-Friendly Experience (`PLANNED`)
-- [ ] **T7.01** Interactive Top Menu: Numbered terminal menu for `python3 -m skillfactory`.
-- [ ] **T7.02** Error Message Redesign: Plain-language explanations for all CLI errors.
-- [ ] **T7.03** OS Quickstart Guides: Author step-by-step guides for macOS, Windows, Linux.
-- [ ] **T7.04** Accessibility Audit: Support `NO_COLOR`, remove color-only signals.
-- [ ] **T7.05** Beginner Glossary: Create `docs/glossary.md`.
-- [ ] **T7.06** Beginner Usability Test: Conduct trial verifying task completion in ≤ 10 min.
+### Phase 7 — Beginner-Friendly Experience (`COMPLETED`)
+- [x] **T7.01** Interactive Top Menu: Numbered terminal menu for `python3 -m skillfactory`.
+- [x] **T7.02** Error Message Redesign: Plain-language explanations for all CLI errors.
+- [x] **T7.03** OS Quickstart Guides: Author step-by-step guides for macOS, Windows, Linux.
+- [x] **T7.04** Accessibility Audit: Support `NO_COLOR`, remove color-only signals.
+- [x] **T7.05** Beginner Glossary: Create `docs/glossary.md`.
+- [x] **T7.06** Beginner Usability Test: Conduct trial verifying task completion in ≤ 10 min.
 
 ---
 

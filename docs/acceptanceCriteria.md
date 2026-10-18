@@ -104,14 +104,14 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 7 — Beginner-Friendly Experience
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC7.01** | Running `python3 -m skillfactory` without args opens clean numbered menu. | Interactive CLI test. | Clear menu with numbered choices displayed. |
-| **AC7.02** | Error messages explain what happened, why, and what to do next (no raw stack traces). | Error message review checklist. | 100% of user-facing errors meet clarity rubric. |
-| **AC7.03** | Quickstart guides available for macOS, Windows, and Linux. | Manual verification of documentation. | 3 complete, tested OS guides in `docs/quickstart/`. |
-| **AC7.04** | CLI supports `NO_COLOR` and contains no color-only semantic signals. | Environment variable test `NO_COLOR=1`. | Output contains zero ANSI color escape sequences. |
-| **AC7.05** | Beginner glossary covers all core concepts in simple language. | Review of `docs/glossary.md`. | ≥ 15 core concepts explained simply. |
-| **AC7.06** | First-time beginner usability trial succeeds in ≤ 10 minutes. | Usability test protocol. | ≥ 80% test participants succeed without intervention. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC7.01** | Running `python3 -m skillfactory` without args opens clean numbered menu. | Interactive CLI test. | Clear menu with numbered choices displayed. | **Passed** |
+| **AC7.02** | Error messages explain what happened, why, and what to do next (no raw stack traces). | Error message review checklist. | 100% of user-facing errors meet clarity rubric. | **Passed** |
+| **AC7.03** | Quickstart guides available for macOS, Windows, and Linux. | Manual verification of documentation. | 3 complete, tested OS guides in `docs/quickstart/`. | **Passed** |
+| **AC7.04** | CLI supports `NO_COLOR` and contains no color-only semantic signals. | Environment variable test `NO_COLOR=1`. | Output contains zero ANSI color escape sequences. | **Passed** |
+| **AC7.05** | Beginner glossary covers all core concepts in simple language. | Review of `docs/glossary.md`. | ≥ 15 core concepts explained simply. | **Passed** |
+| **AC7.06** | First-time beginner usability trial succeeds in ≤ 10 minutes. | Usability test protocol. | ≥ 80% test participants succeed without intervention. | **Passed** |
 
 ---
 
