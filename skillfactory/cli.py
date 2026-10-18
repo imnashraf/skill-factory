@@ -158,6 +158,69 @@ def cmd_validate(args: argparse.Namespace) -> int:
         return 1
 
 
+def cmd_interview(args: argparse.Namespace) -> int:
+    """Handle `skillfactory interview` command (offline guided creation / batch answers)."""
+    from skillfactory.interview import load_batch_answers, run_interactive_interview
+
+    try:
+        if args.answers:
+            answers_path = Path(args.answers)
+            spec = load_batch_answers(answers_path)
+        else:
+            spec = run_interactive_interview()
+
+        output_dir = Path(args.output)
+
+        if args.spec_only:
+            spec_file = output_dir / f"{spec.name}-spec.json"
+            output_dir.mkdir(parents=True, exist_ok=True)
+            spec_file.write_text(spec.to_json(), encoding="utf-8")
+            if args.json:
+                print(json.dumps({"status": "success", "spec_file": str(spec_file)}, indent=2))
+            else:
+                print(format_msg("OK", f"Specification written to {spec_file}"))
+            return 0
+
+        result = generate_skill(spec, output_dir, dry_run=args.dry_run)
+
+        if args.json:
+            print(
+                json.dumps(
+                    {
+                        "status": "success",
+                        "skill_name": result.skill_name,
+                        "target_path": str(result.target_path),
+                        "dry_run": result.dry_run,
+                        "files": result.written_files,
+                    },
+                    indent=2,
+                )
+            )
+        else:
+            if result.dry_run:
+                print(
+                    format_msg(
+                        "INFO",
+                        f"Dry run: {len(result.written_files)} files would be created at {result.target_path}",
+                    )
+                )
+                for f in result.written_files:
+                    print(f"  - {f}")
+            else:
+                print(format_msg("OK", f"Successfully created '{result.skill_name}' at {result.target_path}"))
+                print(f"Files created ({len(result.written_files)}):")
+                for f in result.written_files:
+                    print(f"  - {f}")
+        return 0
+
+    except Exception as err:
+        if args.json:
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -188,6 +251,16 @@ def create_parser() -> argparse.ArgumentParser:
     new_parser.add_argument("--license", default="MIT", help="License (MIT, Apache-2.0, Unlicense, none)")
     new_parser.add_argument("--author", default="", help="Author name")
 
+    # Command: interview
+    interview_parser = subparsers.add_parser(
+        "interview",
+        parents=[common_parser],
+        help="Guided interactive interview or batch creation without an AI model",
+    )
+    interview_parser.add_argument("--answers", help="Path to JSON file with batch answers")
+    interview_parser.add_argument("--output", default="generated-skills", help="Destination folder (default: generated-skills)")
+    interview_parser.add_argument("--spec-only", action="store_true", help="Only generate the spec JSON file")
+
     # Command: validate
     val_parser = subparsers.add_parser("validate", parents=[common_parser], help="Validate an Agent Skill directory")
     val_parser.add_argument("path", help="Path to the skill directory")
@@ -211,6 +284,8 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     if args.command == "new":
         return cmd_new(args)
+    elif args.command == "interview":
+        return cmd_interview(args)
     elif args.command == "validate":
         return cmd_validate(args)
     elif args.command == "version":

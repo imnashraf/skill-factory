@@ -23,15 +23,15 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 
 ## Phase 2 — Natural Language Skill Builder
 
-| Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
-| **T2.01** | Host-AI Skill Prompt | Update root `SKILL.md` to instruct host assistants on the end-to-end interview, spec creation, scaffolding, and verification loop. | T1.08 | `SKILL.md` | AC2.01 |
-| **T2.02** | Offline Interview Engine | Implement terminal questionnaire (`skillfactory/interview.py`) for plain-language guided creation without an AI model. | T1.02 | `skillfactory/interview.py` | AC2.02 |
-| **T2.03** | Batch Answers Mode | Support `--answers answers.json` for non-interactive and scripted execution of the interview process. | T2.02 | `skillfactory/interview.py` | AC2.03 |
-| **T2.04** | Template Selection Rules | Implement deterministic keyword heuristic mapper to suggest the best template family based on user answers. | T2.02 | `skillfactory/templates/router.py` | AC2.04 |
-| **T2.05** | Additional Templates | Implement remaining template families: `checklist-review`, `file-transform`, `workflow-runbook`. | T1.05 | `skillfactory/templates/*` | AC2.05 |
-| **T2.06** | Honest Stubs & Tests | Ensure generated skills include working structural tests and clearly documented, skipped functional stubs. | T2.05 | Template assets | AC2.06 |
-| **T2.07** | Deterministic Golden Tests | Add automated tests comparing generated skills against golden sample directories byte-for-byte. | T2.05 | `tests/test_golden.py` | AC2.07 |
+| Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref | Status |
+|---|---|---|---|---|---|---|
+| **T2.01** | Host-AI Skill Prompt | Update root `SKILL.md` to instruct host assistants on the end-to-end interview, spec creation, scaffolding, and verification loop. | T1.08 | `SKILL.md` | AC2.01 | **Completed** |
+| **T2.02** | Offline Interview Engine | Implement terminal questionnaire (`skillfactory/interview.py`) for plain-language guided creation without an AI model. | T1.02 | `skillfactory/interview.py` | AC2.02 | **Completed** |
+| **T2.03** | Batch Answers Mode | Support `--answers answers.json` for non-interactive and scripted execution of the interview process. | T2.02 | `skillfactory/interview.py` | AC2.03 | **Completed** |
+| **T2.04** | Template Selection Rules | Implement deterministic keyword heuristic mapper to suggest the best template family based on user answers. | T2.02 | `skillfactory/templates/router.py` | AC2.04 | **Completed** |
+| **T2.05** | Additional Templates | Implement remaining template families: `checklist-review`, `file-transform`, `workflow-runbook`. | T1.05 | `skillfactory/templates/*` | AC2.05 | **Completed** |
+| **T2.06** | Honest Stubs & Tests | Ensure generated skills include working structural tests and clearly documented, skipped functional stubs. | T2.05 | Template assets | AC2.06 | **Completed** |
+| **T2.07** | Deterministic Golden Tests | Add automated tests comparing generated skills against golden sample directories byte-for-byte. | T2.05 | `tests/test_golden.py` | AC2.07 | **Completed** |
 
 ---
 

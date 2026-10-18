@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""File transformation script for $name."""
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+
+def transform(input_path: Path, output_path: Path, dry_run: bool = False) -> int:
+    """Perform data transformation from input_path to output_path."""
+    if not input_path.exists():
+        print(f"Error: Input file does not exist: {input_path}", file=sys.stderr)
+        return 1
+
+    print(f"Reading from: {input_path}")
+    raw_data = input_path.read_text(encoding="utf-8")
+
+    # TODO: Implement custom data transformation logic here
+    transformed_data = raw_data
+
+    if dry_run:
+        print(f"[DRY RUN] Would write {len(transformed_data)} bytes to {output_path}")
+        return 0
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(transformed_data, encoding="utf-8")
+    print(f"Successfully transformed: {output_path}")
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="$description")
+    parser.add_argument("--input", "-i", required=True, help="Path to input source file")
+    parser.add_argument("--output", "-o", required=True, help="Path to output destination file")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate without writing files")
+    args = parser.parse_args(argv)
+
+    return transform(Path(args.input), Path(args.output), dry_run=args.dry_run)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

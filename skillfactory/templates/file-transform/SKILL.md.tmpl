@@ -1,0 +1,31 @@
+$frontmatter_yaml
+
+# $name
+
+## When to use
+Use this skill when: $description
+
+## Workflow
+$steps_md
+
+## Script Invocation
+Execute the file transformation script:
+```bash
+python3 scripts/main.py --input <source_file> --output <target_file>
+```
+
+Options:
+- `--dry-run`: Preview transformation statistics without writing files.
+- `--verbose`: Display detailed per-record conversion logs.
+
+See [references/guide.md](references/guide.md) for data schema mappings and options.
+See [examples/example.md](examples/example.md) for sample inputs and outputs.
+
+## Safety
+- Never overwrite source input files. Write exclusively to the specified `--output` destination.
+- Verify output validity and completeness after transformation.
+- Validate file size and schema integrity before reporting success.
+
+## Implementation status
+Scaffold with test harness. Implement data transformation logic in [scripts/main.py](scripts/main.py).
+Run `python3 -m unittest discover -s tests -v` to verify local execution.

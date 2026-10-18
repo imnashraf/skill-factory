@@ -33,15 +33,15 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 2 — Natural Language Skill Builder
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC2.01** | Root `SKILL.md` guides host AI through interactive interview and verification loop. | Manual agent interaction in Antigravity/Claude. | Complete skill generated from conversational prompt. |
-| **AC2.02** | `skillfactory interview` runs in terminal without network or AI model. | Offline terminal execution. | Produces valid `skill-spec.json` and scaffold. |
-| **AC2.03** | Batch interview `--answers answers.json` runs non-interactively. | Scripted CLI test. | Exit code 0, creates expected skill without prompting. |
-| **AC2.04** | Keyword router picks appropriate template family from problem description. | Router unit tests with 20 sample prompts. | ≥ 90% appropriate template assignment. |
-| **AC2.05** | 5 template families implemented (`instructions-only`, `python-script`, `checklist-review`, `file-transform`, `workflow-runbook`). | Template rendering tests. | All 5 templates render valid skills. |
-| **AC2.06** | Generated script-based skills include structural tests and skipped functional stubs. | `python3 -m unittest discover` on output. | Structural tests pass; stubs report skipped (not failed). |
-| **AC2.07** | Deterministic generation produces byte-identical files on identical input. | Golden-file hash comparison test. | 100% byte match (excluding manifest timestamps). |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC2.01** | Root `SKILL.md` guides host AI through interactive interview and verification loop. | Manual agent interaction in Antigravity/Claude. | Complete skill generated from conversational prompt. | **Passed** |
+| **AC2.02** | `skillfactory interview` runs in terminal without network or AI model. | Offline terminal execution. | Produces valid `skill-spec.json` and scaffold. | **Passed** |
+| **AC2.03** | Batch interview `--answers answers.json` runs non-interactively. | Scripted CLI test. | Exit code 0, creates expected skill without prompting. | **Passed** |
+| **AC2.04** | Keyword router picks appropriate template family from problem description. | Router unit tests with 20 sample prompts. | ≥ 90% appropriate template assignment (100% achieved). | **Passed** |
+| **AC2.05** | 5 template families implemented (`instructions-only`, `python-script`, `checklist-review`, `file-transform`, `workflow-runbook`). | Template rendering tests. | All 5 templates render valid skills. | **Passed** |
+| **AC2.06** | Generated script-based skills include structural tests and skipped functional stubs. | `python3 -m unittest discover` on output. | Structural tests pass; stubs report skipped (not failed). | **Passed** |
+| **AC2.07** | Deterministic generation produces byte-identical files on identical input. | Golden-file hash comparison test. | 100% byte match (excluding manifest timestamps). | **Passed** |
 
 ---
 

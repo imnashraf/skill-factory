@@ -6,10 +6,11 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 1 (Skill Factory Core) Completed; Entering Phase 2 (Natural Language Skill Builder).
+- **Current Active Milestone:** Phase 2 (Natural Language Skill Builder) Completed; Entering Phase 3 (Multi-Agent Compatibility).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
-- **Phase 1 Status:** **Completed** (10/10 tasks complete, 10/10 ACs passed, 38 unit tests passing).
-- **Phases 2 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
+- **Phase 2 Status:** **Completed** (7/7 tasks complete, 7/7 ACs passed, 46 unit tests passing).
+- **Phases 3 – 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -39,14 +40,14 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 2 — Natural Language Skill Builder (`PLANNED`)
-- [ ] **T2.01** Host-AI Skill Prompt: Refactor root `SKILL.md` for AI assistant orchestration.
-- [ ] **T2.02** Offline Interview Engine: Implement terminal questionnaire (`skillfactory interview`).
-- [ ] **T2.03** Batch Answers Mode: Implement `--answers answers.json` flag.
-- [ ] **T2.04** Template Selection Rules: Implement keyword heuristic template router.
-- [ ] **T2.05** Additional Templates: Implement 5 core template families.
-- [ ] **T2.06** Honest Stubs & Tests: Ensure generated skills include working structural tests.
-- [ ] **T2.07** Deterministic Golden Tests: Implement byte-for-byte comparison tests.
+### Phase 2 — Natural Language Skill Builder (`COMPLETED`)
+- [x] **T2.01** Host-AI Skill Prompt: Refactor root `SKILL.md` for AI assistant orchestration.
+- [x] **T2.02** Offline Interview Engine: Implement terminal questionnaire (`skillfactory interview`).
+- [x] **T2.03** Batch Answers Mode: Implement `--answers answers.json` flag.
+- [x] **T2.04** Template Selection Rules: Implement keyword heuristic template router.
+- [x] **T2.05** Additional Templates: Implement 5 core template families.
+- [x] **T2.06** Honest Stubs & Tests: Ensure generated skills include working structural tests.
+- [x] **T2.07** Deterministic Golden Tests: Implement byte-for-byte comparison tests.
 
 ---
 
