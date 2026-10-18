@@ -76,15 +76,15 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 5 — Skill Testing and Validation
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC5.01** | `test` executes skill tests in isolated subprocess with 10s timeout. | Subprocess runner unit test. | Times out and reports clean error; does not hang. |
-| **AC5.02** | AST Safety Scanner flags `eval`, `exec`, `shell=True`, and filesystem wipes. | Synthetic malicious code scan tests. | 100% of dangerous AST patterns caught. |
-| **AC5.03** | `eval` calculates 0–100 score across all 5 quality dimensions. | Eval engine test on benchmark skills. | Accurate point calculation matching rubric. |
-| **AC5.04** | Validator flags `SKILL.md` exceeding 500 lines or broken relative links. | Linter unit test. | Warnings issued for long files and missing links. |
-| **AC5.05** | Reports saved to `.skillfactory/test-results.json` and `evaluation.json`. | File existence and JSON schema check. | Valid JSON files written. |
-| **AC5.06** | Trigger rubric guidelines documented and verified against sample prompts. | Review of `docs/eval.md`. | Complete rubric with positive/negative trigger cases. |
-| **AC5.07** | Testing and eval suite executes in < 15 seconds. | Terminal timer. | Total execution time < 15.0s. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC5.01** | `test` executes skill tests in isolated subprocess with 10s timeout. | Subprocess runner unit test. | Times out and reports clean error; does not hang. | **Passed** |
+| **AC5.02** | AST Safety Scanner flags `eval`, `exec`, `shell=True`, and filesystem wipes. | Synthetic malicious code scan tests. | 100% of dangerous AST patterns caught. | **Passed** |
+| **AC5.03** | `eval` calculates 0–100 score across all 5 quality dimensions. | Eval engine test on benchmark skills. | Accurate point calculation matching rubric. | **Passed** |
+| **AC5.04** | Validator flags `SKILL.md` exceeding 500 lines or broken relative links. | Linter unit test. | Warnings issued for long files and missing links. | **Passed** |
+| **AC5.05** | Reports saved to `.skillfactory/test-results.json` and `evaluation.json`. | File existence and JSON schema check. | Valid JSON files written. | **Passed** |
+| **AC5.06** | Trigger rubric guidelines documented and verified against sample prompts. | Review of `docs/eval.md`. | Complete rubric with positive/negative trigger cases. | **Passed** |
+| **AC5.07** | Testing and eval suite executes in < 15 seconds. | Terminal timer. | Total execution time < 15.0s (measured: 1.63s). | **Passed** |
 
 ---
 

@@ -92,6 +92,44 @@ class ValidatorTests(unittest.TestCase):
             self.assertFalse(res.is_valid)
             self.assertTrue(any("Hardcoded absolute path" in e for e in res.errors))
 
+    def test_ac504_validator_flags_500_lines_and_long_tokens(self):
+        """AC5.04: Validator warns if SKILL.md exceeds 500 lines or 5000 tokens."""
+        with tempfile.TemporaryDirectory() as tmp:
+            skill_dir = Path(tmp) / "long-skill"
+            skill_dir.mkdir()
+            frontmatter = dump_frontmatter({
+                "name": "long-skill",
+                "description": "Skill with very long content",
+            })
+            # Create a 550 line body
+            body_lines = [f"Line {i}: Some instruction for the agent." for i in range(550)]
+            body = "\n# Long Skill\n\n" + "\n".join(body_lines) + "\n"
+            (skill_dir / "SKILL.md").write_text(frontmatter + body, encoding="utf-8")
+
+            res = validate_skill(skill_dir)
+            self.assertTrue(res.is_valid)  # Warnings do not invalidate spec
+            self.assertTrue(any("exceeds 500 lines" in w for w in res.warnings))
+
+    def test_ac504_validator_warns_deeply_nested_references(self):
+        """AC5.04: Validator warns if markdown link is nested > 1 level deep."""
+        with tempfile.TemporaryDirectory() as tmp:
+            skill_dir = Path(tmp) / "deep-skill"
+            skill_dir.mkdir()
+            deep_dir = skill_dir / "docs" / "nested" / "deep"
+            deep_dir.mkdir(parents=True)
+            (deep_dir / "manual.md").write_text("# Deep Manual\n", encoding="utf-8")
+
+            frontmatter = dump_frontmatter({
+                "name": "deep-skill",
+                "description": "Skill with deeply nested file",
+            })
+            body = "\n# Deep Skill\n\nSee [manual](docs/nested/deep/manual.md)\n"
+            (skill_dir / "SKILL.md").write_text(frontmatter + body, encoding="utf-8")
+
+            res = validate_skill(skill_dir)
+            self.assertTrue(res.is_valid)
+            self.assertTrue(any("nested more than one level deep" in w for w in res.warnings))
+
 
 if __name__ == "__main__":
     unittest.main()

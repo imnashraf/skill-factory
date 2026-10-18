@@ -6,13 +6,14 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 4 (Easy Installation and Updates) Completed; Entering Phase 5 (Skill Testing and Validation).
+- **Current Active Milestone:** Phase 5 (Skill Testing and Validation) Completed; Entering Phase 6 (Skill Library and Discovery).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 3 Status:** **Completed** (Commit `890688d`, 6/6 tasks complete, 6/6 ACs passed).
-- **Phase 4 Status:** **Completed** (9/9 tasks complete, 9/9 ACs passed, 67 unit tests passing).
-- **Phases 5 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 4 Status:** **Completed** (Commit `74bc178`, 9/9 tasks complete, 9/9 ACs passed).
+- **Phase 5 Status:** **Completed** (7/7 tasks complete, 7/7 ACs passed, 86 unit tests passing).
+- **Phases 6 – 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -76,14 +77,14 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 5 — Skill Testing and Validation (`PLANNED`)
-- [ ] **T5.01** Subprocess Test Runner: Implement `skillfactory test` with 10s timeout.
-- [ ] **T5.02** AST Safety Scanner: Implement Python `ast` danger-code detector.
-- [ ] **T5.03** Quality Scoring Engine: Implement 0–100 `skillfactory eval`.
-- [ ] **T5.04** Extended Validation Rules: Add line count and token estimate warnings.
-- [ ] **T5.05** Test Result Persistence: Save `.skillfactory/test-results.json` and `evaluation.json`.
-- [ ] **T5.06** Host-AI Trigger Rubric: Document positive/negative trigger evaluation prompts.
-- [ ] **T5.07** Testing & Eval Tests: Unit tests for timeouts, safety alerts, and scoring.
+### Phase 5 — Skill Testing and Validation (`COMPLETED`)
+- [x] **T5.01** Subprocess Test Runner: Implement `skillfactory test` with 10s timeout.
+- [x] **T5.02** AST Safety Scanner: Implement Python `ast` danger-code detector.
+- [x] **T5.03** Quality Scoring Engine: Implement 0–100 `skillfactory eval`.
+- [x] **T5.04** Extended Validation Rules: Add line count and token estimate warnings.
+- [x] **T5.05** Test Result Persistence: Save `.skillfactory/test-results.json` and `evaluation.json`.
+- [x] **T5.06** Host-AI Trigger Rubric: Document positive/negative trigger evaluation prompts.
+- [x] **T5.07** Testing & Eval Tests: Unit tests for timeouts, safety alerts, and scoring.
 
 ---
 

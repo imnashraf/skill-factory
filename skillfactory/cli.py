@@ -512,6 +512,101 @@ def cmd_install_self(args: argparse.Namespace) -> int:
         return 1
 
 
+def cmd_test(args: argparse.Namespace) -> int:
+    """Handle `skillfactory test` command (Phase 5, Task T5.01, AC5.01)."""
+    from skillfactory.tester import run_skill_tests
+
+    skill_path = Path(args.path)
+    timeout = getattr(args, "timeout", 10.0) or 10.0
+    result = run_skill_tests(skill_path, timeout=timeout, save_report=True)
+
+    if getattr(args, "json", False):
+        print(json.dumps(result.to_dict(), indent=2))
+    else:
+        if result.timed_out:
+            print(format_msg("ERROR", f"Test execution timed out after {timeout:.1f}s (AC5.01)"), file=sys.stderr)
+            return 1
+        elif not result.success:
+            print(
+                format_msg(
+                    "ERROR",
+                    f"Tests failed: {result.failures} failure(s), {result.errors} error(s) in {result.duration_sec:.2f}s",
+                ),
+                file=sys.stderr,
+            )
+            if result.stderr:
+                print(result.stderr, file=sys.stderr)
+            elif result.stdout:
+                print(result.stdout, file=sys.stderr)
+            return 1
+        else:
+            if result.tests_run == 0:
+                print(format_msg("INFO", f"No test files found to execute in {skill_path / 'tests'}"))
+            else:
+                skip_msg = f" ({result.skipped} skipped)" if result.skipped > 0 else ""
+                print(
+                    format_msg(
+                        "OK",
+                        f"Executed {result.tests_run} tests in {result.duration_sec:.2f}s with 0 failures{skip_msg}",
+                    )
+                )
+    return 0 if result.success else 1
+
+
+def cmd_eval(args: argparse.Namespace) -> int:
+    """Handle `skillfactory eval` command (Phase 5, Task T5.03, AC5.03)."""
+    from skillfactory.eval import evaluate_skill
+
+    skill_path = Path(args.path)
+    run_tests = not getattr(args, "no_test", False)
+    timeout = getattr(args, "timeout", 10.0) or 10.0
+    report = evaluate_skill(skill_path, run_tests=run_tests, test_timeout=timeout, save_report=True)
+
+    if getattr(args, "json", False):
+        print(json.dumps(report.to_dict(), indent=2))
+    else:
+        print(f"Skill Evaluation Report: {report.skill_name}")
+        print(f"Overall Score: {report.total_score} / 100 [{report.grade}]")
+        print("-" * 54)
+        for dim in report.dimensions:
+            earned = dim.earned
+            max_pts = dim.max_points
+            tag = "OK" if earned >= (max_pts * 0.75) else ("WARN" if earned >= (max_pts * 0.5) else "ERROR")
+            print(f"{format_msg(tag, f'{dim.name:<32}')}: {earned:>2} / {max_pts}")
+        print("-" * 54)
+        print(f"Recommendation: {report.recommendation}")
+
+    return 0 if report.total_score >= 60 else 1
+
+
+def cmd_scan(args: argparse.Namespace) -> int:
+    """Handle `skillfactory scan` command (Phase 5, Task T5.02, AC5.02)."""
+    from skillfactory.scanner import scan_skill_directory
+
+    skill_path = Path(args.path)
+    report = scan_skill_directory(skill_path)
+
+    if getattr(args, "json", False):
+        print(json.dumps(report.to_dict(), indent=2))
+    else:
+        if report.findings:
+            print(f"Safety & Secret Scan for: {skill_path.name}")
+            print("=" * 60)
+            for f in report.findings:
+                tag = "ERROR" if f.severity in ("CRITICAL", "HIGH") else ("WARN" if f.severity == "MEDIUM" else "INFO")
+                print(format_msg(tag, f"[{f.rule_id}] {f.description}"))
+                rel_f = Path(f.file_path).name
+                print(f"  Line {f.line_number} in {rel_f}: {f.snippet}")
+            print("-" * 60)
+            print(
+                f"Scanned {report.files_scanned} files: {report.critical_count} critical, {report.high_count} high, {report.medium_count} medium, {report.low_count} low"
+            )
+        else:
+            print(format_msg("OK", f"Safety scan clean: {report.files_scanned} files inspected with 0 findings."))
+
+    return 0 if report.is_clean else 1
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -557,6 +652,21 @@ def create_parser() -> argparse.ArgumentParser:
     val_parser.add_argument("path", help="Path to the skill directory")
     val_parser.add_argument("--no-hashes", action="store_true", help="Skip manifest hash verification")
     val_parser.add_argument("--record", action="store_true", help="Record results to .skillfactory/validation.json")
+
+    # Command: test
+    test_parser = subparsers.add_parser("test", parents=[common_parser], help="Run skill tests in an isolated subprocess with 10s timeout")
+    test_parser.add_argument("path", default=".", nargs="?", help="Path to skill directory (default: .)")
+    test_parser.add_argument("--timeout", type=float, default=10.0, help="Test timeout in seconds (default: 10.0)")
+
+    # Command: eval
+    eval_parser = subparsers.add_parser("eval", parents=[common_parser], help="Evaluate skill quality across 5 dimensions (0-100 score)")
+    eval_parser.add_argument("path", default=".", nargs="?", help="Path to skill directory (default: .)")
+    eval_parser.add_argument("--no-test", action="store_true", help="Skip executing tests during evaluation")
+    eval_parser.add_argument("--timeout", type=float, default=10.0, help="Test timeout in seconds (default: 10.0)")
+
+    # Command: scan
+    scan_parser = subparsers.add_parser("scan", parents=[common_parser], help="Perform AST safety and secrets scan on skill files")
+    scan_parser.add_argument("path", default=".", nargs="?", help="Path to skill directory (default: .)")
 
     # Command: doctor
     doctor_parser = subparsers.add_parser(
@@ -624,6 +734,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         return cmd_interview(args)
     elif args.command == "validate":
         return cmd_validate(args)
+    elif args.command == "test":
+        return cmd_test(args)
+    elif args.command == "eval":
+        return cmd_eval(args)
+    elif args.command == "scan":
+        return cmd_scan(args)
     elif args.command == "doctor":
         return cmd_doctor(args)
     elif args.command == "install":
