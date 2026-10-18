@@ -60,17 +60,17 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 4 — Easy Installation and Updates
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC4.01** | Registry tracks installed skills, platforms, scopes, versions, and backup paths. | JSON validation of `registry.json`. | Correct record created on install. |
-| **AC4.02** | `install` copies only allow-listed files and refuses to overwrite unmanaged folders. | Negative collision unit test. | Aborts cleanly on unmanaged folder collision. |
-| **AC4.03** | `update` detects local edits via SHA-256 diff and takes automated backup. | Edit-detection test. | Backup snapshot created in `<backup_dir>/`. |
-| **AC4.04** | `rollback` restores previous working version in single command. | Rollback integration test. | Target folder restored byte-for-byte to backup. |
-| **AC4.05** | `uninstall` removes only manifest-tracked files, preserving user data. | Partial uninstall test with user file. | User file preserved; skill files removed cleanly. |
-| **AC4.06** | Symlink mode `--link` creates valid symlink or falls back to copy on failure. | Symlink creation test on supported OS. | Valid link or clean copy fallback. |
-| **AC4.07** | `list` displays all installed skills, platforms, and modification flags. | Command output test. | Tabular list matches registry contents. |
-| **AC4.08** | `install-self` installs Skill Factory into host agent skills folder. | Self-install test. | Root `SKILL.md` and scripts discoverable by agent. |
-| **AC4.09** | Full install lifecycle passes on macOS, Linux, and Windows. | Cross-platform CI runner matrix. | 100% tests pass on all 3 operating systems. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC4.01** | Registry tracks installed skills, platforms, scopes, versions, and backup paths. | JSON validation of `registry.json`. | Correct record created on install. | **Passed** |
+| **AC4.02** | `install` copies only allow-listed files and refuses to overwrite unmanaged folders. | Negative collision unit test. | Aborts cleanly on unmanaged folder collision. | **Passed** |
+| **AC4.03** | `update` detects local edits via SHA-256 diff and takes automated backup. | Edit-detection test. | Backup snapshot created in `<backup_dir>/`. | **Passed** |
+| **AC4.04** | `rollback` restores previous working version in single command. | Rollback integration test. | Target folder restored byte-for-byte to backup. | **Passed** |
+| **AC4.05** | `uninstall` removes only manifest-tracked files, preserving user data. | Partial uninstall test with user file. | User file preserved; skill files removed cleanly. | **Passed** |
+| **AC4.06** | Symlink mode `--link` creates valid symlink or falls back to copy on failure. | Symlink creation test on supported OS. | Valid link or clean copy fallback. | **Passed** |
+| **AC4.07** | `list` displays all installed skills, platforms, and modification flags. | Command output test. | Tabular list matches registry contents. | **Passed** |
+| **AC4.08** | `install-self` installs Skill Factory into host agent skills folder. | Self-install test. | Root `SKILL.md` and scripts discoverable by agent. | **Passed** |
+| **AC4.09** | Full install lifecycle passes on macOS, Linux, and Windows. | Cross-platform CI runner matrix. | 100% tests pass on all 3 operating systems. | **Passed** |
 
 ---
 

@@ -296,6 +296,222 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_install(args: argparse.Namespace) -> int:
+    """Handle `skillfactory install` command (Phase 4, Task T4.02, AC4.02)."""
+    from skillfactory.installer import install_skill
+
+    target_platform = getattr(args, "target", None)
+    if not target_platform:
+        # Smart detection: pick detected platform or cursor
+        from skillfactory.compat.detect import detect_all_platforms
+        detected = [pid for pid, d in detect_all_platforms().items() if d.detected]
+        target_platform = detected[0] if detected else "cursor"
+
+    try:
+        res = install_skill(
+            skill_path=args.path,
+            target_platform=target_platform,
+            scope=args.scope,
+            link=args.link,
+            force=args.force,
+            project_dir=getattr(args, "project", "."),
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({
+                "status": "success",
+                "skill_name": res.skill_name,
+                "target_platform": res.target_platform,
+                "installed_path": str(res.installed_path),
+                "mode": res.mode,
+                "copied_files": res.copied_files,
+                "warning": res.warning,
+            }, indent=2))
+        else:
+            if res.warning:
+                print(format_msg("WARN", res.warning))
+            print(format_msg("OK", f"Installed '{res.skill_name}' for {res.target_platform} at {res.installed_path} ({len(res.copied_files)} files, mode: {res.mode})"))
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_update(args: argparse.Namespace) -> int:
+    """Handle `skillfactory update` command (Phase 4, Task T4.03, AC4.03)."""
+    from skillfactory.installer import update_skill
+
+    try:
+        res = update_skill(
+            skill_name=args.name,
+            source_path=args.source,
+            target_platform=args.target,
+            force=args.force,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({
+                "status": "success",
+                "skill_name": res.skill_name,
+                "target_platform": res.target_platform,
+                "installed_path": str(res.installed_path),
+                "backup_path": res.backup_path,
+                "copied_files": res.copied_files,
+            }, indent=2))
+        else:
+            print(format_msg("OK", f"Updated '{res.skill_name}'. Automated backup saved at: {res.backup_path}"))
+            print(format_msg("OK", f"Installed updated files to: {res.installed_path} ({len(res.copied_files)} files)"))
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_rollback(args: argparse.Namespace) -> int:
+    """Handle `skillfactory rollback` command (Phase 4, Task T4.04, AC4.04)."""
+    from skillfactory.installer import rollback_skill
+
+    try:
+        res = rollback_skill(
+            skill_name=args.name,
+            target_platform=args.target,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({
+                "status": "success",
+                "skill_name": res.skill_name,
+                "target_platform": res.target_platform,
+                "restored_path": str(res.installed_path),
+                "restored_from_backup": res.backup_path,
+            }, indent=2))
+        else:
+            print(format_msg("OK", f"Rolled back '{res.skill_name}' from backup: {res.backup_path}"))
+            print(format_msg("OK", f"Restored {len(res.copied_files)} files at {res.installed_path}"))
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_uninstall(args: argparse.Namespace) -> int:
+    """Handle `skillfactory uninstall` command (Phase 4, Task T4.05, AC4.05)."""
+    from skillfactory.installer import uninstall_skill
+
+    try:
+        removed = uninstall_skill(
+            skill_name=args.name,
+            target_platform=args.target,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({
+                "status": "success",
+                "skill_name": args.name,
+                "removed_files": removed,
+            }, indent=2))
+        else:
+            print(format_msg("OK", f"Uninstalled '{args.name}' ({len(removed)} files removed, user data preserved)"))
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
+def cmd_list(args: argparse.Namespace) -> int:
+    """Handle `skillfactory list` command (Phase 4, Task T4.07, AC4.07)."""
+    from skillfactory.manifest import verify_manifest
+    from skillfactory.registry import load_registry
+
+    data = load_registry()
+    installations = data.get("installations", [])
+
+    results = []
+    for rec in installations:
+        p_path = Path(rec.get("installed_path", ""))
+        exists = p_path.exists()
+        modified = False
+        if exists and p_path.is_dir():
+            valid, discrepancies = verify_manifest(p_path)
+            if not valid and any("File content modified" in d for d in discrepancies):
+                modified = True
+
+        results.append({
+            "skill_name": rec.get("skill_name"),
+            "platform": rec.get("platform"),
+            "scope": rec.get("scope"),
+            "version": rec.get("version"),
+            "mode": rec.get("mode"),
+            "installed_path": rec.get("installed_path"),
+            "exists": exists,
+            "modified": modified,
+        })
+
+    if getattr(args, "json", False):
+        print(json.dumps({"status": "success", "installations": results}, indent=2))
+        return 0
+
+    print("Skill Factory — Installed Skills")
+    print("=" * 74)
+    if not results:
+        print("No skills currently recorded in the local registry.")
+        return 0
+
+    header = f"{'Skill Name':<20} {'Platform':<15} {'Scope':<9} {'Version':<9} {'Mode':<8} {'Modified?'}"
+    print(header)
+    print("-" * 74)
+    for r in results:
+        mod_text = "Yes (edits)" if r["modified"] else "No"
+        if not r["exists"]:
+            mod_text = "Missing dir"
+        print(f"{r['skill_name']:<20} {r['platform']:<15} {r['scope']:<9} {r['version']:<9} {r['mode']:<8} {mod_text}")
+    print("-" * 74)
+    print(f"Total installations: {len(results)}")
+    return 0
+
+
+def cmd_install_self(args: argparse.Namespace) -> int:
+    """Handle `skillfactory install-self` command (Phase 4, Task T4.08, AC4.08)."""
+    from skillfactory.installer import install_self
+
+    try:
+        results = install_self(
+            target_platform=args.target,
+            scope=args.scope,
+            link=args.link,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({
+                "status": "success",
+                "installations": [
+                    {
+                        "platform": r.target_platform,
+                        "installed_path": str(r.installed_path),
+                        "mode": r.mode,
+                    }
+                    for r in results
+                ],
+            }, indent=2))
+        else:
+            for r in results:
+                print(format_msg("OK", f"Self-installed Skill Factory for {r.target_platform} at {r.installed_path}"))
+        return 0
+    except Exception as err:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(format_msg("ERROR", str(err)), file=sys.stderr)
+        return 1
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -350,6 +566,43 @@ def create_parser() -> argparse.ArgumentParser:
     )
     doctor_parser.add_argument("--project", default=".", help="Project directory to inspect (default: .)")
 
+    # Command: install
+    install_parser = subparsers.add_parser("install", parents=[common_parser], help="Install an Agent Skill into a target platform")
+    install_parser.add_argument("path", help="Path to the skill directory to install")
+    install_parser.add_argument("--target", help="Target platform (claude-code, cursor, codex, antigravity)")
+    install_parser.add_argument("--scope", default="project", choices=["project", "user"], help="Installation scope (default: project)")
+    install_parser.add_argument("--project", default=".", help="Project directory (default: .)")
+    install_parser.add_argument("--link", action="store_true", help="Use symbolic link instead of copying files")
+    install_parser.add_argument("--force", action="store_true", help="Overwrite if already installed")
+    install_parser.add_argument("--yes", action="store_true", help="Proceed non-interactively without prompt")
+
+    # Command: update
+    update_parser = subparsers.add_parser("update", parents=[common_parser], help="Update an installed skill with automated backup")
+    update_parser.add_argument("name", help="Skill name to update")
+    update_parser.add_argument("--source", help="Path to updated source directory (optional)")
+    update_parser.add_argument("--target", help="Target platform (optional)")
+    update_parser.add_argument("--force", action="store_true", help="Overwrite even if local modifications exist")
+
+    # Command: rollback
+    rollback_parser = subparsers.add_parser("rollback", parents=[common_parser], help="Restore the previous working backup snapshot")
+    rollback_parser.add_argument("name", help="Skill name to roll back")
+    rollback_parser.add_argument("--target", help="Target platform (optional)")
+
+    # Command: uninstall
+    uninstall_parser = subparsers.add_parser("uninstall", parents=[common_parser], help="Safely remove a skill while preserving user files")
+    uninstall_parser.add_argument("name", help="Skill name to uninstall")
+    uninstall_parser.add_argument("--target", help="Target platform (optional)")
+    uninstall_parser.add_argument("--yes", action="store_true", help="Confirm removal non-interactively")
+
+    # Command: list
+    subparsers.add_parser("list", parents=[common_parser], help="List all installed skills and modification statuses")
+
+    # Command: install-self
+    self_parser = subparsers.add_parser("install-self", parents=[common_parser], help="Install Skill Factory into host AI platform")
+    self_parser.add_argument("--target", help="Target platform (optional)")
+    self_parser.add_argument("--scope", default="user", choices=["project", "user"], help="Installation scope (default: user)")
+    self_parser.add_argument("--link", action="store_true", help="Use symbolic link instead of copying files")
+
     # Command: version
     subparsers.add_parser("version", help="Show Skill Factory version")
 
@@ -373,6 +626,18 @@ def main(argv: Optional[List[str]] = None) -> int:
         return cmd_validate(args)
     elif args.command == "doctor":
         return cmd_doctor(args)
+    elif args.command == "install":
+        return cmd_install(args)
+    elif args.command == "update":
+        return cmd_update(args)
+    elif args.command == "rollback":
+        return cmd_rollback(args)
+    elif args.command == "uninstall":
+        return cmd_uninstall(args)
+    elif args.command == "list":
+        return cmd_list(args)
+    elif args.command == "install-self":
+        return cmd_install_self(args)
     elif args.command == "version":
         print(f"skillfactory {__version__}")
         return 0

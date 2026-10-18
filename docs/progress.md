@@ -6,12 +6,13 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 3 (Multi-Agent Compatibility) Completed; Entering Phase 4 (Easy Installation and Updates).
+- **Current Active Milestone:** Phase 4 (Easy Installation and Updates) Completed; Entering Phase 5 (Skill Testing and Validation).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
-- **Phase 3 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 59 unit tests passing).
-- **Phases 4 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 3 Status:** **Completed** (Commit `890688d`, 6/6 tasks complete, 6/6 ACs passed).
+- **Phase 4 Status:** **Completed** (9/9 tasks complete, 9/9 ACs passed, 67 unit tests passing).
+- **Phases 5 – 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -62,16 +63,16 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 4 — Easy Installation and Updates (`PLANNED`)
-- [ ] **T4.01** Local Registry Manager: Implement `skillfactory/registry.py`.
-- [ ] **T4.02** Install Command: Implement `skillfactory install` with allow-list copying.
-- [ ] **T4.03** Update & Hash Diff: Implement `skillfactory update` with backup snapshots.
-- [ ] **T4.04** Rollback Command: Implement `skillfactory rollback`.
-- [ ] **T4.05** Uninstall Command: Implement `skillfactory uninstall`.
-- [ ] **T4.06** Symlink Support: Add optional `--link` mode.
-- [ ] **T4.07** List Command: Implement `skillfactory list`.
-- [ ] **T4.08** Self-Install Command: Implement `skillfactory install-self`.
-- [ ] **T4.09** Installation Test Suite: Cross-platform installation and rollback tests.
+### Phase 4 — Easy Installation and Updates (`COMPLETED`)
+- [x] **T4.01** Local Registry Manager: Implement `skillfactory/registry.py`.
+- [x] **T4.02** Install Command: Implement `skillfactory install` with allow-list copying.
+- [x] **T4.03** Update & Hash Diff: Implement `skillfactory update` with backup snapshots.
+- [x] **T4.04** Rollback Command: Implement `skillfactory rollback`.
+- [x] **T4.05** Uninstall Command: Implement `skillfactory uninstall`.
+- [x] **T4.06** Symlink Support: Add optional `--link` mode.
+- [x] **T4.07** List Command: Implement `skillfactory list`.
+- [x] **T4.08** Self-Install Command: Implement `skillfactory install-self`.
+- [x] **T4.09** Installation Test Suite: Cross-platform installation and rollback tests.
 
 ---
 
