@@ -295,3 +295,9 @@ def import_skill(
         finally:
             if staging_dir.exists():
                 shutil.rmtree(staging_dir, ignore_errors=True)
+
+
+# Aliases for export/import functions
+export_skill_to_zip = export_skill
+import_skill_from_zip = import_skill
+

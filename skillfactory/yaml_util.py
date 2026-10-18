@@ -58,6 +58,10 @@ def dump_frontmatter(data: Dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+# Alias for compatibility
+safe_dump_frontmatter = dump_frontmatter
+
+
 def parse_frontmatter(text: str) -> Tuple[Dict[str, Any], str]:
     """Parse YAML frontmatter and markdown body from markdown text.
 

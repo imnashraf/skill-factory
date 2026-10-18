@@ -158,6 +158,19 @@ def run_skill_tests(
         TestRunResult with execution details.
     """
     skill_path = Path(skill_dir).resolve()
+    if not skill_path.exists():
+        return TestRunResult(
+            success=False,
+            tests_run=0,
+            failures=0,
+            errors=1,
+            skipped=0,
+            duration_sec=0.0,
+            test_files_found=0,
+            error_message=f"Directory does not exist: {skill_path}",
+            stderr=f"Directory does not exist: {skill_path}",
+        )
+
     tests_dir = skill_path / "tests"
 
     test_files = find_test_files(skill_path)
@@ -173,7 +186,7 @@ def run_skill_tests(
             stdout="No test files found in tests/",
             stderr="",
         )
-        if save_report:
+        if save_report and skill_path.exists():
             _save_test_report(skill_path, result)
         return result
 

@@ -6,7 +6,7 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 7 (Beginner Experience) Completed; Entering Phase 8 (Security and Reliability).
+- **Current Active Milestone:** Phase 8 (Security and Reliability) Completed; Entering Phase 9 (Public Release Preparation).
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
@@ -14,8 +14,9 @@ This document tracks development progress, known defects, blockers, and the stat
 - **Phase 4 Status:** **Completed** (Commit `74bc178`, 9/9 tasks complete, 9/9 ACs passed).
 - **Phase 5 Status:** **Completed** (Commit `f3a4f56`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 6 Status:** **Completed** (Commit `cf7e071`, 7/7 tasks complete, 7/7 ACs passed).
-- **Phase 7 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 101 unit tests passing).
-- **Phases 8 – 9 Status:** **Planned & Fully Specified**.
+- **Phase 7 Status:** **Completed** (Commit `6a9e6b1`, 6/6 tasks complete, 6/6 ACs passed).
+- **Phase 8 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 109 unit tests passing).
+- **Phase 9 Status:** **Planned & Fully Specified**.
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -111,13 +112,13 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-### Phase 8 — Security and Reliability (`PLANNED`)
-- [ ] **T8.01** Secret & Token Scanner: Pattern scanner for AWS, GitHub, OpenAI keys.
-- [ ] **T8.02** Cross-Platform Path Hardening: Tests for spaces, unicode, long Windows paths.
-- [ ] **T8.03** Input Fuzzing: Parser fuzzing for malformed YAML and JSON.
-- [ ] **T8.04** Supply Chain Pinning: Pin GitHub Actions to full 40-character commit hashes.
-- [ ] **T8.05** Security Policy: Publish `SECURITY.md`.
-- [ ] **T8.06** CI Multi-OS Matrix: Test on Ubuntu, macOS, and Windows runners in CI.
+### Phase 8 — Security and Reliability (`COMPLETED`)
+- [x] **T8.01** Secret & Token Scanner: Pattern scanner for AWS, GitHub, OpenAI keys.
+- [x] **T8.02** Cross-Platform Path Hardening: Tests for spaces, unicode, long Windows paths.
+- [x] **T8.03** Input Fuzzing: Parser fuzzing for malformed YAML and JSON.
+- [x] **T8.04** Supply Chain Pinning: Pin GitHub Actions to full 40-character commit hashes.
+- [x] **T8.05** Security Policy: Publish `SECURITY.md`.
+- [x] **T8.06** CI Multi-OS Matrix: Test on Ubuntu, macOS, and Windows runners in CI.
 
 ---
 

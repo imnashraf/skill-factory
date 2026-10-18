@@ -517,6 +517,13 @@ def cmd_test(args: argparse.Namespace) -> int:
     from skillfactory.tester import run_skill_tests
 
     skill_path = Path(args.path)
+    if not skill_path.exists():
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": f"Directory not found: {skill_path}"}))
+        else:
+            print(format_msg("ERROR", f"Skill directory not found: {skill_path}"), file=sys.stderr)
+        return 1
+
     timeout = getattr(args, "timeout", 10.0) or 10.0
     result = run_skill_tests(skill_path, timeout=timeout, save_report=True)
 
@@ -558,6 +565,13 @@ def cmd_eval(args: argparse.Namespace) -> int:
     from skillfactory.eval import evaluate_skill
 
     skill_path = Path(args.path)
+    if not skill_path.exists():
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": f"Directory not found: {skill_path}"}))
+        else:
+            print(format_msg("ERROR", f"Skill directory not found: {skill_path}"), file=sys.stderr)
+        return 1
+
     run_tests = not getattr(args, "no_test", False)
     timeout = getattr(args, "timeout", 10.0) or 10.0
     report = evaluate_skill(skill_path, run_tests=run_tests, test_timeout=timeout, save_report=True)
@@ -584,6 +598,13 @@ def cmd_scan(args: argparse.Namespace) -> int:
     from skillfactory.scanner import scan_skill_directory
 
     skill_path = Path(args.path)
+    if not skill_path.exists():
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": f"Directory not found: {skill_path}"}))
+        else:
+            print(format_msg("ERROR", f"Skill directory not found: {skill_path}"), file=sys.stderr)
+        return 1
+
     report = scan_skill_directory(skill_path)
 
     if getattr(args, "json", False):

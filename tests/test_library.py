@@ -173,6 +173,35 @@ class LibraryAndPackagingTests(unittest.TestCase):
             self.assertIn("git init", res.instructions[1])
             self.assertIn("gh repo create", res.instructions[-1])
 
+    def test_ac8_01_publish_blocked_on_secrets(self):
+        """AC8.01: Pre-publish validation blocks export when secrets are present."""
+        with tempfile.TemporaryDirectory() as tmp:
+            src_dir = Path(tmp) / "src"
+            publish_dir = Path(tmp) / "repo-output"
+            src_dir.mkdir()
+
+            spec = SkillSpec(
+                name="secret-leak-skill",
+                description="Attempts to publish with a credential.",
+                template_family="python-script",
+            )
+            gen_res = generate_skill(spec, src_dir)
+
+            # Plant an OpenAI secret in scripts/main.py and re-record manifest so validator passes
+            script_file = gen_res.target_path / "scripts" / "main.py"
+            script_file.write_text("API_KEY = 'sk-proj-abcdefghijklmnopqrstuv12345'\n", encoding="utf-8")
+            from skillfactory.manifest import create_manifest, write_manifest
+            manifest = create_manifest(gen_res.target_path, spec, spec.template_family)
+            write_manifest(gen_res.target_path, manifest)
+
+            with self.assertRaises(ValueError) as ctx:
+                prepare_publish_repository(
+                    skill_dir=gen_res.target_path,
+                    output_dir=publish_dir,
+                )
+            self.assertIn("hardcoded credentials/secrets", str(ctx.exception))
+            self.assertFalse(publish_dir.exists())
+
     def test_all_five_curated_examples_score_grade_a(self):
         """AC6.06: All 5 curated reference skills in examples/ score >= 90 (Grade A)."""
         examples_dir = Path("examples")

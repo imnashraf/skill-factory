@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-18T22:24:42.808800+00:00",
+  "timestamp": "2026-10-18T22:34:52.592065+00:00",
   "success": true,
   "tests_run": 3,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
-  "duration_sec": 0.003,
+  "duration_sec": 0.088,
   "timed_out": false,
   "test_files_found": 1,
   "error_message": null,
   "stdout": "",
-  "stderr": "test_checklist_rules_structure (test_audit_rules.DockerSecurityAuditTests.test_checklist_rules_structure) ... ok\ntest_references_and_examples_exist (test_audit_rules.DockerSecurityAuditTests.test_references_and_examples_exist) ... ok\ntest_required_files_present (test_audit_rules.DockerSecurityAuditTests.test_required_files_present) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n"
+  "stderr": "test_checklist_rules_structure (test_audit_rules.DockerSecurityAuditTests.test_checklist_rules_structure) ... ok\ntest_references_and_examples_exist (test_audit_rules.DockerSecurityAuditTests.test_references_and_examples_exist) ... ok\ntest_required_files_present (test_audit_rules.DockerSecurityAuditTests.test_required_files_present) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
 }

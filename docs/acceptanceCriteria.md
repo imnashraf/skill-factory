@@ -117,14 +117,14 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 8 — Security and Reliability
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC8.01** | Secret scanner catches AWS keys, GitHub tokens, OpenAI keys, and private keys. | Test on synthetic credential fixture file. | 100% of credential patterns caught; blocks publish. |
-| **AC8.02** | Full test suite passes inside paths with spaces and non-ASCII unicode characters. | Test runner executed in `/tmp/test path 🚀/`. | 100% tests pass. |
-| **AC8.03** | Parsers handle fuzzed and malformed input without unhandled crashes. | Fuzz test runner in `test_fuzz.py`. | 0 uncaught exceptions (all return clean error code). |
-| **AC8.04** | All GitHub Actions in workflows pinned to full 40-character commit hashes. | Review of `.github/workflows/*.yml`. | 100% actions pinned by SHA. |
-| **AC8.05** | `SECURITY.md` published with clear vulnerability reporting policy. | File inspection at repo root. | Present and complete. |
-| **AC8.06** | GitHub Actions matrix tests pass on `ubuntu-latest`, `macos-latest`, `windows-latest`. | GitHub Actions CI run. | All 3 OS matrix jobs green. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC8.01** | Secret scanner catches AWS keys, GitHub tokens, OpenAI keys, and private keys. | Test on synthetic credential fixture file. | 100% of credential patterns caught; blocks publish. | **Passed** |
+| **AC8.02** | Full test suite passes inside paths with spaces and non-ASCII unicode characters. | Test runner executed in `/tmp/test path 🚀/`. | 100% tests pass. | **Passed** |
+| **AC8.03** | Parsers handle fuzzed and malformed input without unhandled crashes. | Fuzz test runner in `test_fuzz.py`. | 0 uncaught exceptions (all return clean error code). | **Passed** |
+| **AC8.04** | All GitHub Actions in workflows pinned to full 40-character commit hashes. | Review of `.github/workflows/*.yml`. | 100% actions pinned by SHA. | **Passed** |
+| **AC8.05** | `SECURITY.md` published with clear vulnerability reporting policy. | File inspection at repo root. | Present and complete. | **Passed** |
+| **AC8.06** | GitHub Actions matrix tests pass on `ubuntu-latest`, `macos-latest`, `windows-latest`. | GitHub Actions CI run. | All 3 OS matrix jobs green. | **Passed** |
 
 ---
 
