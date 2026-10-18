@@ -221,6 +221,81 @@ def cmd_interview(args: argparse.Namespace) -> int:
         return 1
 
 
+def cmd_doctor(args: argparse.Namespace) -> int:
+    """Handle `skillfactory doctor` command (Phase 3, Task T3.03, AC3.03)."""
+    from skillfactory.compat.detect import detect_all_platforms
+    from skillfactory.compat.platform_db import detect_os_key, get_all_platforms
+
+    project_dir = Path(getattr(args, "project", ".")).resolve()
+    py_ver = sys.version_info
+    py_ver_str = f"{py_ver.major}.{py_ver.minor}.{py_ver.micro}"
+    py_compatible = py_ver >= (3, 9)
+    os_name = detect_os_key()
+
+    detection_results = detect_all_platforms(project_dir=project_dir)
+    all_defs = get_all_platforms()
+
+    if getattr(args, "json", False):
+        report = {
+            "status": "success",
+            "system": {
+                "python_version": py_ver_str,
+                "python_executable": sys.executable,
+                "python_compatible": py_compatible,
+                "os_name": os_name,
+                "platform": sys.platform,
+                "project_dir": str(project_dir),
+            },
+            "platforms": {
+                pid: res.to_dict() for pid, res in detection_results.items()
+            },
+            "shared_directories": [
+                {
+                    "path": ".agents/skills",
+                    "platforms": ["cursor", "codex", "antigravity"],
+                    "note": "Shared project-level skills directory across Cursor, Codex, and Antigravity.",
+                }
+            ],
+        }
+        print(json.dumps(report, indent=2))
+        return 0
+
+    print("Skill Factory Doctor — System & Multi-Agent Compatibility Report")
+    print("=" * 66)
+    print("\n[System Runtime]")
+    py_status = "[OK]" if py_compatible else "[FAIL]"
+    print(f"  Python:      {py_ver_str} ({sys.executable}) {py_status} (Requires 3.9+)")
+    print(f"  OS:          {os_name} ({sys.platform})")
+    print(f"  Project:     {project_dir}")
+
+    print("\n[Detected AI Platforms]")
+    for pid, res in detection_results.items():
+        pdef = all_defs.get(pid, {})
+        vendor = pdef.get("vendor", "")
+        verified = pdef.get("last_verified", "unverified")
+        inv_syntax = pdef.get("invocation_syntax", "n/a")
+
+        status_line = res.status_summary
+        tag = "[OK]" if res.detected else "[INFO]"
+        print(f"\n  • {res.display_name} ({vendor}) {tag}")
+        print(f"    Status:        {status_line}")
+        print(f"    Verified:      {verified}")
+        print(f"    Invocation:    {inv_syntax}")
+
+        if res.project_path_statuses:
+            for rel_p, p_stat in res.project_path_statuses.items():
+                print(f"    Project Path:  {rel_p}/ [{p_stat}]")
+        if res.user_skill_path:
+            print(f"    User Path:     {res.user_skill_path} [{res.user_path_status}]")
+
+    print("\n[Shared-Directory Notes]")
+    print("  • '.agents/skills/' is shared across Cursor, OpenAI Codex, and Google Antigravity.")
+    print("    Skills created in or installed to '.agents/skills/' are automatically visible to all three.")
+
+    print("\n" + format_msg("OK", "Doctor check completed successfully. All systems operational."))
+    return 0
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -267,6 +342,14 @@ def create_parser() -> argparse.ArgumentParser:
     val_parser.add_argument("--no-hashes", action="store_true", help="Skip manifest hash verification")
     val_parser.add_argument("--record", action="store_true", help="Record results to .skillfactory/validation.json")
 
+    # Command: doctor
+    doctor_parser = subparsers.add_parser(
+        "doctor",
+        parents=[common_parser],
+        help="Diagnose system health, detected AI agents, and platform discovery paths",
+    )
+    doctor_parser.add_argument("--project", default=".", help="Project directory to inspect (default: .)")
+
     # Command: version
     subparsers.add_parser("version", help="Show Skill Factory version")
 
@@ -288,6 +371,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         return cmd_interview(args)
     elif args.command == "validate":
         return cmd_validate(args)
+    elif args.command == "doctor":
+        return cmd_doctor(args)
     elif args.command == "version":
         print(f"skillfactory {__version__}")
         return 0

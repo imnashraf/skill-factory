@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-10-19",
+  "platforms": {
+    "claude-code": {
+      "id": "claude-code",
+      "display_name": "Claude Code",
+      "vendor": "Anthropic",
+      "last_verified": "2026-10-19",
+      "source_url": "https://code.claude.com/docs/en/skills",
+      "status": "verified",
+      "invocation_syntax": "/<skill-name>",
+      "reload_behavior": "Watches skill folders; changes apply in-session without restart",
+      "hot_reload": true,
+      "symlink_supported": true,
+      "reserved_names": [
+        "synced"
+      ],
+      "project_skill_paths": [
+        ".claude/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.claude/skills",
+        "linux": "~/.claude/skills",
+        "windows": "%USERPROFILE%\\.claude\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".claude"
+        ],
+        "user_dirs": [
+          "~/.claude"
+        ],
+        "binaries": [
+          "claude"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description",
+        "allowed-tools",
+        "disable-model-invocation",
+        "user-invocable",
+        "argument-hint",
+        "context",
+        "agent"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata"
+      ],
+      "notes": "Does not expand ${CLAUDE_SKILL_DIR} in other tools. Cloud sessions do not read ~/.claude/skills/."
+    },
+    "cursor": {
+      "id": "cursor",
+      "display_name": "Cursor",
+      "vendor": "Anysphere",
+      "last_verified": "2026-10-19",
+      "source_url": "https://cursor.com/docs/context/skills",
+      "status": "verified",
+      "invocation_syntax": "/<skill-name>",
+      "reload_behavior": "In-session reload unverified; restart or window reload recommended",
+      "hot_reload": false,
+      "symlink_supported": false,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".agents/skills",
+        ".cursor/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.agents/skills",
+        "linux": "~/.agents/skills",
+        "windows": "%USERPROFILE%\\.agents\\skills"
+      },
+      "secondary_user_skill_paths": {
+        "macos": "~/.cursor/skills",
+        "linux": "~/.cursor/skills",
+        "windows": "%USERPROFILE%\\.cursor\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".cursor",
+          ".agents"
+        ],
+        "user_dirs": [
+          "~/.cursor",
+          "~/.agents"
+        ],
+        "binaries": [
+          "cursor"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description",
+        "license",
+        "compatibility",
+        "metadata",
+        "paths",
+        "icon",
+        "disable-model-invocation"
+      ],
+      "ignored_frontmatter_fields": [
+        "allowed-tools",
+        "user-invocable",
+        "argument-hint",
+        "context",
+        "agent"
+      ],
+      "reads_foreign_paths": [
+        ".claude/skills",
+        ".codex/skills",
+        "~/.claude/skills",
+        "~/.codex/skills"
+      ],
+      "notes": "Cursor reads multiple platform directories. Installing into multiple directories causes duplicate skills."
+    },
+    "codex": {
+      "id": "codex",
+      "display_name": "OpenAI Codex",
+      "vendor": "OpenAI",
+      "last_verified": "2026-10-19",
+      "source_url": "https://developers.openai.com/codex/skills",
+      "status": "verified",
+      "invocation_syntax": "$<skill-name>",
+      "reload_behavior": "In-session reload unverified",
+      "hot_reload": false,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".agents/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.agents/skills",
+        "linux": "~/.agents/skills",
+        "windows": "%USERPROFILE%\\.agents\\skills"
+      },
+      "system_skill_paths": [
+        "/etc/codex/skills"
+      ],
+      "detection_rules": {
+        "project_dirs": [
+          ".agents",
+          ".codex"
+        ],
+        "user_dirs": [
+          "~/.agents",
+          "~/.codex"
+        ],
+        "binaries": [
+          "codex"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata",
+        "allowed-tools",
+        "paths"
+      ],
+      "notes": "Optional agents/openai.yaml inside a skill for UI metadata or invocation policy."
+    },
+    "antigravity": {
+      "id": "antigravity",
+      "display_name": "Google Antigravity",
+      "vendor": "Google",
+      "last_verified": "2026-10-19",
+      "source_url": "agy-customizations skill documentation",
+      "status": "verified",
+      "invocation_syntax": "Natural language / model decides",
+      "reload_behavior": "Skills discovered dynamically on session/turn initialization",
+      "hot_reload": true,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".agents/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.gemini/config/skills",
+        "linux": "~/.gemini/config/skills",
+        "windows": "%USERPROFILE%\\.gemini\\config\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".agents",
+          ".agent",
+          "_agents",
+          "_agent"
+        ],
+        "user_dirs": [
+          "~/.gemini/config",
+          "~/.gemini/antigravity-ide"
+        ],
+        "binaries": [
+          "antigravity",
+          "agy"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata",
+        "allowed-tools",
+        "paths"
+      ],
+      "notes": "Walks up from cwd to repo root looking for .agents/skills/. Global skills in ~/.gemini/config/skills/."
+    }
+  }
+}

@@ -4,7 +4,7 @@ from __future__ import annotations
 import datetime
 from pathlib import Path
 from string import Template
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from skillfactory.spec import SkillSpec
 from skillfactory.yaml_util import dump_frontmatter
@@ -73,15 +73,46 @@ For more information, please refer to <http://unlicense.org/>
 """
 
 
+def format_compatibility_table(platforms: List[str], skill_name: str) -> str:
+    """Format markdown table for verified target platforms."""
+    from skillfactory.compat.platform_db import get_all_platforms
+    db = get_all_platforms()
+    rows = [
+        "| Platform | Supported Path | Invocation |",
+        "|---|---|---|",
+    ]
+    for pid in platforms:
+        pdef = db.get(pid)
+        if not pdef:
+            continue
+        display_name = pdef.get("display_name", pid)
+        paths = ", ".join(f"`{p}/`" for p in pdef.get("project_skill_paths", []))
+        syntax = pdef.get("invocation_syntax", "").replace("<skill-name>", skill_name)
+        rows.append(f"| {display_name} | {paths} | `{syntax}` |")
+    return "\n".join(rows)
+
+
 def build_template_context(spec: SkillSpec) -> Dict[str, str]:
     """Build variable substitution map from a SkillSpec."""
+    target_pids = spec.target_platforms or ["claude-code", "cursor", "codex", "antigravity"]
+    compat_table = format_compatibility_table(target_pids, spec.name)
+
+    compat_str = spec.compatibility
+    if not compat_str:
+        from skillfactory.compat.platform_db import get_all_platforms
+        db = get_all_platforms()
+        names = [db[pid]["display_name"] for pid in target_pids if pid in db]
+        if names:
+            compat_str = f"Designed for {', '.join(names[:-1])} and {names[-1]}." if len(names) > 1 else f"Designed for {names[0]}."
+        else:
+            compat_str = "Agent Skills specification compliant."
+
     # Frontmatter dictionary
     fm_dict: Dict[str, Any] = {
         "name": spec.name,
         "description": spec.description,
+        "compatibility": compat_str,
     }
-    if spec.compatibility:
-        fm_dict["compatibility"] = spec.compatibility
     if spec.metadata:
         fm_dict["metadata"] = spec.metadata
 
@@ -131,6 +162,8 @@ def build_template_context(spec: SkillSpec) -> Dict[str, str]:
         "author": author,
         "year": year,
         "version": spec.version,
+        "compatibility": compat_str,
+        "compatibility_table": compat_table,
     }
 
 

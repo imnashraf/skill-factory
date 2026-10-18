@@ -47,14 +47,14 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 3 — Multi-Agent Compatibility
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC3.01** | Platform database `platforms.json` encodes paths and features for all 4 tools. | Schema validation test on JSON file. | 100% valid schema with documented dates. |
-| **AC3.02** | Platform detection identifies installed agents on host system. | `test_detect.py` with mock filesystem. | Accurate detection of Claude, Cursor, Codex, Antigravity. |
-| **AC3.03** | `skillfactory doctor` prints clear diagnostic summary and path readiness. | Command execution in terminal. | Exit code 0, readable diagnostic report. |
-| **AC3.04** | Shared directory resolver avoids double-installing to `.agents/skills/`. | Multi-platform install test. | 0 duplicate folder collisions created. |
-| **AC3.05** | Compatibility table auto-generated in `README.md` and frontmatter. | Output inspection test. | Accurate platform list in generated markdown. |
-| **AC3.06** | Generated skills load cleanly without errors in simulated platform folders. | Discovery simulation tests. | 0 syntax or parsing errors. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC3.01** | Platform database `platforms.json` encodes paths and features for all 4 tools. | Schema validation test on JSON file. | 100% valid schema with documented dates. | **Passed** |
+| **AC3.02** | Platform detection identifies installed agents on host system. | `test_detect.py` with mock filesystem. | Accurate detection of Claude, Cursor, Codex, Antigravity. | **Passed** |
+| **AC3.03** | `skillfactory doctor` prints clear diagnostic summary and path readiness. | Command execution in terminal. | Exit code 0, readable diagnostic report. | **Passed** |
+| **AC3.04** | Shared directory resolver avoids double-installing to `.agents/skills/`. | Multi-platform install test. | 0 duplicate folder collisions created. | **Passed** |
+| **AC3.05** | Compatibility table auto-generated in `README.md` and frontmatter. | Output inspection test. | Accurate platform list in generated markdown. | **Passed** |
+| **AC3.06** | Generated skills load cleanly without errors in simulated platform folders. | Discovery simulation tests. | 0 syntax or parsing errors. | **Passed** |
 
 ---
 

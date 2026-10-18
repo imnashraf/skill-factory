@@ -37,14 +37,14 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 
 ## Phase 3 — Multi-Agent Compatibility
 
-| Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
-| **T3.01** | Platform Database | Create `skillfactory/data/platforms.json` encoding folder conventions, supported fields, and verification dates. | None | `skillfactory/data/platforms.json` | AC3.01 |
-| **T3.02** | Platform Detection | Implement environment scanner to detect installed AI platforms and check filesystem permissions. | T3.01 | `skillfactory/compat/detect.py` | AC3.02 |
-| **T3.03** | Doctor Command | Implement `skillfactory doctor` displaying system health, detected agents, and platform discovery paths. | T3.02 | `skillfactory/cli.py` | AC3.03 |
-| **T3.04** | Shared-Folder Resolver | Implement duplicate-name and collision detection across shared locations like `.agents/skills/`. | T3.01 | `skillfactory/compat/resolve.py` | AC3.04 |
-| **T3.05** | Compatibility Section | Auto-generate the "Compatibility" markdown table in generated `README.md` and `compatibility` frontmatter. | T3.01 | `skillfactory/core.py` | AC3.05 |
-| **T3.06** | Compatibility Matrix Verification | Create tests validating generated skills load cleanly in simulated Claude, Cursor, Codex, and Antigravity directory layouts. | T3.01 | `tests/test_compat.py` | AC3.06 |
+| Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref | Status |
+|---|---|---|---|---|---|---|
+| **T3.01** | Platform Database | Create `skillfactory/data/platforms.json` encoding folder conventions, supported fields, and verification dates. | None | `skillfactory/data/platforms.json` | AC3.01 | **Completed** |
+| **T3.02** | Platform Detection | Implement environment scanner to detect installed AI platforms and check filesystem permissions. | T3.01 | `skillfactory/compat/detect.py` | AC3.02 | **Completed** |
+| **T3.03** | Doctor Command | Implement `skillfactory doctor` displaying system health, detected agents, and platform discovery paths. | T3.02 | `skillfactory/cli.py` | AC3.03 | **Completed** |
+| **T3.04** | Shared-Folder Resolver | Implement duplicate-name and collision detection across shared locations like `.agents/skills/`. | T3.01 | `skillfactory/compat/resolve.py` | AC3.04 | **Completed** |
+| **T3.05** | Compatibility Section | Auto-generate the "Compatibility" markdown table in generated `README.md` and `compatibility` frontmatter. | T3.01 | `skillfactory/core.py` | AC3.05 | **Completed** |
+| **T3.06** | Compatibility Matrix Verification | Create tests validating generated skills load cleanly in simulated Claude, Cursor, Codex, and Antigravity directory layouts. | T3.01 | `tests/test_compat.py` | AC3.06 | **Completed** |
 
 ---
 
