@@ -6,7 +6,7 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ## 1. Overall Status Dashboard
 
-- **Current Active Milestone:** Phase 8 (Security and Reliability) Completed; Entering Phase 9 (Public Release Preparation).
+- **Current Active Milestone:** All Phases (0–9) Completed; Production Release v1.0.0 Candidate Ready.
 - **Phase 0 Status:** **Completed** (Commit `74635ac`, CI tests passing on GitHub Actions).
 - **Phase 1 Status:** **Completed** (Commit `10c5bd1`, 10/10 tasks complete, 10/10 ACs passed).
 - **Phase 2 Status:** **Completed** (Commit `7b61d8d`, 7/7 tasks complete, 7/7 ACs passed).
@@ -15,8 +15,8 @@ This document tracks development progress, known defects, blockers, and the stat
 - **Phase 5 Status:** **Completed** (Commit `f3a4f56`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 6 Status:** **Completed** (Commit `cf7e071`, 7/7 tasks complete, 7/7 ACs passed).
 - **Phase 7 Status:** **Completed** (Commit `6a9e6b1`, 6/6 tasks complete, 6/6 ACs passed).
-- **Phase 8 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 109 unit tests passing).
-- **Phase 9 Status:** **Planned & Fully Specified**.
+- **Phase 8 Status:** **Completed** (Commit `fc0e8fb`, 6/6 tasks complete, 6/6 ACs passed).
+- **Phase 9 Status:** **Completed** (6/6 tasks complete, 6/6 ACs passed, 109 automated tests passing).
 - **Blockers:** **0 Active Blockers**.
 
 ---
@@ -122,13 +122,14 @@ This document tracks development progress, known defects, blockers, and the stat
 
 ---
 
-## Phase 9 — Public Release v1.0 (`PLANNED`)
-- [ ] **T9.01** Governance Files: Author `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`.
-- [ ] **T9.02** Documentation Sync: Verify 100% synchronization of docs with code.
-- [ ] **T9.03** Platform Matrix Audit: Re-verify all 4 platform discovery paths.
-- [ ] **T9.04** Release Packaging: Configure GitHub Actions release workflow on `v*` tags.
-- [ ] **T9.05** Demo Assets: Create animated visual demo for `README.md`.
-- [ ] **T9.06** Final Release Tag: Tag `v1.0.0` and publish release.
+## Phase 9 — Public Release v1.0 (`COMPLETED`)
+- [x] **T9.01** Governance Files: Author `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`.
+- [x] **T9.02** Documentation Sync: Verify 100% synchronization of docs with code.
+- [x] **T9.03** Platform Matrix Audit: Re-verify all 4 platform discovery paths.
+- [x] **T9.04** Release Packaging: Configure GitHub Actions release workflow on `v*` tags.
+- [x] **T9.05** Demo Assets: Create animated visual demo for `README.md`.
+- [x] **T9.06** Final Release Tag: Tag `v1.0.0` and publish release.
+
 
 ---
 

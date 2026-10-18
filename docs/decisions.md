@@ -20,6 +20,7 @@ This document records the critical technical and architectural decisions made fo
 | **D-10** | Zero Built-In AI API Calls (Host Assistant Orchestration) | **Approved** | Cost, Privacy, Simplicity |
 | **D-11** | Full User Ownership of Generated Skills (No Viral Attribution) | **Approved** | Legal, Licensing |
 | **D-12** | Strict Backward Compatibility for `scripts/create_skill.py` | **Approved** | Compatibility, Governance |
+| **D-13** | Version 1.0.0 Packaging and Standalone Zero-Dependency Distribution | **Approved** | Packaging, Distribution |
 
 ---
 
@@ -122,3 +123,11 @@ This document records the critical technical and architectural decisions made fo
 - **Context:** Existing users and documentation rely on `python3 scripts/create_skill.py --name ... --description ...`.
 - **Decision:** Keep `scripts/create_skill.py` as an entry point that delegates to `skillfactory.core` with identical arguments, flags, and exit codes.
 - **Consequences:** Existing scripts, CI jobs, and user habits continue to work without disruption.
+
+---
+
+### D-13: Version 1.0.0 Packaging and Standalone Zero-Dependency Distribution
+- **Status:** **Approved**.
+- **Context:** Version 1.0.0 requires standard Python distribution metadata (`pyproject.toml`) so it can be installed via `pip install .` or `pipx`, while strictly maintaining zero third-party runtime dependencies and running directly from source (`python3 -m skillfactory`).
+- **Decision:** Provide a standard PEP 517/518 `pyproject.toml` targeting `setuptools.build_meta`, defining entry point `skillfactory = "skillfactory.cli:main"`, while retaining 100% functionality without packaging tools.
+- **Consequences:** Fully compliant with modern Python packaging standards. Standard library only at runtime. Supports direct source execution, `pip install .`, and legacy `python3 scripts/create_skill.py`.

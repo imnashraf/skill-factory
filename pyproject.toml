@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillfactory"
+version = "1.0.0"
+description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, and Antigravity."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Skill Factory Contributors" }]
+requires-python = ">=3.9"
+dependencies = []
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/imnashraf/skill-factory"
+Repository = "https://github.com/imnashraf/skill-factory.git"
+Documentation = "https://github.com/imnashraf/skill-factory/tree/main/docs"
+Issues = "https://github.com/imnashraf/skill-factory/issues"
+
+[project.scripts]
+skillfactory = "skillfactory.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["skillfactory*"]
+
+[tool.setuptools.package-data]
+skillfactory = ["data/*.json"]

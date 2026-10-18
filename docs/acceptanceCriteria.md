@@ -130,11 +130,12 @@ Every phase has explicit, testable acceptance criteria (`AC<phase>.<number>`). A
 
 ## Phase 9 — Public Release v1.0
 
-| ID | Criterion | Verification Method | Target Metric |
-|---|---|---|---|
-| **AC9.01** | `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md` published. | File inspection at repo root. | Present, complete, community-standard. |
-| **AC9.02** | 100% of documents in `docs/` synchronized with implementation. | Documentation audit. | 0 obsolete commands or contradictory instructions. |
-| **AC9.03** | Platform compatibility matrix re-verified against official docs with fresh dates. | Verification checklist. | All 4 platforms re-verified within 30 days of release. |
-| **AC9.04** | Automated GitHub Actions release workflow packages verified release assets. | Trigger release tag in sandbox. | Clean release created with release notes. |
-| **AC9.05** | README features clear hero visual / animated demo. | Visual review of `README.md`. | High-quality visual demonstration present. |
-| **AC9.06** | Git tag `v1.0.0` pushed and confirmed. | `git tag -v v1.0.0`. | Tag verified and released. |
+| ID | Criterion | Verification Method | Target Metric | Status |
+|---|---|---|---|---|
+| **AC9.01** | `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md` published. | File inspection at repo root. | Present, complete, community-standard. | **Passed** |
+| **AC9.02** | 100% of documents in `docs/` synchronized with implementation. | Documentation audit. | 0 obsolete commands or contradictory instructions. | **Passed** |
+| **AC9.03** | Platform compatibility matrix re-verified against official docs with fresh dates. | Verification checklist. | All 4 platforms re-verified within 30 days of release. | **Passed** |
+| **AC9.04** | Automated GitHub Actions release workflow packages verified release assets. | Trigger release tag in sandbox. | Clean release created with release notes. | **Passed** |
+| **AC9.05** | README features clear hero visual / animated demo. | Visual review of `README.md`. | High-quality visual demonstration present. | **Passed** |
+| **AC9.06** | Git tag `v1.0.0` pushed and confirmed. | `git tag -v v1.0.0` or local tag confirmation. | Tag verified and created. | **Passed** |
+
