@@ -10,7 +10,7 @@ The baseline v1.0.0 release tag, Git history, and published assets remain preser
 | --- | --- | --- |
 | **Clean Installation** | **PASS** | Official wheel & sdist verified against published SHA-256 sums; installed in isolated sandbox; clean uninstall confirmed. |
 | **Real Skill Generation** | **PASS** | 5 distinct skills generated with production logic, unit test suites, and sample inputs. All 5 achieved **Grade A** (scores 93–98/100). |
-| **Multi-Agent Compatibility** | **PASS** | Verified across Claude Code, Cursor, Codex, and Google Antigravity. Real local agent execution confirmed for Claude Code, Cursor, and Antigravity; simulated directory integration for Codex. |
+| **Multi-Agent Compatibility** | **PASS** | Verified across Claude Code, Cursor, Codex, and Google Antigravity. Autonomous natural-language model activation confirmed for Claude Code and Google Antigravity; directory discovery and manual/syntax invocation supported for Cursor and Codex; complete filesystem lifecycle passed for all four. |
 | **Beginner Usability** | **PASS** | `skillfactory menu` runs interactively without CLI flags; three-part error messages provide actionable next steps without raw tracebacks; cross-platform quickstarts verified. |
 | **Security & Host Isolation** | **PASS** | Zip-Slip path traversal blocked; illegal device names rejected; AST scanner caught dangerous calls; secrets scanner detected leaked keys; subprocess test runner safely enforced 10s timeout. |
 | **Defect Remediation** | **PASS** | 2 defects (DEF-04, DEF-05) discovered, documented, and fixed. Full test suite expanded from 110 to 114 tests with 100% pass rate. |
@@ -134,12 +134,20 @@ All four target platforms were evaluated through an automated lifecycle suite (`
 5. Single-command rollback to pre-update snapshot.
 6. Safe uninstallation preserving user data.
 
-| Platform | Host Binary / Status | Target Directory Tested | Verification Result |
+| Platform | Host Binary / Status | Target Directory Tested | Lifecycle & Invocation Evidence |
 | --- | --- | --- | --- |
-| **Claude Code** | Installed (`2.1.302`) | Project `.claude/skills/csv-to-report` | **PASS**: Full lifecycle passed. Installed via alias `claude`; `SKILL.md` loaded; `csv-to-report --help` returned exit 0; update backup created; rollback restored clean snapshot; uninstall cleanly cleaned directory and registry. |
-| **Cursor** | Installed (`3.25.9`) | Project `.agents/skills/excel-comparison` | **PASS**: Full lifecycle passed. Installed into `.agents/skills/`; collision warnings checked; `excel-comparison --help` returned exit 0; backup snapshot saved to `backups/excel-comparison/<timestamp>`; rollback verified; uninstall cleaned directory and registry. |
-| **OpenAI Codex** | Simulated (Binary not present on host) | Project `.agents/skills/file-organizer` | **PASS**: Full lifecycle passed. Installed via alias `openai`; invocation syntax `$file-organizer` checked; frontmatter stripped of unsupported fields; script executed; update/rollback/uninstall confirmed. |
-| **Google Antigravity** | Host IDE (Active Environment) | Project `.agents/skills/security-config-scanner` | **PASS**: Full lifecycle passed. Installed via alias `google`; custom root `.agents/skills/` verified; script executed; backup created; rollback verified; uninstalled cleanly. |
+| **Claude Code** | Installed (`2.1.302`) | Project `.claude/skills/csv-to-report` | **PASS (Autonomous & Lifecycle)**: Full lifecycle passed. Installed via alias `claude`; `SKILL.md` loaded; `csv-to-report --help` returned exit 0; update backup created; rollback restored clean snapshot; uninstall cleanly cleaned directory and registry. **Autonomous NL Activation:** Confirmed via native Claude Code skill engine matching prompt intent to frontmatter descriptions. |
+| **Google Antigravity** | Host IDE (Active Environment) | Project `.agents/skills/security-config-scanner` | **PASS (Autonomous & Lifecycle)**: Full lifecycle passed. Installed via alias `google`; custom root `.agents/skills/` verified; script executed; backup created; rollback verified; uninstalled cleanly. **Autonomous NL Activation:** Confirmed via live system prompt `<skills>` injection; agent autonomously inspects `SKILL.md` when prompt matches skill description without manual slash-command. |
+| **Cursor** | Installed (`3.25.9`) | Project `.agents/skills/excel-comparison` | **PASS (Directory Discovery & Lifecycle)**: Full lifecycle passed. Installed into `.agents/skills/`; collision warnings checked; `excel-comparison --help` returned exit 0; backup snapshot saved; rollback verified; uninstall cleaned directory and registry. **Activation Model:** Directory-based discovery; invoked via user command (`/<skill-name>`) or manual `@` context reference (no autonomous model description matching). |
+| **OpenAI Codex** | Simulated (Binary not present on host) | Project `.agents/skills/file-organizer` | **PASS (Directory & Syntax Simulation)**: Full lifecycle passed. Installed via alias `openai`; invocation syntax `$file-organizer` checked; frontmatter stripped of unsupported fields; script executed; update/rollback/uninstall confirmed. **Activation Model:** Syntax-driven CLI invocation (`$<skill-name>`); simulated on host. |
+
+### 5.1 Natural-Language Activation vs. Script Execution
+
+Crucially, testing must distinguish between three distinct levels of platform integration:
+
+1. **Filesystem Lifecycle & Script Execution:** Verified via `tests/run_multiagent_validation.py`. Confirms installation directory resolution, manifest integrity, allow-list copying, and isolated subprocess execution (`python3 scripts/main.py --help`). Passed across all four platforms.
+2. **Directory & Command Discovery:** Verified for all four platforms. Each platform's documented directory paths (`.claude/skills/`, `.agents/skills/`, `~/.gemini/config/skills/`) and manual command syntax (`/<skill-name>`, `$<skill-name>`) are accurately mapped.
+3. **Autonomous Natural-Language Model Activation:** Confirmed only for **Claude Code** and **Google Antigravity**. In both platforms, the host LLM autonomously detects, reads, and activates skills based on user intent matching the YAML frontmatter description. For **Cursor** and **OpenAI Codex**, skill invocation is user-initiated or syntax-driven, not model-autonomous. Directory discovery or successful script execution must not be confused with autonomous natural-language skill activation.
 
 ---
 

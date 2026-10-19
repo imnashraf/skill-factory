@@ -10,7 +10,8 @@ Security updates and patches are actively maintained for the following versions:
 
 | Version | Supported | Minimum Python |
 | --- | --- | --- |
-| `1.0.x` | :white_check_mark: Yes | Python 3.9+ |
+| `1.0.1` | :white_check_mark: Yes (Current) | Python 3.9+ |
+| `1.0.0` | :white_check_mark: Yes | Python 3.9+ |
 | `< 1.0.0` | :x: No (Legacy / Alpha) | Python 3.9+ |
 
 ---

@@ -215,7 +215,7 @@ def install_skill(
         installed_path=str(dest_path),
         source_path=str(src),
         version=version,
-        installed_at=datetime.datetime.utcnow().isoformat() + "Z",
+        installed_at=datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
         mode=actual_mode,
         installed_files=copied_files,
     )
@@ -260,7 +260,7 @@ def update_skill(
 
     # Create backup snapshot before update (AC4.03)
     backup_base = get_data_dir(home_dir) / "backups" / skill_name
-    timestamp_str = datetime.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+    timestamp_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M%S")
     backup_dir = backup_base / timestamp_str
     backup_dir.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(installed_path, backup_dir)
@@ -287,7 +287,7 @@ def update_skill(
     history = reg_entry.get("backup_history", [])
     history.append({
         "backup_path": str(backup_dir),
-        "created_at": datetime.datetime.utcnow().isoformat() + "Z",
+        "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
         "reason": "pre-update",
     })
 
@@ -298,7 +298,7 @@ def update_skill(
         installed_path=str(installed_path),
         source_path=str(src),
         version=version,
-        installed_at=datetime.datetime.utcnow().isoformat() + "Z",
+        installed_at=datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
         mode="copy",
         installed_files=copied_files,
         backup_history=history,

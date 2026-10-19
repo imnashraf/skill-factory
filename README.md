@@ -36,7 +36,7 @@ It bridges the gap between conversational AI prompts and production-grade tools 
 - 🔒 **Safe & Isolated:** AST safety scanner flags dangerous code (`eval`, `exec`, shell injection, filesystem wipes). Subprocess test runner enforces a 10-second timeout. Pre-publish checks block leaked API keys, tokens, and credentials.
 - 🎯 **Dual-Mode Creation:**
   - **Host-AI Mode:** Uses the capabilities of your connected AI coding assistant (Claude, Cursor, Codex, Antigravity) via the root [`SKILL.md`](SKILL.md) to generate complete, tested code. No Skill Factory API subscription required.
-  - **Offline Mode:** 5-minute interactive terminal questionnaire or batch JSON answers generating deterministic, verifiable templates with honest capability placeholders.
+  - **Offline Mode:** 5-minute interactive terminal questionnaire or batch JSON answers generating deterministic, verifiable templates with honest capability placeholders (domain logic and tests implemented by the developer or assistant; not a "no-code" black box).
 - 🌐 **Multi-Platform Compatibility:** Native data-driven discovery and installation for Claude Code, Cursor, Codex, and Google Antigravity with collision detection and shared-folder resolution (`.agents/skills/`).
 - 📦 **Complete Lifecycle Management:** atomic staging, SHA-256 manifests, platform installer with automatic backup snapshots, rollback, uninstaller, ZIP export/import with Zip-Slip defense, and standalone GitHub repository publishing.
 - 📊 **Automated Quality Scoring:** 0–100 rubric evaluating specification conformance, description trigger clarity, test coverage, implementation density, and documentation hygiene.
@@ -133,12 +133,12 @@ When working in a standard terminal without AI access:
 
 Skill Factory maps to official agent discovery paths defined in [`skillfactory/data/platforms.json`](skillfactory/data/platforms.json):
 
-| Platform | Project Scope Folder | Global (User) Scope Folder | Shared Compatibility |
+| Platform | Project Scope Folder | Global (User) Scope Folder | Activation & Invocation Support |
 | --- | --- | --- | --- |
-| **Claude Code** | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` | Native `allowed-tools`, `argument-hint` |
-| **Cursor** | `.agents/skills/<name>/`, `.cursor/skills/` | `~/.agents/skills/`, `~/.cursor/skills/` | Auto-detects Claude & Codex paths |
-| **OpenAI Codex** | `.agents/skills/<name>/` | `~/.agents/skills/` | Supports `agents/openai.yaml` metadata |
-| **Google Antigravity** | `.agents/skills/<name>/` | `~/.gemini/config/skills/` | Built-in workspace hierarchy resolution |
+| **Claude Code** | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` | Autonomous model activation (description-matched) + manual `/<skill-name>` |
+| **Google Antigravity** | `.agents/skills/<name>/` | `~/.gemini/config/skills/` | Autonomous model activation (system prompt `<skills>` injection) |
+| **Cursor** | `.agents/skills/<name>/`, `.cursor/skills/` | `~/.agents/skills/`, `~/.cursor/skills/` | Directory discovery & manual invocation (`/<skill-name>`, `@` context) |
+| **OpenAI Codex** | `.agents/skills/<name>/` | `~/.agents/skills/` | Directory discovery & CLI invocation (`$<skill-name>`); simulated |
 
 Run `python3 -m skillfactory doctor` to automatically detect which AI assistants are installed on your workstation.
 
@@ -226,7 +226,7 @@ Run the full automated test suite locally:
 python3 -m unittest discover -s tests -v
 ```
 
-All 109+ tests run in ~2 seconds using standard library `unittest`.
+All 114 tests run in ~2 seconds using standard library `unittest`.
 
 To test backward compatibility with the legacy Phase 0 script:
 
