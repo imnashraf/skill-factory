@@ -44,11 +44,13 @@ This document establishes the end-to-end execution roadmap, stage dependencies, 
 ## 2. Phase-by-Phase Deliverables
 
 ### Stage 1: Phase 15 Final Validation & Remediation
+
 - Comprehensive audit of all Phase 15 commits, modules, tests, and distributions.
 - Verification of 14 reference skills, 5 curated packs, and 8 AI coding assistant integrations.
 - Documentation: `docs/final-development/phase15Validation.md`.
 
 ### Stage 2: Phase 16 — Real-World Usability & Reliable AI Creation
+
 - **Workstream 16A**: Enhance `skillfactory/guide.py` with OS-specific path guidance (macOS, Windows, Linux) and zero raw stack traces.
 - **Workstream 16B**: Create `skillfactory/ai/requirements.py` implementing intent extraction, input/output typing, validation rules, error handling definitions, and structured Assumption Registers.
 - **Workstream 16C**: Create `skillfactory/ai/test_gen.py` for automated behavioral unit test generation from specifications, and update `skillfactory/ai/engine.py` with bounded self-repair and explicit non-AI fallback.
@@ -56,6 +58,7 @@ This document establishes the end-to-end execution roadmap, stage dependencies, 
 - **Workstream 16E**: Benchmark simulated beginner scenarios and record metrics in `docs/final-development/phase16Report.md`.
 
 ### Stage 3: Phase 17 — Skill Library, Discovery & Community Ecosystem
+
 - **Workstream 17A**: Update `skillfactory/library.py` and `skillfactory/data/packs.json` with dynamic domain registration.
 - **Workstream 17B**: Enhance CLI search with `--domain`, `--category`, `--platform`, `--grade`, and `--type` filters (<10ms offline execution).
 - **Workstream 17C**: Add `skillfactory pack preview <pack>` showing dependency graphs, file lists, and platform compatibility before installation.
@@ -64,6 +67,7 @@ This document establishes the end-to-end execution roadmap, stage dependencies, 
 - Documentation: `docs/final-development/phase17Report.md`.
 
 ### Stage 4: Phase 18 — Production Hardening & Product Completion
+
 - **Workstream 18A**: Codebase audit for unused imports, circular dependencies, and dead code; verify 100% standard library compliance.
 - **Workstream 18B**: 16-vector threat model audit, adversarial test suite execution, and security risk documentation.
 - **Workstream 18C**: Multi-platform compatibility verification for all 8 platforms across macOS, Linux, and Windows.
@@ -74,5 +78,6 @@ This document establishes the end-to-end execution roadmap, stage dependencies, 
 - Documentation: `docs/final-development/phase18Report.md`.
 
 ### Stage 5: Final Integration & Release Readiness
+
 - Execute complete automated test suite (150+ tests).
 - Generate `docs/final-development/finalCompletionReport.md`.

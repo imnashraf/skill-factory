@@ -9,6 +9,7 @@ This document establishes the technical blueprint, architectural components, imp
 Phase 16 transforms Skill Factory from a functional developer tool into an intuitive, beginner-friendly platform capable of interpreting complex natural-language skill requests, generating robust specifications with explicit assumption registers, synthesizing behavioral tests, and validating functional correctness through bounded execution loops.
 
 ### Workstream Overview
+
 1. **Workstream 16A — End-to-End Beginner Experience (`FR16-01`)**:
    - Cross-platform path guidance (macOS, Linux, Windows conventions).
    - Zero raw stack traces for user-facing commands with friendly remediation advice.
@@ -36,6 +37,7 @@ Phase 16 transforms Skill Factory from a functional developer tool into an intui
 ## 2. Technical Architecture & Component Design
 
 ### 2.1 Natural Language Requirements Engine (`skillfactory/ai/requirements.py`)
+
 ```text
 Natural Language Input
         │
@@ -55,21 +57,27 @@ Natural Language Input
 ```
 
 ### 2.2 Behavioral Test Generator (`skillfactory/ai/test_gen.py`)
+
 Synthesizes a standalone, executable `unittest.TestCase` suite from the structured requirement specification:
+
 - Positive functional tests for primary user workflow.
 - Negative tests for missing arguments, malformed data, and boundary cases.
 - Path traversal and security boundary tests.
 - 100% standard library compliance (`unittest`, `tempfile`, `pathlib`).
 
 ### 2.3 Functional Evaluator (`skillfactory/ai/evaluator.py`)
+
 Provides independent verification of AI-generated skills:
+
 - Runs static AST analysis against 8 security vectors.
 - Executes synthesized tests with a 10s timeout in a sandboxed subprocess.
 - Compares actual execution outputs with expected requirement criteria.
 - Returns an independent verification report with zero self-grading bias.
 
 ### 2.4 Beginner Guidance Wizard (`skillfactory/guide.py`)
+
 Enhances onboarding with:
+
 - OS-specific assistant directory resolution:
   - macOS: `~/Library/Application Support/...` or `~/.agents/skills`
   - Linux: `~/.config/...` or `~/.agents/skills`
@@ -98,6 +106,7 @@ Enhances onboarding with:
 ---
 
 ## 4. Acceptance Criteria
+
 - All 4 reference test cases ("Excel compare", "Attendance CSV", "RAID log", "Invoice discrepancies") produce structured specifications with non-empty assumption registers.
 - Generated tests execute under standard library `unittest` without external dependencies.
 - Bounded repair loop handles syntax/assertion errors up to 3 times before failing safely.

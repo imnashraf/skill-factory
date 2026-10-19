@@ -7,6 +7,7 @@ This document establishes the completed implementation, validation evidence, and
 ## 1. Executive Summary
 
 Phase 16 has been completed autonomously and verified against all functional, quality, and architectural criteria:
+
 - **Workstream 16A (Beginner UX)**: Implemented cross-platform directory resolution and guidance for macOS, Linux, and Windows; ensured zero raw stack traces across user commands with three-part error messages (`What`, `Why`, `Next Action`).
 - **Workstream 16B (Requirements Engine)**: Built `skillfactory/ai/requirements.py` capable of translating natural-language intent into structured contracts (`StructuredRequirementSpec`) with an explicit **Assumption Register** for ambiguous rules.
 - **Workstream 16C (Bounded AI Implementation & Test Generation)**: Developed `skillfactory/ai/test_gen.py` to synthesize executable `unittest.TestCase` suites mapped 1:1 to acceptance criteria; enhanced `AIAssistedEngine` with bounded self-repair (max 3 retries) and deterministic non-AI fallback.
@@ -33,6 +34,7 @@ Phase 16 has been completed autonomously and verified against all functional, qu
 ## 3. Workstream Details & Implementation Evidence
 
 ### 3.1 Workstream 16A: Beginner Guidance & OS Path Guidance
+
 - Enhanced `skillfactory/guide.py` with `get_os_friendly_name()` and `get_os_path_guidance(platform_id)`.
 - Resolves OS-specific paths:
   - macOS: `~/Library/Application Support/...` or `~/.agents/skills`
@@ -46,6 +48,7 @@ Phase 16 has been completed autonomously and verified against all functional, qu
   5. Deployment: `skillfactory install`, `update`, `rollback`, `uninstall`
 
 ### 3.2 Workstream 16B: Natural-Language Requirements Engine
+
 - Implemented `skillfactory/ai/requirements.py` supporting complex prompts:
   1. *"Create a skill that compares two Excel files and highlights differences."*
   2. *"Create a skill that validates employee attendance data."*
@@ -65,6 +68,7 @@ Phase 16 has been completed autonomously and verified against all functional, qu
   - Provides concrete user actions to take if the assumption is incorrect.
 
 ### 3.3 Workstream 16C: Behavioral Test Generator & Bounded Repair
+
 - Implemented `skillfactory/ai/test_gen.py`:
   - Synthesizes valid Python standard library `unittest.TestCase` code.
   - Maps every `AcceptanceCriterion` to an executable test method (`test_ac_1_...`, `test_ac_2_...`).
@@ -74,12 +78,14 @@ Phase 16 has been completed autonomously and verified against all functional, qu
   - Intercepts dangerous AST nodes before any code execution occurs.
 
 ### 3.4 Workstream 16D: Functional Correctness & Independent Checks
+
 - Implemented `skillfactory/ai/evaluator.py`:
   - `audit_functional_correctness()`: Parses test AST, computes traceability score (% of ACs mapped to test methods), checks AST safety, runs tests in sandboxed subprocess.
   - Computes independent score: Security (35pts) + Tests (35pts) + Traceability (30pts).
   - Provides deterministic non-AI implementations for common domains when models are offline.
 
 ### 3.5 Workstream 16E: Simulated Beginner Journey Benchmark
+
 - Evaluated simulated first-time user flow via `tests/test_beginner_experience.py`:
   - **Total Steps**: 5 guided steps from pre-flight to deployment.
   - **Execution Latency**: 0.04s for complete scaffolding, validation, test execution, and guidance.

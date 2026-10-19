@@ -16,27 +16,27 @@ This document establishes the formal requirements, priorities, acceptance criter
 | `FR15-06` | 15 | AI Creation | Provider-neutral AI creation engine with AST quarantine | Must | VERIFIED | `skillfactory/ai/`, 14 engine tests |
 | `FR15-07` | 15 | Platforms | 8 AI coding assistant integrations verified across 6 lifecycle stages | Must | VERIFIED | `tests/run_multiagent_validation.py` |
 | `FR15-08` | 15 | Security | Symlink escape defense and prompt injection rules INJ005–INJ007 | Must | VERIFIED | `tests/run_security_validation.py` |
-| `FR16-01` | 16 | Usability | Zero raw stack traces, OS-specific path guidance, friendly error remediation | Must | PENDING | Implementation in Workstream 16A |
-| `FR16-02` | 16 | AI Creation | Structured natural-language requirements interpreter (intent, I/O, rules, tests) | Must | PENDING | Implementation in Workstream 16B |
-| `FR16-03` | 16 | AI Creation | Explicit Assumption Register for ambiguous business requirements | Should | PENDING | Implementation in Workstream 16B |
-| `FR16-04` | 16 | Quality | Automated behavioral test generation from acceptance criteria / spec | Must | PENDING | Implementation in Workstream 16C |
-| `FR16-05` | 16 | AI Creation | Bounded code generation & self-repair loop with stderr feedback (max 3 retries) | Must | PENDING | Implementation in Workstream 16C |
-| `FR16-06` | 16 | Usability | Deterministic non-AI specification & scaffolding fallback when model unavailable | Must | PENDING | Implementation in Workstream 16C |
-| `FR16-07` | 16 | Quality | Functional correctness checking against boundary test fixtures; independent scoring | Must | PENDING | Implementation in Workstream 16D |
-| `FR16-08` | 16 | Validation | Simulated beginner journey evaluation measuring steps, error recovery, and latency | Should | PENDING | Implementation in Workstream 16E |
-| `FR17-01` | 17 | Ecosystem | Extensible 3-tier domain taxonomy with dynamic domain registration | Must | PENDING | Implementation in Workstream 17A |
-| `FR17-02` | 17 | Discovery | Multi-attribute offline catalog search (keyword, domain, category, platform, grade) | Must | PENDING | Implementation in Workstream 17B |
-| `FR17-03` | 17 | Ecosystem | Curated skill pack preview, dependency resolution, and atomic rollback | Must | PENDING | Implementation in Workstream 17C |
-| `FR17-04` | 17 | Community | Automated contribution validation script & pull request screening workflow | Must | PENDING | Implementation in Workstream 17D |
-| `FR17-05` | 17 | Security | Strict security quarantine: untrusted community submissions never executed automatically | Must | PENDING | Implementation in Workstream 17D |
-| `FR17-06` | 17 | Discovery | Standalone offline Markdown catalog generator (`docs/SKILL_CATALOG.md`) | Should | PENDING | Implementation in Workstream 17E |
-| `FR18-01` | 18 | Architecture | Full codebase architecture review: dead code removal, 100% stdlib purity | Must | PENDING | Implementation in Workstream 18A |
-| `FR18-02` | 18 | Security | Comprehensive 16-vector threat model audit, mitigations, and residual risk registry | Must | PENDING | Implementation in Workstream 18B |
-| `FR18-03` | 18 | Compatibility| Cross-platform verification (macOS, Linux, Windows; Py 3.9–3.13) | Must | PENDING | Implementation in Workstream 18C |
-| `FR18-04` | 18 | Performance | Production performance benchmark harness validating sub-10ms budgets | Must | PENDING | Implementation in Workstream 18D |
-| `FR18-05` | 18 | Documentation| Complete documentation suite: guides, API reference, security, maintenance policy | Must | PENDING | Implementation in Workstream 18E |
-| `FR18-06` | 18 | Release | Final production release candidate (clean install test, checksums, release notes) | Must | PENDING | Implementation in Workstream 18F |
-| `FR18-07` | 18 | Governance | Long-term maintenance readiness: bug triage, security disclosure, deprecation policy | Must | PENDING | Implementation in Workstream 18G |
+| `FR16-01` | 16 | Usability | Zero raw stack traces, OS-specific path guidance, friendly error remediation | Must | VERIFIED | `skillfactory/guide.py`, `tests/test_beginner_experience.py` |
+| `FR16-02` | 16 | AI Creation | Structured natural-language requirements interpreter (intent, I/O, rules, tests) | Must | VERIFIED | `skillfactory/ai/requirements.py`, `tests/test_requirements.py` |
+| `FR16-03` | 16 | AI Creation | Explicit Assumption Register for ambiguous business requirements | Should | VERIFIED | `AssumptionRegister` in `requirements.py`, markdown export |
+| `FR16-04` | 16 | Quality | Automated behavioral test generation from acceptance criteria / spec | Must | VERIFIED | `skillfactory/ai/test_gen.py`, `tests/test_test_gen.py` |
+| `FR16-05` | 16 | AI Creation | Bounded code generation & self-repair loop with stderr feedback (max 3 retries) | Must | VERIFIED | `AIAssistedEngine.build_skill()`, `tests/test_ai_engine.py` |
+| `FR16-06` | 16 | Usability | Deterministic non-AI specification & scaffolding fallback when model unavailable | Must | VERIFIED | `generate_non_ai_implementation()`, `tests/test_evaluator.py` |
+| `FR16-07` | 16 | Quality | Functional correctness checking against boundary test fixtures; independent scoring | Must | VERIFIED | `audit_functional_correctness()`, `tests/test_evaluator.py` |
+| `FR16-08` | 16 | Validation | Simulated beginner journey evaluation measuring steps, error recovery, and latency | Should | VERIFIED | `tests/test_beginner_experience.py` (Simulated) |
+| `FR17-01` | 17 | Ecosystem | Extensible 3-tier domain taxonomy with dynamic domain registration | Must | VERIFIED | `skillfactory/library.py`, `tests/test_library_search.py` |
+| `FR17-02` | 17 | Discovery | Multi-attribute offline catalog search (keyword, domain, category, platform, grade) | Must | VERIFIED | `search_catalog()`, `tests/test_library_search.py` (<10ms) |
+| `FR17-03` | 17 | Ecosystem | Curated skill pack preview, dependency resolution, and atomic rollback | Must | VERIFIED | `preview_pack()`, `skillfactory/pack.py`, `tests/test_pack_preview.py` |
+| `FR17-04` | 17 | Community | Automated contribution validation script & pull request screening workflow | Must | VERIFIED | `scripts/validate_submission.py`, `tests/test_submission_screening.py` |
+| `FR17-05` | 17 | Security | Strict security quarantine: untrusted community submissions never executed automatically | Must | VERIFIED | Quarantine barrier in `scripts/validate_submission.py` |
+| `FR17-06` | 17 | Discovery | Standalone offline Markdown catalog generator (`docs/SKILL_CATALOG.md`) | Should | VERIFIED | `docs/SKILL_CATALOG.md` (14 skills, 5 packs, 31 domains) |
+| `FR18-01` | 18 | Architecture | Full codebase architecture review: dead code removal, 100% stdlib purity | Must | VERIFIED | AST import audit (0 third-party imports), `architectureDecisions.md` |
+| `FR18-02` | 18 | Security | Comprehensive 16-vector threat model audit, mitigations, and residual risk registry | Must | VERIFIED | `securityFindings.md`, `riskRegister.md`, `run_security_validation.py` |
+| `FR18-03` | 18 | Compatibility | Cross-platform verification (macOS, Linux, Windows; Py 3.9–3.14) | Must | VERIFIED | `compatibilityEvidence.md`, `run_multiagent_validation.py` |
+| `FR18-04` | 18 | Performance | Production performance benchmark harness validating sub-10ms budgets | Must | VERIFIED | `scripts/run_benchmarks.py` (search 0.02ms, startup 3.05ms) |
+| `FR18-05` | 18 | Documentation | Complete documentation suite: guides, API reference, security, maintenance policy | Must | VERIFIED | `README.md`, `SKILL_CATALOG.md`, `CLI_REFERENCE.md`, `maintenancePolicy.md` |
+| `FR18-06` | 18 | Release | Final production release candidate (clean install test, checksums, release notes) | Must | VERIFIED | `dist/`, clean venv test `/tmp/sf_release_verify`, `releaseReadiness.md` |
+| `FR18-07` | 18 | Governance | Long-term maintenance readiness: bug triage, security disclosure, deprecation policy | Must | VERIFIED | `docs/final-development/maintenancePolicy.md` |
 
 ---
 
