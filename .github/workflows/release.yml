@@ -66,10 +66,10 @@ jobs:
           cat SHA256SUMS.txt
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@c95fe148935b9c7a1d3d7581ad88950d6f461476 # v2.2.1
-        with:
-          files: |
-            dist/*
-          draft: false
-          prerelease: false
-          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --title "Skill Factory $GITHUB_REF_NAME" \
+            --generate-notes
+
