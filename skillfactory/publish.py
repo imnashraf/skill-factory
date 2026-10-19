@@ -208,26 +208,32 @@ def prepare_publish_repository(
 {desc}
 
 ## Overview
+
 This repository contains the `{skill_name}` Agent Skill, formatted according to the open [Agent Skills specification](https://agentskills.io).
 
 ## Installation
 
 Using **Skill Factory**:
+
 ```bash
 python3 -m skillfactory install . --target claude-code
 ```
 
 Or copy directly into your AI assistant's skills directory:
+
 - **Claude Code**: `.claude/skills/{skill_name}/`
 - **Cursor / Codex / Antigravity**: `.agents/skills/{skill_name}/`
 
 ## Testing
+
 Run automated test suite:
+
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
 ## License
+
 MIT License
 """
         readme_path.write_text(readme_content, encoding="utf-8")

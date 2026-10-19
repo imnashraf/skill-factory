@@ -135,12 +135,12 @@ All 16 threat vectors audited and defended:
 
 ## I. Quality Assurance & Test Verification
 
-- **Automated Unit Tests**: 165 tests run via `python3 -m unittest discover -s tests`; **165 passed, 0 failures, 0 errors** (100% pass rate in 3.63s).
+- **Automated Unit Tests**: 172 tests run via `python3 -m unittest discover -s tests`; **172 passed, 0 failures, 0 errors** (100% pass rate in 5.8s).
 - **Security Validation**: 8/8 threat vector suites pass (`tests/run_security_validation.py`).
 - **Multiagent Lifecycle**: 8/8 platforms pass all 6 lifecycle stages (`tests/run_multiagent_validation.py`).
 - **Reference Skills Execution**: 14/14 reference skill test suites pass in <0.07s each.
 - **Reference Demos**: 5/5 demonstration scenarios pass (`scripts/run_demos.py`).
-- **Markdown Linting**: 0 errors across entire repository (`npx markdownlint-cli`).
+- **Markdown Linting**: 0 errors across entire repository verified via `npx --yes markdownlint-cli -c .markdownlint.json "**/*.md" --ignore "node_modules/**"`, with 7 automated regression tests in `tests/test_markdown_lint.py` and continuous enforcement in GitHub Actions CI.
 
 ---
 
@@ -148,7 +148,7 @@ All 16 threat vectors audited and defended:
 
 - **GitHub Actions Workflows**:
   - `pypi-publish.yml`: Configured for tokenless GitHub Actions OIDC Trusted Publishing with restricted environment permissions (`id-token: write`).
-  - `ci.yml`: Cross-platform matrix configured for Ubuntu, macOS, and Windows across Python 3.9 through 3.13.
+  - `tests.yml`: Cross-platform matrix configured for Ubuntu, macOS, and Windows across Python 3.9 through 3.13, including automated Markdown linting and package smoke tests.
 
 ---
 

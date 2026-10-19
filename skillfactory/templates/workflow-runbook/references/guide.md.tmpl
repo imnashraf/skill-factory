@@ -3,13 +3,16 @@
 Operational parameters, escalation matrix, and detailed rollback commands for $name.
 
 ## Pre-Flight Checklist
+
 - [ ] Environment variables verified
 - [ ] Network connectivity to upstream services confirmed
 - [ ] Database backup snapshot validated
 - [ ] Communication channel opened (#ops-alerts)
 
 ## Rollback Command Playbook
+
 In case of rollback trigger:
+
 ```bash
 # Example rollback sequence:
 # 1. Restore previous configuration:
@@ -19,5 +22,6 @@ In case of rollback trigger:
 ```
 
 ## Escalation Path
+
 - Primary On-Call: Tier 2 Infrastructure Team
 - Secondary On-Call: Team Lead / Lead Architect

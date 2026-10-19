@@ -98,7 +98,7 @@ class AssumptionRegister:
             return "No assumptions recorded (specification fully determined)."
         lines = [
             "| # | Category | Assumption | Rationale | Remediation If Incorrect |",
-            "|---|---|---|---|---|",
+            "| --- | --- | --- | --- | --- |",
         ]
         for idx, item in enumerate(self.items, 1):
             lines.append(
@@ -148,11 +148,13 @@ class StructuredRequirementSpec:
             f"# Specification: {self.skill_name}",
             "",
             f"**Objective**: {self.business_objective}",
+            "",
             f"**Domain**: {self.domain} | **Category**: {self.category}",
             "",
             "## 1. Input Contracts",
+            "",
             "| Name | Type | Format | Required | Description |",
-            "|---|---|---|---|---|",
+            "| --- | --- | --- | --- | --- |",
         ]
         for inp in self.inputs:
             lines.append(f"| {inp.name} | {inp.data_type} | {inp.format} | {'Yes' if inp.required else 'No'} | {inp.description} |")
@@ -160,8 +162,9 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 2. Output Contracts",
+            "",
             "| Name | Type | Format | Description |",
-            "|---|---|---|---|",
+            "| --- | --- | --- | --- |",
         ])
         for out in self.outputs:
             lines.append(f"| {out.name} | {out.data_type} | {out.format} | {out.description} |")
@@ -169,8 +172,9 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 3. Validation Rules",
+            "",
             "| Field | Rule Type | Description | On Error |",
-            "|---|---|---|---|",
+            "| --- | --- | --- | --- |",
         ])
         for rule in self.validation_rules:
             lines.append(f"| {rule.field_name} | {rule.rule_type} | {rule.description} | {rule.error_action} |")
@@ -178,8 +182,9 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 4. Edge Cases",
+            "",
             "| Scenario | Expected Behavior |",
-            "|---|---|",
+            "| --- | --- |",
         ])
         for edge in self.edge_cases:
             lines.append(f"| {edge.scenario} | {edge.expected_behavior} |")
@@ -187,8 +192,9 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 5. Security Requirements",
+            "",
             "| Control | Description | Enforcement |",
-            "|---|---|---|",
+            "| --- | --- | --- |",
         ])
         for sec in self.security_requirements:
             lines.append(f"| {sec.control_type} | {sec.description} | {sec.enforcement} |")
@@ -196,8 +202,9 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 6. Acceptance Criteria",
+            "",
             "| ID | Criterion | Test Scenario |",
-            "|---|---|---|",
+            "| --- | --- | --- |",
         ])
         for ac in self.acceptance_criteria:
             lines.append(f"| {ac.criterion_id} | {ac.description} | {ac.test_scenario} |")
@@ -205,6 +212,7 @@ class StructuredRequirementSpec:
         lines.extend([
             "",
             "## 7. Assumption Register",
+            "",
             self.assumption_register.to_markdown(),
             "",
         ])

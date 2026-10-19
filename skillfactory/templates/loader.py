@@ -79,7 +79,7 @@ def format_compatibility_table(platforms: List[str], skill_name: str) -> str:
     db = get_all_platforms()
     rows = [
         "| Platform | Supported Path | Invocation |",
-        "|---|---|---|",
+        "| --- | --- | --- |",
     ]
     for pid in platforms:
         pdef = db.get(pid)
