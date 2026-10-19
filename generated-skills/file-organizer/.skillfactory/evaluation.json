@@ -1,0 +1,173 @@
+{
+  "skill_name": "file-organizer",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/file-organizer",
+  "total_score": 98,
+  "grade": "Grade A",
+  "dimensions": [
+    {
+      "name": "Spec Compliance & Structure",
+      "dimension_id": "EV-01",
+      "earned": 23,
+      "max_points": 25,
+      "items": {
+        "mandatory_files": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md and README.md both exist"
+        },
+        "valid_frontmatter": {
+          "earned": 5,
+          "max": 5,
+          "note": "YAML frontmatter parsed without errors"
+        },
+        "name_conformance": {
+          "earned": 5,
+          "max": 5,
+          "note": "Skill name conforms to lowercase kebab-case rules"
+        },
+        "description_quality": {
+          "earned": 3,
+          "max": 5,
+          "note": "Description present but could be more specific regarding trigger conditions"
+        },
+        "relative_file_links": {
+          "earned": 5,
+          "max": 5,
+          "note": "All markdown file links resolve successfully"
+        }
+      }
+    },
+    {
+      "name": "Cross-Platform Portability",
+      "dimension_id": "EV-02",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "no_absolute_paths": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero hardcoded absolute paths found"
+        },
+        "reserved_names": {
+          "earned": 5,
+          "max": 5,
+          "note": "Clean of Windows and platform-reserved names"
+        },
+        "line_endings_and_encoding": {
+          "earned": 5,
+          "max": 5,
+          "note": "All text files are valid UTF-8 with standard LF line endings"
+        },
+        "portable_interpreters": {
+          "earned": 5,
+          "max": 5,
+          "note": "Portable invocation patterns used"
+        }
+      }
+    },
+    {
+      "name": "Documentation & Progressive Disclosure",
+      "dimension_id": "EV-03",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "concise_main_file": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md is concise (38 lines <= 500 limit)"
+        },
+        "progressive_disclosure": {
+          "earned": 5,
+          "max": 5,
+          "note": "Progressive disclosure utilized with modular subdirectories"
+        },
+        "examples_included": {
+          "earned": 5,
+          "max": 5,
+          "note": "Concrete usage examples provided"
+        },
+        "limitations_documented": {
+          "earned": 5,
+          "max": 5,
+          "note": "Operational constraints and prerequisites documented"
+        }
+      }
+    },
+    {
+      "name": "Test Coverage & Execution",
+      "dimension_id": "EV-04",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "test_suite_present": {
+          "earned": 5,
+          "max": 5,
+          "note": "Test suite present with 1 test file(s)"
+        },
+        "structural_tests_pass": {
+          "earned": 5,
+          "max": 5,
+          "note": "Baseline test suite executes without failures"
+        },
+        "behavioral_execution": {
+          "earned": 5,
+          "max": 5,
+          "note": "Tests ran successfully in 0.03s (< 10.0s timeout)"
+        },
+        "honest_reporting": {
+          "earned": 5,
+          "max": 5,
+          "note": "All 6 assertions executed and verified"
+        }
+      }
+    },
+    {
+      "name": "Code Safety & Secrets Scan",
+      "dimension_id": "EV-05",
+      "earned": 15,
+      "max_points": 15,
+      "items": {
+        "clean_secret_scan": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero credentials, API tokens, or private keys detected"
+        },
+        "ast_safety_check": {
+          "earned": 5,
+          "max": 5,
+          "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
+        },
+        "manifest_integrity": {
+          "earned": 5,
+          "max": 5,
+          "note": "All files match their recorded SHA-256 manifest hashes"
+        }
+      }
+    }
+  ],
+  "summary": "Skill Quality Score: 98 / 100 [Grade A]",
+  "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
+  "test_result": {
+    "success": true,
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_sec": 0.029,
+    "timed_out": false,
+    "error_message": null,
+    "stdout": "[OK] Successfully organized 2 files into structured categories.\n{\n  \"status\": \"success\",\n  \"files_organized\": 1,\n  \"operations\": [\n    {\n      \"source_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpyd_apzlg/intake/contract.pdf\",\n      \"target_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpyd_apzlg/intake/documents/2026_contract.pdf\",\n      \"category\": \"documents\",\n      \"renamed\": true\n    }\n  ]\n}\n",
+    "stderr": "test_categorization (test_main.FileOrganizerTests.test_categorization) ... ok\ntest_dry_run_leaves_files_in_place (test_main.FileOrganizerTests.test_dry_run_leaves_files_in_place) ... ok\ntest_live_organization_and_collision_avoidance (test_main.FileOrganizerTests.test_live_organization_and_collision_avoidance) ... ok\ntest_nonexistent_directory_error (test_main.FileOrganizerTests.test_nonexistent_directory_error) ... [ERROR] Failed to plan organization: Source directory not found: /nonexistent/fake/directory/xyz\nok\ntest_prefix_option (test_main.FileOrganizerTests.test_prefix_option) ... ok\ntest_sanitize_filename (test_main.FileOrganizerTests.test_sanitize_filename) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.029s\n\nOK\n",
+    "test_files_found": 1
+  },
+  "safety_summary": {
+    "is_clean": true,
+    "files_scanned": 11,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 0,
+    "findings": []
+  },
+  "timestamp": "2026-10-19T14:33:39.265080+00:00"
+}

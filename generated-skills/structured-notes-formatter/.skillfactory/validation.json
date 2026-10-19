@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "structured-notes-formatter",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/structured-notes-formatter",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "structured-notes-formatter",
+      "description": "Parses unstructured meeting notes and text transcripts into standardized GitHub-flavored markdown minutes with metadata, decisions, and assigned action items."
+    }
+  }
+}

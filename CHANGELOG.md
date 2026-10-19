@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-10-20
+
+### Added
+
+- **PyPI Distribution Readiness (Workstream A)**:
+  - Packaging configuration verified in `pyproject.toml` with dual console scripts: `skillfactory` and `skill-factory`.
+  - Comprehensive bundled package data rules ensuring `data/*/*.json` and subdirectories are fully included in wheels.
+  - PyPI namespace collision audit documented; publication pathway configured via GitHub Actions OIDC Trusted Publishing (`.github/workflows/pypi-publish.yml`).
+  - Isolated clean-environment installation testing verified outside source tree.
+- **Beginner Onboarding & Guided UX (Workstream B)**:
+  - Interactive step-by-step onboarding wizard (`skillfactory guide`) covering diagnostic pre-flight, assistant selection, specification, generation, and optional installation.
+  - Enhanced top-level interactive menu with choices 0–12 and zero required flags.
+- **Curated Domain Skill Packs (Workstream D)**:
+  - 3-tier domain taxonomy schema (Personal, Professional, Developer) covering 31 domain specializations.
+  - 5 curated domain packs (`office-productivity`, `finance-erp`, `hr-workforce`, `project-management`, `developer-security`) defined in `skillfactory/data/packs.json`.
+  - Full pack lifecycle CLI manager (`skillfactory pack list`, `install`, `verify`, `uninstall`) with atomic rollback on partial batch failures.
+  - 9 new production-grade reference skills (total 14 skills in library), all achieving Grade A (≥90/100) on the quality rubric.
+- **Optional AI-Assisted Skill Creation (Workstream E)**:
+  - Provider-neutral AI creation engine (`skillfactory ai-create`) supporting local Ollama, OpenAI-compatible APIs, and offline deterministic mock providers.
+  - Pre-execution AST safety quarantine scanning for dangerous calls before running tests.
+  - Isolated subprocess execution sandbox (10.0s timeout) with bounded self-repair loop (up to 3 retries).
+- **Multi-Agent Platform Expansion (Workstream F)**:
+  - Expanded compatibility to 8 AI coding assistants: Claude Code, Google Antigravity, Cursor, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
+  - Added native detection rules, directory schemas, and shorthand alias normalization (`windsurf`, `codeium`, `continue`, `cline`, `copilot`, `github-copilot`).
+- **Security & Quality Hardening (Workstream G)**:
+  - Symlink escape defense in file installer and package importer preventing access to files outside skill directory.
+  - 3 new prompt injection rules (`INJ005` system prompt extraction, `INJ006` webhook exfiltration, `INJ007` adversarial roleplay).
+  - Multiagent validation suite expanded to test all 8 platforms through 6-stage lifecycle (`install`, `validate`, `execute`, `update`, `rollback`, `uninstall`).
+- **Community & Launch Kit (Workstreams C & H)**:
+  - Community launch preparation kit with platform-tailored announcements for Hacker News, Reddit, and LinkedIn.
+  - GitHub issue forms (`bug_report.yml`, `feature_request.yml`) and pull request template (`pull_request_template.md`).
+  - Zero-telemetry adoption measurement policy.
+
+---
+
 ## [1.1.0] - 2026-10-19
 
 ### Added

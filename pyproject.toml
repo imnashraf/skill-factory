@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skillfactory"
-version = "1.1.0"
-description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, and Antigravity."
+version = "1.2.0"
+description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, Antigravity, Windsurf, Continue, Cline, and Copilot."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Skill Factory Contributors" }]
@@ -33,6 +33,7 @@ Issues = "https://github.com/imnashraf/skill-factory/issues"
 
 [project.scripts]
 skillfactory = "skillfactory.cli:main"
+skill-factory = "skillfactory.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
@@ -41,6 +42,8 @@ include = ["skillfactory*"]
 [tool.setuptools.package-data]
 skillfactory = [
     "data/*.json",
+    "data/*/*.json",
+    "data/*/*/*.json",
     "templates/*/*.tmpl",
     "templates/*/*/*.tmpl",
 ]

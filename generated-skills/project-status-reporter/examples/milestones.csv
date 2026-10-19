@@ -1,0 +1,6 @@
+id,name,owner,status,due_date
+MS-1,Core Architecture Specification,Lead Architect,COMPLETED,2026-10-05
+MS-2,Packaging & OIDC Publish Pipeline,DevOps Engineer,COMPLETED,2026-10-12
+MS-3,Domain Reference Skill Packs,Engineering Team,IN_PROGRESS,2026-10-22
+MS-4,AI Provider Sandboxing & Self-Repair,Agent Engineer,IN_PROGRESS,2026-10-24
+MS-5,Public Documentation & Launch Kit,Technical Writer,NOT_STARTED,2026-10-28

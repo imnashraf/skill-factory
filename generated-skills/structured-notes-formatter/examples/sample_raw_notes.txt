@@ -1,0 +1,9 @@
+# Sprint Planning Sync
+Date: 2026-10-20
+Attendees: Maria, Alex, Ken
+Discussed release milestones and documentation scope.
+Decision: Prioritize beginner onboarding and PyPI readiness.
+Action: Draft PyPI packaging guide (Owner: Maria)
+Action: Build interactive onboarding wizard (Owner: Alex)
+Action: Verify security checks @Ken
+All tasks scheduled for sprint completion.

@@ -1,0 +1,173 @@
+{
+  "skill_name": "timesheet-reconciliation",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/timesheet-reconciliation",
+  "total_score": 91,
+  "grade": "Grade A",
+  "dimensions": [
+    {
+      "name": "Spec Compliance & Structure",
+      "dimension_id": "EV-01",
+      "earned": 23,
+      "max_points": 25,
+      "items": {
+        "mandatory_files": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md and README.md both exist"
+        },
+        "valid_frontmatter": {
+          "earned": 5,
+          "max": 5,
+          "note": "YAML frontmatter parsed without errors"
+        },
+        "name_conformance": {
+          "earned": 5,
+          "max": 5,
+          "note": "Skill name conforms to lowercase kebab-case rules"
+        },
+        "description_quality": {
+          "earned": 3,
+          "max": 5,
+          "note": "Description present but could be more specific regarding trigger conditions"
+        },
+        "relative_file_links": {
+          "earned": 5,
+          "max": 5,
+          "note": "All markdown file links resolve successfully"
+        }
+      }
+    },
+    {
+      "name": "Cross-Platform Portability",
+      "dimension_id": "EV-02",
+      "earned": 15,
+      "max_points": 20,
+      "items": {
+        "no_absolute_paths": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero hardcoded absolute paths found"
+        },
+        "reserved_names": {
+          "earned": 0,
+          "max": 5,
+          "note": "Contains Windows or tool reserved device names"
+        },
+        "line_endings_and_encoding": {
+          "earned": 5,
+          "max": 5,
+          "note": "All text files are valid UTF-8 with standard LF line endings"
+        },
+        "portable_interpreters": {
+          "earned": 5,
+          "max": 5,
+          "note": "Portable invocation patterns used"
+        }
+      }
+    },
+    {
+      "name": "Documentation & Progressive Disclosure",
+      "dimension_id": "EV-03",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "concise_main_file": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md is concise (28 lines <= 500 limit)"
+        },
+        "progressive_disclosure": {
+          "earned": 5,
+          "max": 5,
+          "note": "Progressive disclosure utilized with modular subdirectories"
+        },
+        "examples_included": {
+          "earned": 5,
+          "max": 5,
+          "note": "Concrete usage examples provided"
+        },
+        "limitations_documented": {
+          "earned": 5,
+          "max": 5,
+          "note": "Operational constraints and prerequisites documented"
+        }
+      }
+    },
+    {
+      "name": "Test Coverage & Execution",
+      "dimension_id": "EV-04",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "test_suite_present": {
+          "earned": 5,
+          "max": 5,
+          "note": "Test suite present with 1 test file(s)"
+        },
+        "structural_tests_pass": {
+          "earned": 5,
+          "max": 5,
+          "note": "Baseline test suite executes without failures"
+        },
+        "behavioral_execution": {
+          "earned": 5,
+          "max": 5,
+          "note": "Tests ran successfully in 0.05s (< 10.0s timeout)"
+        },
+        "honest_reporting": {
+          "earned": 5,
+          "max": 5,
+          "note": "All 1 assertions executed and verified"
+        }
+      }
+    },
+    {
+      "name": "Code Safety & Secrets Scan",
+      "dimension_id": "EV-05",
+      "earned": 13,
+      "max_points": 15,
+      "items": {
+        "clean_secret_scan": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero credentials, API tokens, or private keys detected"
+        },
+        "ast_safety_check": {
+          "earned": 5,
+          "max": 5,
+          "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
+        },
+        "manifest_integrity": {
+          "earned": 3,
+          "max": 5,
+          "note": "Manifest file not found (unmanaged or freshly generated without manifest)"
+        }
+      }
+    }
+  ],
+  "summary": "Skill Quality Score: 91 / 100 [Grade A]",
+  "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
+  "test_result": {
+    "success": true,
+    "tests_run": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_sec": 0.052,
+    "timed_out": false,
+    "error_message": null,
+    "stdout": "",
+    "stderr": "test_timesheet_reconcile (test_main.TestTimesheetReconciliation.test_timesheet_reconcile) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+    "test_files_found": 1
+  },
+  "safety_summary": {
+    "is_clean": true,
+    "files_scanned": 11,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 0,
+    "findings": []
+  },
+  "timestamp": "2026-10-19T19:38:51.745232+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "financial-variance-analyzer",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/financial-variance-analyzer",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "financial-variance-analyzer",
+      "description": "Compares budgeted vs. actual financial figures from CSV files, calculates dollar and percentage variance, flags material exceptions, and produces executive reports."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "invoice-reconciliation",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/invoice-reconciliation",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "invoice-reconciliation",
+      "description": "Reconciles supplier invoices against purchase order registers, identifying price discrepancies, missing purchase order numbers, and duplicate billings."
+    }
+  }
+}

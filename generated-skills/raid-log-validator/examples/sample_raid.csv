@@ -1,0 +1,5 @@
+id,type,description,owner,status,severity,due_date
+R-101,RISK,Third-party auth latency degradation,DevOps Lead,OPEN,HIGH,2026-11-15
+A-102,ASSUMPTION,PostgreSQL 16 migration completes in window,DBA Team,CLOSED,LOW,2026-10-10
+I-103,ISSUE,Staging environment SSL cert expired,Security Admin,IN_PROGRESS,CRITICAL,2026-10-25
+D-104,DEPENDENCY,Payment gateway webhook specification approval,Product Owner,OPEN,MEDIUM,2026-11-05

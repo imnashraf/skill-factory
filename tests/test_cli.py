@@ -141,6 +141,67 @@ class CliTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertTrue((tmp_path / ".claude" / "skills" / "alias-skill").exists())
 
+    def test_cli_pack_list_and_json(self):
+        """Verify pack list outputs all 5 packs."""
+        exit_code = main(["pack", "list"])
+        self.assertEqual(exit_code, 0)
+
+        # JSON mode
+        import io
+        from contextlib import redirect_stdout
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            ret = main(["pack", "list", "--json"])
+        self.assertEqual(ret, 0)
+        data = json.loads(buf.getvalue())
+        self.assertIn("packs", data)
+        pack_ids = [p["id"] for p in data["packs"]]
+        self.assertIn("office-productivity", pack_ids)
+        self.assertIn("finance-erp", pack_ids)
+        self.assertIn("developer-security", pack_ids)
+
+    def test_cli_guide_non_interactive(self):
+        """Verify guide runs non-interactively to completion."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            exit_code = main([
+                "guide",
+                "--name", "beginner-cli-test",
+                "--platform", "standalone",
+                "--output", str(tmp_path),
+                "--non-interactive",
+            ])
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((tmp_path / "beginner-cli-test" / "SKILL.md").exists())
+
+    def test_cli_ai_create_with_mock_provider(self):
+        """Verify ai-create command creates valid skill via mock provider."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            exit_code = main([
+                "ai-create",
+                "Create a text report generator",
+                "--name", "ai-cli-skill",
+                "--provider", "mock-passing",
+                "--output", str(tmp_path),
+            ])
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((tmp_path / "ai-cli-skill" / "SKILL.md").exists())
+            self.assertTrue((tmp_path / "ai-cli-skill" / "scripts" / "main.py").exists())
+
+    def test_cli_ai_create_safety_rejection(self):
+        """Verify ai-create command intercepts dangerous code."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            exit_code = main([
+                "ai-create",
+                "Execute dangerous code",
+                "--name", "dangerous-cli-skill",
+                "--provider", "mock-dangerous",
+                "--output", str(tmp_path),
+            ])
+            self.assertEqual(exit_code, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

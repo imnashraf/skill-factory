@@ -1,0 +1,80 @@
+name: Bug Report
+description: File a reproducible defect report for Skill Factory.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem in Skill Factory!
+        Please verify that you are running the latest version using `skillfactory doctor` or `skillfactory version`.
+
+  - type: input
+    id: version
+    attributes:
+      label: Skill Factory Version
+      placeholder: e.g. 1.2.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Linux
+        - Windows
+    validations:
+      required: true
+
+  - type: input
+    id: python_version
+    attributes:
+      label: Python Runtime Version
+      placeholder: e.g. Python 3.11.8
+    validations:
+      required: true
+
+  - type: dropdown
+    id: assistant
+    attributes:
+      label: AI Coding Assistant (if applicable)
+      options:
+        - Claude Code
+        - Google Antigravity
+        - Cursor
+        - OpenAI Codex
+        - Windsurf
+        - Continue
+        - Cline
+        - GitHub Copilot
+        - None / Standalone CLI
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear and concise description of the issue.
+      placeholder: What happened versus what you expected to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Exact commands run to trigger the issue.
+      placeholder: |
+        1. Run `skillfactory new my-test`
+        2. Run `skillfactory test generated-skills/my-test`
+        3. See error ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Command Output & Error Message
+      description: Paste the terminal output (run with `--debug` if possible).
+      render: shell

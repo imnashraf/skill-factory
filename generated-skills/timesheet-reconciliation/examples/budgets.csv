@@ -1,0 +1,4 @@
+employee_id,project_code,allocated_hours
+EMP-201,PRJ-ALPHA,40.0
+EMP-202,PRJ-BETA,40.0
+EMP-203,PRJ-GAMMA,20.0

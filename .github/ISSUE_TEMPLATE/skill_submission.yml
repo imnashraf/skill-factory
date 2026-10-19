@@ -50,6 +50,10 @@ body:
         - label: Google Antigravity
         - label: Cursor
         - label: OpenAI Codex
+        - label: Windsurf
+        - label: Continue
+        - label: Cline
+        - label: GitHub Copilot
 
   - type: input
     id: quality_score

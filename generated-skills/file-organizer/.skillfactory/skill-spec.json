@@ -1,0 +1,25 @@
+{
+  "name": "file-organizer",
+  "description": "Organize and rename files into structured directories based on file types, dates, and name patterns.",
+  "template_family": "file-transform",
+  "version": "0.1.0",
+  "author": "",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

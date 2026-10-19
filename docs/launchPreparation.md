@@ -1,4 +1,4 @@
-# Skill Factory — Public Launch Preparation Kit
+# Skill Factory — Public Launch Preparation Kit (Phase 15)
 
 This document provides a launch kit for introducing Skill Factory to developers, AI practitioners, and open-source communities. All materials strictly reflect the tested, local-first capabilities of Skill Factory and avoid unsupported marketing claims.
 
@@ -8,7 +8,7 @@ This document provides a launch kit for introducing Skill Factory to developers,
 
 ### Tagline / Short Description
 
-> "A local-first, zero-dependency toolkit for building, validating, testing, and installing reusable skills across AI coding assistants."
+> "A local-first, zero-dependency open-source ecosystem to create, validate, test, install, and share skills across AI coding assistants."
 
 ### Suggested GitHub Topics
 
@@ -17,6 +17,8 @@ This document provides a launch kit for introducing Skill Factory to developers,
 - `claude-code`
 - `antigravity`
 - `cursor`
+- `copilot`
+- `windsurf`
 - `developer-tools`
 - `local-first`
 - `python`
@@ -25,39 +27,47 @@ This document provides a launch kit for introducing Skill Factory to developers,
 
 ### Core Value Proposition
 
-1. **Local-First & Offline:** Pure Python standard library implementation. No mandatory accounts, telemetry, API tokens, or cloud servers.
-2. **Deterministic Lifecycle:** Comprehensive scaffolding, semantic validation, static security auditing, manifest hashing, atomic installation, and clean rollback.
-3. **Cross-Platform & Cross-Assistant:** Standardized skill package structure compatible with Claude Code, Google Antigravity, Cursor, and OpenAI Codex conventions.
+1. **Local-First & Offline:** Pure Python standard library implementation. Zero mandatory accounts, telemetry, API tokens, or cloud servers.
+2. **Deterministic Lifecycle:** Comprehensive scaffolding, semantic validation, static AST security auditing, manifest hashing, atomic installation, and clean rollback.
+3. **Cross-Platform & 8 Assistants:** Standardized skill package structure compatible with Claude Code, Google Antigravity, Cursor, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
+4. **5 Curated Domain Packs (14 Grade A Skills):** Ready-to-use reference skills across Office Productivity, Finance & ERP, HR & Workforce, Project Management, and Developer & Security.
+5. **Optional AI-Assisted Creation:** Provider-neutral natural language skill synthesis (local Ollama, OpenAI-compatible, or mock) with pre-execution AST safety quarantine and bounded self-repair.
 
 ---
 
-## 2. Release Announcement Draft (v1.0.1)
+## 2. Release Announcement Draft (v1.2.0)
 
 ````markdown
-# Skill Factory v1.0.1: Build, Validate, and Install AI Coding Assistant Skills
+# Skill Factory v1.2.0: Build, Audit, and Share AI Coding Assistant Skills
 
-Skill Factory provides a standard, repeatable toolkit to create, test, and safely install reusable skills for AI coding assistants.
+Skill Factory transforms how developers and non-programmers create, validate, test, install, and share reusable Agent Skills.
 
-### Highlights:
+### Highlights in v1.2.0:
 - **Zero Runtime Dependencies:** Runs on pure Python standard library (Python 3.9+).
-- **Five Pre-Packaged Reference Skills:**
-  - `excel-comparison`: Fast row/cell-level CSV & XLSX diffing.
-  - `security-config-scanner`: Detects exposed secrets, API keys, and insecure settings.
-  - `file-organizer`: Structured directory organization with collision handling.
-  - `csv-to-report`: Statistical data profiling and Markdown/HTML summaries.
-  - `markdown-doc-validator`: Audits broken relative links and code fence annotations.
-- **Safety by Default:** Static security scanner, manifest SHA-256 integrity verification, collision detection, and atomic rollback on failed installations.
-- **Support for Leading AI Assistants:** Target Claude Code, Google Antigravity, Cursor, or OpenAI Codex with explicit project or user scopes.
+- **8 Supported AI Coding Assistants:** Full lifecycle compatibility with Claude Code, Google Antigravity, Cursor, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
+- **5 Curated Domain Skill Packs (14 Grade A Reference Skills):**
+  - *Office Productivity Pack*: File organizer, CSV report generator, Excel comparison, structured notes formatter, markdown validator.
+  - *Finance & ERP Pack*: Financial variance analyzer, invoice reconciliation.
+  - *HR & Workforce Pack*: Attendance CSV validator, timesheet reconciliation.
+  - *Project Management Pack*: RAID log validator, project status reporter.
+  - *Developer & Security Pack*: Security config scanner, dependency manifest reviewer, test inventory analyzer.
+- **Optional AI-Assisted Skill Creation:** Turn natural language prompts into tested skills (`skillfactory ai-create`) with AST safety interception and bounded test self-repair.
+- **Beginner Guided Walkthrough:** Interactive step-by-step wizard (`skillfactory guide`) with pre-flight diagnostics and platform auto-detection.
+- **Symlink Escape & Prompt Injection Defense:** Hardened against symlink escapes, path traversal, Zip-Slip, and 7 categories of prompt injection.
 
 ### Quick Start:
 
 ```bash
-pip install git+https://github.com/imnashraf/skill-factory.git
-skillfactory new my-skill --category automation
-skillfactory validate ./my-skill
+# Install via pip
+pip install skillfactory
+
+# Or clone and run directly (zero install required)
+git clone https://github.com/imnashraf/skill-factory.git
+cd skill-factory
+python3 -m skillfactory
 ```
 
-Check out the full documentation and beginner guide: [Skill Factory GitHub Repository](https://github.com/imnashraf/skill-factory)
+Documentation and guides: [Skill Factory GitHub Repository](https://github.com/imnashraf/skill-factory)
 ````
 
 ---
@@ -66,83 +76,97 @@ Check out the full documentation and beginner guide: [Skill Factory GitHub Repos
 
 ### A. Hacker News ("Show HN")
 
-**Title:** Show HN: Skill Factory – Local-first toolkit to build and install AI agent skills
+**Title:** Show HN: Skill Factory – Local-first open-source ecosystem for AI agent skills
 
 **Text:**
 
-> Hi HN! We built Skill Factory because developing and sharing custom skills for AI coding assistants (like Claude Code, Cursor, and Google Antigravity) currently suffers from fragmented formats, unvalidated scripts, and manual copy-pasting.
+> Hi HN! We built Skill Factory because developing and sharing custom skills for AI coding assistants (like Claude Code, Cursor, Windsurf, and Google Antigravity) currently suffers from fragmented formats, unvalidated scripts, and manual copy-pasting.
 >
 > Skill Factory is a local-first, zero-dependency Python toolkit that standardizes the skill lifecycle:
 >
-> 1. Scaffolding: Generates clean SKILL.md specs, execution scripts, and unit tests.
-> 2. Validation & Quality: Checks frontmatter schema, file integrity, and computes a 0–100 quality score.
-> 3. Security Auditing: Static AST scanner checks for unsafe subprocess execution, arbitrary evals, and network calls before installation.
-> 4. Safe Installation: Manifest-tracked installation with SHA-256 checksums, collision guards, and instant rollback.
+> 1. **Scaffolding & Templates:** Generates clean SKILL.md specs, execution scripts, and unit tests.
+> 2. **Validation & Quality:** Checks frontmatter schema, file integrity, and computes a 0–100 quality score across 5 dimensions.
+> 3. **Security Auditing:** Static AST scanner checks for unsafe subprocess execution, arbitrary evals, and network calls before installation; defenses against Zip-Slip, symlink escapes, and prompt injections.
+> 4. **Safe Installation & Rollback:** Manifest-tracked installation with SHA-256 checksums, collision guards, and instant rollback across 8 AI coding assistants.
+> 5. **Curated Domain Packs:** 14 verified Grade A reference skills spanning Office Productivity, Finance & ERP, HR & Workforce, Project Management, and Security.
+> 6. **Optional AI Creation:** Natural language skill generation via local Ollama or OpenAI-compatible endpoints with AST pre-execution safety screening and bounded repair.
 >
 > It requires zero external libraries (pure standard library) and makes zero external network calls.
 >
-> Repository: [Skill Factory on GitHub](https://github.com/imnashraf/skill-factory)
+> Repository: [https://github.com/imnashraf/skill-factory](https://github.com/imnashraf/skill-factory)
 >
 > We would love your feedback on the architecture, format standardization, and security model!
 
-### B. Reddit (r/Python, r/LocalLLaMA, r/MachineLearning)
+### B. Reddit (r/Python, r/LocalLLaMA, r/ClaudeAI, r/Cursor)
 
-**Title:** Skill Factory — A local-first, zero-dependency Python tool to build, audit, and install AI assistant skills
+**Title:** Skill Factory — A local-first, zero-dependency tool to build, audit, and install AI assistant skills (Claude, Cursor, Windsurf, Antigravity, Copilot)
 
 **Text:**
 
-> Most AI coding assistants now support external skills or MCP extensions, but authoring them is often ad-hoc.
+> Most AI coding assistants now support external skills, but authoring them is often ad-hoc and unverified.
 >
-> Skill Factory provides a consistent standard:
+> Skill Factory provides an open, structured ecosystem:
 >
-> - Built with pure Python standard library (no pip dependencies required at runtime).
-> - Includes static security scanning to detect suspicious subprocess calls or prompt injection vectors.
-> - Manages installations into assistant configuration paths (`~/.claude/skills/`, `.agents/skills/`, `.cursor/skills/`, etc.) with manifest-backed tracking and atomic rollbacks.
-> - Ships with 5 reference skills (Excel/CSV comparison, secret scanner, file organizer, CSV reporter, markdown validator).
+> - **Pure Python Standard Library:** Zero pip dependencies required at runtime.
+> - **8 Assistant Integrations:** Native path resolution and lifecycle management for Claude Code, Cursor, Google Antigravity, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
+> - **Curated Packs:** 14 Grade A reference skills (Excel diffing, attendance auditing, invoice reconciliation, RAID log validator, security scanner, dependency reviewer, etc.).
+> - **Security by Default:** Static AST inspection, prompt injection defense, Zip-Slip protection, symlink escape defense, and manifest-backed atomic rollback.
+> - **AI-Assisted Engine:** Translate natural-language descriptions into validated skills using your local Ollama or compatible LLM with AST sandbox guards.
 >
-> Repository: [Skill Factory on GitHub](https://github.com/imnashraf/skill-factory)
+> Repository: [https://github.com/imnashraf/skill-factory](https://github.com/imnashraf/skill-factory)
 >
 > Feedback and contributions welcome!
 
+### C. LinkedIn & Developer Forums
+
+**Text:**
+
+> Excited to introduce **Skill Factory** v1.2.0—an open-source, local-first ecosystem for creating, testing, and managing AI agent skills across major coding assistants.
+>
+> Whether you use Claude Code, Cursor, Windsurf, Google Antigravity, Continue, Cline, or Copilot, Skill Factory standardizes how skills are scaffolded, evaluated, and securely installed.
+>
+> 🔹 100% Python Standard Library (zero runtime third-party dependencies)  
+> 🔹 5 Curated Domain Packs (14 Grade A reference skills)  
+> 🔹 Built-in AST safety scanner, secret detector, and prompt injection defense  
+> 🔹 Optional AI-assisted skill generation using local models  
+> 🔹 Manifest-backed installation with one-command rollback  
+>
+> Explore the project: [Skill Factory GitHub Repository](https://github.com/imnashraf/skill-factory)
+
 ---
 
-## 4. AI Coding Assistant Compatibility Comparison
+## 4. AI Coding Assistant Compatibility Comparison (8 Platforms)
 
-| Dimension | Claude Code | Google Antigravity | Cursor | OpenAI Codex |
-| :--- | :--- | :--- | :--- | :--- |
-| **Default User Path** | `~/.claude/skills/` | `~/.gemini/skills/` | `~/.cursor/skills/` | `~/.codex/skills/` |
-| **Default Project Path** | `.claude/skills/` | `.agents/skills/` | `.cursor/skills/` | `.codex/skills/` |
-| **Directory Discovery** | Verified | Verified | Verified | Verified |
-| **Natural Language Activation** | Verified | Verified | Manual prompt invocation | Manual script invocation |
-| **Configuration Aliases** | `claude`, `claudecode` | `antigravity`, `gemini` | `cursor` | `codex`, `openai` |
-| **Integrity Checks** | SHA-256 Manifest | SHA-256 Manifest | SHA-256 Manifest | SHA-256 Manifest |
-| **Rollback Support** | Yes (Atomic) | Yes (Atomic) | Yes (Atomic) | Yes (Atomic) |
-
-*Note: Autonomous activation refers to whether the assistant's runtime engine parses SKILL.md instructions automatically upon relevant user prompts.*
+| Platform | Project Scope Folder | Global (User) Scope Folder | Verification Level & Activation Model |
+| :--- | :--- | :--- | :--- |
+| **Claude Code** | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` | **Verified Autonomous Activation:** Host model matches prompt intent to `SKILL.md` description; also supports manual `/<skill-name>` command. |
+| **Google Antigravity** | `.agents/skills/<name>/` | `~/.gemini/config/skills/` | **Verified Autonomous Activation:** Engine injects discovered skills into system prompt `<skills>` context; model autonomously reads `SKILL.md` when intent matches. |
+| **Cursor** | `.agents/skills/<name>/`, `.cursor/skills/` | `~/.agents/skills/`, `~/.cursor/skills/` | **Verified Directory Discovery:** Discovered in workspace or global folder; invoked via manual slash command `/<skill-name>` or explicit `@` context inclusion. |
+| **OpenAI Codex** | `.agents/skills/<name>/` | `~/.agents/skills/` | **Simulated CLI Integration:** Discovered in `.agents/skills/`; invoked via CLI syntax `$<skill-name>`; respects `agents/openai.yaml` metadata. |
+| **Windsurf** | `.codeium/windsurf/skills/<name>/` | `~/.codeium/windsurf/skills/<name>/` | **Verified Directory Discovery:** Discovered in Codeium Cascade workspace configuration. |
+| **Continue** | `.continue/prompts/<name>/` | `~/.continue/prompts/<name>/` | **Verified Prompt / Tool Folder:** Discovered in Continue prompt/custom commands directory. |
+| **Cline** | `.cline/skills/<name>/` | `~/.cline/skills/<name>/` | **Verified Workspace Skill Path:** Discovered in project `.cline/` root directory. |
+| **GitHub Copilot** | `.github/skills/<name>/` | `~/.config/github-copilot/skills/<name>/` | **Verified Repository Instruction Path:** Discovered in `.github/` repository directory. |
 
 ---
 
-## 5. Frequently Asked Questions (FAQ)
+## 5. Zero-Telemetry Privacy-Respecting Adoption Measurement
 
-### What is a "Skill"?
+Skill Factory operates under a strict **Zero-Telemetry Policy**. The tool does not contact remote servers, track IP addresses, or collect usage analytics.
 
-A skill is a self-contained capability package consisting of:
+Adoption is measured strictly through public, privacy-preserving indicators:
 
-1. `SKILL.md`: Metadata and instructions telling the AI assistant how and when to use the tool.
-2. `scripts/`: Executable scripts implementing the deterministic logic.
-3. `tests/`: Automated tests verifying the functionality.
-
-### Does Skill Factory require an internet connection?
-
-No. Skill Factory is strictly local-first and functions entirely offline without telemetry or external API requests.
-
-### Does Skill Factory run generated code automatically?
-
-No. Skill Factory generates code templates and statically audits them. It never executes untrusted code automatically during validation or installation without explicit user request.
-
-### How does rollback work?
-
-Every installation generates a cryptographic manifest (`.manifest.json`) containing SHA-256 checksums of every installed file. When uninstalling or rolling back, Skill Factory verifies file hashes and removes only tracked files, ensuring user-modified files are never silently deleted.
+1. **Public GitHub Metrics:**
+   - Star growth and fork frequency.
+   - Release asset download counts via the public GitHub Releases API.
+2. **Community Activity:**
+   - Issues opened, answered, and closed.
+   - Pull requests submitted and merged.
+   - Community skill submissions via the `.github/ISSUE_TEMPLATE/skill_submission.yml` workflow.
+3. **Distribution Metrics:**
+   - Public PyPI download statistics (via PyPI stats / `pypistats`, aggregate numbers only, without user identifiers).
+4. **Documentation Feedback:**
+   - Questions and clarifications raised in GitHub Discussions or issues.
 
 ---
 
@@ -150,19 +174,10 @@ Every installation generates a cryptographic manifest (`.manifest.json`) contain
 
 - [x] Repository README clearly communicates value proposition and limitations.
 - [x] Beginner quick-start guide tested across macOS, Windows, and Linux.
-- [x] All 5 reference skill demonstrations validated via `scripts/run_demos.py`.
+- [x] All 14 reference skills validated and evaluated at Grade A (≥90/100).
 - [x] Test suite passing with 100% green status across all supported Python versions.
 - [x] No secrets, private credentials, or internal test files committed.
 - [x] Security reporting policy documented in `SECURITY.md`.
 - [x] Contribution workflow and Code of Conduct published.
+- [x] GitHub issue and pull request templates configured.
 - [ ] Maintainer authorization obtained before public announcement broadcasts.
-
----
-
-## 7. User Feedback Collection Process
-
-To capture community feedback systematically:
-
-1. **GitHub Issues:** Use structured issue forms for bug reports and feature requests.
-2. **Discussions:** Enable GitHub Discussions for user questions, skill ideas, and community showcase.
-3. **Usability Log:** Record beginner pain points in `docs/` to guide future UX refinements.

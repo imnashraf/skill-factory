@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "attendance-csv-validator",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/attendance-csv-validator",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "attendance-csv-validator",
+      "description": "Validates employee clock-in and clock-out attendance CSV files, detecting missing punch-outs, excessive overtime shifts, duplicate swipes, and time calculation anomalies."
+    }
+  }
+}

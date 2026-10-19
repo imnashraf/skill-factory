@@ -1,0 +1,36 @@
+name: Feature Request
+description: Propose a new feature, assistant adapter, domain skill pack, or enhancement.
+title: "[Feature]: "
+labels: ["enhancement", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome proposals that adhere to Skill Factory's core tenets:
+        1. Pure Python standard library (zero runtime dependencies).
+        2. Local-first, privacy-respecting (zero telemetry, zero secret uploads).
+        3. Clear beginner-friendly UX and cross-platform portability.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Motivation
+      description: Is your feature request related to a problem or usability friction?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / User Journey
+      description: What should happen from a user's perspective?
+      placeholder: A clear description of the command or capability...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative workarounds or designs?

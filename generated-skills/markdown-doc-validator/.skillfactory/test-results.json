@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-19T20:19:51.171943+00:00",
+  "success": true,
+  "tests_run": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.137,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_clean_document (test_main.MarkdownValidatorTests.test_clean_document) ... ok\ntest_cli_json_and_exit_code (test_main.MarkdownValidatorTests.test_cli_json_and_exit_code) ... ok\ntest_detects_broken_relative_links (test_main.MarkdownValidatorTests.test_detects_broken_relative_links) ... ok\ntest_detects_empty_heading (test_main.MarkdownValidatorTests.test_detects_empty_heading) ... ok\ntest_detects_unlabeled_code_fences (test_main.MarkdownValidatorTests.test_detects_unlabeled_code_fences) ... ok\ntest_detects_unspaced_table_separator (test_main.MarkdownValidatorTests.test_detects_unspaced_table_separator) ... ok\ntest_nonexistent_path_error (test_main.MarkdownValidatorTests.test_nonexistent_path_error) ... [ERROR] Validation failed: Path does not exist: /nonexistent/fake/file.md\nok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.137s\n\nOK\n"
+}

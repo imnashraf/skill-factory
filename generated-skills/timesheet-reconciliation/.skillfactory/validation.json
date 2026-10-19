@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "timesheet-reconciliation",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/timesheet-reconciliation",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "timesheet-reconciliation",
+      "description": "Compares employee logged project timesheet hours against approved project budget allocations, detecting overruns, under-utilization, and billing discrepancies."
+    }
+  }
+}

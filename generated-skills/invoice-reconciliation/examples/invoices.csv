@@ -1,0 +1,6 @@
+invoice_number,po_number,vendor,amount
+INV-2026-001,PO-8801,Apex Tech,5200.00
+INV-2026-002,PO-8802,Vertex Cloud,1400.00
+INV-2026-003,PO-8803,Starlight Data,3100.00
+INV-2026-004,PO-9999,Unknown Corp,850.00
+INV-2026-002,PO-8802,Vertex Cloud,1400.00

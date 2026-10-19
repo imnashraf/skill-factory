@@ -24,6 +24,7 @@ class CatalogEntry:
     version: str = "0.1.0"
     template_family: str = "python-script"
     compatibility: str = ""
+    category: str = "general"
     tags: List[str] = field(default_factory=list)
     author: str = ""
     license: str = "MIT"
@@ -233,6 +234,7 @@ def search_catalog(
     index: CatalogIndex,
     query: str,
     tag_filter: Optional[str] = None,
+    category_filter: Optional[str] = None,
 ) -> List[Tuple[CatalogEntry, int]]:
     """Search skills in a CatalogIndex offline with ranking (< 100ms, AC6.02).
 
@@ -242,11 +244,15 @@ def search_catalog(
     start_time = time.monotonic()
     query_tokens = [t.lower() for t in query.strip().split() if t]
     tag_filter_clean = tag_filter.lower().strip() if tag_filter else None
+    cat_filter_clean = category_filter.lower().strip() if category_filter else None
 
     results: List[Tuple[CatalogEntry, int]] = []
 
     for entry in index.skills:
         if tag_filter_clean and tag_filter_clean not in [t.lower() for t in entry.tags]:
+            continue
+
+        if cat_filter_clean and cat_filter_clean != entry.category.lower():
             continue
 
         if not query_tokens:
