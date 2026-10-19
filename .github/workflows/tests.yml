@@ -2,9 +2,10 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feat/phases-11-14-roadmap ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
