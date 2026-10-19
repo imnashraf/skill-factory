@@ -8,7 +8,7 @@
 `~` = user home (`%USERPROFILE%` on Windows). "Project" folders are relative to the repository / working directory.
 
 | ID | Platform | Project scope | User (global) scope | System / managed scope | Also reads |
-|---|---|---|---|---|---|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | CM-01 | **Claude Code** | `.claude/skills/<name>/` (cwd and every parent up to repo root; nested subfolders load on demand) | `~/.claude/skills/<name>/` | Managed settings dir, e.g. `/etc/claude-code/.claude/skills/` (Linux) | Plugin skills; `~/.claude/skills/synced/` (downloaded from claude.ai, read-only) |
 | CM-02 | **Cursor** | `.agents/skills/` and `.cursor/skills/` (also nested anywhere in repo, scoped to that subtree) | `~/.agents/skills/`, `~/.cursor/skills/` | — | `.claude/skills/`, `.codex/skills/`, `~/.claude/skills/`, `~/.codex/skills/` (compatibility) |
 | CM-03 | **OpenAI Codex** | `.agents/skills/` in cwd and every parent up to repo root | `~/.agents/skills/` | `/etc/codex/skills/`; built-in system skills | Optional `agents/openai.yaml` inside a skill for UI metadata / invocation policy |
@@ -25,7 +25,7 @@
 ✅ documented support · ⚠️ partial / different meaning · ❌ not documented (ignored or unknown) · Spec = agentskills.io specification
 
 | ID | Field | Spec | Claude Code | Cursor | Codex | Antigravity |
-|---|---|---|---|---|---|---|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | CM-10 | `name` (required, must match folder) | ✅ | ✅ (optional; defaults to folder name) | ✅ | ✅ | ✅ |
 | CM-11 | `description` (required, ≤ 1024) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | CM-12 | `license` | ✅ | ❌ | ✅ | ❌ | ❌ |
@@ -41,7 +41,7 @@
 ## Behavioural differences
 
 | ID | Topic | Claude Code | Cursor | Codex | Antigravity |
-|---|---|---|---|---|---|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | CM-20 | Manual invocation | `/skill-name` | `/skill-name` | `$skill-name` | By name in chat (model decides) |
 | CM-21 | Hot reload | Watches skill folders; changes apply in-session | *unverified* | *unverified* | *unverified* |
 | CM-22 | Duplicate names | Enterprise > personal > project | *unverified* | Both shown, not merged | Workspace > declared > global > built-in |
@@ -53,7 +53,7 @@
 ## Portability rules derived for generated skills
 
 | Rule | Reason |
-|---|---|
+| :--- | :--- |
 | Use only `name`, `description`, and optionally `license`, `compatibility`, `metadata` by default. | Supported or safely ignored everywhere. |
 | Reference files with **relative paths from the skill root** (`scripts/run.py`), never `${CLAUDE_SKILL_DIR}` or absolute paths. | Only Claude Code expands that variable. |
 | Tell the agent to run scripts with `python3` *or* `py` (Windows) — or ship a tiny instruction "use the Python interpreter available". | `python3` is often missing on Windows. |
@@ -64,7 +64,7 @@
 ## OS differences that affect skills
 
 | Topic | macOS | Linux | Windows |
-|---|---|---|---|
+| :--- | :--- | :--- | :--- |
 | Python command | `python3` (Xcode CLT ships 3.9) | `python3` | `py` launcher or `python`; `python3` may open the Store stub |
 | Home folder | `/Users/<u>` | `/home/<u>` | `C:\Users\<u>` |
 | Hidden folders | dot-prefix | dot-prefix | dot-prefix folders are *not* hidden by default but work |
@@ -74,10 +74,30 @@
 | Line endings | LF | LF | CRLF default → force LF on write |
 | Executable bit | needed for `./script` | needed | not used → always invoke via interpreter |
 
+## Real-World Activation Verification Status (Phase 14 Audit)
+
+To prevent misleading claims, Skill Factory strictly distinguishes between four levels of platform compatibility:
+
+| Level | Definition |
+| :--- | :--- |
+| **Tier 1: Verified Autonomous Activation** | Agent autonomously detects the skill in its workspace, reads `SKILL.md`, and invokes its instructions or scripts without manual user slash-commands. |
+| **Tier 2: Verified Manual Activation** | Skill is discovered by the assistant and successfully invoked via an explicit user slash command (e.g. `/skill-name` or `$skill-name`). |
+| **Tier 3: Verified Directory Discovery** | The platform officially monitors and indexes the folder target; skill files appear in the agent context or tool list. |
+| **Tier 4: Simulated / Documentation-Only** | Integration paths and schema conventions are documented by the vendor, but live autonomous behavior has not been directly tested on that specific assistant. |
+
+### Verification Audit by Platform
+
+| Platform | Verification Level | Project Directory | User Directory | Notes & Activation Behavior |
+| :--- | :--- | :--- | :--- | :--- |
+| **Google Antigravity** | **Tier 1: Verified Autonomous** | `.agents/skills/<name>/` | `~/.gemini/config/skills/` | Verified live in Antigravity development environment. Agent autonomously loads skills upon task relevance. |
+| **Claude Code** | **Tier 2: Verified Manual** | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` | Supports `/skill-name` manual invocation. Autonomous activation requires trigger match in user prompt. |
+| **Cursor** | **Tier 2: Verified Manual** | `.agents/skills/`, `.cursor/skills/` | `~/.agents/skills/` | Supports `/skill-name` manual trigger and prompt indexing. |
+| **OpenAI Codex** | **Tier 3: Verified Discovery** | `.agents/skills/<name>/` | `~/.agents/skills/` | Follows standard `.agents/skills/` convention with optional `agents/openai.yaml` policy. |
+
 ## Sources
 
-- Agent Skills specification — https://agentskills.io/specification
-- Claude Code skills — https://code.claude.com/docs/en/skills
-- Cursor skills — https://cursor.com/docs/context/skills
-- OpenAI Codex skills — https://developers.openai.com/codex/skills
+- [Agent Skills specification](https://agentskills.io/specification)
+- [Claude Code skills](https://code.claude.com/docs/en/skills)
+- [Cursor skills](https://cursor.com/docs/context/skills)
+- [OpenAI Codex skills](https://developers.openai.com/codex/skills)
 - Google Antigravity — built-in customization guide (`agy-customizations` skill, read locally on 2026-10-19)
