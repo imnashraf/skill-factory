@@ -1,0 +1,5 @@
+recursive-include skillfactory/templates *.tmpl
+recursive-include skillfactory/data *.json
+include LICENSE
+include README.md
+include CHANGELOG.md

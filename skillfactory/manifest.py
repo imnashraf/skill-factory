@@ -37,8 +37,16 @@ def create_manifest(
     for path in sorted(skill_dir.rglob("*")):
         if path.is_file():
             rel_path = path.relative_to(skill_dir).as_posix()
-            # Do not include the manifest itself or temp files
-            if rel_path == ".skillfactory/manifest.json" or rel_path.startswith(".tmp"):
+            # Do not include the manifest itself, temp files, or dynamic runtime reports
+            if (
+                rel_path == ".skillfactory/manifest.json"
+                or rel_path.startswith(".tmp")
+                or rel_path in (
+                    ".skillfactory/test-results.json",
+                    ".skillfactory/evaluation.json",
+                    ".skillfactory/validation.json",
+                )
+            ):
                 continue
             sha = compute_sha256(path)
             size_bytes = path.stat().st_size

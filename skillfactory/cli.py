@@ -838,7 +838,7 @@ def create_parser() -> argparse.ArgumentParser:
     # Command: install
     install_parser = subparsers.add_parser("install", parents=[common_parser], help="Install an Agent Skill into a target platform")
     install_parser.add_argument("path", help="Path to the skill directory to install")
-    install_parser.add_argument("--target", help="Target platform (claude-code, cursor, codex, antigravity)")
+    install_parser.add_argument("--target", "--platform", dest="target", help="Target platform (claude-code, cursor, codex, antigravity)")
     install_parser.add_argument("--scope", default="project", choices=["project", "user"], help="Installation scope (default: project)")
     install_parser.add_argument("--project", default=".", help="Project directory (default: .)")
     install_parser.add_argument("--link", action="store_true", help="Use symbolic link instead of copying files")
@@ -849,26 +849,26 @@ def create_parser() -> argparse.ArgumentParser:
     update_parser = subparsers.add_parser("update", parents=[common_parser], help="Update an installed skill with automated backup")
     update_parser.add_argument("name", help="Skill name to update")
     update_parser.add_argument("--source", help="Path to updated source directory (optional)")
-    update_parser.add_argument("--target", help="Target platform (optional)")
+    update_parser.add_argument("--target", "--platform", dest="target", help="Target platform (optional)")
     update_parser.add_argument("--force", action="store_true", help="Overwrite even if local modifications exist")
 
     # Command: rollback
     rollback_parser = subparsers.add_parser("rollback", parents=[common_parser], help="Restore the previous working backup snapshot")
     rollback_parser.add_argument("name", help="Skill name to roll back")
-    rollback_parser.add_argument("--target", help="Target platform (optional)")
+    rollback_parser.add_argument("--target", "--platform", dest="target", help="Target platform (optional)")
 
     # Command: uninstall
     uninstall_parser = subparsers.add_parser("uninstall", parents=[common_parser], help="Safely remove a skill while preserving user files")
     uninstall_parser.add_argument("name", help="Skill name to uninstall")
-    uninstall_parser.add_argument("--target", help="Target platform (optional)")
-    uninstall_parser.add_argument("--yes", action="store_true", help="Confirm removal non-interactively")
+    uninstall_parser.add_argument("--target", "--platform", dest="target", help="Target platform (optional)")
+    uninstall_parser.add_argument("--yes", "--force", dest="yes", action="store_true", help="Confirm removal non-interactively")
 
     # Command: list
     subparsers.add_parser("list", parents=[common_parser], help="List all installed skills and modification statuses")
 
     # Command: install-self
     self_parser = subparsers.add_parser("install-self", parents=[common_parser], help="Install Skill Factory into host AI platform")
-    self_parser.add_argument("--target", help="Target platform (optional)")
+    self_parser.add_argument("--target", "--platform", dest="target", help="Target platform (optional)")
     self_parser.add_argument("--scope", default="user", choices=["project", "user"], help="Installation scope (default: user)")
     self_parser.add_argument("--link", action="store_true", help="Use symbolic link instead of copying files")
 

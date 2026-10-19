@@ -262,7 +262,7 @@ def evaluate_skill(
         d4_items["test_suite_present"] = (0, 5, "No tests/ directory or test files found")
 
     if run_tests and has_tests_dir and test_files:
-        test_run = run_skill_tests(skill_path, timeout=test_timeout, save_report=True)
+        test_run = run_skill_tests(skill_path, timeout=test_timeout, save_report=save_report)
 
         # [5 pts] Structural Tests Pass
         if test_run.success and test_run.failures == 0 and test_run.errors == 0:

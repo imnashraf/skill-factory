@@ -121,5 +121,26 @@ class CliTests(unittest.TestCase):
         self.assertIn("Skill Factory", res.stdout)
 
 
+    def test_cli_platform_alias_support(self):
+        """Verify --platform is accepted as an alias to --target."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            main([
+                "new",
+                "--name", "alias-skill",
+                "--description", "Testing --platform alias support.",
+                "--output", str(tmp_path),
+            ])
+            target = tmp_path / "alias-skill"
+            exit_code = main([
+                "install",
+                str(target),
+                "--platform", "claude-code",
+                "--project", str(tmp_path),
+            ])
+            self.assertEqual(exit_code, 0)
+            self.assertTrue((tmp_path / ".claude" / "skills" / "alias-skill").exists())
+
+
 if __name__ == "__main__":
     unittest.main()

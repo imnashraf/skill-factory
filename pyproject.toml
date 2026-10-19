@@ -39,4 +39,8 @@ where = ["."]
 include = ["skillfactory*"]
 
 [tool.setuptools.package-data]
-skillfactory = ["data/*.json"]
+skillfactory = [
+    "data/*.json",
+    "templates/*/*.tmpl",
+    "templates/*/*/*.tmpl",
+]
