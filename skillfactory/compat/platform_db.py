@@ -40,10 +40,45 @@ def get_all_platforms(db: Optional[Dict[str, Any]] = None) -> Dict[str, Dict[str
     return data.get("platforms", {})
 
 
+PLATFORM_ALIASES: Dict[str, str] = {
+    "claude": "claude-code",
+    "claudecode": "claude-code",
+    "claude-code": "claude-code",
+    "anthropic": "claude-code",
+    "cursor": "cursor",
+    "anysphere": "cursor",
+    "codex": "codex",
+    "openai": "codex",
+    "openai-codex": "codex",
+    "antigravity": "antigravity",
+    "agy": "antigravity",
+    "google": "antigravity",
+    "google-antigravity": "antigravity",
+    "gemini": "antigravity",
+}
+
+
+def normalize_platform_id(platform_id: str) -> str:
+    """Normalize user input or alias to canonical platform ID.
+
+    Examples:
+        'claude' -> 'claude-code'
+        'anthropic' -> 'claude-code'
+        'openai' -> 'codex'
+        'google' -> 'antigravity'
+        'agy' -> 'antigravity'
+    """
+    if not platform_id:
+        return platform_id
+    key = platform_id.strip().lower()
+    return PLATFORM_ALIASES.get(key, key)
+
+
 def get_platform(platform_id: str, db: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
-    """Retrieve platform definition by ID (e.g. 'claude-code', 'cursor')."""
+    """Retrieve platform definition by ID (e.g. 'claude-code', 'cursor') or alias."""
     platforms = get_all_platforms(db)
-    return platforms.get(platform_id)
+    canonical = normalize_platform_id(platform_id)
+    return platforms.get(canonical)
 
 
 def detect_os_key(platform_os: Optional[str] = None) -> str:

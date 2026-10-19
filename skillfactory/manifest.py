@@ -20,6 +20,34 @@ def compute_sha256(file_path: Path) -> str:
     return hasher.hexdigest()
 
 
+EXCLUDED_MANIFEST_PARTS = {
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "venv",
+    ".git",
+    ".DS_Store",
+    "Thumbs.db",
+}
+
+EXCLUDED_MANIFEST_EXTENSIONS = {".pyc", ".pyo", ".pyd"}
+
+
+def is_manifest_excluded(rel_path: str) -> bool:
+    """Check if relative path should be excluded from manifest tracking."""
+    parts = Path(rel_path).parts
+    for part in parts:
+        if part in EXCLUDED_MANIFEST_PARTS:
+            return True
+        if part.startswith(".tmp"):
+            return True
+    if any(rel_path.endswith(ext) for ext in EXCLUDED_MANIFEST_EXTENSIONS):
+        return True
+    return False
+
+
 def create_manifest(
     skill_dir: Path,
     spec: SkillSpec,
@@ -37,10 +65,10 @@ def create_manifest(
     for path in sorted(skill_dir.rglob("*")):
         if path.is_file():
             rel_path = path.relative_to(skill_dir).as_posix()
-            # Do not include the manifest itself, temp files, or dynamic runtime reports
+            # Do not include the manifest itself, temp files, bytecode, or dynamic runtime reports
             if (
                 rel_path == ".skillfactory/manifest.json"
-                or rel_path.startswith(".tmp")
+                or is_manifest_excluded(rel_path)
                 or rel_path in (
                     ".skillfactory/test-results.json",
                     ".skillfactory/evaluation.json",
@@ -100,6 +128,8 @@ def verify_manifest(skill_dir: Path) -> Tuple[bool, List[str]]:
 
     # Check that all recorded files exist and match their hash
     for rel_path, file_info in recorded_files.items():
+        if is_manifest_excluded(rel_path):
+            continue
         target_path = skill_dir / rel_path
         if not target_path.exists():
             discrepancies.append(f"Recorded file missing from disk: {rel_path}")

@@ -16,6 +16,7 @@ from skillfactory.compat.platform_db import (
     get_platform,
     get_project_skill_paths,
     get_user_skill_path,
+    normalize_platform_id,
 )
 from skillfactory.compat.resolve import resolve_install_targets
 from skillfactory.manifest import compute_sha256, verify_manifest
@@ -137,16 +138,23 @@ def install_skill(
 
     skill_name = src.name
 
+    canonical_platform = normalize_platform_id(target_platform)
+    pdef = get_platform(canonical_platform)
+    if not pdef:
+        raise ValueError(
+            f"Unknown platform '{target_platform}'. Supported platforms: claude-code, cursor, codex, antigravity (or aliases 'claude', 'openai', 'google')."
+        )
+
     # Determine destination directory
     targets = resolve_install_targets(
-        [target_platform],
+        [canonical_platform],
         scope=scope,
         project_dir=project_dir,
         home_dir=home_dir,
         os_name=os_name,
     )
     if not targets:
-        raise ValueError(f"Could not resolve install target for platform '{target_platform}' with scope '{scope}'")
+        raise ValueError(f"Could not resolve install target for platform '{canonical_platform}' with scope '{scope}'")
 
     dest_container = Path(targets[0].target_dir)
     dest_path = dest_container / skill_name
@@ -202,7 +210,7 @@ def install_skill(
 
     record = InstallationRecord(
         skill_name=skill_name,
-        platform=target_platform,
+        platform=canonical_platform,
         scope=scope,
         installed_path=str(dest_path),
         source_path=str(src),
@@ -215,7 +223,7 @@ def install_skill(
 
     return InstallResult(
         skill_name=skill_name,
-        target_platform=target_platform,
+        target_platform=canonical_platform,
         installed_path=dest_path,
         mode=actual_mode,
         copied_files=copied_files,
@@ -232,7 +240,8 @@ def update_skill(
     registry_path: Optional[Path | str] = None,
 ) -> InstallResult:
     """Update an installed skill with automated backup and edit detection."""
-    reg_entry = find_installation(skill_name, platform=target_platform, registry_path=registry_path)
+    canonical_platform = normalize_platform_id(target_platform) if target_platform else None
+    reg_entry = find_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
     if not reg_entry:
         raise ValueError(f"Skill '{skill_name}' is not recorded as installed in Skill Factory registry.")
 
@@ -312,7 +321,8 @@ def rollback_skill(
     registry_path: Optional[Path | str] = None,
 ) -> InstallResult:
     """Restore the previous working backup snapshot in a single command (AC4.04)."""
-    reg_entry = find_installation(skill_name, platform=target_platform, registry_path=registry_path)
+    canonical_platform = normalize_platform_id(target_platform) if target_platform else None
+    reg_entry = find_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
     if not reg_entry:
         raise ValueError(f"Skill '{skill_name}' not found in installation registry.")
 
@@ -363,19 +373,20 @@ def uninstall_skill(
     registry_path: Optional[Path | str] = None,
 ) -> List[str]:
     """Remove only manifest/registry tracked files, preserving user data (AC4.05)."""
-    reg_entry = find_installation(skill_name, platform=target_platform, registry_path=registry_path)
+    canonical_platform = normalize_platform_id(target_platform) if target_platform else None
+    reg_entry = find_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
     if not reg_entry:
         raise ValueError(f"Skill '{skill_name}' not found in installation registry.")
 
     installed_path = Path(reg_entry["installed_path"])
     if not installed_path.exists():
-        unregister_installation(skill_name, platform=target_platform, registry_path=registry_path)
+        unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
         return []
 
     # If it's a symlink, just unlink
     if installed_path.is_symlink():
         installed_path.unlink()
-        unregister_installation(skill_name, platform=target_platform, registry_path=registry_path)
+        unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
         return [str(installed_path)]
 
     # Collect tracked files
@@ -419,7 +430,7 @@ def uninstall_skill(
     except Exception:
         pass
 
-    unregister_installation(skill_name, platform=target_platform, registry_path=registry_path)
+    unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
     return removed
 
 
@@ -437,7 +448,7 @@ def install_self(
 
     platforms_to_target: List[str] = []
     if target_platform:
-        platforms_to_target.append(target_platform)
+        platforms_to_target.append(normalize_platform_id(target_platform))
     else:
         # Detect installed platforms
         detections = detect_all_platforms(home_dir=home_dir)

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - Unreleased
+
+### Fixed
+
+- **Platform Shorthand Aliases (DEF-04)**:
+  - Enabled intuitive CLI shorthand aliases (`claude`, `anthropic`, `openai`, `google`, `agy`) for `--platform` across `install`, `update`, `rollback`, `uninstall`, and `install-self`.
+- **Bytecode & Cache Manifest Filtering (DEF-05)**:
+  - Filtered Python bytecode (`__pycache__`, `*.pyc`) and OS cache files (`.DS_Store`, `Thumbs.db`) from `create_manifest` and `verify_manifest` to prevent false positive integrity discrepancies when tests run before installation.
+
+### Added
+
+- **Phase 10 Automated Validation Suites**:
+  - `tests/run_multiagent_validation.py`: Automated multi-agent lifecycle testing across Claude Code, Cursor, Codex, and Antigravity.
+  - `tests/run_security_validation.py`: Comprehensive adversarial security and host isolation validation.
+  - 4 new unit regression tests expanding the test suite to 114 tests with 100% pass rate.
+
+---
+
 ## [1.0.0] - 2026-10-19
 
 ### Added

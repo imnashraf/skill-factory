@@ -227,6 +227,40 @@ class LibraryAndPackagingTests(unittest.TestCase):
             )
             self.assertEqual(rep.grade, "Grade A")
 
+    def test_manifest_excludes_bytecode_and_caches(self):
+        """DEF-05: Ensure manifest excludes bytecode (__pycache__, *.pyc) and OS cache files."""
+        from skillfactory.manifest import create_manifest, verify_manifest, write_manifest
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            spec = SkillSpec(
+                name="manifest-clean-skill",
+                description="Test manifest exclusion.",
+                template_family="python-script",
+            )
+            gen_res = generate_skill(spec, tmp_path)
+            skill_dir = gen_res.target_path
+
+            # Plant bytecode and OS cache files
+            pycache_dir = skill_dir / "scripts" / "__pycache__"
+            pycache_dir.mkdir(parents=True, exist_ok=True)
+            (pycache_dir / "main.cpython-314.pyc").write_bytes(b"\x00\x00\x00\x00")
+            (skill_dir / ".DS_Store").write_bytes(b"\x00\x00")
+
+            # Re-create manifest
+            manifest = create_manifest(skill_dir, spec, spec.template_family)
+            write_manifest(skill_dir, manifest)
+
+            # Assert excluded files are NOT in manifest
+            files = list(manifest["files"].keys())
+            self.assertFalse(any("__pycache__" in f for f in files))
+            self.assertFalse(any(f.endswith(".pyc") for f in files))
+            self.assertFalse(any(".DS_Store" in f for f in files))
+
+            # Verify manifest succeeds
+            valid, discrepancies = verify_manifest(skill_dir)
+            self.assertTrue(valid, f"Manifest verification failed with discrepancies: {discrepancies}")
+
 
 if __name__ == "__main__":
     unittest.main()

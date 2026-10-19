@@ -11,6 +11,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from skillfactory.compat.platform_db import normalize_platform_id
+
 
 @dataclass
 class BackupEntry:
@@ -92,7 +94,7 @@ def find_installation(
     data = load_registry(registry_path)
     for record in data.get("installations", []):
         if record.get("skill_name") == skill_name:
-            if platform is not None and record.get("platform") != platform:
+            if platform is not None and normalize_platform_id(record.get("platform", "")) != normalize_platform_id(platform):
                 continue
             if installed_path is not None:
                 # Compare resolved absolute paths
@@ -144,7 +146,7 @@ def unregister_installation(
     filtered = []
     for rec in installations:
         if rec.get("skill_name") == skill_name:
-            if platform is not None and rec.get("platform") != platform:
+            if platform is not None and normalize_platform_id(rec.get("platform", "")) != normalize_platform_id(platform):
                 filtered.append(rec)
                 continue
             if installed_path is not None:

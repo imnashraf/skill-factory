@@ -260,5 +260,44 @@ class PlatformDiscoverySimulationTests(unittest.TestCase):
                 )
 
 
+class PlatformAliasNormalizationTests(unittest.TestCase):
+    """DEF-04: Test platform alias normalization across all platform commands."""
+
+    def test_normalize_platform_id_aliases(self):
+        from skillfactory.compat.platform_db import normalize_platform_id
+
+        self.assertEqual(normalize_platform_id("claude"), "claude-code")
+        self.assertEqual(normalize_platform_id("  Claude  "), "claude-code")
+        self.assertEqual(normalize_platform_id("anthropic"), "claude-code")
+        self.assertEqual(normalize_platform_id("cursor"), "cursor")
+        self.assertEqual(normalize_platform_id("openai"), "codex")
+        self.assertEqual(normalize_platform_id("codex"), "codex")
+        self.assertEqual(normalize_platform_id("google"), "antigravity")
+        self.assertEqual(normalize_platform_id("agy"), "antigravity")
+        self.assertEqual(normalize_platform_id("antigravity"), "antigravity")
+
+    def test_get_platform_with_aliases(self):
+        claude_def = get_platform("claude")
+        self.assertIsNotNone(claude_def)
+        self.assertEqual(claude_def["id"], "claude-code")
+
+        openai_def = get_platform("openai")
+        self.assertIsNotNone(openai_def)
+        self.assertEqual(openai_def["id"], "codex")
+
+        google_def = get_platform("google")
+        self.assertIsNotNone(google_def)
+        self.assertEqual(google_def["id"], "antigravity")
+
+    def test_resolve_install_targets_with_aliases(self):
+        targets = resolve_install_targets(["claude", "google", "openai"])
+        platform_ids = []
+        for t in targets:
+            platform_ids.extend(t.platforms)
+        self.assertIn("claude-code", platform_ids)
+        self.assertIn("antigravity", platform_ids)
+        self.assertIn("codex", platform_ids)
+
+
 if __name__ == "__main__":
     unittest.main()

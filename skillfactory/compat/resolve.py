@@ -13,6 +13,7 @@ from skillfactory.compat.platform_db import (
     get_platform,
     get_project_skill_paths,
     get_user_skill_path,
+    normalize_platform_id,
 )
 
 
@@ -54,21 +55,22 @@ def resolve_install_targets(
     dir_to_platforms: Dict[str, List[str]] = {}
 
     for pid in platforms:
-        pdef = get_platform(pid, db)
+        canonical_pid = normalize_platform_id(pid)
+        pdef = get_platform(canonical_pid, db)
         if not pdef:
             continue
 
         if scope == "project":
-            proj_paths = get_project_skill_paths(pid, db)
+            proj_paths = get_project_skill_paths(canonical_pid, db)
             if proj_paths:
                 # Prefer primary (first) project path
                 canonical_path = str((p_dir / proj_paths[0]).resolve())
-                dir_to_platforms.setdefault(canonical_path, []).append(pid)
+                dir_to_platforms.setdefault(canonical_path, []).append(canonical_pid)
         elif scope == "user":
-            user_path = get_user_skill_path(pid, os_name=os_key, home_override=h_dir, db=db)
+            user_path = get_user_skill_path(canonical_pid, os_name=os_key, home_override=h_dir, db=db)
             if user_path:
                 canonical_path = str(Path(user_path).resolve())
-                dir_to_platforms.setdefault(canonical_path, []).append(pid)
+                dir_to_platforms.setdefault(canonical_path, []).append(canonical_pid)
 
     resolved: List[ResolvedTarget] = []
     for target_dir, p_list in dir_to_platforms.items():
