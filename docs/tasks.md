@@ -7,7 +7,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 1 — Skill Factory Core
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref | Status |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | **T1.01** | Package Structure | Create `skillfactory/` package directory layout (`__init__.py`, `__main__.py`, `cli.py`, `core.py`, `spec.py`, `validator.py`, `templates/`). | None | `skillfactory/` layout | AC1.01 | **Completed** |
 | **T1.02** | SkillSpec Model | Implement canonical `SkillSpec` data class and JSON schema validator (`skillfactory/spec.py`). | T1.01 | `skillfactory/spec.py` | AC1.02 | **Completed** |
 | **T1.03** | Safe YAML Formatter | Implement lightweight, safe YAML frontmatter serializer handling multiline strings, colons, quotes, and escaping (fixes `DEF-01`). | T1.01 | `skillfactory/yaml_util.py` | AC1.03 | **Completed** |
@@ -24,7 +24,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 2 — Natural Language Skill Builder
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref | Status |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | **T2.01** | Host-AI Skill Prompt | Update root `SKILL.md` to instruct host assistants on the end-to-end interview, spec creation, scaffolding, and verification loop. | T1.08 | `SKILL.md` | AC2.01 | **Completed** |
 | **T2.02** | Offline Interview Engine | Implement terminal questionnaire (`skillfactory/interview.py`) for plain-language guided creation without an AI model. | T1.02 | `skillfactory/interview.py` | AC2.02 | **Completed** |
 | **T2.03** | Batch Answers Mode | Support `--answers answers.json` for non-interactive and scripted execution of the interview process. | T2.02 | `skillfactory/interview.py` | AC2.03 | **Completed** |
@@ -38,7 +38,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 3 — Multi-Agent Compatibility
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref | Status |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | **T3.01** | Platform Database | Create `skillfactory/data/platforms.json` encoding folder conventions, supported fields, and verification dates. | None | `skillfactory/data/platforms.json` | AC3.01 | **Completed** |
 | **T3.02** | Platform Detection | Implement environment scanner to detect installed AI platforms and check filesystem permissions. | T3.01 | `skillfactory/compat/detect.py` | AC3.02 | **Completed** |
 | **T3.03** | Doctor Command | Implement `skillfactory doctor` displaying system health, detected agents, and platform discovery paths. | T3.02 | `skillfactory/cli.py` | AC3.03 | **Completed** |
@@ -51,7 +51,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 4 — Easy Installation and Updates
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T4.01** | Local Registry Manager | Implement `skillfactory/registry.py` managing `<user_data>/skillfactory/registry.json`. | None | `skillfactory/registry.py` | AC4.01 |
 | **T4.02** | Install Command | Implement `skillfactory install` with allow-list copying, collision protection, and confirmation prompts. | T3.01, T4.01 | `skillfactory/installer.py` | AC4.02 |
 | **T4.03** | Update & Hash Diff | Implement `skillfactory update` checking file SHA-256 hashes for local edits and backing up previous versions. | T4.02 | `skillfactory/installer.py` | AC4.03 |
@@ -67,7 +67,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 5 — Skill Testing and Validation
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T5.01** | Subprocess Test Runner | Implement `skillfactory test` executing skill tests in an isolated subprocess with timeout and restricted environment. | T1.04 | `skillfactory/tester.py` | AC5.01 |
 | **T5.02** | AST Safety Scanner | Implement `skillfactory/scanner.py` using Python `ast` to detect dangerous function calls, network requests, and disk operations. | None | `skillfactory/scanner.py` | AC5.02 |
 | **T5.03** | Quality Scoring Engine | Implement `skillfactory eval` calculating 0–100 quality scores across structure, spec compliance, tests, docs, and safety. | T5.01, T5.02 | `skillfactory/eval.py` | AC5.03 |
@@ -81,7 +81,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 6 — Skill Library and Discovery
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T6.01** | Local Catalog Indexer | Implement indexer scanning a local folder of skills to build an offline searchable `index.json`. | T1.06 | `skillfactory/library.py` | AC6.01 |
 | **T6.02** | Search Command | Implement `skillfactory search` searching skills by keyword, tag, or description offline. | T6.01 | `skillfactory/cli.py` | AC6.02 |
 | **T6.03** | Zip Export Engine | Implement `skillfactory export` packaging skills into portable `.zip` archives with SHA-256 checksums. | T1.06 | `skillfactory/packaging.py` | AC6.03 |
@@ -95,7 +95,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 7 — Beginner-Friendly Experience
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T7.01** | Interactive Top Menu | Implement clean numbered terminal menu when running `python3 -m skillfactory` without arguments. | T1.08 | `skillfactory/cli.py` | AC7.01 |
 | **T7.02** | Error Message Redesign | Audit and rewrite all CLI error messages to explain what happened, why, and suggested remediation steps. | T1.08 | `skillfactory/errors.py` | AC7.02 |
 | **T7.03** | OS Quickstart Guides | Author detailed, step-by-step Quickstart guides for macOS, Windows, and Linux in `docs/quickstart/`. | None | `docs/quickstart/*.md` | AC7.03 |
@@ -108,7 +108,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 8 — Security and Reliability
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T8.01** | Secret & Token Scanner | Implement pattern scanner checking for hardcoded AWS keys, GitHub tokens, OpenAI keys, and private certificates. | None | `skillfactory/scanner.py` | AC8.01 |
 | **T8.02** | Cross-Platform Path Hardening | Add automated test suite for spaces in paths, non-ASCII characters, and Windows long paths. | T1.04 | `tests/test_paths.py` | AC8.02 |
 | **T8.03** | Input Fuzzing | Implement unit fuzz tests feeding malformed strings, deeply nested JSON, and invalid UTF-8 into parsers. | T1.02, T1.03 | `tests/test_fuzz.py` | AC8.03 |
@@ -121,7 +121,7 @@ Every phase is broken down into discrete, actionable tasks. Tasks follow the for
 ## Phase 9 — Public Release v1.0
 
 | Task ID | Task Title | Description | Prereqs | Deliverables | AC Ref |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | **T9.01** | Governance Files | Author `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `CHANGELOG.md`. | None | Root docs | AC9.01 |
 | **T9.02** | Documentation Sync | Review every document in `docs/` against current code; ensure 100% accurate command examples and requirement IDs. | All phases | `docs/*` | AC9.02 |
 | **T9.03** | Platform Matrix Audit | Re-verify compatibility matrix paths and frontmatter support against the latest documentation of all 4 AI tools. | T3.01 | `docs/compatibilityMatrix.md` | AC9.03 |

@@ -6,7 +6,7 @@ This document defines the execution sequence, dependency graph, critical path, a
 
 ## 1. Phase Dependency Graph
 
-```
+```text
 [ Phase 0: GitHub Foundation ] (Done)
               |
               v
@@ -83,7 +83,7 @@ The critical path represents the sequence of dependent steps that determines the
 ## 3. Technical Risk Matrix & Mitigations
 
 | Risk ID | Risk Description | Severity | Likelihood | Mitigation Strategy |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **R-01** | **Breaking changes in target AI platforms** (e.g., Claude Code or Cursor changing skill paths or frontmatter). | High | High | Data-driven architecture (`platforms.json`). Platform paths are decoupled from code. `skillfactory doctor` verifies paths live on the user's system. Documented verification dates (PR-15, PR-24). |
 | **R-02** | **YAML syntax breakage from user descriptions.** (Special characters like `:`, `#`, `'` breaking YAML frontmatter parsing). | High | Medium | **Addressed immediately in Phase 1.** Implement safe string escaping/quoting for all frontmatter serialization; comprehensive YAML roundtrip tests. |
 | **R-03** | **Windows path and permission limitations** (Path separators `\`, max path length 260 chars, restricted symlinks, reserved names). | Medium | High | Use `pathlib.Path` exclusively; keep generated subfolder hierarchies shallow; default to copying rather than symlinks; validate against Windows reserved device names (`CON`, `PRN`, etc.). Run CI on Windows runners. |

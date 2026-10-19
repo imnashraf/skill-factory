@@ -134,7 +134,7 @@ When working in a standard terminal without AI access:
 Skill Factory maps to official agent discovery paths defined in [`skillfactory/data/platforms.json`](skillfactory/data/platforms.json):
 
 | Platform | Project Scope Folder | Global (User) Scope Folder | Shared Compatibility |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Claude Code** | `.claude/skills/<name>/` | `~/.claude/skills/<name>/` | Native `allowed-tools`, `argument-hint` |
 | **Cursor** | `.agents/skills/<name>/`, `.cursor/skills/` | `~/.agents/skills/`, `~/.cursor/skills/` | Auto-detects Claude & Codex paths |
 | **OpenAI Codex** | `.agents/skills/<name>/` | `~/.agents/skills/` | Supports `agents/openai.yaml` metadata |
@@ -169,7 +169,7 @@ generated-skills/my-skill/
 All commands are available via `python3 -m skillfactory <command>` or legacy `python3 scripts/create_skill.py`.
 
 | Command | Description | Example |
-|---|---|---|
+| --- | --- | --- |
 | `menu` | Opens the beginner-friendly interactive numbered menu. | `python3 -m skillfactory` |
 | `new` | Directly generates a skill with command-line flags. | `python3 -m skillfactory new --name my-tool --desc "Process log files"` |
 | `interview` | Launches the terminal questionnaire or accepts `--answers file.json`. | `python3 -m skillfactory interview` |

@@ -24,6 +24,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ## 2. Phase-by-Phase Progress Tracker
 
 ### Phase 0 — GitHub Foundation (`COMPLETED`)
+
 - [x] Correct repository structure (move files from nested `skill-factory/` to root).
 - [x] Untrack and clean Python `__pycache__` and `.pyc` files.
 - [x] Add comprehensive `.gitignore` covering Python, virtual environments, caches, OS files, and generator output.
@@ -33,6 +34,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 1 — Skill Factory Core (`COMPLETED`)
+
 - [x] **T1.01** Package Structure: Initialize `skillfactory/` module layout.
 - [x] **T1.02** SkillSpec Model: Implement `SkillSpec` data class and validation logic.
 - [x] **T1.03** Safe YAML Formatter: Implement safe frontmatter serializer (fixes `DEF-01`).
@@ -47,6 +49,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 2 — Natural Language Skill Builder (`COMPLETED`)
+
 - [x] **T2.01** Host-AI Skill Prompt: Refactor root `SKILL.md` for AI assistant orchestration.
 - [x] **T2.02** Offline Interview Engine: Implement terminal questionnaire (`skillfactory interview`).
 - [x] **T2.03** Batch Answers Mode: Implement `--answers answers.json` flag.
@@ -58,6 +61,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 3 — Multi-Agent Compatibility (`COMPLETED`)
+
 - [x] **T3.01** Platform Database: Create `skillfactory/data/platforms.json`.
 - [x] **T3.02** Platform Detection: Implement environment scanner for installed agents.
 - [x] **T3.03** Doctor Command: Implement `skillfactory doctor`.
@@ -68,6 +72,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 4 — Easy Installation and Updates (`COMPLETED`)
+
 - [x] **T4.01** Local Registry Manager: Implement `skillfactory/registry.py`.
 - [x] **T4.02** Install Command: Implement `skillfactory install` with allow-list copying.
 - [x] **T4.03** Update & Hash Diff: Implement `skillfactory update` with backup snapshots.
@@ -81,6 +86,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 5 — Skill Testing and Validation (`COMPLETED`)
+
 - [x] **T5.01** Subprocess Test Runner: Implement `skillfactory test` with 10s timeout.
 - [x] **T5.02** AST Safety Scanner: Implement Python `ast` danger-code detector.
 - [x] **T5.03** Quality Scoring Engine: Implement 0–100 `skillfactory eval`.
@@ -92,6 +98,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 6 — Skill Library and Discovery (`COMPLETED`)
+
 - [x] **T6.01** Local Catalog Indexer: Build searchable offline `index.json`.
 - [x] **T6.02** Search Command: Implement `skillfactory search`.
 - [x] **T6.03** Zip Export Engine: Implement `skillfactory export` with SHA-256 checksums.
@@ -103,6 +110,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 7 — Beginner-Friendly Experience (`COMPLETED`)
+
 - [x] **T7.01** Interactive Top Menu: Numbered terminal menu for `python3 -m skillfactory`.
 - [x] **T7.02** Error Message Redesign: Plain-language explanations for all CLI errors.
 - [x] **T7.03** OS Quickstart Guides: Author step-by-step guides for macOS, Windows, Linux.
@@ -113,6 +121,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ### Phase 8 — Security and Reliability (`COMPLETED`)
+
 - [x] **T8.01** Secret & Token Scanner: Pattern scanner for AWS, GitHub, OpenAI keys.
 - [x] **T8.02** Cross-Platform Path Hardening: Tests for spaces, unicode, long Windows paths.
 - [x] **T8.03** Input Fuzzing: Parser fuzzing for malformed YAML and JSON.
@@ -123,6 +132,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ---
 
 ## Phase 9 — Public Release v1.0 (`COMPLETED`)
+
 - [x] **T9.01** Governance Files: Author `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`.
 - [x] **T9.02** Documentation Sync: Verify 100% synchronization of docs with code.
 - [x] **T9.03** Platform Matrix Audit: Re-verify all 4 platform discovery paths.
@@ -130,13 +140,12 @@ This document tracks development progress, known defects, blockers, and the stat
 - [x] **T9.05** Demo Assets: Create animated visual demo for `README.md`.
 - [x] **T9.06** Final Release Tag: Tag `v1.0.0` and publish release.
 
-
 ---
 
 ## 3. Defects Identified During Planning Review
 
 | Defect ID | Severity | Description | Status | Target Fix |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **DEF-01** | High | Unescaped YAML frontmatter strings (e.g. descriptions with `:` or `#`) cause YAML syntax errors when parsed. | **Resolved** | Phase 1 (Task T1.03 in `yaml_util.py`, verified in `test_yaml_util.py`) |
 | **DEF-02** | Medium | Generator does not reject Windows reserved device names (`CON`, `PRN`, `AUX`, `NUL`) or platform reserved names (`synced`). | **Resolved** | Phase 1 (Task T1.07 in `validator.py`, verified in `test_validator.py`) |
 | **DEF-03** | Low | CI tests Python 3.11 and 3.13, while README claims 3.9+ (and default macOS CLT ships 3.9.6). | **Resolved** | Phase 1 (Task T1.10 in `tests.yml`, verified locally on Python 3.9.6) |
@@ -146,6 +155,7 @@ This document tracks development progress, known defects, blockers, and the stat
 ## 4. Phase 1 Entry Gate Checklist
 
 Before beginning code implementation in Phase 1:
+
 - [x] Phase 0 completed, committed, and passing GitHub Actions.
 - [x] Complete planning documentation created in `docs/`.
 - [x] Identified defects logged (`DEF-01`, `DEF-02`, `DEF-03`).

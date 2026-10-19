@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-10-19
 
 ### Added
+
 - **Core Generator Engine (Phase 1)**:
   - Atomic directory generation with sibling staging (`.tmp-*`) and rollback protection.
   - Safe YAML frontmatter serializer preventing parsing errors on colons, quotes, and hashes (resolves `DEF-01`).
@@ -61,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Multi-OS CI testing matrix across Ubuntu, macOS, and Windows on Python 3.9, 3.11, and 3.13.
 
 ### Fixed
+
 - `DEF-01`: Safe YAML frontmatter serializer prevents crashes from colons, hashes, and quotes in descriptions.
 - `DEF-02`: Generator and validator strictly reject Windows reserved device names and platform reserved directory names.
 - `DEF-03`: Minimum supported Python version validated as 3.9+ across macOS, Windows, and Linux.
