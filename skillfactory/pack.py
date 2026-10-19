@@ -1,7 +1,8 @@
-"""Skill Pack Management Subsystem (Phase 15, Workstream D).
+"""Skill Pack Management Subsystem (Phases 15 & 17, Workstreams 15D, 17C).
 
-Provides discovery, batch installation, verification, and uninstallation of
-curated skill packs across target AI platforms with atomic rollback on failure.
+Provides discovery, preview, batch installation, verification, update, and
+uninstallation of curated skill packs across target AI platforms with conflict
+detection and atomic rollback on failure.
 """
 from __future__ import annotations
 
@@ -10,6 +11,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from skillfactory.compat.resolve import resolve_install_targets
 from skillfactory.errors import SkillFactoryError
 from skillfactory.eval import evaluate_skill
 from skillfactory.installer import InstallResult, install_skill, uninstall_skill
@@ -59,7 +61,6 @@ def resolve_skill_path(skill_name: str, base_dir: Optional[Path | str] = None) -
     if base_dir:
         candidates.append(Path(base_dir) / skill_name)
 
-    # Search generated-skills/
     candidates.append(Path.cwd() / "generated-skills" / skill_name)
     candidates.append(Path(__file__).parent.parent / "generated-skills" / skill_name)
 
@@ -67,6 +68,78 @@ def resolve_skill_path(skill_name: str, base_dir: Optional[Path | str] = None) -
         if c.is_dir() and (c / "SKILL.md").is_file():
             return c.resolve()
     return None
+
+
+def preview_pack(
+    pack_id: str,
+    target_platform: str,
+    scope: str = "project",
+    project_dir: Optional[Path | str] = None,
+    base_dir: Optional[Path | str] = None,
+) -> Dict[str, Any]:
+    """Preview installation of a skill pack, showing file operations and conflict detection (Workstream 17C)."""
+    pack = get_pack(pack_id)
+    if not pack:
+        raise SkillFactoryError(
+            message=f"Skill pack '{pack_id}' not found.",
+            why=f"No registered pack matches identifier '{pack_id}'.",
+            suggestion="Run 'skillfactory pack list' to view all available packs.",
+            exit_code=1,
+        )
+
+    skills_info: List[Dict[str, Any]] = []
+    has_conflicts = False
+
+    for s_name in pack.skills:
+        s_path = resolve_skill_path(s_name, base_dir=base_dir)
+        if not s_path:
+            skills_info.append({
+                "skill": s_name,
+                "status": "missing_source",
+                "error": "Source skill directory not found",
+            })
+            continue
+
+        # Inspect skill files
+        files = [str(f.relative_to(s_path)) for f in s_path.rglob("*") if f.is_file()]
+
+        # Resolve destination targets to detect conflicts
+        targets = resolve_install_targets(
+            platforms=[target_platform],
+            scope=scope,
+            project_dir=Path(project_dir) if project_dir else Path.cwd(),
+        )
+
+        conflict = False
+        conflict_path = None
+        for t in targets:
+            dest = Path(t.target_dir) / s_name
+            if dest.exists():
+                conflict = True
+                conflict_path = str(dest)
+                has_conflicts = True
+                break
+
+        target_display = str(Path(targets[0].target_dir) / s_name) if targets else "Unknown"
+
+        skills_info.append({
+            "skill": s_name,
+            "source_path": str(s_path),
+            "files_count": len(files),
+            "conflict": conflict,
+            "conflict_path": conflict_path,
+            "target_dir": target_display,
+        })
+
+    return {
+        "pack_id": pack.id,
+        "pack_name": pack.name,
+        "target_platform": target_platform,
+        "scope": scope,
+        "total_skills": len(pack.skills),
+        "conflicts_detected": has_conflicts,
+        "skills": skills_info,
+    }
 
 
 def install_pack(
@@ -78,7 +151,7 @@ def install_pack(
     yes: bool = False,
     base_dir: Optional[Path | str] = None,
 ) -> Dict[str, Any]:
-    """Install all skills in a pack into a target platform."""
+    """Install all skills in a pack into a target platform with atomic rollback on failure."""
     pack = get_pack(pack_id)
     if not pack:
         raise SkillFactoryError(
@@ -90,9 +163,11 @@ def install_pack(
 
     results: List[Dict[str, Any]] = []
     installed_skills: List[str] = []
+    last_skill_attempted = "initialization"
 
     try:
         for s_name in pack.skills:
+            last_skill_attempted = s_name
             s_path = resolve_skill_path(s_name, base_dir=base_dir)
             if not s_path:
                 raise SkillFactoryError(
@@ -128,7 +203,7 @@ def install_pack(
             except Exception as rb_err:
                 rollback_errors.append(f"{installed_name}: {rb_err}")
 
-        why_msg = f"Installation of pack '{pack.name}' failed during '{s_name}': {exc}"
+        why_msg = f"Installation of pack '{pack.name}' failed during '{last_skill_attempted}': {exc}"
         if rollback_errors:
             why_msg += f" (Rollback errors: {'; '.join(rollback_errors)})"
 
@@ -147,6 +222,24 @@ def install_pack(
         "installed_count": len(results),
         "skills": results,
     }
+
+
+def update_pack(
+    pack_id: str,
+    target_platform: str,
+    scope: str = "project",
+    project_dir: Optional[Path | str] = None,
+    base_dir: Optional[Path | str] = None,
+) -> Dict[str, Any]:
+    """Update all skills in a pack by re-installing with force=True."""
+    return install_pack(
+        pack_id=pack_id,
+        target_platform=target_platform,
+        scope=scope,
+        project_dir=project_dir,
+        force=True,
+        base_dir=base_dir,
+    )
 
 
 def verify_pack(pack_id: str, base_dir: Optional[Path | str] = None) -> Dict[str, Any]:

@@ -699,17 +699,51 @@ def cmd_search(args: argparse.Namespace) -> int:
     search_dir = Path(search_dir_arg) if search_dir_arg and search_dir_arg != "." else Path(".")
     results = []
 
+    tag_f = getattr(args, "tag", None)
+    cat_f = getattr(args, "category", None)
+    dom_f = getattr(args, "domain", None)
+    plat_f = getattr(args, "platform", None)
+    grade_f = getattr(args, "grade", None)
+    type_f = getattr(args, "type", None)
+
     if search_dir_arg and search_dir_arg != ".":
         index = index_directory(search_dir, include_eval=False)
-        results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
+        results = search_catalog(
+            index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
     else:
         # Search local directory first
         local_index = index_directory(search_dir, include_eval=False)
-        local_results = search_catalog(local_index, query=args.query, tag_filter=getattr(args, "tag", None))
+        local_results = search_catalog(
+            local_index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
 
         # Also search bundled catalog
         bundled_index = load_bundled_catalog()
-        bundled_results = search_catalog(bundled_index, query=args.query, tag_filter=getattr(args, "tag", None))
+        bundled_results = search_catalog(
+            bundled_index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
 
         # Merge results, avoiding duplicate skill names
         seen_names = set()
@@ -931,14 +965,27 @@ def cmd_pack(args: argparse.Namespace) -> int:
                 print(format_msg(sk_tag, f"{s['skill']}: {s.get('grade', 'N/A')} ({s.get('score', 0)}/100)"))
         return 0 if res["all_clean"] else 1
 
-    elif action == "uninstall":
+    elif action == "preview":
         pack_id = args.pack_id
         target = args.target
-        res = uninstall_pack(pack_id=pack_id, target_platform=target)
+        scope = getattr(args, "scope", "project")
+        from skillfactory.pack import preview_pack
+        res = preview_pack(pack_id=pack_id, target_platform=target, scope=scope)
         if getattr(args, "json", False):
             print(json.dumps(res, indent=2))
         else:
-            print(format_msg("OK", f"Uninstalled {res['uninstalled_count']} skills from pack '{res['pack_name']}'"))
+            print("=" * 70)
+            print(f" Installation Preview: Pack '{res['pack_name']}' -> {target}")
+            print("=" * 70)
+            if res["conflicts_detected"]:
+                print(format_msg("WARN", "Conflicts detected! Some skills already exist at target destination:"))
+            else:
+                print(format_msg("OK", "No conflicts detected. Safe to install."))
+            for s in res["skills"]:
+                conflict_mark = f" [CONFLICT: {s.get('conflict_path')}]" if s.get("conflict") else ""
+                print(f"• {s['skill']} ({s.get('files_count', 0)} files) -> {s.get('target_dir')}{conflict_mark}")
+            if res["conflicts_detected"]:
+                print("\nUse '--force' during install to overwrite existing skills.")
         return 0
 
     return 2
@@ -1134,9 +1181,14 @@ def create_parser() -> argparse.ArgumentParser:
 
     # Command: search
     search_parser = subparsers.add_parser("search", parents=[common_parser], help="Search skills offline in catalog by keyword or tag (<100ms)")
-    search_parser.add_argument("query", help="Keyword, tag, or topic to search for")
+    search_parser.add_argument("query", nargs="?", default="", help="Keyword, tag, or topic to search for")
     search_parser.add_argument("--dir", default=".", help="Directory of skills to search (default: . or examples)")
     search_parser.add_argument("--tag", help="Filter by specific tag")
+    search_parser.add_argument("--domain", help="Filter by domain (Personal, Professional, Developer and AI)")
+    search_parser.add_argument("--category", help="Filter by category")
+    search_parser.add_argument("--platform", help="Filter by supported platform")
+    search_parser.add_argument("--grade", help="Filter by minimum quality grade (e.g. A, B)")
+    search_parser.add_argument("--type", help="Filter by template family (e.g. python-script)")
 
     # Command: export
     export_parser = subparsers.add_parser("export", parents=[common_parser], help="Export an Agent Skill to portable .zip with SHA-256")
@@ -1170,6 +1222,11 @@ def create_parser() -> argparse.ArgumentParser:
 
     pack_list = pack_sub.add_parser("list", parents=[common_parser], help="List all available curated skill packs")
     pack_list.add_argument("--category", choices=["personal", "professional", "developer"], help="Filter by category")
+
+    pack_prev = pack_sub.add_parser("preview", parents=[common_parser], help="Preview installation, files, and conflict detection for a pack")
+    pack_prev.add_argument("pack_id", help="Identifier of the pack")
+    pack_prev.add_argument("--target", "--platform", dest="target", required=True, help="Target AI platform")
+    pack_prev.add_argument("--scope", default="project", choices=["project", "user"], help="Installation scope")
 
     pack_inst = pack_sub.add_parser("install", parents=[common_parser], help="Install all skills in a pack into a target AI platform")
     pack_inst.add_argument("pack_id", help="Identifier of the pack (e.g., office-productivity, finance-erp)")
