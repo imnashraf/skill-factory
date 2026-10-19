@@ -3,6 +3,7 @@
 ## Syntax Guidelines
 
 The formatter recognizes common note patterns:
+
 - `# Meeting Title` sets the document title.
 - `Date: YYYY-MM-DD` sets the recorded meeting date.
 - `Attendees: Name1, Name2` defines participants.

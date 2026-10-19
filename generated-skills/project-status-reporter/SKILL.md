@@ -10,6 +10,7 @@ Automate project governance and sprint status reporting from milestone spreadshe
 ## When to Use This Skill
 
 Activate this skill when:
+
 - Compiling weekly or bi-weekly stakeholder progress reports.
 - Calculating project completion percentages and milestone delivery health (Red/Amber/Green).
 - Spotting blocked deliverables or overdue milestones before escalation.
@@ -18,10 +19,13 @@ Activate this skill when:
 
 1. Prepare milestones CSV (`id,name,owner,status,due_date`).
 2. Run report generation:
+
    ```bash
    python3 scripts/main.py milestones.csv --title "Ecosystem Expansion" --output status.md
    ```
+
 3. Export JSON metrics:
+
    ```bash
    python3 scripts/main.py milestones.csv --json
    ```

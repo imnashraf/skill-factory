@@ -153,11 +153,11 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "duration_sec": 0.003,
+    "duration_sec": 0.002,
     "timed_out": false,
     "error_message": null,
     "stdout": "",
-    "stderr": "test_validation_logic (test_main.TestAttendanceValidator.test_validation_logic) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.003s\n\nOK\n",
+    "stderr": "test_validation_logic (test_main.TestAttendanceValidator.test_validation_logic) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\n",
     "test_files_found": 1
   },
   "safety_summary": {
@@ -169,5 +169,5 @@
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-19T20:12:45.221334+00:00"
+  "timestamp": "2026-10-19T20:39:26.505065+00:00"
 }

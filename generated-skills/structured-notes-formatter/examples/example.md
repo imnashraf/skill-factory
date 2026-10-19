@@ -1,6 +1,7 @@
 # Example Notes Input and Output
 
 ## Input Notes
+
 ```text
 # Architecture Sync
 Date: 2026-10-19
@@ -12,6 +13,7 @@ Action: Write test suite @Sarah
 ```
 
 ## Formatted Markdown Output
+
 ```markdown
 # Architecture Sync
 

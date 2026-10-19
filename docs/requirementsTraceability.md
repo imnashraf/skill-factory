@@ -7,7 +7,7 @@ This matrix maps every high-level **Product Requirement** (`PR-xx`) to its under
 ## Traceability Table
 
 | PR ID | Product Requirement Summary | Child Requirements | Implementing Tasks | Verification / Tests | Acceptance Criteria | Target Phase |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | **PR-01** | Free, MIT-licensed, no paid APIs | NFR-01, LEG-01, LEG-02 | T1.01, T1.04, T8.06 | TS-05, TS-06 | AC1.09, AC8.06 | All |
 | **PR-02** | Local-first & offline by default | NFR-06, SEC-07, FR-NL-02 | T1.04, T2.02, T4.02 | TS-06 (`test_offline.py`) | AC2.02, AC4.02 | 1–5 |
 | **PR-03** | Comprehensive skill output (SKILL.md, scripts, tests, README, references) | FR-CORE-02, FR-CORE-08 | T1.04, T1.05, T2.05 | TS-01, TS-03 | AC1.05, AC2.05 | 1, 2 |
@@ -20,7 +20,7 @@ This matrix maps every high-level **Product Requirement** (`PR-xx`) to its under
 | **PR-10** | Automated skill testing and quality evaluation scoring | FR-TEST-01..04, FR-EVAL-01..03 | T5.01, T5.02, T5.03 | TS-08 (`test_eval.py`) | AC5.01, AC5.02, AC5.03 | 5 |
 | **PR-11** | Easy installation, updates, uninstallation, rollback | FR-INST-01..09 | T4.01–T4.06 | TS-04 (`test_installer.py`) | AC4.01–AC4.06 | 4 |
 | **PR-12** | Skill library, offline search, export/import, GitHub publish | FR-LIB-01..05, FR-PUB-01..04 | T6.01–T6.06 | TS-04 (`test_library.py`) | AC6.01–AC6.06 | 6 |
-| **PR-13** | Standard-library-only runtime; zero external dependencies | NFR-02 | T1.01, T1.04, T1.09 | TS-05 (`test_no_third_party.py`)| AC1.09 | All |
+| **PR-13** | Standard-library-only runtime; zero external dependencies | NFR-02 | T1.01, T1.04, T1.09 | TS-05 (`test_no_third_party.py`) | AC1.09 | All |
 | **PR-14** | Public release v1.0, quality CI, complete documentation | NFR-16, NFR-19 | T9.01–T9.06 | CI Matrix, Docs Audit | AC9.01–AC9.06 | 9 |
 | **PR-15** | Honest compatibility claims with documented verification dates | FR-COMPAT-01, NFR-15 | T3.01, T9.03 | Platform docs audit | AC3.01, AC9.03 | 3, 9 |
 | **PR-16** | Provenance, versioning, manifest SHA-256 hashes | FR-CORE-10, FR-SPEC-04 | T1.06, T4.03 | TS-01 (`test_manifest.py`) | AC1.06, AC4.03 | 1, 4 |

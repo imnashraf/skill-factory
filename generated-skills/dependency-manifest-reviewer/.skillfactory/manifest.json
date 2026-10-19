@@ -1,0 +1,45 @@
+{
+  "skill_name": "dependency-manifest-reviewer",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "d06a2abab80a405278ae8298ffc7e42dde7a7c95e1e605af775bc76abebf5108",
+      "bytes": 237
+    },
+    "SKILL.md": {
+      "sha256": "44fafaa4dd6faa7ddb49e4de39c08a314fdce225363c87941203f5da9ec06b24",
+      "bytes": 1149
+    },
+    "examples/example.md": {
+      "sha256": "8e1c0c4d6e9133c2c6326c7cc055ed0a5c2b50ce6a22d0029d5bbebc9cd3f149",
+      "bytes": 108
+    },
+    "examples/sample_requirements.txt": {
+      "sha256": "5f9b86496da835f9770a317584b4c70fba76fe0244d0114a620f77c76cfdc809",
+      "bytes": 173
+    },
+    "references/guide.md": {
+      "sha256": "cefd7ca5f0098418eecc6a88575acf21be6b30d8a118d580e09e9534921f83e5",
+      "bytes": 410
+    },
+    "scripts/main.py": {
+      "sha256": "4601365ca73e9adc73c03c19d8a62e296d595680b4c28eecf8e2c8ff39d073d3",
+      "bytes": 5376
+    },
+    "tests/test_main.py": {
+      "sha256": "47dc7b9859eb2f00e4d3a59dbf0380fc1aea7fc7592c39ee91dbcc8016a5180e",
+      "bytes": 1376
+    }
+  }
+}

@@ -30,10 +30,12 @@
 ## 2. Release Candidate Verification Details
 
 ### Wheel Artifacts Built
+
 - Source Distribution: `dist/skillfactory-1.2.0.tar.gz` (54.8 KB)
 - Built Wheel: `dist/skillfactory-1.2.0-py3-none-any.whl` (52.1 KB)
 
 ### Test Suite Execution Summary
+
 - Unit Tests: 148 passed, 0 failed, 1 skipped.
 - Security Validation: 8/8 vectors passed.
 - Multi-Agent Platforms: 8/8 platforms passed all 6 lifecycle stages.
@@ -44,6 +46,7 @@
 ## 3. Required External Authorization Actions (Hold for User)
 
 Per Autonomous Operating Authority rules:
+
 1. **PyPI Publication:**
    - Publication must be initiated through the configured GitHub Actions workflow (`.github/workflows/pypi-publish.yml`) using GitHub Trusted Publishing (OIDC), or manually via `twine upload dist/*` with user's PyPI credentials.
    - Requires user confirmation of package name ownership on PyPI.

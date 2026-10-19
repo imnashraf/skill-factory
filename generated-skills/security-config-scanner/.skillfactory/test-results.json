@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-10-19T19:47:47.860072+00:00",
+  "timestamp": "2026-10-19T20:39:27.366399+00:00",
   "success": true,
   "tests_run": 6,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
-  "duration_sec": 0.026,
+  "duration_sec": 0.03,
   "timed_out": false,
   "test_files_found": 1,
   "error_message": null,
   "stdout": "",
-  "stderr": "test_clean_directory_has_zero_findings (test_main.SecurityScannerTests.test_clean_directory_has_zero_findings) ... ok\ntest_cli_json_and_exit_code (test_main.SecurityScannerTests.test_cli_json_and_exit_code) ... ok\ntest_detects_credentials_and_masks_output (test_main.SecurityScannerTests.test_detects_credentials_and_masks_output) ... ok\ntest_detects_insecure_configurations (test_main.SecurityScannerTests.test_detects_insecure_configurations) ... ok\ntest_missing_directory_returns_error_code (test_main.SecurityScannerTests.test_missing_directory_returns_error_code) ... [ERROR] Scan failed: Target directory does not exist: /nonexistent/directory/path/that/does/not/exist\nok\ntest_severity_filtering (test_main.SecurityScannerTests.test_severity_filtering) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.026s\n\nOK\n"
+  "stderr": "test_clean_directory_has_zero_findings (test_main.SecurityScannerTests.test_clean_directory_has_zero_findings) ... ok\ntest_cli_json_and_exit_code (test_main.SecurityScannerTests.test_cli_json_and_exit_code) ... ok\ntest_detects_credentials_and_masks_output (test_main.SecurityScannerTests.test_detects_credentials_and_masks_output) ... ok\ntest_detects_insecure_configurations (test_main.SecurityScannerTests.test_detects_insecure_configurations) ... ok\ntest_missing_directory_returns_error_code (test_main.SecurityScannerTests.test_missing_directory_returns_error_code) ... [ERROR] Scan failed: Target directory does not exist: /nonexistent/directory/path/that/does/not/exist\nok\ntest_severity_filtering (test_main.SecurityScannerTests.test_severity_filtering) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.030s\n\nOK\n"
 }

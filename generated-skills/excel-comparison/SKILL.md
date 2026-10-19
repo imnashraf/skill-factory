@@ -7,16 +7,20 @@ compatibility: "Designed for Claude Code, Cursor, OpenAI Codex and Google Antigr
 # excel-comparison
 
 ## When to use
+
 Use this skill when: Compares two Excel spreadsheets or CSV files row-by-row and cell-by-cell to identify added, removed, and modified records with detailed diff reports.
 
 ## Workflow
+
 1. Clarify expected inputs and outputs.
 2. Inspect available files without modifying them.
 3. Plan and execute the core task logic.
 4. Verify the output and report any limitations.
 
 ## Script Execution
+
 Run the bundled script to perform the task:
+
 ```bash
 python3 scripts/main.py --help
 ```
@@ -25,10 +29,12 @@ See [references/guide.md](references/guide.md) for full argument references and 
 See [examples/example.md](examples/example.md) for sample inputs and outputs.
 
 ## Safety
+
 - Do not delete or overwrite user data without explicit permission.
 - Never send private files to external services.
 - Always verify script exit codes before claiming success.
 
 ## Implementation status
+
 Fully implemented and verified with automated test suite. Task logic is located in [scripts/main.py](scripts/main.py).
 Run `python3 -m unittest discover -s tests -v` to verify local execution.

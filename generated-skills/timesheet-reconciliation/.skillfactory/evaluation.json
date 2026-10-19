@@ -1,7 +1,7 @@
 {
   "skill_name": "timesheet-reconciliation",
   "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/timesheet-reconciliation",
-  "total_score": 91,
+  "total_score": 93,
   "grade": "Grade A",
   "dimensions": [
     {
@@ -74,7 +74,7 @@
         "concise_main_file": {
           "earned": 5,
           "max": 5,
-          "note": "SKILL.md is concise (28 lines <= 500 limit)"
+          "note": "SKILL.md is concise (30 lines <= 500 limit)"
         },
         "progressive_disclosure": {
           "earned": 5,
@@ -112,7 +112,7 @@
         "behavioral_execution": {
           "earned": 5,
           "max": 5,
-          "note": "Tests ran successfully in 0.05s (< 10.0s timeout)"
+          "note": "Tests ran successfully in 0.06s (< 10.0s timeout)"
         },
         "honest_reporting": {
           "earned": 5,
@@ -124,7 +124,7 @@
     {
       "name": "Code Safety & Secrets Scan",
       "dimension_id": "EV-05",
-      "earned": 13,
+      "earned": 15,
       "max_points": 15,
       "items": {
         "clean_secret_scan": {
@@ -138,14 +138,14 @@
           "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
         },
         "manifest_integrity": {
-          "earned": 3,
+          "earned": 5,
           "max": 5,
-          "note": "Manifest file not found (unmanaged or freshly generated without manifest)"
+          "note": "All files match their recorded SHA-256 manifest hashes"
         }
       }
     }
   ],
-  "summary": "Skill Quality Score: 91 / 100 [Grade A]",
+  "summary": "Skill Quality Score: 93 / 100 [Grade A]",
   "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
   "test_result": {
     "success": true,
@@ -153,7 +153,7 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "duration_sec": 0.052,
+    "duration_sec": 0.062,
     "timed_out": false,
     "error_message": null,
     "stdout": "",
@@ -162,12 +162,12 @@
   },
   "safety_summary": {
     "is_clean": true,
-    "files_scanned": 11,
+    "files_scanned": 13,
     "critical_count": 0,
     "high_count": 0,
     "medium_count": 0,
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-19T19:38:51.745232+00:00"
+  "timestamp": "2026-10-19T20:39:27.570761+00:00"
 }

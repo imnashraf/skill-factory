@@ -74,7 +74,7 @@
         "concise_main_file": {
           "earned": 5,
           "max": 5,
-          "note": "SKILL.md is concise (38 lines <= 500 limit)"
+          "note": "SKILL.md is concise (45 lines <= 500 limit)"
         },
         "progressive_disclosure": {
           "earned": 5,
@@ -112,7 +112,7 @@
         "behavioral_execution": {
           "earned": 5,
           "max": 5,
-          "note": "Tests ran successfully in 0.03s (< 10.0s timeout)"
+          "note": "Tests ran successfully in 0.04s (< 10.0s timeout)"
         },
         "honest_reporting": {
           "earned": 5,
@@ -153,11 +153,11 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "duration_sec": 0.029,
+    "duration_sec": 0.042,
     "timed_out": false,
     "error_message": null,
-    "stdout": "[OK] Successfully organized 2 files into structured categories.\n{\n  \"status\": \"success\",\n  \"files_organized\": 1,\n  \"operations\": [\n    {\n      \"source_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpyd_apzlg/intake/contract.pdf\",\n      \"target_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpyd_apzlg/intake/documents/2026_contract.pdf\",\n      \"category\": \"documents\",\n      \"renamed\": true\n    }\n  ]\n}\n",
-    "stderr": "test_categorization (test_main.FileOrganizerTests.test_categorization) ... ok\ntest_dry_run_leaves_files_in_place (test_main.FileOrganizerTests.test_dry_run_leaves_files_in_place) ... ok\ntest_live_organization_and_collision_avoidance (test_main.FileOrganizerTests.test_live_organization_and_collision_avoidance) ... ok\ntest_nonexistent_directory_error (test_main.FileOrganizerTests.test_nonexistent_directory_error) ... [ERROR] Failed to plan organization: Source directory not found: /nonexistent/fake/directory/xyz\nok\ntest_prefix_option (test_main.FileOrganizerTests.test_prefix_option) ... ok\ntest_sanitize_filename (test_main.FileOrganizerTests.test_sanitize_filename) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.029s\n\nOK\n",
+    "stdout": "[OK] Successfully organized 2 files into structured categories.\n{\n  \"status\": \"success\",\n  \"files_organized\": 1,\n  \"operations\": [\n    {\n      \"source_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpuyn11c7w/intake/contract.pdf\",\n      \"target_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpuyn11c7w/intake/documents/2026_contract.pdf\",\n      \"category\": \"documents\",\n      \"renamed\": true\n    }\n  ]\n}\n",
+    "stderr": "test_categorization (test_main.FileOrganizerTests.test_categorization) ... ok\ntest_dry_run_leaves_files_in_place (test_main.FileOrganizerTests.test_dry_run_leaves_files_in_place) ... ok\ntest_live_organization_and_collision_avoidance (test_main.FileOrganizerTests.test_live_organization_and_collision_avoidance) ... ok\ntest_nonexistent_directory_error (test_main.FileOrganizerTests.test_nonexistent_directory_error) ... [ERROR] Failed to plan organization: Source directory not found: /nonexistent/fake/directory/xyz\nok\ntest_prefix_option (test_main.FileOrganizerTests.test_prefix_option) ... ok\ntest_sanitize_filename (test_main.FileOrganizerTests.test_sanitize_filename) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.042s\n\nOK\n",
     "test_files_found": 1
   },
   "safety_summary": {
@@ -169,5 +169,5 @@
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-19T14:33:39.265080+00:00"
+  "timestamp": "2026-10-19T20:39:26.905584+00:00"
 }

@@ -15,7 +15,7 @@ Today, creating a good skill is harder than it should be:
 ## Who it is for
 
 | Persona | Need |
-|---|---|
+| --- | --- |
 | **Beginner user** | Describe a problem in plain language and get a working, installed skill without learning the format. |
 | **Developer** | Scaffold, validate, test, and publish skills from the command line, scriptably. |
 | **Team lead** | Share vetted skills across a team and several AI tools, with predictable updates. |

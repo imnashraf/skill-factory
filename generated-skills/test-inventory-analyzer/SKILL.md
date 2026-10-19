@@ -10,6 +10,7 @@ Developer QA utility to catalog test suites and measure test density across code
 ## When to Use This Skill
 
 Activate this skill when:
+
 - Auditing test coverage and test suite sizes prior to releases.
 - Cataloging unit, integration, and end-to-end test cases in a repository.
 - Identifying silently skipped or disabled test suites.
@@ -18,10 +19,13 @@ Activate this skill when:
 
 1. Identify the project root or tests directory.
 2. Run inventory scan:
+
    ```bash
    python3 scripts/main.py tests/ --output test_inventory.md
    ```
+
 3. Export JSON report:
+
    ```bash
    python3 scripts/main.py tests/ --json
    ```

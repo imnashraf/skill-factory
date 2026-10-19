@@ -8,7 +8,7 @@ import sys
 # Import from scripts/main.py
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import format_markdown, parse_raw_notes
+from main import format_markdown, parse_raw_notes  # type: ignore
 
 
 class TestStructuredNotesFormatter(unittest.TestCase):

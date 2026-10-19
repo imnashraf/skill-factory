@@ -41,14 +41,19 @@ Skill Factory operates under strict security invariants:
 ## 3. Phase 15 Hardening Deep Dive
 
 ### 3.1 Symlink Escape Prevention
+
 In `skillfactory/installer.py`, `copy_allow_listed_files` was enhanced with explicit symlink target resolution. If a skill directory contains a symlink pointing to an absolute or relative target that does not resolve strictly inside the source directory (`not resolved_target.is_relative_to(src_dir.resolve())`), the symlink is silently ignored and never copied to the installation target. Tested via `tests/test_hardening.py::test_symlink_escape_protection`.
 
 ### 3.2 Extended Prompt Injection Rules (INJ005–INJ007)
+
 The static scanner was expanded with three additional high-severity detection rules in `skillfactory/scanner.py`:
+
 - `INJ005`: System Prompt Extraction Directive (detects `repeat/reveal/dump/leak your system prompt/initial instructions`).
 - `INJ006`: Known Exfiltration Endpoint (detects `webhook.site`, `pastebin.com`, `ngrok.io`, `requestbin.com`).
 - `INJ007`: Adversarial Roleplay Override (detects `act as a rogue/unrestricted/hacked AI`).
+
 Tested via `tests/run_security_validation.py::test_prompt_injection_defense`.
 
 ### 3.3 AI-Generated Code Containment
+
 In `skillfactory/ai/engine.py`, generated code is never executed on the host system without prior safety scanning. If AST scanning detects any critical or high findings (such as `eval`, `exec`, `shell=True`, or credential patterns), the engine halts immediately with `status: safety_rejected` without invoking the Python test runner subprocess.

@@ -8,7 +8,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import format_markdown_report, generate_status_summary
+from main import format_markdown_report, generate_status_summary  # type: ignore
 
 
 class TestProjectStatusReporter(unittest.TestCase):

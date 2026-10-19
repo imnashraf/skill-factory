@@ -8,7 +8,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import analyze_test_directory, format_markdown_report
+from main import analyze_test_directory, format_markdown_report  # type: ignore
 
 
 class TestInventoryAnalyzer(unittest.TestCase):

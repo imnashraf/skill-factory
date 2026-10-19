@@ -1,0 +1,45 @@
+{
+  "skill_name": "structured-notes-formatter",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "6b6003acc2d2497db73accc5beb6fe2174c78e519a5fdfd4e63aade078a4fc36",
+      "bytes": 274
+    },
+    "SKILL.md": {
+      "sha256": "bc89e67e2bda4cb122b1e855245ae1ced2ec5c216a0b1fa9a5ee7adb912a7901",
+      "bytes": 1082
+    },
+    "examples/example.md": {
+      "sha256": "524c93332625ed7f30ef8d2db09edfdb3a00d432d1598f1c6716fa8035a13bda",
+      "bytes": 619
+    },
+    "examples/sample_raw_notes.txt": {
+      "sha256": "a985ec9750c2642ec137d9512aa52fda514b69317c8caff8a88cc56ebd812cb0",
+      "bytes": 370
+    },
+    "references/guide.md": {
+      "sha256": "8b0824356702ba9e71514831c31a350817634ae7ede18bd6b8a9f769e0461702",
+      "bytes": 382
+    },
+    "scripts/main.py": {
+      "sha256": "aa5461866b9baf95e3296ac7fbe295949eda12d6fc8c79e1209d1f93aae2c93e",
+      "bytes": 4568
+    },
+    "tests/test_main.py": {
+      "sha256": "5a1e389ac4e0e8cea05bece28c7af4d5cbdd4c44ab9c42d6c8033ca64bb8b65a",
+      "bytes": 1470
+    }
+  }
+}

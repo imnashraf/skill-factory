@@ -7,7 +7,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import format_markdown_report, reconcile_invoices
+from main import format_markdown_report, reconcile_invoices  # type: ignore
 
 
 class TestInvoiceReconciliation(unittest.TestCase):

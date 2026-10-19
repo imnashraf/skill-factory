@@ -1,7 +1,7 @@
 {
   "skill_name": "financial-variance-analyzer",
   "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/financial-variance-analyzer",
-  "total_score": 96,
+  "total_score": 98,
   "grade": "Grade A",
   "dimensions": [
     {
@@ -74,7 +74,7 @@
         "concise_main_file": {
           "earned": 5,
           "max": 5,
-          "note": "SKILL.md is concise (33 lines <= 500 limit)"
+          "note": "SKILL.md is concise (37 lines <= 500 limit)"
         },
         "progressive_disclosure": {
           "earned": 5,
@@ -124,7 +124,7 @@
     {
       "name": "Code Safety & Secrets Scan",
       "dimension_id": "EV-05",
-      "earned": 13,
+      "earned": 15,
       "max_points": 15,
       "items": {
         "clean_secret_scan": {
@@ -138,14 +138,14 @@
           "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
         },
         "manifest_integrity": {
-          "earned": 3,
+          "earned": 5,
           "max": 5,
-          "note": "Manifest file not found (unmanaged or freshly generated without manifest)"
+          "note": "All files match their recorded SHA-256 manifest hashes"
         }
       }
     }
   ],
-  "summary": "Skill Quality Score: 96 / 100 [Grade A]",
+  "summary": "Skill Quality Score: 98 / 100 [Grade A]",
   "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
   "test_result": {
     "success": true,
@@ -162,12 +162,12 @@
   },
   "safety_summary": {
     "is_clean": true,
-    "files_scanned": 11,
+    "files_scanned": 13,
     "critical_count": 0,
     "high_count": 0,
     "medium_count": 0,
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-19T19:32:06.258222+00:00"
+  "timestamp": "2026-10-19T20:39:26.968527+00:00"
 }

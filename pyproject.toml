@@ -7,14 +7,13 @@ name = "skillfactory"
 version = "1.2.0"
 description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, Antigravity, Windsurf, Continue, Cline, and Copilot."
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
 authors = [{ name = "Skill Factory Contributors" }]
 requires-python = ">=3.9"
 dependencies = []
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -47,3 +46,6 @@ skillfactory = [
     "templates/*/*.tmpl",
     "templates/*/*/*.tmpl",
 ]
+
+[tool.pyrefly]
+ignore-missing-imports = ["main"]

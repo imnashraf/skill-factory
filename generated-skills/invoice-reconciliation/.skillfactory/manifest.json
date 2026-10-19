@@ -1,0 +1,49 @@
+{
+  "skill_name": "invoice-reconciliation",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "2794c83fb3d364f25c977299163e5362121606ff4d3d696abab93a048bbddab8",
+      "bytes": 269
+    },
+    "SKILL.md": {
+      "sha256": "52d159fd9aafa988190f9872622c0d068c1da19bbdda35bdf62687a788a152f3",
+      "bytes": 1250
+    },
+    "examples/example.md": {
+      "sha256": "f914df61299879468b862c31806f474e3cbe821313a699de4a71dd3b65ab9dbe",
+      "bytes": 272
+    },
+    "examples/invoices.csv": {
+      "sha256": "f806a4c0c58f9978936af5332d1a6bae92cb6fb595cad0a1c6d6f6fe10e14a2d",
+      "bytes": 247
+    },
+    "examples/purchase_orders.csv": {
+      "sha256": "5c601c54039a4ec6a94894034e1dca42b652c5f7e887acf1a22f3424db14fc9f",
+      "bytes": 143
+    },
+    "references/guide.md": {
+      "sha256": "cd876097952d7390a1a2d8ec83478eece249d9efc59b0b874fd0a647c7db9343",
+      "bytes": 425
+    },
+    "scripts/main.py": {
+      "sha256": "d21b59df04f991fb0a5454d37e0b5c6780c8c1cf75bf7eb5e0b108136c2b8be7",
+      "bytes": 6332
+    },
+    "tests/test_main.py": {
+      "sha256": "24ce299539139c9cbbd3dcd7ac564bf3e08d59dead1829135383fc9e569a1cf3",
+      "bytes": 1839
+    }
+  }
+}

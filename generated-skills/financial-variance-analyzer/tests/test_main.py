@@ -7,7 +7,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import analyze_variances, format_report_markdown
+from main import analyze_variances, format_report_markdown  # type: ignore
 
 
 class TestFinancialVarianceAnalyzer(unittest.TestCase):

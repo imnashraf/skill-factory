@@ -10,6 +10,7 @@ Deterministic finance utility for automated line-item reconciliation between acc
 ## When to Use This Skill
 
 Activate this skill when:
+
 - Performing three-way or two-way invoice reconciliation.
 - Auditing vendor invoices against approved purchase order values.
 - Detecting duplicate supplier invoice numbers prior to batch payment runs.
@@ -18,10 +19,13 @@ Activate this skill when:
 
 1. Prepare invoices CSV (`invoice_number,po_number,vendor,amount`) and PO CSV (`po_number,vendor,amount`).
 2. Run reconciliation:
+
    ```bash
    python3 scripts/main.py invoices.csv purchase_orders.csv --output reconciliation_report.md
    ```
+
 3. Run with custom dollar tolerance:
+
    ```bash
    python3 scripts/main.py invoices.csv purchase_orders.csv --tolerance 0.05
    ```

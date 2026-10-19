@@ -10,6 +10,7 @@ Deterministic financial analysis utility for comparing actual spending and reven
 ## When to Use This Skill
 
 Activate this skill when:
+
 - Analyzing monthly or quarterly budget variances.
 - Auditing departmental spend reports against approved allocations.
 - Identifying cost overruns and material variances exceeding configured thresholds.
@@ -18,10 +19,13 @@ Activate this skill when:
 
 1. Prepare budget CSV (`account,amount`) and actuals CSV (`account,amount`).
 2. Run variance analysis:
+
    ```bash
    python3 scripts/main.py budget.csv actuals.csv --output variance_report.md
    ```
+
 3. Set custom materiality thresholds:
+
    ```bash
    python3 scripts/main.py budget.csv actuals.csv --threshold-pct 5.0 --threshold-abs 2000.0
    ```

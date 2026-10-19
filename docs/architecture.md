@@ -8,7 +8,7 @@ Skill Factory is designed to be **simple, reliable, completely free, and standar
 
 Skill Factory operates as a command-line tool, a Python package (`skillfactory`), and an Agent Skill itself (`SKILL.md` at root).
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                               User Interaction Layer                         |
 |  - Beginner Guided Mode (`python3 -m skillfactory`)                          |
@@ -48,14 +48,16 @@ Skill Factory operates as a command-line tool, a Python package (`skillfactory`)
 The project is structured under a clean internal module namespace `skillfactory/`:
 
 ### `skillfactory.cli` — Command-Line Interface
+
 - **Responsibility:** Handles arguments, command routing, and formatted terminal output.
-- **Key Characteristics:** 
+- **Key Characteristics:**
   - Uses `argparse` from standard library.
   - Formats output for humans with clear symbols (`[OK]`, `[WARN]`, `[ERROR]`) without relying on colors alone.
   - Supports `--json` for machine readability and automated integration.
   - Supports `--dry-run` to preview actions before touching files.
 
 ### `skillfactory.core` — Skill Generation Engine
+
 - **Responsibility:** Generates reproducible, portable skill directories from a structured `SkillSpec`.
 - **Key Characteristics:**
   - **Deterministic Output:** Given the same spec and template, produces byte-identical files every time (with stable formatting and sorted keys).
@@ -64,6 +66,7 @@ The project is structured under a clean internal module namespace `skillfactory/
   - **Manifest Generation:** Produces `.skillfactory/manifest.json` containing SHA-256 hashes of all generated files, generator version, and timestamp.
 
 ### `skillfactory.spec` — The Skill Specification Model
+
 - **Responsibility:** Defines the canonical intermediate format `SkillSpec` (`skill-spec.json`).
 - **Why this matters:** By decoupling the *description of the skill* from *how files are written*, both the **Host AI model** and the **Offline deterministic interview** produce the exact same data structure.
 - **Fields in `SkillSpec`:**
@@ -78,6 +81,7 @@ The project is structured under a clean internal module namespace `skillfactory/
   - `target_platforms`: List of target AI tools (Claude Code, Cursor, Codex, Antigravity).
 
 ### `skillfactory.validator` — Agent Skills Spec & Quality Linter
+
 - **Responsibility:** Enforces compliance with the open [Agent Skills Specification](https://agentskills.io/specification).
 - **Checks Performed:**
   1. `SKILL.md` exists and starts with YAML frontmatter `---`.
@@ -89,11 +93,13 @@ The project is structured under a clean internal module namespace `skillfactory/
   7. No hardcoded absolute local paths (`/Users/...`, `C:\...`).
 
 ### `skillfactory.compat` — Multi-Platform Adapter
+
 - **Responsibility:** Encapsulates directory conventions, frontmatter differences, and platform quirks.
 - **Data-Driven Architecture:** All platform knowledge lives in `skillfactory/data/platforms.json`. Adding support or updating a platform path requires updating data, not editing core logic.
 - **Inspection (`doctor`):** Inspects the host machine to detect which platforms are installed, verifies write access to their skills folders, and flags potential duplicate name collisions across shared folders (like `.agents/skills/`).
 
 ### `skillfactory.installer` — Safe Installation, Update, and Rollback
+
 - **Responsibility:** Safely moves skill files into target AI agent discovery folders.
 - **Key Safety Mechanisms:**
   - **Copy-by-Default:** Safe copy of allow-listed files only (no hidden IDE caches, no test fixtures from Skill Factory itself).
@@ -102,11 +108,13 @@ The project is structured under a clean internal module namespace `skillfactory/
   - **Atomic Rollback:** Reverts instantly to a previous backup snapshot if an update causes issues.
 
 ### `skillfactory.tester` — Automated Skill Test Runner
+
 - **Responsibility:** Runs automated tests packaged inside the skill's `tests/` folder.
 - **Isolation:** Runs tests in a separate subprocess with an execution timeout (e.g., 10 seconds), minimal environment variables, and working directory pinned to a temporary copy.
 - **Honest Status Reporting:** Clearly distinguishes between `PASSED`, `FAILED`, and `NOT IMPLEMENTED / SKIPPED`.
 
 ### `skillfactory.eval` — Quality & Safety Evaluation Engine
+
 - **Responsibility:** Calculates an objective quality score (0–100) across structure, spec compliance, portability, documentation, test completeness, and static script safety.
 - **Static Safety Scanner:** Parses Python scripts into an AST (Abstract Syntax Tree) to check for suspicious operations (e.g., destructive system calls, hardcoded tokens) and generates warnings.
 
@@ -117,7 +125,9 @@ The project is structured under a clean internal module namespace `skillfactory/
 A key requirement is that Skill Factory works **with or without** an external AI model. Here is exactly how both modes operate:
 
 ### Mode A: Host-AI Generation (When inside Claude Code, Cursor, Codex, or Antigravity)
+
 In this mode, Skill Factory does **not** make any API calls. Instead, the host assistant executes the instructions in Skill Factory's root `SKILL.md`:
+
 1. **Interactive Interview:** The host AI interviews the user about their problem, required inputs, edge cases, and target platforms.
 2. **Spec Generation:** The host AI structures the user's answers into a valid `skill-spec.json`.
 3. **Scaffolding:** The host AI runs `python3 -m skillfactory new --spec skill-spec.json` to generate the correct deterministic skeleton, tests, and manifest.
@@ -126,7 +136,9 @@ In this mode, Skill Factory does **not** make any API calls. Instead, the host a
 6. **Reporting:** The host AI presents the verified skill, test results, and eval score to the user.
 
 ### Mode B: Offline Deterministic Generation (No AI Model Available)
+
 When running in a bare terminal, offline, or without an AI assistant:
+
 1. **Guided Questionnaire (`skillfactory interview`):** The CLI presents a step-by-step sequence of plain-language questions in the terminal:
    - What problem does this skill solve?
    - What inputs does it accept?
@@ -141,7 +153,7 @@ When running in a bare terminal, offline, or without an AI assistant:
 
 ## 4. Data Flow Diagram
 
-```
+```text
 [ User Input / Plain Language ]
        |
        +---> (Mode A: Host AI Prompt) ----> [ Host Model Generates JSON ] ---+
@@ -176,7 +188,7 @@ When running in a bare terminal, offline, or without an AI assistant:
 ## 5. Technology Stack & Design Constraints
 
 | Component | Choice | Rationale |
-|---|---|---|
+| --- | --- | --- |
 | **Language** | Python 3.9+ | Universal availability across macOS, Linux, and Windows. |
 | **Dependencies** | Python Standard Library only | Zero install burden, no supply-chain breakage, 100% offline reliability. |
 | **File Formats** | UTF-8 Markdown, JSON, YAML-subset | Standard, portable, human-readable, easily parsed. |

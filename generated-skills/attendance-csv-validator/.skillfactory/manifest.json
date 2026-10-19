@@ -6,12 +6,12 @@
   "template_id": "python-script",
   "template_version": "1.0.0",
   "spec_schema_version": 1,
-  "created_at": "2026-10-19T20:12:39.029873+00:00",
-  "updated_at": "2026-10-19T20:12:39.029873+00:00",
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
   "files": {
     "LICENSE": {
-      "sha256": "5136f9d46a4cd07c9f09648acff75bf849b685dd5a7f74a66eceaa6b0909aae3",
-      "bytes": 1083
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
     },
     "README.md": {
       "sha256": "ce00d5e35c8fabff2695cae2923478907ddb0ad5fe6077726d9cdd13bd0b4ae0",
@@ -22,8 +22,8 @@
       "bytes": 1114
     },
     "examples/example.md": {
-      "sha256": "c7c0e13a091877edbcf412b835937f1fe268a7b3bcb7b73982e153a4d765e4f4",
-      "bytes": 112
+      "sha256": "432375171f25dfe4b2679be9f765a21515cfe57a44a33ec50f1ba5eb0b132e8c",
+      "bytes": 113
     },
     "examples/sample_attendance.csv": {
       "sha256": "709e4868ea0384bc58a1c8d64943f4b351c2deefe2c1a0287cdb1d1a33c27ab4",
@@ -38,8 +38,8 @@
       "bytes": 5915
     },
     "tests/test_main.py": {
-      "sha256": "aae4777106417da69e948b3f7e1cb96079a9e25780d8de346693979dfa1c7b02",
-      "bytes": 1577
+      "sha256": "fef4683a4492724ba711175c7d53c0755d70f71de96e02193d21828c2beceacb",
+      "bytes": 1593
     }
   }
 }

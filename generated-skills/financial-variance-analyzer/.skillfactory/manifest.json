@@ -1,0 +1,49 @@
+{
+  "skill_name": "financial-variance-analyzer",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "f56428c218043bf36742763a82ccfd089cf6b5a9ae8bba5ee332b215e5529a51",
+      "bytes": 269
+    },
+    "SKILL.md": {
+      "sha256": "2f3ae07fab40f93e593e26be94071de52861be9f2d37bd88981e7897298d2d02",
+      "bytes": 1190
+    },
+    "examples/actuals.csv": {
+      "sha256": "18ac4ff7bc4d0badbba9f751ccddc4d984e8e4c869d61f01eb42c03b1bfc4045",
+      "bytes": 150
+    },
+    "examples/budget.csv": {
+      "sha256": "7a61ca941ac06b6db08361cee85824a0061938a9fc7ff9d094eff4da22daa3e6",
+      "bytes": 150
+    },
+    "examples/example.md": {
+      "sha256": "fa85ca3fbbd659a0b0eb34c327980c1b21d3940a8e67d9fc899e4ac0ac661c9a",
+      "bytes": 251
+    },
+    "references/guide.md": {
+      "sha256": "baed2139099d9ebb27709e143d5b41d826a71e3e0cb3350a4826c614d8c9f92d",
+      "bytes": 460
+    },
+    "scripts/main.py": {
+      "sha256": "73ae171a4bb881c45edf39191ac34575dc1aa85f27f92f9a24da32240fb21e45",
+      "bytes": 5639
+    },
+    "tests/test_main.py": {
+      "sha256": "821085d9c42aaad4a51916b1be267bbfabbb7261f1444e6ecfa69e4bdb36f743",
+      "bytes": 1406
+    }
+  }
+}

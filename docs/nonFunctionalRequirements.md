@@ -3,7 +3,7 @@
 Each NFR has a **measurable** target and a verification method. Parent product requirements in brackets.
 
 | ID | Category | Requirement | Target / measure | Verified by | Phase |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | NFR-01 | Cost [PR-01] | No mandatory paid service, API key, or account. | Full test suite and quickstart pass with network disabled and no credentials. | CI job with no network for tests (`unshare`/no secrets); review checklist | 1+ |
 | NFR-02 | Dependencies [PR-13] | Runtime uses Python standard library only. | 0 third-party runtime imports; checked by an import-allowlist test. | `tests/test_no_third_party_imports.py` | 1 |
 | NFR-03 | Python support [PR-17] | Minimum Python version per D-03 (proposed 3.9) to latest stable. | CI matrix covers minimum and latest; startup check exits code 3 with a friendly message below minimum. | CI matrix | 1 |

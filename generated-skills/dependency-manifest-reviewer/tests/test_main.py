@@ -7,7 +7,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import format_markdown_report, review_requirements_lines
+from main import format_markdown_report, review_requirements_lines  # type: ignore
 
 
 class TestDependencyManifestReviewer(unittest.TestCase):

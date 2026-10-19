@@ -696,15 +696,15 @@ def cmd_search(args: argparse.Namespace) -> int:
     from skillfactory.library import index_directory, load_bundled_catalog, search_catalog
 
     search_dir_arg = getattr(args, "dir", None)
+    search_dir = Path(search_dir_arg) if search_dir_arg and search_dir_arg != "." else Path(".")
     results = []
 
     if search_dir_arg and search_dir_arg != ".":
-        search_dir = Path(search_dir_arg)
         index = index_directory(search_dir, include_eval=False)
         results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
     else:
         # Search local directory first
-        local_index = index_directory(Path("."), include_eval=False)
+        local_index = index_directory(search_dir, include_eval=False)
         local_results = search_catalog(local_index, query=args.query, tag_filter=getattr(args, "tag", None))
 
         # Also search bundled catalog

@@ -2,48 +2,40 @@
   "skill_name": "excel-comparison",
   "skill_version": "0.1.0",
   "generator_name": "skillfactory",
-  "generator_version": "1.0.0",
+  "generator_version": "1.2.0",
   "template_id": "python-script",
   "template_version": "1.0.0",
   "spec_schema_version": 1,
-  "created_at": "2026-10-19T03:18:05.917670+00:00",
-  "updated_at": "2026-10-19T03:18:05.917670+00:00",
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
   "files": {
     ".skillfactory/skill-spec.json": {
       "sha256": "014e3667f12b7ffe57ea76c474c03b2194d790c26c2143f62cef12dc4d934a99",
       "bytes": 625
     },
     "LICENSE": {
-      "sha256": "4d3d0a66ac0116f694e2e236b02621514053cfe3a5dac84802414cb8309ea273",
-      "bytes": 1069
+      "sha256": "2974baf80d5207630114cbeaff0c6d7f362b7a7fb8b3056306c6713c4e2676bb",
+      "bytes": 1071
     },
     "README.md": {
-      "sha256": "c6ae9d2192f0d528ab56c4fd1d84eeee415e03295ce3979b8ef3a5a58f0eec91",
-      "bytes": 1023
+      "sha256": "f76f4065295274f73c48553eeaa5974e5d89626407ccd52fcfca42ee79d74894",
+      "bytes": 1034
     },
     "SKILL.md": {
-      "sha256": "047bcca1b064ba96a1505c14675fa2477f9a99748c644e5c74b81a11190047e0",
-      "bytes": 1367
+      "sha256": "3e026cace93a9b5056dd2ac503c5310bfa1cf98be3a7a0c9a665003926c91374",
+      "bytes": 1373
     },
     "examples/example.md": {
-      "sha256": "539c8d17272d78a59efb9b220f0ec20c6573bb7ddc012882a39cbd931a27fb3f",
-      "bytes": 305
+      "sha256": "29f18e75ff102f08ddd8340ec2517a7a8126d910863cb385cc39baf8582e7095",
+      "bytes": 307
     },
     "references/guide.md": {
-      "sha256": "5e6ec4e8b8912f295226f126b35965cfef484b63ed0d64c36e76d5a5e58ff9ef",
-      "bytes": 386
-    },
-    "scripts/__pycache__/main.cpython-314.pyc": {
-      "sha256": "b1f9b5d5c7b31c88c4ec614accf28b5086fcc82a0c08a75c222f3463fb6f36ba",
-      "bytes": 19321
+      "sha256": "79bdcac1f434e4beb6b92f8b0d8d7a25c26c7c39eb7ea6d4ddbab13d822f8a15",
+      "bytes": 389
     },
     "scripts/main.py": {
       "sha256": "601bbd36074d4360823c59ab6f1a29616327104c59bcc30d1f4153b50995027a",
       "bytes": 12635
-    },
-    "tests/__pycache__/test_main.cpython-314.pyc": {
-      "sha256": "2653fbba10a078a91eb5b48b8ed45e4d2db3fdcb449f9e3eab43c5dbe57d9f5a",
-      "bytes": 14130
     },
     "tests/test_main.py": {
       "sha256": "aa9eae82f9230c30bbf7e30cd31da799864418e4e2cb604bf003716e09dda7db",

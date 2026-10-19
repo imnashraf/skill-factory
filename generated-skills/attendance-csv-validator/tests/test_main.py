@@ -7,7 +7,7 @@ import sys
 
 script_path = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(script_path))
-from main import format_report_markdown, validate_attendance_records
+from main import format_report_markdown, validate_attendance_records  # type: ignore
 
 
 class TestAttendanceValidator(unittest.TestCase):

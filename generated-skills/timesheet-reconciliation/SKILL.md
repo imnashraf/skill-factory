@@ -10,6 +10,7 @@ Automate workforce timesheet auditing and project budget allocation checks witho
 ## When to Use This Skill
 
 Activate this skill when:
+
 - Reviewing weekly or monthly contractor and employee timesheet submissions.
 - Auditing project billable hours against client statements of work (SOW).
 - Spotting resource overallocation across multiple initiatives.
@@ -18,6 +19,7 @@ Activate this skill when:
 
 1. Prepare timesheet CSV (`employee_id,project_code,hours`) and budget CSV (`employee_id,project_code,allocated_hours`).
 2. Run reconciliation:
+
    ```bash
    python3 scripts/main.py timesheets.csv budgets.csv --output report.md
    ```
