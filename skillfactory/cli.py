@@ -18,6 +18,19 @@ from skillfactory.spec import VALID_TEMPLATE_FAMILIES, SkillSpec, SpecValidation
 from skillfactory.validator import validate_skill
 
 
+def configure_streams() -> None:
+    """Ensure standard output and error streams handle Unicode gracefully on restricted encodings."""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(errors="replace")
+            except Exception:
+                pass
+
+
+configure_streams()
+
+
 def use_color() -> bool:
     """Determine whether color output should be enabled."""
     if os.environ.get("NO_COLOR"):
@@ -981,6 +994,7 @@ def cmd_interactive_top_menu() -> int:
 
 def main(argv: Optional[List[str]] = None) -> int:
     """Main CLI entrypoint."""
+    configure_streams()
     is_interactive_shell = (argv is None) and (len(sys.argv) <= 1) and sys.stdin.isatty()
     parser = create_parser()
     args = parser.parse_args(argv)
