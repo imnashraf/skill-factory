@@ -1,6 +1,6 @@
 # Automated Skill Evaluation & Quality Scoring
 
-Skill Factory includes a built-in evaluation engine (`skillfactory eval <skill-dir>`) that scores any agent skill on an objective **0–100 scale**. 
+Skill Factory includes a built-in evaluation engine (`skillfactory eval <skill-dir>`) that scores any agent skill on an objective **0–100 scale**.
 
 This allows users, developers, and automated pipelines to instantly evaluate whether a skill is well-structured, safe, portable, and ready for deployment.
 
@@ -10,7 +10,7 @@ This allows users, developers, and automated pipelines to instantly evaluate whe
 
 The evaluation engine assesses skills across five key dimensions:
 
-```
+```text
 +--------------------------------------------------------------------+
 |                         Skill Quality Score (0–100)                |
 +--------------------------------------------------------------------+
@@ -25,6 +25,7 @@ The evaluation engine assesses skills across five key dimensions:
 ---
 
 ### Dimension 1: Spec Compliance & Structure (25 Points) — `EV-01`
+
 - **[5 pts] Mandatory Files:** `SKILL.md` exists at skill root; `README.md` exists.
 - **[5 pts] Valid YAML Frontmatter:** YAML parser validates frontmatter without syntax errors or unescaped characters.
 - **[5 pts] Name Conformance:** Name is lowercase kebab-case (1–64 characters), no leading/trailing/consecutive hyphens, and matches parent directory name exactly.
@@ -34,6 +35,7 @@ The evaluation engine assesses skills across five key dimensions:
 ---
 
 ### Dimension 2: Cross-Platform Portability (20 Points) — `EV-02`
+
 - **[5 pts] No Absolute Paths:** `SKILL.md` and scripts contain zero hardcoded absolute paths (`/Users/...`, `/home/...`, `C:\...`).
 - **[5 pts] Cross-Platform Reserved Names:** Neither the skill name nor any file within it uses Windows reserved names (`CON`, `PRN`, `AUX`, `NUL`, `COM1-9`, `LPT1-9`) or tool-reserved names (`synced`).
 - **[5 pts] Line Endings & Encodings:** All text files are valid UTF-8 and use standard LF line endings.
@@ -42,6 +44,7 @@ The evaluation engine assesses skills across five key dimensions:
 ---
 
 ### Dimension 3: Documentation & Progressive Disclosure (20 Points) — `EV-03`
+
 - **[5 pts] Concise Main File:** `SKILL.md` is under 500 lines (respecting agent context windows).
 - **[5 pts] Progressive Disclosure:** In-depth manuals, schemas, or large references are split into `references/` or `assets/` rather than bloating `SKILL.md`.
 - **[5 pts] Examples Included:** At least one concrete usage example with sample user prompt and expected output is provided.
@@ -50,6 +53,7 @@ The evaluation engine assesses skills across five key dimensions:
 ---
 
 ### Dimension 4: Test Coverage & Execution (20 Points) — `EV-04`
+
 - **[5 pts] Test Suite Present:** A `tests/` directory with at least one runnable test file exists.
 - **[5 pts] Structural Tests Pass:** Baseline validation and file existence tests execute and pass.
 - **[5 pts] Behavioral Execution:** Functional tests execute successfully via `skillfactory test` within the 10-second timeout.
@@ -58,6 +62,7 @@ The evaluation engine assesses skills across five key dimensions:
 ---
 
 ### Dimension 5: Code Safety & Secrets Scan (15 Points) — `EV-05`
+
 - **[5 pts] Clean Secret Scan:** Zero hardcoded API keys, bearer tokens, AWS secrets, or private keys detected (`SEC-02`).
 - **[5 pts] AST Safety Check:** Python scripts parse cleanly and contain zero high-risk un-sandboxed operations (`eval()`, `exec()`, `shutil.rmtree('/')`, or `shell=True`).
 - **[5 pts] Manifest Integrity:** All files match their recorded SHA-256 hashes in `.skillfactory/manifest.json`.
@@ -67,7 +72,7 @@ The evaluation engine assesses skills across five key dimensions:
 ## 2. Letter Grades & Quality Gates
 
 | Score | Grade | Meaning & Action |
-|---|---|---|
+| :--- | :--- | :--- |
 | **90 – 100** | **Grade A** | **Production Ready.** Safe, portable, fully tested, and ready for publication or team sharing. |
 | **75 – 89** | **Grade B** | **Good Quality.** Usable and safe, but missing tests, examples, or minor portability improvements. |
 | **60 – 74** | **Grade C** | **Scaffold Only.** Functional skeleton, but contains unimplemented test stubs or needs documentation. |
@@ -91,8 +96,9 @@ When running inside an AI host assistant, the assistant can optionally test trig
 
 ## 4. Evaluation Output Formats
 
-### Plain-Language Summary:
-```
+### Plain-Language Summary
+
+```text
 Skill Evaluation Report: excel-comparison
 Overall Score: 95 / 100 [Grade A]
 --------------------------------------------------
@@ -105,5 +111,6 @@ Overall Score: 95 / 100 [Grade A]
 Recommendation: Ready for installation and publishing.
 ```
 
-### Structured JSON Output (`--json`):
+### Structured JSON Output (`--json`)
+
 Saved to `.skillfactory/evaluation.json` with itemized point deductions and remediation suggestions for automated CI gates.
