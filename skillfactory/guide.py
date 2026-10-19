@@ -1,17 +1,18 @@
-"""Beginner Guided Onboarding Wizard (Phase 15, Workstream B).
+"""Beginner Guided Onboarding Wizard (Phases 15 & 16, Workstream 16A).
 
-Provides an interactive step-by-step walkthrough for first-time users:
+Provides an interactive, beginner-friendly walkthrough:
 1. Pre-flight health and prerequisite diagnostics.
-2. AI assistant discovery and selection.
+2. AI assistant discovery and selection with OS-specific path guidance (macOS, Linux, Windows).
 3. Guided skill specification (name, purpose, template).
 4. Deterministic scaffolding generation.
 5. Immediate validation and unit test execution.
 6. Optional platform installation with backup and collision defense.
-7. Clear actionable instructions for next steps and activation.
+7. Complete end-to-end lifecycle guidance (Test, Eval, Scan, Update, Rollback, Uninstall).
 """
 from __future__ import annotations
 
 import os
+import platform as sys_platform
 import sys
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
@@ -29,6 +30,60 @@ from skillfactory.ui_util import format_status
 from skillfactory.validator import validate_skill
 
 
+def get_os_friendly_name() -> str:
+    """Return a human-readable operating system descriptor."""
+    os_name = sys_platform.system()
+    if os_name == "Darwin":
+        return "macOS"
+    elif os_name == "Windows":
+        return "Windows"
+    elif os_name == "Linux":
+        return "Linux"
+    return os_name or "Unknown OS"
+
+
+def get_os_path_guidance(platform_id: str) -> str:
+    """Return OS-specific directory guidance for the target AI coding assistant."""
+    os_type = sys_platform.system()
+    home = Path.home()
+
+    if platform_id == "antigravity":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.agents\skills"
+        return f"{home}/.agents/skills"
+    elif platform_id == "claude-code":
+        if os_type == "Windows":
+            return r"%APPDATA%\Claude\skills or %USERPROFILE%\.claude\skills"
+        elif os_type == "Darwin":
+            return f"{home}/Library/Application Support/Claude/skills or ~/.claude/skills"
+        return f"{home}/.config/claude/skills or ~/.claude/skills"
+    elif platform_id == "cursor":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.cursor\skills"
+        return f"{home}/.cursor/skills"
+    elif platform_id == "codex":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.codex\skills"
+        return f"{home}/.codex/skills"
+    elif platform_id == "windsurf":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.codeium\windsurf\skills"
+        return f"{home}/.codeium/windsurf/skills"
+    elif platform_id == "continue":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.continue\prompts"
+        return f"{home}/.continue/prompts"
+    elif platform_id == "cline":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.cline\skills"
+        return f"{home}/.cline/skills"
+    elif platform_id == "copilot":
+        if os_type == "Windows":
+            return r"%USERPROFILE%\.github\skills"
+        return f"{home}/.github/skills"
+    return str(home / "skills")
+
+
 def run_beginner_guide(
     non_interactive: bool = False,
     skill_name: Optional[str] = None,
@@ -37,24 +92,26 @@ def run_beginner_guide(
     input_func: Callable[[str], str] = input,
     print_func: Callable[..., None] = print,
 ) -> int:
-    """Run the interactive beginner onboarding wizard."""
-    print_func("\n" + "=" * 70)
-    print_func(f" Skill Factory v{__version__} — Interactive Beginner Onboarding Wizard")
-    print_func("=" * 70)
-    print_func("Welcome! This wizard will guide you through creating, testing, and")
-    print_func("installing your first Agent Skill in just a few simple steps.\n")
+    """Run the interactive beginner onboarding wizard with OS-specific path guidance."""
+    os_desc = get_os_friendly_name()
+
+    print_func("\n" + "=" * 72)
+    print_func(f" Skill Factory v{__version__} — Guided Onboarding Wizard ({os_desc})")
+    print_func("=" * 72)
+    print_func("Welcome! This wizard guides you through creating, testing, validating,")
+    print_func("and installing your first Agent Skill with zero manual setup.\n")
 
     # Step 1: System Health & Diagnostic Check
-    print_func("[Step 1/5] Checking System Prerequisites...")
+    print_func(f"[Step 1/5] Checking System Prerequisites ({os_desc})...")
     report = run_diagnostics()
     if not report.is_ready:
         print_func(format_status("FAIL", "System prerequisites not met."))
         for item in report.action_items:
             print_func(f"  • {item}")
         return 1
-    print_func(format_status("OK", f"Python {report.python_version} ready | Directory writable"))
+    print_func(format_status("OK", f"Python {report.python_version} ready | Directory writable | Platform: {os_desc}"))
 
-    # Step 2: AI Coding Assistant Selection
+    # Step 2: AI Coding Assistant Selection & OS Path Guidance
     print_func("\n[Step 2/5] Selecting Target AI Assistant...")
     detected = detect_all_platforms()
     detected_ids = [d.platform_id for d in detected.values() if d.detected]
@@ -79,10 +136,12 @@ def run_beginner_guide(
             selected_platform = detected_ids[0] if detected_ids else "claude-code"
             print_func(f"Non-interactive mode: defaulting to target platform '{selected_platform}'.")
         else:
-            print_func("Which AI coding assistant do you want to create this skill for?")
+            print_func(f"Available AI coding assistants for {os_desc}:")
             for idx, (p_id, p_name) in enumerate(available_platforms, start=1):
                 marker = " [DETECTED]" if p_id in detected_ids else ""
+                path_hint = get_os_path_guidance(p_id) if p_id != "standalone" else "Local directory"
                 print_func(f"  [{idx}] {p_name}{marker}")
+                print_func(f"      Default path: {path_hint}")
 
             try:
                 choice = input_func("\nEnter number [1-9] (default: 1): ").strip()
@@ -94,7 +153,8 @@ def run_beginner_guide(
                 print_func("\nSetup cancelled.")
                 return 1
 
-    print_func(format_status("OK", f"Target platform: {selected_platform}"))
+    guidance_path = get_os_path_guidance(selected_platform)
+    print_func(format_status("OK", f"Target platform: {selected_platform} (Folder: {guidance_path})"))
 
     # Step 3: Skill Definition
     print_func("\n[Step 3/5] Defining Your Skill...")
@@ -104,7 +164,7 @@ def run_beginner_guide(
             chosen_name = "my-first-skill"
         else:
             try:
-                inp_name = input_func("Enter skill name (lowercase, e.g. 'pdf-extractor', default: 'my-first-skill'): ").strip()
+                inp_name = input_func("Enter skill name (e.g. 'excel-diff', default: 'my-first-skill'): ").strip()
                 chosen_name = inp_name if inp_name else "my-first-skill"
             except (EOFError, KeyboardInterrupt):
                 print_func("\nSetup cancelled.")
@@ -131,21 +191,21 @@ def run_beginner_guide(
     print_func("\n[Step 4/5] Generating Skill Scaffolding...")
     gen_result = generate_skill(spec, target_out)
     skill_dir = target_out / sanitized_name
-    print_func(format_status("OK", f"Skill generated at: {skill_dir}"))
+    print_func(format_status("OK", f"Skill created at: {skill_dir}"))
 
     # Step 5: Validation & Testing
-    print_func("\n[Step 5/5] Validating & Verifying Tests...")
+    print_func("\n[Step 5/5] Validating Structure & Testing...")
     val_report = validate_skill(skill_dir)
     if not val_report.is_valid:
         print_func(format_status("FAIL", f"Validation failed: {val_report.errors}"))
         return 1
-    print_func(format_status("OK", "Specification and structure verified!"))
+    print_func(format_status("OK", "Specification and directory integrity verified!"))
 
     test_res = run_skill_tests(skill_dir)
     if not test_res.success:
         print_func(format_status("WARN", f"Test runner notice: {test_res.error_message}"))
     else:
-        print_func(format_status("OK", f"Passed baseline tests in {test_res.duration_sec:.2f}s."))
+        print_func(format_status("OK", f"Baseline tests executed in {test_res.duration_sec:.2f}s."))
 
     # Optional Installation
     if selected_platform and selected_platform != "standalone":
@@ -168,19 +228,24 @@ def run_beginner_guide(
                 )
                 print_func(format_status("OK", f"Installed into {selected_platform}: {inst_res.installed_path}"))
             except Exception as e:
-                print_func(format_status("WARN", f"Installation notice: {e}"))
+                print_func(format_status("WARN", f"Installation note: {e}"))
 
-    # Summary & Actionable Next Steps
-    print_func("\n" + "=" * 70)
-    print_func(" Skill Created Successfully! What to do next:")
-    print_func("=" * 70)
-    print_func(f"1. Open the implementation file:")
-    print_func(f"   {skill_dir / 'scripts' / 'main.py'}")
-    print_func(f"2. Add your custom task logic or ask your AI coding assistant:")
-    print_func(f"   'Implement scripts/main.py for {sanitized_name}'")
-    print_func(f"3. Re-run tests anytime:")
+    # Summary & Complete Lifecycle Guide
+    print_func("\n" + "=" * 72)
+    print_func(" Skill Created Successfully! Full Lifecycle Commands:")
+    print_func("=" * 72)
+    print_func("1. Implementation:")
+    print_func(f"   Edit logic in: {skill_dir / 'scripts' / 'main.py'}")
+    print_func("2. Testing (Run after modifying code):")
     print_func(f"   skillfactory test {skill_dir}")
-    print_func(f"4. Re-evaluate quality:")
-    print_func(f"   skillfactory eval {skill_dir}\n")
+    print_func("3. Quality Evaluation (Scores Grade A to F):")
+    print_func(f"   skillfactory eval {skill_dir}")
+    print_func("4. Security Scanning (Intercepts vulnerabilities):")
+    print_func(f"   skillfactory scan {skill_dir}")
+    print_func("5. Deployment & Updates:")
+    print_func(f"   Install:   skillfactory install {skill_dir} --platform {selected_platform}")
+    print_func(f"   Update:    skillfactory update {sanitized_name}")
+    print_func(f"   Rollback:  skillfactory rollback {sanitized_name}")
+    print_func(f"   Uninstall: skillfactory uninstall {sanitized_name} --platform {selected_platform}\n")
 
     return 0
