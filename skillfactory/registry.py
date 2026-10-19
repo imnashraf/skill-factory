@@ -90,8 +90,13 @@ def find_installation(
     installed_path: Optional[str] = None,
     registry_path: Optional[Path | str] = None,
 ) -> Optional[Dict[str, Any]]:
-    """Find a specific installation record."""
+    """Find a specific installation record.
+
+    If installed_path is not specified, prefers records that actually exist on disk,
+    evaluating most recent installations first.
+    """
     data = load_registry(registry_path)
+    matching: List[Dict[str, Any]] = []
     for record in data.get("installations", []):
         if record.get("skill_name") == skill_name:
             if platform is not None and normalize_platform_id(record.get("platform", "")) != normalize_platform_id(platform):
@@ -103,8 +108,24 @@ def find_installation(
                         continue
                 except Exception:
                     continue
-            return record
-    return None
+            matching.append(record)
+
+    if not matching:
+        return None
+
+    if installed_path is not None:
+        return matching[-1]
+
+    # Prefer the most recent record that exists on disk
+    for rec in reversed(matching):
+        try:
+            if Path(rec.get("installed_path", "")).exists():
+                return rec
+        except Exception:
+            pass
+
+    # Fallback to the latest record
+    return matching[-1]
 
 
 def register_installation(

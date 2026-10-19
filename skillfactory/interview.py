@@ -127,9 +127,24 @@ def run_interactive_interview() -> SkillSpec:
         print("   Please provide a brief problem description.")
         problem = prompt_user("1. What problem or task does this skill solve?")
 
-    # Q2: Suggested Name
+    # Q2: Suggested Name with live validation
     suggested_name = derive_skill_name(problem)
-    name = prompt_user("2. Skill identifier (lowercase kebab-case)", default=suggested_name)
+    while True:
+        raw_name = prompt_user("2. Skill identifier (lowercase kebab-case)", default=suggested_name)
+        cleaned_candidate = derive_skill_name(raw_name)
+        if not NAME_PATTERN.match(raw_name):
+            print(f"   [Notice] '{raw_name}' is not valid kebab-case (must be lowercase alphanumeric + hyphens).")
+            print(f"   [Suggestion] Using sanitized identifier: '{cleaned_candidate}'")
+            use_cleaned = prompt_user(f"   Accept '{cleaned_candidate}'? (y/n)", default="y").lower()
+            if use_cleaned in ("y", "yes"):
+                name = cleaned_candidate
+                break
+        elif raw_name in WINDOWS_RESERVED_NAMES or raw_name in PLATFORM_RESERVED_NAMES:
+            print(f"   [Warning] '{raw_name}' is a reserved platform filename.")
+            suggested_name = f"{raw_name}-skill"
+        else:
+            name = raw_name
+            break
 
     # Q3: Description
     description = prompt_user(
@@ -137,7 +152,10 @@ def run_interactive_interview() -> SkillSpec:
         default=problem,
     )
 
-    # Q4: Executable code requirement
+    # Q4: Executable code requirement & honest disclaimer
+    print("\n   [Notice] Skill Factory scaffolds the directory, manifest, and script templates.")
+    print("            The functional implementation in 'scripts/main.py' must be completed by")
+    print("            you or your AI coding assistant.")
     scripts_input = prompt_user(
         "4. Does this skill require custom Python scripts? (y/n)",
         default="y",
@@ -171,6 +189,12 @@ def run_interactive_interview() -> SkillSpec:
     author = prompt_user("9. Author name or handle (optional)", default="")
     license_choice = prompt_user("10. License (MIT, Apache-2.0, Unlicense, none)", default="MIT")
 
+    # Q11: Target Platform
+    target_platform = prompt_user(
+        "11. Target AI coding assistant (claude, antigravity, cursor, codex, all)",
+        default="all",
+    )
+
     answers = {
         "problem": problem,
         "name": name,
@@ -182,6 +206,7 @@ def run_interactive_interview() -> SkillSpec:
         "steps": steps,
         "author": author,
         "license": license_choice,
+        "target_platform": target_platform,
     }
     return build_spec_from_answers(answers)
 

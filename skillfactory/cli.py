@@ -14,6 +14,7 @@ from typing import List, Optional
 
 from skillfactory import __version__
 from skillfactory.core import generate_skill
+from skillfactory.errors import SkillFactoryError
 from skillfactory.spec import VALID_TEMPLATE_FAMILIES, SkillSpec, SpecValidationError
 from skillfactory.validator import validate_skill
 
@@ -63,22 +64,30 @@ def cmd_new(args: argparse.Namespace) -> int:
                 return 1
             spec = SkillSpec.from_json(spec_path.read_text(encoding="utf-8"))
         else:
-            if not args.name or not args.description:
-                print(
-                    format_msg(
-                        "ERROR",
-                        "Both --name and --description are required when not using --spec."
-                    ),
-                    file=sys.stderr,
+            name = getattr(args, "name", None) or getattr(args, "name_pos", None)
+            interactive = getattr(args, "interactive", False)
+
+            if interactive or (not name and sys.stdin.isatty()):
+                from skillfactory.interview import run_interactive_interview
+                spec = run_interactive_interview()
+            elif not name:
+                err = SkillFactoryError(
+                    message="Skill name is required to create a new skill.",
+                    why="Neither a skill identifier nor a specification file was supplied.",
+                    suggestion="Provide a name like 'skillfactory new my-skill' or run with '--interactive'.",
+                    exit_code=2,
                 )
+                print(err.format_user_message(), file=sys.stderr)
                 return 2
-            spec = SkillSpec(
-                name=args.name,
-                description=args.description,
-                template_family=args.template,
-                license=args.license,
-                author=args.author or "",
-            )
+            else:
+                description = args.description or f"Agent skill for {name.replace('-', ' ')}."
+                spec = SkillSpec(
+                    name=name,
+                    description=description,
+                    template_family=args.template,
+                    license=args.license,
+                    author=args.author or "",
+                )
 
         output_dir = Path(args.output)
         result = generate_skill(spec, output_dir, dry_run=args.dry_run)
@@ -235,11 +244,21 @@ def cmd_interview(args: argparse.Namespace) -> int:
 
 
 def cmd_doctor(args: argparse.Namespace) -> int:
-    """Handle `skillfactory doctor` command (Phase 3, Task T3.03, AC3.03)."""
+    """Handle `skillfactory doctor` command (Phase 3, Task T3.03; Phase 12, Task T12.01)."""
     from skillfactory.compat.detect import detect_all_platforms
     from skillfactory.compat.platform_db import detect_os_key, get_all_platforms
+    from skillfactory.doctor import format_guided_setup, run_diagnostics
 
     project_dir = Path(getattr(args, "project", ".")).resolve()
+    report = run_diagnostics(project_dir=project_dir)
+
+    if getattr(args, "guided", False) or getattr(args, "setup", False):
+        if getattr(args, "json", False):
+            print(json.dumps(report.to_dict(), indent=2))
+        else:
+            print(format_guided_setup(report))
+        return 0 if report.is_ready else 1
+
     py_ver = sys.version_info
     py_ver_str = f"{py_ver.major}.{py_ver.minor}.{py_ver.micro}"
     py_compatible = py_ver >= (3, 9)
@@ -249,7 +268,7 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     all_defs = get_all_platforms()
 
     if getattr(args, "json", False):
-        report = {
+        res_report = {
             "status": "success",
             "system": {
                 "python_version": py_ver_str,
@@ -269,8 +288,9 @@ def cmd_doctor(args: argparse.Namespace) -> int:
                     "note": "Shared project-level skills directory across Cursor, Codex, and Antigravity.",
                 }
             ],
+            "health": report.to_dict(),
         }
-        print(json.dumps(report, indent=2))
+        print(json.dumps(res_report, indent=2))
         return 0
 
     print("Skill Factory Doctor — System & Multi-Agent Compatibility Report")
@@ -305,6 +325,11 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     print("  • '.agents/skills/' is shared across Cursor, OpenAI Codex, and Google Antigravity.")
     print("    Skills created in or installed to '.agents/skills/' are automatically visible to all three.")
 
+    if not report.detected_platforms:
+        print("\n[Beginner Recommendation]")
+        print("  • No AI coding assistant directories detected in this project.")
+        print("    You can still scaffold and test skills locally, or install to '.agents/skills/'")
+
     print("\n" + format_msg("OK", "Doctor check completed successfully. All systems operational."))
     return 0
 
@@ -318,7 +343,14 @@ def cmd_install(args: argparse.Namespace) -> int:
         # Smart detection: pick detected platform or cursor
         from skillfactory.compat.detect import detect_all_platforms
         detected = [pid for pid, d in detect_all_platforms().items() if d.detected]
-        target_platform = detected[0] if detected else "cursor"
+        if detected:
+            target_platform = detected[0]
+            if not getattr(args, "json", False):
+                print(format_msg("INFO", f"Auto-detected platform: '{target_platform}'"))
+        else:
+            target_platform = "cursor"
+            if not getattr(args, "json", False):
+                print(format_msg("INFO", "No AI platform detected; targeting shared project directory (Cursor / Codex / Antigravity)."))
 
     try:
         res = install_skill(
@@ -344,6 +376,24 @@ def cmd_install(args: argparse.Namespace) -> int:
                 print(format_msg("WARN", res.warning))
             print(format_msg("OK", f"Installed '{res.skill_name}' for {res.target_platform} at {res.installed_path} ({len(res.copied_files)} files, mode: {res.mode})"))
         return 0
+    except SkillFactoryError as sfe:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": sfe.message, "why": sfe.why, "suggestion": sfe.suggestion}, indent=2), file=sys.stderr)
+        else:
+            print(sfe.format_user_message(), file=sys.stderr)
+        return sfe.exit_code
+    except FileExistsError as err:
+        from skillfactory.errors import InstallError
+        ie = InstallError(
+            message=str(err),
+            why="The target skill directory already exists and '--force' was not specified.",
+            suggestion="Run 'skillfactory update' to upgrade, or pass '--force' to overwrite existing files.",
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
+        else:
+            print(ie.format_user_message(), file=sys.stderr)
+        return 1
     except Exception as err:
         if getattr(args, "json", False):
             print(json.dumps({"status": "error", "error": str(err)}, indent=2), file=sys.stderr)
@@ -784,6 +834,7 @@ def create_parser() -> argparse.ArgumentParser:
     common_parser = argparse.ArgumentParser(add_help=False)
     common_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON")
     common_parser.add_argument("--dry-run", action="store_true", help="Simulate execution without modifying files")
+    common_parser.add_argument("--debug", action="store_true", help="Display full stack traces on unexpected errors")
 
     parser = argparse.ArgumentParser(
         prog="skillfactory",
@@ -796,8 +847,10 @@ def create_parser() -> argparse.ArgumentParser:
 
     # Command: new
     new_parser = subparsers.add_parser("new", parents=[common_parser], help="Create a new Agent Skill")
+    new_parser.add_argument("name_pos", nargs="?", metavar="NAME", help="Skill name (optional positional argument)")
     new_parser.add_argument("--name", help="Skill name (lowercase kebab-case)")
     new_parser.add_argument("--description", help="What the skill does (1-1024 characters)")
+    new_parser.add_argument("-i", "--interactive", action="store_true", help="Launch interactive guided creation")
     new_parser.add_argument(
         "--template",
         default="python-script",
@@ -847,6 +900,7 @@ def create_parser() -> argparse.ArgumentParser:
         help="Diagnose system health, detected AI agents, and platform discovery paths",
     )
     doctor_parser.add_argument("--project", default=".", help="Project directory to inspect (default: .)")
+    doctor_parser.add_argument("--guided", "--setup", dest="guided", action="store_true", help="Run guided beginner environment setup and diagnostics")
 
     # Command: install
     install_parser = subparsers.add_parser("install", parents=[common_parser], help="Install an Agent Skill into a target platform")
@@ -1005,47 +1059,74 @@ def main(argv: Optional[List[str]] = None) -> int:
         parser.print_help()
         return 0
 
-    if args.command == "menu":
-        return cmd_interactive_top_menu()
-    elif args.command == "new":
-        return cmd_new(args)
-    elif args.command == "interview":
-        return cmd_interview(args)
-    elif args.command == "validate":
-        return cmd_validate(args)
-    elif args.command == "test":
-        return cmd_test(args)
-    elif args.command == "eval":
-        return cmd_eval(args)
-    elif args.command == "scan":
-        return cmd_scan(args)
-    elif args.command == "search":
-        return cmd_search(args)
-    elif args.command == "export":
-        return cmd_export(args)
-    elif args.command == "import":
-        return cmd_import(args)
-    elif args.command == "publish":
-        return cmd_publish(args)
-    elif args.command == "doctor":
-        return cmd_doctor(args)
-    elif args.command == "install":
-        return cmd_install(args)
-    elif args.command == "update":
-        return cmd_update(args)
-    elif args.command == "rollback":
-        return cmd_rollback(args)
-    elif args.command == "uninstall":
-        return cmd_uninstall(args)
-    elif args.command == "list":
-        return cmd_list(args)
-    elif args.command == "install-self":
-        return cmd_install_self(args)
-    elif args.command == "version":
-        print(f"skillfactory {__version__}")
-        return 0
+    try:
+        if args.command == "menu":
+            return cmd_interactive_top_menu()
+        elif args.command == "new":
+            return cmd_new(args)
+        elif args.command == "interview":
+            return cmd_interview(args)
+        elif args.command == "validate":
+            return cmd_validate(args)
+        elif args.command == "test":
+            return cmd_test(args)
+        elif args.command == "eval":
+            return cmd_eval(args)
+        elif args.command == "scan":
+            return cmd_scan(args)
+        elif args.command == "search":
+            return cmd_search(args)
+        elif args.command == "export":
+            return cmd_export(args)
+        elif args.command == "import":
+            return cmd_import(args)
+        elif args.command == "publish":
+            return cmd_publish(args)
+        elif args.command == "doctor":
+            return cmd_doctor(args)
+        elif args.command == "install":
+            return cmd_install(args)
+        elif args.command == "update":
+            return cmd_update(args)
+        elif args.command == "rollback":
+            return cmd_rollback(args)
+        elif args.command == "uninstall":
+            return cmd_uninstall(args)
+        elif args.command == "list":
+            return cmd_list(args)
+        elif args.command == "install-self":
+            return cmd_install_self(args)
+        elif args.command == "version":
+            print(f"skillfactory {__version__}")
+            return 0
+        return 2
 
-    return 2
+    except SkillFactoryError as sfe:
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "message": sfe.message, "why": sfe.why, "suggestion": sfe.suggestion}, indent=2), file=sys.stderr)
+        else:
+            print(sfe.format_user_message(), file=sys.stderr)
+        return sfe.exit_code
+
+    except KeyboardInterrupt:
+        print("\n[INFO] Operation cancelled by user.", file=sys.stderr)
+        return 130
+
+    except Exception as exc:
+        debug = getattr(args, "debug", False) or ("--debug" in sys.argv)
+        if debug:
+            raise
+        err = SkillFactoryError(
+            message=str(exc) or exc.__class__.__name__,
+            why="An unexpected error occurred during command execution.",
+            suggestion="Run with '--debug' to view the technical stack trace, or report an issue on GitHub.",
+            exit_code=1,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps({"status": "error", "error": str(exc)}, indent=2), file=sys.stderr)
+        else:
+            print(err.format_user_message(), file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
