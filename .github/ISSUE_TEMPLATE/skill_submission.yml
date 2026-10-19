@@ -1,0 +1,95 @@
+name: Community Skill Submission
+description: Submit a validated, local-first Agent Skill for review and inclusion in the reference catalog.
+title: "[Skill]: "
+labels: ["community-skill", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting an Agent Skill to the Skill Factory reference ecosystem!
+        Before submitting, please review the [Community Contribution Guidelines](docs/communityContributions.md) and run local verification.
+
+  - type: input
+    id: skill_name
+    attributes:
+      label: Skill Name
+      description: Lowercase alphanumeric identifier with hyphens (e.g., `git-conflict-resolver`).
+      placeholder: my-skill-name
+    validations:
+      required: true
+
+  - type: textarea
+    id: skill_description
+    attributes:
+      label: Skill Description & Trigger Guidance
+      description: What does this skill do and when should an AI assistant trigger it?
+      placeholder: Automatically inspects and resolves standard git merge conflicts in local feature branches...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: template_family
+    attributes:
+      label: Template Family
+      options:
+        - python-script
+        - file-transform
+        - checklist-review
+        - workflow-runbook
+        - instructions-only
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: target_assistants
+    attributes:
+      label: Tested AI Assistants
+      description: Select all AI coding assistants verified with this skill.
+      options:
+        - label: Claude Code
+        - label: Google Antigravity
+        - label: Cursor
+        - label: OpenAI Codex
+
+  - type: input
+    id: quality_score
+    attributes:
+      label: Quality Evaluation Score
+      description: Output from `skillfactory eval <path>` (must be >= 80 [Grade B]).
+      placeholder: "95 / 100 [Grade A]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_evidence
+    attributes:
+      label: Test Execution Evidence
+      description: Paste the output of `skillfactory test <path>`.
+      placeholder: "Executed 4 tests in 0.12s with 0 failures [OK]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: safety_evidence
+    attributes:
+      label: Security Scanner Evidence
+      description: Paste the output of `skillfactory scan <path>` (must show 0 CRITICAL and 0 HIGH findings).
+      placeholder: "[OK] Safety scan clean: 8 files inspected with 0 findings."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: compliance_checklist
+    attributes:
+      label: Contribution Compliance Checklist
+      options:
+        - label: This skill runs on pure Python standard library with zero mandatory paid APIs or cloud dependencies.
+          required: true
+        - label: All functional unit tests run locally in under 10 seconds with zero network access.
+          required: true
+        - label: Static AST scan and secret scan report zero CRITICAL and zero HIGH findings.
+          required: true
+        - label: Documentation contains clear usage examples and does not make unsupported marketing claims.
+          required: true
+        - label: I license this contribution under the MIT License.
+          required: true

@@ -48,6 +48,34 @@ SECRET_PATTERNS = [
     ),
 ]
 
+# Prompt injection and adversarial instruction patterns (Phase 13, AC13.04)
+PROMPT_INJECTION_PATTERNS = [
+    (
+        "INJ001",
+        "Directive Override / Jailbreak Attempt",
+        re.compile(r"(?i)\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior|above)\s+instructions\b"),
+        "HIGH",
+    ),
+    (
+        "INJ002",
+        "Persona Hijack / Developer Mode Override",
+        re.compile(r"(?i)\b(?:you\s+are\s+now|override\s+system\s+prompt|developer\s+mode\s+enabled|dan\s+mode)\b"),
+        "HIGH",
+    ),
+    (
+        "INJ003",
+        "Remote Script Execution Pipeline",
+        re.compile(r"(?i)\b(?:curl|wget)\s+[^\n|;&]+(?:\s*\|\s*(?:bash|sh|python3?))\b"),
+        "CRITICAL",
+    ),
+    (
+        "INJ004",
+        "Hidden Markup Injection",
+        re.compile(r"(?i)<(?:script|iframe|object|embed)[^>]*>"),
+        "CRITICAL",
+    ),
+]
+
 # File patterns to exclude from secret scanning (test fixtures, caches, etc.)
 DEFAULT_EXCLUDE_DIRS = {
     ".git",
@@ -242,6 +270,7 @@ def scan_secrets_in_text(text: str, file_path: str = "<text>") -> List[Finding]:
         if line_clean.startswith("#") and "example" in line_clean.lower():
             continue
 
+        # Check secret patterns
         for rule_id, rule_name, pattern, severity in SECRET_PATTERNS:
             match = pattern.search(line)
             if match:
@@ -261,6 +290,21 @@ def scan_secrets_in_text(text: str, file_path: str = "<text>") -> List[Finding]:
                         line_number=line_idx,
                         description=f"Hardcoded credential detected: {rule_name}",
                         snippet=snippet,
+                    )
+                )
+
+        # Check prompt injection and adversarial patterns (Phase 13, AC13.04)
+        for rule_id, rule_name, pattern, severity in PROMPT_INJECTION_PATTERNS:
+            match = pattern.search(line)
+            if match:
+                findings.append(
+                    Finding(
+                        rule_id=rule_id,
+                        severity=severity,
+                        file_path=file_path,
+                        line_number=line_idx,
+                        description=f"Security violation detected: {rule_name}",
+                        snippet=line_clean[:80],
                     )
                 )
 

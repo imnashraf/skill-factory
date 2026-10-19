@@ -693,14 +693,35 @@ def cmd_scan(args: argparse.Namespace) -> int:
 
 def cmd_search(args: argparse.Namespace) -> int:
     """Handle `skillfactory search` command (Phase 6, Task T6.02, AC6.02)."""
-    from skillfactory.library import index_directory, search_catalog
+    from skillfactory.library import index_directory, load_bundled_catalog, search_catalog
 
-    search_dir = Path(getattr(args, "dir", ".") or ".")
-    if not any(search_dir.glob("*/SKILL.md")) and Path("examples").is_dir():
-        search_dir = Path("examples")
+    search_dir_arg = getattr(args, "dir", None)
+    results = []
 
-    index = index_directory(search_dir, include_eval=False)
-    results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
+    if search_dir_arg and search_dir_arg != ".":
+        search_dir = Path(search_dir_arg)
+        index = index_directory(search_dir, include_eval=False)
+        results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
+    else:
+        # Search local directory first
+        local_index = index_directory(Path("."), include_eval=False)
+        local_results = search_catalog(local_index, query=args.query, tag_filter=getattr(args, "tag", None))
+
+        # Also search bundled catalog
+        bundled_index = load_bundled_catalog()
+        bundled_results = search_catalog(bundled_index, query=args.query, tag_filter=getattr(args, "tag", None))
+
+        # Merge results, avoiding duplicate skill names
+        seen_names = set()
+        for entry, score in local_results:
+            seen_names.add(entry.name)
+            results.append((entry, score))
+        for entry, score in bundled_results:
+            if entry.name not in seen_names:
+                seen_names.add(entry.name)
+                results.append((entry, score))
+
+        results.sort(key=lambda x: (-x[1], x[0].name))
 
     if getattr(args, "json", False):
         print(json.dumps({
@@ -784,6 +805,8 @@ def cmd_import(args: argparse.Namespace) -> int:
             print(f"  Files extracted: {res.file_count}")
             print(f"  Spec validated:  {'Yes' if res.validation_valid else 'No'}")
             print(f"  Safety scan:     {'Clean' if res.safety_clean else 'Warnings'}")
+            print("\n[SECURITY NOTICE] External / community skill imported. Treat as untrusted.")
+            print("  Always review scripts in 'scripts/' and run 'skillfactory scan' before executing.")
         return 0
     except Exception as err:
         if getattr(args, "json", False):

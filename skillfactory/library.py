@@ -31,6 +31,7 @@ class CatalogEntry:
     grade: Optional[str] = None
     has_scripts: bool = False
     has_tests: bool = False
+    security_status: str = "Unverified"
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -67,6 +68,24 @@ class CatalogIndex:
             total_skills=data.get("total_skills", len(skills)),
             updated_at=data.get("updated_at", ""),
         )
+
+
+def load_bundled_catalog() -> CatalogIndex:
+    """Load the built-in reference skills catalog (Phase 13, AC13.01)."""
+    catalog_path = Path(__file__).parent / "data" / "catalog.json"
+    if catalog_path.is_file():
+        try:
+            data = json.loads(catalog_path.read_text(encoding="utf-8"))
+            skills = [CatalogEntry(**s) for s in data.get("skills", [])]
+            return CatalogIndex(
+                skills=skills,
+                source_dir=str(catalog_path),
+                total_skills=len(skills),
+                updated_at=data.get("updated_at", ""),
+            )
+        except Exception:
+            pass
+    return CatalogIndex(skills=[], source_dir="", total_skills=0, updated_at="")
 
 
 def _extract_tags(name: str, description: str, metadata: Dict[str, Any]) -> List[str]:
