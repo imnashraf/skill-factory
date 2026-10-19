@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skillfactory"
-version = "1.0.1"
+version = "1.1.0"
 description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, and Antigravity."
 readme = "README.md"
 license = { text = "MIT" }

@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-10-19
+
+### Added
+
+- **Public Launch & Developer Adoption (Phase 11)**:
+  - Comprehensive, honest `README.md` with explicit product boundaries and verified platform support tiers.
+  - Beginner-friendly platform-specific onboarding guide (`docs/beginnerQuickstart.md`) for macOS, Windows, and Linux.
+  - 5 reproducible, real-world reference skill demonstrations with automated validation harness (`scripts/run_demos.py` and `docs/demonstrations.md`).
+  - Community launch preparation kit (`docs/launchPreparation.md`) including Show HN/Reddit drafts, FAQ, and AI coding assistant comparisons.
+- **Beginner-Friendly Experience (Phase 12)**:
+  - Pre-flight diagnostic engine (`skillfactory doctor --guided`) checking Python runtime, permissions, shell PATH, and assistant installations with concrete remediation commands.
+  - Intuitive positional skill name CLI syntax (`skillfactory new my-skill`) with automatic trigger guidance.
+  - Interactive questionnaire (`skillfactory interview`) enhancements with live kebab-case sanitization loops and target assistant prompts.
+  - Universal 3-part structured error formatting (`What happened`, `Why it happened`, `What to do next`) across all CLI errors with stack trace suppression.
+  - Automated usability regression test suite (`tests/test_beginner_experience.py`).
+- **Skill Library & Community Ecosystem (Phase 13)**:
+  - Built-in offline reference catalog (`skillfactory/data/catalog.json`) containing 5 Grade-A reference skills with instant (<10ms) local search.
+  - Static prompt injection and adversarial instruction scanner rules (`INJ001`–`INJ004` in `skillfactory/scanner.py`) detecting directive overrides, persona shifts, remote execution pipelines, and hidden markup.
+  - Objective 100-point community quality scoring rubric (`docs/skillQualityStandards.md`) defining evaluation criteria for Grade A/B/C/F classifications.
+  - Standardized community contribution workflow (`docs/communityContributions.md`) and GitHub submission issue form (`.github/ISSUE_TEMPLATE/skill_submission.yml`).
+  - Untrusted archive import quarantine warning banners in `skillfactory import`.
+- **Production Hardening & Ecosystem Expansion (Phase 14)**:
+  - Cross-platform regression test suite (`tests/test_hardening.py`) verifying deep Unicode paths, spaces, Windows reserved device names (`CON`, `PRN`, `NUL`), Zip Slip traversal defenses, and atomic rollbacks.
+  - Repeatable performance benchmark harness (`scripts/run_benchmarks.py`) profiling cold starts, scaffolding throughput, AST scanning rate, and manifest verification.
+  - Comprehensive 14-vector security threat model audit (`docs/securityThreatModel.md`).
+  - Rigorous 4-tier platform compatibility matrix (`docs/compatibilityMatrix.md`) distinguishing verified autonomous activation, manual invocation, directory discovery, and simulated testing.
+  - Ecosystem expansion assessment (`docs/ecosystemExpansion.md`) evaluating Windsurf, Continue.dev, Cline, and Copilot.
+
+---
+
 ## [1.0.1] - 2026-10-19
 
 ### Fixed

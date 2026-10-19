@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import sys
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 __author__ = "Skill Factory Contributors"
 MIN_PYTHON_VERSION = (3, 9)
 
