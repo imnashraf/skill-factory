@@ -5,6 +5,7 @@
 [![Dependencies](https://img.shields.io/badge/dependencies-0%20(standard%20library)-success.svg)](skillfactory/)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
 [![Specification](https://img.shields.io/badge/spec-agentskills.io-orange.svg)](https://agentskills.io/specification)
+[![Status](https://img.shields.io/badge/status-development%20complete-success.svg)](PROJECT_CLOSURE.md)
 
 **Skill Factory** is an open-source, local-first generator, validator, evaluator, package manager, and lifecycle system for **Agent Skills** conforming to the [Agent Skills open specification](https://agentskills.io/specification).
 
@@ -315,6 +316,7 @@ python3 scripts/create_skill.py --name test-skill --description "Testing backwar
 Skill Factory is an open-source project welcoming community contributions. Please review:
 
 - [Contributing Guidelines](CONTRIBUTING.md)
+- [Project Closure Report](PROJECT_CLOSURE.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Architecture Decisions Log](docs/decisions.md)
 - [Security Policy](SECURITY.md)
