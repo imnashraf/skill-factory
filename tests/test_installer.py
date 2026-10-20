@@ -309,6 +309,40 @@ class CliInstallCommandTests(unittest.TestCase):
         self.assertEqual(len(data["installations"]), 1)
         self.assertEqual(data["installations"][0]["skill_name"], "cli-installed-skill")
 
+    def test_cli_install_and_uninstall_dry_run(self):
+        """Verify --dry-run simulates installation and uninstallation without modifying files."""
+        project_dir = str(self.root / "dry_run_project")
+        dry_target = Path(project_dir) / ".agents" / "skills" / "cli-installed-skill"
+
+        # 1. Install with --dry-run
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            ret = main(["install", self.skill_path, "--target", "cursor", "--scope", "project", "--project", project_dir, "--dry-run"])
+        self.assertEqual(ret, 0)
+        self.assertIn("[DRY RUN] Would install 'cli-installed-skill'", buf.getvalue())
+        self.assertFalse(dry_target.exists())
+
+        # 2. Real install
+        ret_real = main(["install", self.skill_path, "--target", "cursor", "--scope", "project", "--project", project_dir])
+        self.assertEqual(ret_real, 0)
+        self.assertTrue(dry_target.exists())
+
+        # 3. Uninstall with --dry-run
+        buf_un_dry = io.StringIO()
+        with redirect_stdout(buf_un_dry):
+            ret_un_dry = main(["uninstall", "cli-installed-skill", "--target", "cursor", "--dry-run"])
+        self.assertEqual(ret_un_dry, 0)
+        self.assertIn("[DRY RUN] Would remove", buf_un_dry.getvalue())
+        self.assertTrue(dry_target.exists())
+
+        # 4. Real uninstall
+        buf_un_real = io.StringIO()
+        with redirect_stdout(buf_un_real):
+            ret_un_real = main(["uninstall", "cli-installed-skill", "--target", "cursor"])
+        self.assertEqual(ret_un_real, 0)
+        self.assertIn("Uninstalled 'cli-installed-skill'", buf_un_real.getvalue())
+        self.assertFalse(dry_target.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

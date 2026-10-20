@@ -40,7 +40,7 @@ def dump_frontmatter(data: Dict[str, Any]) -> str:
     """Serialize a dictionary into standard YAML frontmatter enclosed in '---'."""
     lines = ["---"]
     for key, val in data.items():
-        if not re.fullmatch(r"[A-Za-z0-9_-]+", str(key)):
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", key):
             raise YamlError(f"Invalid YAML key: {key}")
         if isinstance(val, dict):
             lines.append(f"{key}:")
