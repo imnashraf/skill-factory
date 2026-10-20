@@ -3,7 +3,7 @@
 - **Project**: Skill Factory
 - **Target Release**: `v1.2.0`
 - **Current Active Branch**: `feat/phase-15-master-execution`
-- **Latest Commit**: `49dc229ad3b3aabc128efde08bd97c0beb05cb0f`
+- **Latest Commit**: `bf3caa60b4b205391a2fc33c5a610f63b2f56b27`
 - **Current Stage**: Stage 5 — Release Candidate Validated & Publication Gate Reached
 - **Completed Tasks**:
   - [x] Verified repository state, remote URL, branch tracking, and commit history.
@@ -21,8 +21,8 @@
   - [x] Created pull request #1 on GitHub (`https://github.com/imnashraf/skill-factory/pull/1`).
   - [x] Verified full GitHub Actions CI matrix (Run ID `39432685236`): 9/9 jobs passed across Ubuntu, macOS, and Windows on Python 3.9, 3.11, and 3.13.
   - [x] Rebuilt wheel and source distribution from source commit in clean environment:
-    - Wheel: `skillfactory-1.2.0-py3-none-any.whl` (133,756 bytes, SHA-256: `d4c667ceb42bfdbb8a44497060c8a8368365ff31b1a12ad2db5505b0511ee214`)
-    - Sdist: `skillfactory-1.2.0.tar.gz` (159,684 bytes, SHA-256: `e2884ce4c4514c12d48b1d967fc0a3c5eab612ed94eafc5288885a12e5c2d9c1`)
+    - Wheel: `skillfactory-1.2.0-py3-none-any.whl` (133,756 bytes, SHA-256: `d7eaaa439c887e148c20eb08222cbe24a7f5c6e51de36b642ce03d48d91d31f1`)
+    - Sdist: `skillfactory-1.2.0.tar.gz` (159,709 bytes, SHA-256: `6b76f55b3569dd83beea5d999fafcd5b80e3fcbcbeb246d0083f7c11540a3920`)
   - [x] Verified archive contents (all 24 templates included, both CLI entry points verified, license, clean metadata).
   - [x] Executed clean installation tests in isolated virtual environments from both wheel and sdist outside the repository working directory.
   - [x] Verified PyPI publishing workflow safety (`.github/workflows/pypi-publish.yml` and `release.yml`). Pushing release tag triggers automated release and PyPI publishing; protected gates strictly maintained.
