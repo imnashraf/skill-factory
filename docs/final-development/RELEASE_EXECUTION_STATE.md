@@ -1,35 +1,29 @@
 # Release Execution State Checkpoint
 
 - **Project**: Skill Factory
-- **Target Release**: `v1.2.1` (Patch Release for PyPI Distribution `agent-skill-factory`)
+- **Release Target**: `v1.2.1` (PyPI Distribution: `agent-skill-factory`)
 - **Current Active Branch**: `main`
-- **Latest Release Tag**: `v1.2.0` (published on GitHub)
-- **Target Release Tag**: `v1.2.1` (pending maintainer authorization)
-- **Current Stage**: Stage 8 — v1.2.1 Patch Release Prepared (Pending Publication Authorization)
+- **Published GitHub Releases**: `v1.2.0`, `v1.2.1`
+- **Published PyPI Package**: `agent-skill-factory==1.2.1` (`https://pypi.org/project/agent-skill-factory/1.2.1/`)
+- **Current Stage**: Stage 9 — v1.2.1 Release & PyPI Publication Complete (Maintenance Mode)
 - **Completed Tasks**:
   - [x] Verified repository state, remote URL, branch tracking, and commit history.
   - [x] Ran full Markdown lint audit across all 152 Markdown files in repo (0 violations).
   - [x] Ran full unit test suite (172/172 tests passed).
-  - [x] Rebuilt distribution packages from source with PyPI distribution name `agent-skill-factory` and version `1.2.1`:
-    - Wheel: `dist/agent_skill_factory-1.2.1-py3-none-any.whl` (131 KB, SHA-256: `1e0ea5604624ad85d224fadd91fbf5f7e2bb542914e9a9fa3ab99c1c22638463`)
-    - Sdist: `dist/agent_skill_factory-1.2.1.tar.gz` (149 KB, SHA-256: `ed03fc49fd1bc792b9e217dfe45c751009361048dab3d5079c094f733eb481da`)
-  - [x] Verified distribution archive contents: package data, templates, license, entry points `skillfactory` and `skill-factory`.
-  - [x] Verified clean isolated venv installation outside repository tree:
-    - Installed `agent-skill-factory-1.2.1`.
-    - `skillfactory --version` returned `skillfactory 1.2.1`.
-    - `skill-factory --version` returned `skillfactory 1.2.1`.
-    - Python import `import skillfactory; print(skillfactory.__version__)` returned `1.2.1`.
-    - `skillfactory search --tag automation` returned reference skill.
-  - [x] Updated `.github/workflows/pypi-publish.yml` to target `https://pypi.org/p/agent-skill-factory`.
-  - [x] Updated `README.md` and `CHANGELOG.md` with `agent-skill-factory` installation.
-  - [x] Prepared release notes for v1.2.1 (`docs/final-development/releaseNotes_v1.2.1.md`).
-- **Pending Tasks (Protected Maintainer Actions)**:
-  - [ ] Commit and push v1.2.1 changes to `main`.
-  - [ ] Tag `v1.2.1` and push tag to origin.
-  - [ ] Trigger GitHub Release and PyPI publication via OIDC Trusted Publisher.
-  - [ ] Perform post-release validation on published PyPI package `agent-skill-factory`.
+  - [x] Renamed PyPI distribution to `agent-skill-factory` in `pyproject.toml` while keeping Python import `skillfactory` and CLI entry points `skillfactory` and `skill-factory`.
+  - [x] Tagged and published `v1.2.1` on GitHub (`https://github.com/imnashraf/skill-factory/releases/tag/v1.2.1`).
+  - [x] Successfully published `agent-skill-factory` 1.2.1 to PyPI via GitHub Actions OIDC Trusted Publishing (`pypi-publish.yml`, Run ID `39446380820`).
+  - [x] Verified package live on PyPI: `https://pypi.org/project/agent-skill-factory/1.2.1/`
+  - [x] Performed post-release validation in clean isolated virtual environment from public PyPI:
+    - `pip install --no-cache-dir agent-skill-factory==1.2.1` (succeeded)
+    - `skillfactory --version` (1.2.1)
+    - `skill-factory --version` (1.2.1)
+    - `import skillfactory` (version 1.2.1)
+    - `skillfactory doctor` (all systems operational)
+    - `skillfactory search --tag automation` (succeeded)
+    - Skill scaffolding, validation, test suite, safety scan, and evaluation (Grade A, 97/100).
 - **Latest Test Results**: 172/172 passing (100% pass rate).
-- **CI Workflow Status**: Ready for v1.2.1 workflow run.
-- **Build Artifact Status**: Wheel and sdist rebuilt, verified, and checksummed.
-- **Release Blockers**: Awaiting explicit maintainer authorization before tagging and publishing v1.2.1.
-- **Next Action**: Present v1.2.1 Release Authorization Summary to maintainer.
+- **CI Workflow Status**: All GitHub Actions release and PyPI workflows succeeded.
+- **Build Artifact Status**: Published on GitHub Releases and PyPI.
+- **Release Blockers**: None. All release actions completed.
+- **Next Action**: Project transitioned to normal open-source maintenance.

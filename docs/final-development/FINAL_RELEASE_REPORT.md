@@ -113,17 +113,20 @@ Rebuilt from clean checkout of merge commit `95725fc8a26b2b7ea089e9d690a6f881f1d
 ## 8. GitHub Actions & CI Evidence
 
 - **CI Test Matrix**: Workflow `test.yml` — **Run ID 39432685236** (9/9 jobs passed: Ubuntu, macOS, Windows on Python 3.9, 3.11, 3.13).
-- **Release Workflow**: Workflow `release.yml` — **Run ID 39435392907** (9 verification matrix jobs passed + `build-and-release` job succeeded).
-- **Release Assets Published**: GitHub Release `v1.2.0` automatically created with signed release notes and assets.
+- **v1.2.0 Release Workflow**: Workflow `release.yml` — **Run ID 39435392907** (9 verification matrix jobs passed + `build-and-release` job succeeded).
+- **v1.2.1 Release Workflow**: Workflow `release.yml` — **Run ID 39445962518** (9 verification matrix jobs passed + `build-and-release` job succeeded).
+- **v1.2.1 PyPI Publication Workflow**: Workflow `pypi-publish.yml` — **Run ID 39446380820** (Build, twine verification, and PyPI OIDC publication succeeded).
 
 ---
 
-## 9. Git History & Branches
+## 9. Git History & Releases
 
 - **Development Branch**: `feat/phase-15-master-execution`
 - **Pull Request**: [#1](https://github.com/imnashraf/skill-factory/pull/1) (Merged into `main`)
-- **Main Branch Head**: `95725fc8a26b2b7ea089e9d690a6f881f1d1b326`
-- **Release Tag**: `v1.2.0` (Tagged and pushed to `origin`)
+- **Main Branch Head**: `30374d9`
+- **Release Tags**:
+  - `v1.2.0` (Signed and pushed to `origin`)
+  - `v1.2.1` (Signed and pushed to `origin`)
 
 ---
 
@@ -131,7 +134,11 @@ Rebuilt from clean checkout of merge commit `95725fc8a26b2b7ea089e9d690a6f881f1d
 
 - **GitHub Release `v1.2.0`**: **PUBLISHED**  
   URL: `https://github.com/imnashraf/skill-factory/releases/tag/v1.2.0`
-- **PyPI Package Publication**: In progress via GitHub Actions OIDC Trusted Publishing workflow `pypi-publish.yml` (Run ID `39436469422`). Workflow executed cleanly through build, twine verification, and isolated smoke testing; PyPI token exchange returned `invalid-publisher` pending maintainer adding GitHub repository `imnashraf/skill-factory` under PyPI project settings.
+- **GitHub Release `v1.2.1`**: **PUBLISHED**  
+  URL: `https://github.com/imnashraf/skill-factory/releases/tag/v1.2.1`
+- **PyPI Package Publication (`agent-skill-factory`)**: **PUBLISHED & VERIFIED**  
+  URL: `https://pypi.org/project/agent-skill-factory/1.2.1/`  
+  Public Installation Verified: `pip install agent-skill-factory==1.2.1` (100% functional, dual CLI entry points `skillfactory` and `skill-factory`, import package `skillfactory`).
 
 ---
 
