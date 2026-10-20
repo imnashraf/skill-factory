@@ -1,0 +1,25 @@
+{
+  "name": "markdown-doc-validator",
+  "description": "Scan and validate Markdown repositories for broken links, missing code languages, and table formatting.",
+  "template_family": "python-script",
+  "version": "0.1.0",
+  "author": "",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

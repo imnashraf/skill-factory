@@ -11,7 +11,7 @@ class NoThirdPartyImportsTests(unittest.TestCase):
     def test_only_stdlib_imports(self):
         # Python standard library module names (common standard library prefixes)
         stdlib_modules = set(sys.builtin_module_names) | {
-            "argparse", "ast", "asyncio", "base64", "collections", "contextlib",
+            "abc", "argparse", "ast", "asyncio", "base64", "collections", "contextlib",
             "copy", "csv", "dataclasses", "datetime", "decimal", "difflib",
             "enum", "errno", "fnmatch", "functools", "glob", "hashlib",
             "importlib", "inspect", "io", "itertools", "json", "logging",

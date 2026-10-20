@@ -12,12 +12,28 @@ from skillfactory.spec import SCHEMA_VERSION, SkillSpec
 
 
 def compute_sha256(file_path: Path) -> str:
-    """Compute the SHA-256 hex digest of a file."""
+    """Compute the SHA-256 hex digest of a file.
+
+    For text files, normalizes CRLF to LF so that repository checkout line-ending
+    differences on Windows do not cause spurious manifest integrity failures.
+    """
     hasher = hashlib.sha256()
-    with file_path.open("rb") as f:
-        while chunk := f.read(65536):
-            hasher.update(chunk)
-    return hasher.hexdigest()
+    try:
+        raw_bytes = file_path.read_bytes()
+        if b"\r\n" in raw_bytes:
+            try:
+                text = raw_bytes.decode("utf-8")
+                hasher.update(text.replace("\r\n", "\n").encode("utf-8"))
+                return hasher.hexdigest()
+            except UnicodeDecodeError:
+                pass
+        hasher.update(raw_bytes)
+        return hasher.hexdigest()
+    except Exception:
+        with file_path.open("rb") as f:
+            while chunk := f.read(65536):
+                hasher.update(chunk)
+        return hasher.hexdigest()
 
 
 EXCLUDED_MANIFEST_PARTS = {

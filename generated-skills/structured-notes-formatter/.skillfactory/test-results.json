@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T13:41:48.646670+00:00",
+  "success": true,
+  "tests_run": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.07,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_parse_meeting_notes (test_main.TestStructuredNotesFormatter.test_parse_meeting_notes) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n"
+}

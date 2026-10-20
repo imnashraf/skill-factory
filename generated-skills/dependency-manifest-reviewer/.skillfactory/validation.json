@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "dependency-manifest-reviewer",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/dependency-manifest-reviewer",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "dependency-manifest-reviewer",
+      "description": "Audits software dependency manifest files for security risks including unpinned packages, wildcards, mutable VCS references, and insecure HTTP download protocols."
+    }
+  }
+}

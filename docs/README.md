@@ -16,7 +16,7 @@ This folder is the single source of truth for *what* Skill Factory must do, *why
 ## Document map
 
 | Document | Purpose | IDs defined |
-|---|---|---|
+| --- | --- | --- |
 | [problemStatement.md](problemStatement.md) | Problem, users, goals, non-goals | — |
 | [productRequirements.md](productRequirements.md) | Product-level requirements and identified gaps | `PR-xx` |
 | [functionalRequirements.md](functionalRequirements.md) | Specific behaviours, grouped by area | `FR-<AREA>-xx` |

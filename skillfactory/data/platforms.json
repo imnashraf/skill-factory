@@ -213,6 +213,180 @@
         "paths"
       ],
       "notes": "Walks up from cwd to repo root looking for .agents/skills/. Global skills in ~/.gemini/config/skills/."
+    },
+    "windsurf": {
+      "id": "windsurf",
+      "display_name": "Windsurf",
+      "vendor": "Codeium",
+      "last_verified": "2026-10-19",
+      "source_url": "https://codeium.com/windsurf/docs",
+      "status": "verified",
+      "invocation_syntax": "Natural language / Cascade context",
+      "reload_behavior": "Reloads on workspace change or window reload",
+      "hot_reload": false,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".codeium/windsurf/skills",
+        ".agents/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.codeium/windsurf/skills",
+        "linux": "~/.codeium/windsurf/skills",
+        "windows": "%USERPROFILE%\\.codeium\\windsurf\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".codeium",
+          ".windsurf"
+        ],
+        "user_dirs": [
+          "~/.codeium"
+        ],
+        "binaries": [
+          "windsurf"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata"
+      ],
+      "notes": "Cascade reads workspace memories and project skills."
+    },
+    "continue": {
+      "id": "continue",
+      "display_name": "Continue",
+      "vendor": "Continue.dev",
+      "last_verified": "2026-10-19",
+      "source_url": "https://docs.continue.dev/customization/prompts",
+      "status": "verified",
+      "invocation_syntax": "/<slash-command>",
+      "reload_behavior": "Watches .continue/prompts directory dynamically",
+      "hot_reload": true,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".continue/prompts",
+        ".continue/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.continue/prompts",
+        "linux": "~/.continue/prompts",
+        "windows": "%USERPROFILE%\\.continue\\prompts"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".continue"
+        ],
+        "user_dirs": [
+          "~/.continue"
+        ],
+        "binaries": [
+          "continue"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata"
+      ],
+      "notes": "Custom slash commands and prompts supported in .continue/prompts/."
+    },
+    "cline": {
+      "id": "cline",
+      "display_name": "Cline",
+      "vendor": "Cline Community",
+      "last_verified": "2026-10-19",
+      "source_url": "https://github.com/cline/cline",
+      "status": "verified",
+      "invocation_syntax": "Natural language / custom instructions",
+      "reload_behavior": "Reloads on task start",
+      "hot_reload": true,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".cline/skills",
+        ".clinerules"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.cline/skills",
+        "linux": "~/.cline/skills",
+        "windows": "%USERPROFILE%\\.cline\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".cline"
+        ],
+        "user_dirs": [
+          "~/.cline"
+        ],
+        "binaries": [
+          "cline"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata"
+      ],
+      "notes": "Reads .clinerules instructions and .cline/skills/ directory."
+    },
+    "copilot": {
+      "id": "copilot",
+      "display_name": "GitHub Copilot",
+      "vendor": "GitHub / Microsoft",
+      "last_verified": "2026-10-19",
+      "source_url": "https://docs.github.com/en/copilot",
+      "status": "verified",
+      "invocation_syntax": "Natural language / workspace instruction context",
+      "reload_behavior": "In-session instruction reload",
+      "hot_reload": true,
+      "symlink_supported": true,
+      "reserved_names": [],
+      "project_skill_paths": [
+        ".github/skills",
+        ".agents/skills"
+      ],
+      "user_skill_paths": {
+        "macos": "~/.github/skills",
+        "linux": "~/.github/skills",
+        "windows": "%USERPROFILE%\\.github\\skills"
+      },
+      "detection_rules": {
+        "project_dirs": [
+          ".github"
+        ],
+        "user_dirs": [
+          "~/.config/github-copilot"
+        ],
+        "binaries": [
+          "copilot",
+          "gh"
+        ]
+      },
+      "supported_frontmatter_fields": [
+        "name",
+        "description"
+      ],
+      "ignored_frontmatter_fields": [
+        "license",
+        "compatibility",
+        "metadata"
+      ],
+      "notes": "Reads workspace instructions from .github/copilot-instructions.md and .github/skills/."
     }
   }
 }

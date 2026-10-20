@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "test-inventory-analyzer",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/test-inventory-analyzer",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "test-inventory-analyzer",
+      "description": "Scans software projects to catalog and audit automated test suites, counting test cases, assertion density, and skipped tests across directories."
+    }
+  }
+}

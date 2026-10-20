@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T13:41:48.280203+00:00",
+  "success": true,
+  "tests_run": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.026,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "[OK] Successfully organized 2 files into structured categories.\n{\n  \"status\": \"success\",\n  \"files_organized\": 1,\n  \"operations\": [\n    {\n      \"source_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmp21e6xd5v/intake/contract.pdf\",\n      \"target_path\": \"/var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmp21e6xd5v/intake/documents/2026_contract.pdf\",\n      \"category\": \"documents\",\n      \"renamed\": true\n    }\n  ]\n}\n",
+  "stderr": "test_categorization (test_main.FileOrganizerTests.test_categorization) ... ok\ntest_dry_run_leaves_files_in_place (test_main.FileOrganizerTests.test_dry_run_leaves_files_in_place) ... ok\ntest_live_organization_and_collision_avoidance (test_main.FileOrganizerTests.test_live_organization_and_collision_avoidance) ... ok\ntest_nonexistent_directory_error (test_main.FileOrganizerTests.test_nonexistent_directory_error) ... [ERROR] Failed to plan organization: Source directory not found: /nonexistent/fake/directory/xyz\nok\ntest_prefix_option (test_main.FileOrganizerTests.test_prefix_option) ... ok\ntest_sanitize_filename (test_main.FileOrganizerTests.test_sanitize_filename) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.026s\n\nOK\n"
+}

@@ -1,9 +1,11 @@
 # Example Review Session for docker-security-audit
 
 ## Scenario
+
 Run `docker-security-audit` to achieve: Audits Dockerfiles and container configurations for root user execution, sensitive volume mounts, and security vulnerabilities..
 
 ## Sample Review Output
+
 ```markdown
 # Review Findings: Candidate Artifact
 - Status: ACTION REQUIRED

@@ -210,6 +210,10 @@ def main() -> int:
             ("cursor", "cursor", skills_dir / "excel-comparison", ["--help"]),
             ("codex", "openai", skills_dir / "file-organizer", ["--help"]),
             ("antigravity", "google", skills_dir / "security-config-scanner", ["--help"]),
+            ("windsurf", "windsurf", skills_dir / "structured-notes-formatter", ["--help"]),
+            ("continue", "continue", skills_dir / "attendance-csv-validator", ["--help"]),
+            ("cline", "cline", skills_dir / "financial-variance-analyzer", ["--help"]),
+            ("copilot", "copilot", skills_dir / "dependency-manifest-reviewer", ["--help"]),
         ]
 
         all_passed = True

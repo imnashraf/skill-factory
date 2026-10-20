@@ -11,7 +11,7 @@ from pathlib import Path
 from skillfactory.cli import main
 from skillfactory.core import generate_skill
 from skillfactory.eval import evaluate_skill
-from skillfactory.library import index_directory, search_catalog
+from skillfactory.library import index_directory, load_bundled_catalog, search_catalog
 from skillfactory.packaging import (
     ZipSecurityError,
     calculate_file_sha256,
@@ -260,6 +260,26 @@ class LibraryAndPackagingTests(unittest.TestCase):
             # Verify manifest succeeds
             valid, discrepancies = verify_manifest(skill_dir)
             self.assertTrue(valid, f"Manifest verification failed with discrepancies: {discrepancies}")
+
+    def test_bundled_catalog_has_all_14_skills_and_categories(self):
+        """P15: Verify bundled catalog includes all 14 reference skills across 3-tier taxonomy."""
+        index = load_bundled_catalog()
+        self.assertEqual(index.total_skills, 14)
+        categories = {s.category for s in index.skills}
+        self.assertEqual(categories, {"personal", "professional", "developer"})
+
+    def test_search_catalog_with_category_filter(self):
+        """P15: Verify search_catalog filters correctly by category."""
+        index = load_bundled_catalog()
+        finance_results = search_catalog(index, query="", category_filter="professional")
+        self.assertTrue(len(finance_results) >= 6)
+        for entry, _ in finance_results:
+            self.assertEqual(entry.category, "professional")
+
+        personal_results = search_catalog(index, query="", category_filter="personal")
+        self.assertTrue(len(personal_results) >= 4)
+        for entry, _ in personal_results:
+            self.assertEqual(entry.category, "personal")
 
 
 if __name__ == "__main__":

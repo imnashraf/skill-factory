@@ -3,6 +3,7 @@
 Detailed domain reference material, operational parameters, and troubleshooting guides for sql-migration-linter.
 
 ## Key Rules
+
 1. Inspect before modifying: verify current state before executing tasks.
 2. Follow progressive disclosure: refer to specific workflow steps in `SKILL.md`.
 3. Report clear summaries: deliver structured results to the user.

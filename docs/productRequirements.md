@@ -5,7 +5,7 @@ Each product requirement (`PR-xx`) is broken down into functional (`FR-*`), non-
 ## Approved — from the product vision
 
 | ID | Requirement | Phase(s) |
-|---|---|---|
+| --- | --- | --- |
 | PR-01 | Skill Factory is completely free and open-source (MIT). No mandatory paid APIs, subscriptions, or proprietary cloud services. | All |
 | PR-02 | Local-first: every core feature (generate, validate, test, install, uninstall) works offline. | 1–5 |
 | PR-03 | From a problem description, produce a reusable skill containing: `SKILL.md`, executable scripts where required, automated tests, `README.md`, examples and references, compatibility metadata, validation results, and installation instructions. | 1, 2, 5 |
@@ -26,7 +26,7 @@ Each product requirement (`PR-xx`) is broken down into functional (`FR-*`), non-
 These were not stated in the vision but are needed for a dependable, beginner-friendly, cross-platform product. **Each needs your approval** (accept / reject / modify).
 
 | ID | Requirement | Why it is essential | Phase |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | PR-15 | **Honest compatibility claims.** Only claim support for a platform/OS/version that has been verified, and show the verification date. | The current README already promises this; platforms change paths frequently (Claude Code ships multiple releases per week). | 3, 9 |
 | PR-16 | **Provenance and versioning of generated skills.** Each skill records its version, the Skill Factory version that generated it, the template used, and file hashes. | Needed for safe updates, rollback, and "is this file modified?" checks. | 1, 4 |
 | PR-17 | **Python runtime policy.** A documented minimum Python version, tested in CI, plus a clear message if the user's Python is too old. | macOS ships Python 3.9 via Xcode tools; README says 3.9+ but CI tests only 3.11/3.13. See D-03. | 1 |

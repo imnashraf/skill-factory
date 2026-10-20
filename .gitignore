@@ -26,8 +26,8 @@ ENV/
 .env.*
 !.env.example
 
-# Generator output (created by scripts/create_skill.py by default)
-generated-skills/
+# Generator output (tracked for curated reference skills and packs)
+# generated-skills/
 
 # Temporary files
 *.tmp

@@ -1,0 +1,45 @@
+{
+  "skill_name": "raid-log-validator",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "84603cc7b5cb736d6895249bdb593605e84eac9e58f73c945eb068c7fc93c4e0",
+      "bytes": 211
+    },
+    "SKILL.md": {
+      "sha256": "fb767ac394bd7144beb6c6caf11424b90b065319f2e77376d201f7e2877eafa1",
+      "bytes": 1129
+    },
+    "examples/example.md": {
+      "sha256": "058a81f2c04be297d79dfb133fc527a7c3956fbb4c0957146cd1ab25d9a916cc",
+      "bytes": 94
+    },
+    "examples/sample_raid.csv": {
+      "sha256": "30affd45f9188aaa7365ec52a9b578d36234404e0880826f840b96bc9086d4b8",
+      "bytes": 421
+    },
+    "references/guide.md": {
+      "sha256": "34bdb73a495899dc9011600dde88a2fca600973efa8c72dceb21136452e823ce",
+      "bytes": 497
+    },
+    "scripts/main.py": {
+      "sha256": "f724588be23f5f8ccae437588508fa9241dd01ec22bba6f1def9903a26bbac22",
+      "bytes": 6383
+    },
+    "tests/test_main.py": {
+      "sha256": "3b022e998c5e11713f99d436ffbef477b2c7f44b410ee96ce2ad788b4152912b",
+      "bytes": 1416
+    }
+  }
+}

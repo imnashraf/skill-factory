@@ -2,17 +2,13 @@
   "skill_name": "sql-migration-linter",
   "skill_version": "0.1.0",
   "generator_name": "skillfactory",
-  "generator_version": "0.1.0",
+  "generator_version": "1.2.0",
   "template_id": "instructions-only",
   "template_version": "1.0.0",
   "spec_schema_version": 1,
   "created_at": "2026-10-18T22:15:12.379683+00:00",
-  "updated_at": "2026-10-18T22:15:12.379683+00:00",
+  "updated_at": "2026-10-19T22:01:09.700725+00:00",
   "files": {
-    ".skillfactory/evaluation.json": {
-      "sha256": "99c6109ff851f620edd89fc0c8f0236cbe0e88105ee197b1fb42607810a88306",
-      "bytes": 4428
-    },
     ".skillfactory/skill-spec.json": {
       "sha256": "0efbcff6553ea9c5b474ea7937ea5d6b96eacea6e14553c1a9eec99687fe1511",
       "bytes": 621
@@ -22,20 +18,20 @@
       "bytes": 1075
     },
     "README.md": {
-      "sha256": "b6d1b0c5d3bce3c7cef9ae845f23a82de03df390274b1d8b0c811d3696a0c739",
-      "bytes": 889
+      "sha256": "57f1aa574a774f9a4bdc1492c3d7673b4a1998b4b3a47c4b214c6d38ddabd604",
+      "bytes": 899
     },
     "SKILL.md": {
-      "sha256": "8ce2f0c967046d550aa4251fe752870707724337f0c216f6049519a1c0a238f7",
-      "bytes": 1163
+      "sha256": "6044a28ee4ad142e4caf1274c06048e08682a97f1c2d077866b4ff4072190240",
+      "bytes": 1168
     },
     "examples/example.md": {
-      "sha256": "e3bdc6a6f5bfe46216387212c76ab11e73919ca69c8f8aa64716961984464ab4",
-      "bytes": 416
+      "sha256": "9e672c8953be480e377a4a04b7319ff3d624ef39c0965ecf5cbf48851e13ec10",
+      "bytes": 418
     },
     "references/guide.md": {
-      "sha256": "9f8d2cf1e4d93abd63a24625b11369d11e705e34ebf82e468a4dd01c8c23da47",
-      "bytes": 404
+      "sha256": "a20806bbec516026b00db0e2bd145c7a45922511dcef1491974c6d678ccd5c03",
+      "bytes": 405
     },
     "tests/test_migration_linter.py": {
       "sha256": "1637bdb2b3b1e5eac33d740db1f41681d8ae88b71084165f5e886b215649ddb7",

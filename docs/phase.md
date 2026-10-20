@@ -7,7 +7,7 @@ Skill Factory is developed across 10 disciplined phases. Each phase has explicit
 ## Overview
 
 | Phase | Title | Focus Area | Status |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Phase 0** | GitHub Foundation | Repository layout, CI baseline, cleanup | **Completed** |
 | **Phase 1** | Skill Factory Core | Core architecture, CLI, generator, spec, basic validation | **Ready for Entry** |
 | **Phase 2** | Natural Language Skill Builder | Host-AI workflow + Offline guided interview | Planned |

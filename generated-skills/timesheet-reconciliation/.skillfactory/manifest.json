@@ -1,0 +1,49 @@
+{
+  "skill_name": "timesheet-reconciliation",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "6cedc079b309f98bd50712f9ea418807611e5a82957eb7602e6639f22a7ecd78",
+      "bytes": 242
+    },
+    "SKILL.md": {
+      "sha256": "5b62056d5985f054d8cac727f30daf8c425d6ffb81991355a559815a7cf8452e",
+      "bytes": 1040
+    },
+    "examples/budgets.csv": {
+      "sha256": "f352e2cf5d6bad067ece91ce3b4c2626bb310597f92906ae0664a5d2b82bf079",
+      "bytes": 109
+    },
+    "examples/example.md": {
+      "sha256": "eae0cd08e64e289a4439ca2264a3154d2b46b52b4585bdcf7df16df4183a1033",
+      "bytes": 135
+    },
+    "examples/timesheets.csv": {
+      "sha256": "191072e46a369d81b80312db6004484d4e53887d3bd4a3fc6e2be032da7bd928",
+      "bytes": 122
+    },
+    "references/guide.md": {
+      "sha256": "5ecce440a4db674d015cc81c901acc671bdfad881c6a92cea8f690f0d8f9dcc6",
+      "bytes": 358
+    },
+    "scripts/main.py": {
+      "sha256": "468d91f591f1f58d7674374fb3c8afd6b540a190527bba6c530972a4f3ebd6e4",
+      "bytes": 5134
+    },
+    "tests/test_main.py": {
+      "sha256": "a1d94082ffea17fff78eb983cde9eeac5bd8977ddc7b453d90e45310ff75f7f7",
+      "bytes": 1410
+    }
+  }
+}

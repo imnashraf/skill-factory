@@ -696,20 +696,54 @@ def cmd_search(args: argparse.Namespace) -> int:
     from skillfactory.library import index_directory, load_bundled_catalog, search_catalog
 
     search_dir_arg = getattr(args, "dir", None)
+    search_dir = Path(search_dir_arg) if search_dir_arg and search_dir_arg != "." else Path(".")
     results = []
 
+    tag_f = getattr(args, "tag", None)
+    cat_f = getattr(args, "category", None)
+    dom_f = getattr(args, "domain", None)
+    plat_f = getattr(args, "platform", None)
+    grade_f = getattr(args, "grade", None)
+    type_f = getattr(args, "type", None)
+
     if search_dir_arg and search_dir_arg != ".":
-        search_dir = Path(search_dir_arg)
         index = index_directory(search_dir, include_eval=False)
-        results = search_catalog(index, query=args.query, tag_filter=getattr(args, "tag", None))
+        results = search_catalog(
+            index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
     else:
         # Search local directory first
-        local_index = index_directory(Path("."), include_eval=False)
-        local_results = search_catalog(local_index, query=args.query, tag_filter=getattr(args, "tag", None))
+        local_index = index_directory(search_dir, include_eval=False)
+        local_results = search_catalog(
+            local_index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
 
         # Also search bundled catalog
         bundled_index = load_bundled_catalog()
-        bundled_results = search_catalog(bundled_index, query=args.query, tag_filter=getattr(args, "tag", None))
+        bundled_results = search_catalog(
+            bundled_index,
+            query=args.query,
+            tag_filter=tag_f,
+            category_filter=cat_f,
+            domain_filter=dom_f,
+            platform_filter=plat_f,
+            grade_filter=grade_f,
+            type_filter=type_f,
+        )
 
         # Merge results, avoiding duplicate skill names
         seen_names = set()
@@ -852,6 +886,189 @@ def cmd_publish(args: argparse.Namespace) -> int:
         return 1
 
 
+def cmd_guide(args: argparse.Namespace) -> int:
+    """Handle `skillfactory guide` command (Phase 15, Workstream B)."""
+    from skillfactory.guide import run_beginner_guide
+
+    out_dir = Path(args.output) if getattr(args, "output", None) else None
+    return run_beginner_guide(
+        non_interactive=getattr(args, "non_interactive", False),
+        skill_name=getattr(args, "name", None),
+        platform=getattr(args, "platform", None),
+        output_dir=out_dir,
+    )
+
+
+def cmd_pack(args: argparse.Namespace) -> int:
+    """Handle `skillfactory pack` command (Phase 15, Workstream D)."""
+    from skillfactory.pack import get_pack, install_pack, load_packs, uninstall_pack, verify_pack
+
+    action = getattr(args, "pack_action", None)
+    if not action or action == "list":
+        packs = load_packs()
+        cat = getattr(args, "category", None)
+        if cat:
+            packs = [p for p in packs if p.category.lower() == cat.lower()]
+
+        if getattr(args, "json", False):
+            print(json.dumps({"packs": [p.to_dict() for p in packs]}, indent=2))
+        else:
+            print("=" * 70)
+            print(" Curated Domain Skill Packs (Phase 15)")
+            print("=" * 70)
+            for p in packs:
+                print(f"• {p.name} [{p.id}] ({p.category.capitalize()})")
+                print(f"  {p.description}")
+                print(f"  Skills ({len(p.skills)}): {', '.join(p.skills)}\n")
+            print("To install a pack:   skillfactory pack install <pack_id> --target <platform>")
+            print("To verify a pack:    skillfactory pack verify <pack_id>")
+        return 0
+
+    elif action == "install":
+        pack_id = args.pack_id
+        target = args.target
+        scope = getattr(args, "scope", "project")
+        force = getattr(args, "force", False)
+        yes = getattr(args, "yes", False)
+
+        res = install_pack(
+            pack_id=pack_id,
+            target_platform=target,
+            scope=scope,
+            force=force,
+            yes=yes,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            print(format_msg("OK", f"Installed {res['installed_count']} skills from pack '{res['pack_name']}' into '{target}'"))
+            for s in res["skills"]:
+                print(f"  • {s['skill']} -> {s['installed_path']}")
+        return 0
+
+    elif action == "verify":
+        pack_id = args.pack_id
+        res = verify_pack(pack_id)
+        if getattr(args, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            print("=" * 70)
+            print(f" Verification Report: Pack '{res['pack_name']}'")
+            print("=" * 70)
+            status_tag = "OK" if res["all_clean"] else "WARN"
+            skill_results = res.get("results", [])
+            valid_count = len([s for s in skill_results if s.get("valid") and s.get("tests_passed") and s.get("safety_clean")])
+            total_count = res.get("total_skills", len(skill_results))
+            print(format_msg(status_tag, f"Overall: {valid_count}/{total_count} skills verified"))
+            for s in skill_results:
+                sk_tag = "OK" if s.get("valid") and s.get("tests_passed") and s.get("safety_clean") else "FAIL"
+                print(format_msg(sk_tag, f"{s['skill']}: {s.get('grade', 'N/A')} ({s.get('score', 0)}/100)"))
+        return 0 if res["all_clean"] else 1
+
+    elif action == "preview":
+        pack_id = args.pack_id
+        target = args.target
+        scope = getattr(args, "scope", "project")
+        from skillfactory.pack import preview_pack
+        res = preview_pack(pack_id=pack_id, target_platform=target, scope=scope)
+        if getattr(args, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            print("=" * 70)
+            print(f" Installation Preview: Pack '{res['pack_name']}' -> {target}")
+            print("=" * 70)
+            if res["conflicts_detected"]:
+                print(format_msg("WARN", "Conflicts detected! Some skills already exist at target destination:"))
+            else:
+                print(format_msg("OK", "No conflicts detected. Safe to install."))
+            for s in res["skills"]:
+                conflict_mark = f" [CONFLICT: {s.get('conflict_path')}]" if s.get("conflict") else ""
+                print(f"• {s['skill']} ({s.get('files_count', 0)} files) -> {s.get('target_dir')}{conflict_mark}")
+            if res["conflicts_detected"]:
+                print("\nUse '--force' during install to overwrite existing skills.")
+        return 0
+
+    return 2
+
+
+def cmd_ai_create(args: argparse.Namespace) -> int:
+    """Handle `skillfactory ai-create` command (Phase 15, Workstream E)."""
+    from skillfactory.ai.engine import AIAssistedEngine
+    from skillfactory.ai.mock_provider import MockAIProvider
+    from skillfactory.ai.ollama import OllamaProvider
+    from skillfactory.ai.openai_compat import OpenAICompatibleProvider
+
+    prompt = getattr(args, "prompt", None) or getattr(args, "prompt_flag", None)
+    if not prompt and sys.stdin.isatty():
+        try:
+            prompt = input("Describe the skill you want to create (natural language): ").strip()
+        except (EOFError, KeyboardInterrupt):
+            return 1
+
+    if not prompt:
+        err = SkillFactoryError(
+            message="Prompt is required for AI-assisted skill creation.",
+            why="No requirement description was provided via positional argument or '--prompt'.",
+            suggestion="Run with a description, e.g.: skillfactory ai-create 'Validate JSON configurations and check required keys'",
+            exit_code=2,
+        )
+        print(err.format_user_message(), file=sys.stderr)
+        return 2
+
+    provider_name = getattr(args, "provider", "auto")
+    if provider_name == "mock-passing":
+        provider = MockAIProvider(mode="passing")
+    elif provider_name == "mock-repair":
+        provider = MockAIProvider(mode="repair_needed")
+    elif provider_name == "mock-dangerous":
+        provider = MockAIProvider(mode="dangerous")
+    elif provider_name == "ollama":
+        provider = OllamaProvider()
+    elif provider_name == "openai-compat":
+        provider = OpenAICompatibleProvider()
+    else:
+        provider = None  # engine auto-detects
+
+    engine = AIAssistedEngine(provider=provider, max_repairs=getattr(args, "max_repairs", 3))
+    out_dir = getattr(args, "output", "generated-skills")
+    name = getattr(args, "name", None)
+
+    if not getattr(args, "json", False):
+        prov_name = provider.display_name if provider else "Auto-Detected Provider"
+        print(format_msg("INFO", f"Synthesizing skill via AI Engine ({prov_name})..."))
+
+    res = engine.build_skill(
+        requirement=prompt,
+        output_dir=out_dir,
+        preferred_name=name,
+    )
+
+    if getattr(args, "json", False):
+        print(json.dumps(res.to_dict(), indent=2))
+    else:
+        if res.status == "success":
+            print(format_msg("OK", f"Skill '{res.skill_name}' successfully created and validated!"))
+            print(f"  • Destination : {res.output_dir}")
+            print(f"  • Quality     : {res.grade} ({res.eval_score}/100)")
+            print(f"  • Self-Repairs: {res.repair_count}")
+            print(f"  • Explanation : {res.explanation}\n")
+
+            auto_target = getattr(args, "auto_install", None)
+            if auto_target:
+                from skillfactory.installer import install_skill
+                try:
+                    i_res = install_skill(skill_path=res.output_dir, target_platform=auto_target)
+                    print(format_msg("OK", f"Installed into {auto_target}: {i_res.installed_path}"))
+                except Exception as e:
+                    print(format_msg("WARN", f"Auto-installation error: {e}"))
+        else:
+            tag = "ERROR" if res.status == "safety_rejected" else "FAIL"
+            print(format_msg(tag, f"AI skill generation halted ({res.status})"))
+            print(f"  • Details: {res.explanation}")
+
+    return 0 if res.status == "success" else 1
+
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the top-level argument parser."""
     common_parser = argparse.ArgumentParser(add_help=False)
@@ -964,9 +1181,14 @@ def create_parser() -> argparse.ArgumentParser:
 
     # Command: search
     search_parser = subparsers.add_parser("search", parents=[common_parser], help="Search skills offline in catalog by keyword or tag (<100ms)")
-    search_parser.add_argument("query", help="Keyword, tag, or topic to search for")
+    search_parser.add_argument("query", nargs="?", default="", help="Keyword, tag, or topic to search for")
     search_parser.add_argument("--dir", default=".", help="Directory of skills to search (default: . or examples)")
     search_parser.add_argument("--tag", help="Filter by specific tag")
+    search_parser.add_argument("--domain", help="Filter by domain (Personal, Professional, Developer and AI)")
+    search_parser.add_argument("--category", help="Filter by category")
+    search_parser.add_argument("--platform", help="Filter by supported platform")
+    search_parser.add_argument("--grade", help="Filter by minimum quality grade (e.g. A, B)")
+    search_parser.add_argument("--type", help="Filter by template family (e.g. python-script)")
 
     # Command: export
     export_parser = subparsers.add_parser("export", parents=[common_parser], help="Export an Agent Skill to portable .zip with SHA-256")
@@ -986,6 +1208,51 @@ def create_parser() -> argparse.ArgumentParser:
     publish_parser.add_argument("--output", help="Target output repository directory")
     publish_parser.add_argument("--repo", help="Target GitHub repository (e.g. username/skill-name)")
     publish_parser.add_argument("--force", action="store_true", help="Overwrite output directory if it exists")
+
+    # Command: guide
+    guide_parser = subparsers.add_parser("guide", parents=[common_parser], help="Interactive step-by-step beginner onboarding wizard")
+    guide_parser.add_argument("--name", help="Skill name to create")
+    guide_parser.add_argument("--platform", help="Target AI assistant platform")
+    guide_parser.add_argument("--output", default="skills", help="Output directory (default: skills)")
+    guide_parser.add_argument("--non-interactive", action="store_true", help="Run wizard non-interactively with safe defaults")
+
+    # Command: pack
+    pack_parser = subparsers.add_parser("pack", parents=[common_parser], help="Manage curated domain skill packs")
+    pack_sub = pack_parser.add_subparsers(dest="pack_action")
+
+    pack_list = pack_sub.add_parser("list", parents=[common_parser], help="List all available curated skill packs")
+    pack_list.add_argument("--category", choices=["personal", "professional", "developer"], help="Filter by category")
+
+    pack_prev = pack_sub.add_parser("preview", parents=[common_parser], help="Preview installation, files, and conflict detection for a pack")
+    pack_prev.add_argument("pack_id", help="Identifier of the pack")
+    pack_prev.add_argument("--target", "--platform", dest="target", required=True, help="Target AI platform")
+    pack_prev.add_argument("--scope", default="project", choices=["project", "user"], help="Installation scope")
+
+    pack_inst = pack_sub.add_parser("install", parents=[common_parser], help="Install all skills in a pack into a target AI platform")
+    pack_inst.add_argument("pack_id", help="Identifier of the pack (e.g., office-productivity, finance-erp)")
+    pack_inst.add_argument("--target", "--platform", dest="target", required=True, help="Target AI platform")
+    pack_inst.add_argument("--scope", default="project", choices=["project", "user"], help="Installation scope")
+    pack_inst.add_argument("--force", action="store_true", help="Force overwrite existing skills")
+    pack_inst.add_argument("--yes", action="store_true", help="Non-interactive confirmation")
+
+    pack_ver = pack_sub.add_parser("verify", parents=[common_parser], help="Verify integrity, tests, and safety of skills in a pack")
+    pack_ver.add_argument("pack_id", help="Identifier of the pack")
+
+    pack_uninst = pack_sub.add_parser("uninstall", parents=[common_parser], help="Uninstall all skills in a pack from a target AI platform")
+    pack_uninst.add_argument("pack_id", help="Identifier of the pack")
+    pack_uninst.add_argument("--target", "--platform", dest="target", required=True, help="Target AI platform")
+    pack_uninst.add_argument("--yes", action="store_true", help="Non-interactive confirmation")
+
+    # Command: ai-create (and alias ai)
+    for ai_cmd in ("ai-create", "ai"):
+        ai_parser = subparsers.add_parser(ai_cmd, parents=[common_parser], help="Create an Agent Skill from natural language using AI assistance")
+        ai_parser.add_argument("prompt", nargs="?", help="Natural language description of the skill")
+        ai_parser.add_argument("--prompt", dest="prompt_flag", help="Natural language description of the skill")
+        ai_parser.add_argument("--name", help="Preferred skill name (kebab-case)")
+        ai_parser.add_argument("--provider", default="auto", choices=["auto", "ollama", "openai-compat", "mock-passing", "mock-repair", "mock-dangerous"], help="AI provider (default: auto)")
+        ai_parser.add_argument("--output", default="generated-skills", help="Output directory (default: generated-skills)")
+        ai_parser.add_argument("--max-repairs", type=int, default=3, help="Max test self-repair attempts (default: 3)")
+        ai_parser.add_argument("--auto-install", dest="auto_install", help="Target AI platform to automatically install into if validated")
 
     # Command: menu
     subparsers.add_parser("menu", help="Open the interactive beginner top menu (AC7.01)")
@@ -1010,11 +1277,14 @@ def cmd_interactive_top_menu() -> int:
     print("  [7] Platform health doctor (check AI agents)")
     print("  [8] Install a skill into an AI tool")
     print("  [9] List installed skills")
+    print("  [10] Beginner guided walkthrough (step-by-step wizard)")
+    print("  [11] AI-assisted skill creation (natural language)")
+    print("  [12] Curated domain skill packs (browse & install)")
     print("  [0] Exit")
     print("-" * 74)
 
     try:
-        choice = input("Enter your choice [0-9]: ").strip()
+        choice = input("Enter your choice [0-12]: ").strip()
     except (EOFError, KeyboardInterrupt):
         print("\nExiting Skill Factory. Goodbye!")
         return 0
@@ -1064,6 +1334,12 @@ def cmd_interactive_top_menu() -> int:
         return cmd_install(argparse.Namespace(path=p, target=None, scope="project", project=".", link=False, force=False, yes=False, json=False))
     elif choice == "9":
         return cmd_list(argparse.Namespace(json=False))
+    elif choice == "10":
+        return cmd_guide(argparse.Namespace(name=None, platform=None, output="skills", non_interactive=False, json=False))
+    elif choice == "11":
+        return cmd_ai_create(argparse.Namespace(prompt=None, prompt_flag=None, name=None, provider="auto", output="generated-skills", max_repairs=3, auto_install=None, json=False))
+    elif choice == "12":
+        return cmd_pack(argparse.Namespace(pack_action="list", category=None, json=False))
     else:
         print(f"Unknown choice '{choice}'. Run with --help for command line usage.")
         return 1
@@ -1085,6 +1361,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         if args.command == "menu":
             return cmd_interactive_top_menu()
+        elif args.command == "guide":
+            return cmd_guide(args)
+        elif args.command == "pack":
+            return cmd_pack(args)
+        elif args.command in ("ai-create", "ai"):
+            return cmd_ai_create(args)
         elif args.command == "new":
             return cmd_new(args)
         elif args.command == "interview":

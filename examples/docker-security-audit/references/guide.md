@@ -3,11 +3,13 @@
 Detailed evaluation criteria, severity definitions, and scoring guidelines for docker-security-audit.
 
 ## Severity Definitions
+
 - **High / Critical**: Blocker. Security flaw, data loss risk, or severe specification breakage.
 - **Medium**: Important issue affecting maintainability, performance, or edge cases.
 - **Low / Suggestion**: Minor style, documentation, or optimization improvement.
 
 ## Inspection Checklist Items
+
 1. Completeness: Check every mandatory element against requirements.
 2. Boundary Conditions: Test empty, large, or special-character edge cases.
 3. Clarity: Ensure feedback is actionable, polite, and prioritized.

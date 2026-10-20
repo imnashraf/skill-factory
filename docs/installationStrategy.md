@@ -21,7 +21,7 @@ Skill Factory provides a **safe, reversible, and multi-agent installation engine
 Skill Factory maps installation targets based on the platform and scope:
 
 | Target Platform | User (Global) Scope Target | Project (Local) Scope Target |
-|---|---|---|
+| --- | --- | --- |
 | **Claude Code** | `~/.claude/skills/<name>/` | `.claude/skills/<name>/` |
 | **Cursor** | `~/.cursor/skills/<name>/` *(or `~/.agents/skills/<name>/`)* | `.cursor/skills/<name>/` *(or `.agents/skills/<name>/`)* |
 | **OpenAI Codex** | `~/.agents/skills/<name>/` | `.agents/skills/<name>/` |
@@ -30,7 +30,8 @@ Skill Factory maps installation targets based on the platform and scope:
 *Note: On Windows, `~` resolves to `C:\Users\<Username>`.*
 
 ### Multi-Agent Awareness
-Notice that **Cursor, Codex, and Antigravity all support `.agents/skills/` at the project level**. 
+
+Notice that **Cursor, Codex, and Antigravity all support `.agents/skills/` at the project level**.
 When installing with `--scope project`, Skill Factory can target `.agents/skills/` once, making the skill available to Cursor, Codex, and Antigravity simultaneously without duplicating files.
 
 ---
@@ -39,7 +40,7 @@ When installing with `--scope project`, Skill Factory can target `.agents/skills
 
 ### 3.1 Installation (`skillfactory install <skill-path> --target <platform> [--scope user|project]`)
 
-```
+```text
 [ User runs install command ]
               |
               v
@@ -75,6 +76,7 @@ When installing with `--scope project`, Skill Factory can target `.agents/skills
 ```
 
 ### 3.2 Update (`skillfactory update <name> --target <platform>`)
+
 1. **Hash Verification:** Check whether files at the destination have been modified by the user since the last install (by comparing SHA-256 hashes against `manifest.json`).
 2. **Warning on Local Edits:** If the user made manual edits in the destination folder, Skill Factory warns: *"Files in the installed skill have been modified locally. Overwriting will erase these changes."*
 3. **Backup Snapshot:** Before replacing anything, the existing folder is zipped or copied into `<backup_dir>/<name>-<timestamp>.bak/`.
@@ -82,6 +84,7 @@ When installing with `--scope project`, Skill Factory can target `.agents/skills
 5. **Registry Update:** The registry is updated with new version numbers, timestamps, and hashes.
 
 ### 3.3 Rollback (`skillfactory rollback <name> --target <platform>`)
+
 1. Skill Factory locates the most recent backup in the local registry backup store.
 2. Displays the version being restored and asks for confirmation.
 3. Swaps the backup back into the platform directory.
@@ -89,6 +92,7 @@ When installing with `--scope project`, Skill Factory can target `.agents/skills
 5. Keeps at least the last 3 versions in reserve.
 
 ### 3.4 Uninstallation (`skillfactory uninstall <name> --target <platform>`)
+
 1. Checks the destination folder against the recorded manifest.
 2. If unknown files (not in manifest) are found, pauses and asks the user whether to delete them or preserve them.
 3. Removes the tracked files and the empty parent skill directory.
@@ -135,11 +139,13 @@ Stored in user data space (`~/.config/skillfactory/registry.json` on Linux/macOS
 
 ## 6. Self-Installation (Skill Factory as an Agent Skill)
 
-Skill Factory is itself packaged as a skill (`SKILL.md` at repository root). 
+Skill Factory is itself packaged as a skill (`SKILL.md` at repository root).
 Running:
+
 ```bash
 python3 -m skillfactory install-self --target claude-code --scope user
 ```
+
 installs Skill Factory into the chosen host assistant so the user can interactively say:
 > *"Use skill-factory to create a new skill for analyzing SQLite databases."*
 The assistant will read the root `SKILL.md` and use the built-in CLI to guide the user.

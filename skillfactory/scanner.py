@@ -74,6 +74,24 @@ PROMPT_INJECTION_PATTERNS = [
         re.compile(r"(?i)<(?:script|iframe|object|embed)[^>]*>"),
         "CRITICAL",
     ),
+    (
+        "INJ005",
+        "System Prompt Extraction Directive",
+        re.compile(r"(?i)\b(?:repeat|reveal|dump|leak)\s+(?:your\s+)?(?:system\s+prompt|initial\s+instructions|system\s+instructions)\b"),
+        "HIGH",
+    ),
+    (
+        "INJ006",
+        "Known Webhook / Exfiltration Endpoint",
+        re.compile(r"(?i)\b(?:webhook\.site|pastebin\.com|ngrok\.io|requestbin\.com)\b"),
+        "HIGH",
+    ),
+    (
+        "INJ007",
+        "Adversarial Roleplay Override",
+        re.compile(r"(?i)\b(?:act\s+as|pretend\s+you\s+are)\s+(?:an?\s+unrestricted|a\s+hacked|an?\s+evil|a\s+rogue)\b"),
+        "HIGH",
+    ),
 ]
 
 # File patterns to exclude from secret scanning (test fixtures, caches, etc.)

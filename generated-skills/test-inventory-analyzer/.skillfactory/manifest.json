@@ -1,0 +1,45 @@
+{
+  "skill_name": "test-inventory-analyzer",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "838b7a04131fb995f38a7313707ec6426686c330762d2e8828f3782f2002e816",
+      "bytes": 206
+    },
+    "SKILL.md": {
+      "sha256": "4b092239a2af7a6aa0cd0b366522874c38531b7eddde302d6373f6302e9af2ef",
+      "bytes": 1001
+    },
+    "examples/example.md": {
+      "sha256": "6990afa6e18070ea4acd9ba9e9180c7295b2dcfcc6f9c72521fb7819681d676b",
+      "bytes": 85
+    },
+    "examples/sample_tests.py": {
+      "sha256": "0e002a83951f0252106b4b6a1640752dd31344991f449c44e752c95b653ae469",
+      "bytes": 301
+    },
+    "references/guide.md": {
+      "sha256": "8bb9b9d8936c76db7f22f72f90c84ef8a464864cf2b63f5bf78682afd2da017e",
+      "bytes": 307
+    },
+    "scripts/main.py": {
+      "sha256": "0ceba3deb0f87eefda30c6da22794176f455f7e6bc7fdcfb6f0297f4899d52ea",
+      "bytes": 5120
+    },
+    "tests/test_main.py": {
+      "sha256": "b1b98b5690cce07b53f2fb197d5c8a89adf5ee8f8820f60a89eeb8b75111f73c",
+      "bytes": 1459
+    }
+  }
+}

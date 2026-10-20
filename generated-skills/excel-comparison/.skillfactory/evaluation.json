@@ -1,0 +1,173 @@
+{
+  "skill_name": "excel-comparison",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/excel-comparison",
+  "total_score": 98,
+  "grade": "Grade A",
+  "dimensions": [
+    {
+      "name": "Spec Compliance & Structure",
+      "dimension_id": "EV-01",
+      "earned": 23,
+      "max_points": 25,
+      "items": {
+        "mandatory_files": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md and README.md both exist"
+        },
+        "valid_frontmatter": {
+          "earned": 5,
+          "max": 5,
+          "note": "YAML frontmatter parsed without errors"
+        },
+        "name_conformance": {
+          "earned": 5,
+          "max": 5,
+          "note": "Skill name conforms to lowercase kebab-case rules"
+        },
+        "description_quality": {
+          "earned": 3,
+          "max": 5,
+          "note": "Description present but could be more specific regarding trigger conditions"
+        },
+        "relative_file_links": {
+          "earned": 5,
+          "max": 5,
+          "note": "All markdown file links resolve successfully"
+        }
+      }
+    },
+    {
+      "name": "Cross-Platform Portability",
+      "dimension_id": "EV-02",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "no_absolute_paths": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero hardcoded absolute paths found"
+        },
+        "reserved_names": {
+          "earned": 5,
+          "max": 5,
+          "note": "Clean of Windows and platform-reserved names"
+        },
+        "line_endings_and_encoding": {
+          "earned": 5,
+          "max": 5,
+          "note": "All text files are valid UTF-8 with standard LF line endings"
+        },
+        "portable_interpreters": {
+          "earned": 5,
+          "max": 5,
+          "note": "Portable invocation patterns used"
+        }
+      }
+    },
+    {
+      "name": "Documentation & Progressive Disclosure",
+      "dimension_id": "EV-03",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "concise_main_file": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md is concise (40 lines <= 500 limit)"
+        },
+        "progressive_disclosure": {
+          "earned": 5,
+          "max": 5,
+          "note": "Progressive disclosure utilized with modular subdirectories"
+        },
+        "examples_included": {
+          "earned": 5,
+          "max": 5,
+          "note": "Concrete usage examples provided"
+        },
+        "limitations_documented": {
+          "earned": 5,
+          "max": 5,
+          "note": "Operational constraints and prerequisites documented"
+        }
+      }
+    },
+    {
+      "name": "Test Coverage & Execution",
+      "dimension_id": "EV-04",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "test_suite_present": {
+          "earned": 5,
+          "max": 5,
+          "note": "Test suite present with 1 test file(s)"
+        },
+        "structural_tests_pass": {
+          "earned": 5,
+          "max": 5,
+          "note": "Baseline test suite executes without failures"
+        },
+        "behavioral_execution": {
+          "earned": 5,
+          "max": 5,
+          "note": "Tests ran successfully in 0.01s (< 10.0s timeout)"
+        },
+        "honest_reporting": {
+          "earned": 5,
+          "max": 5,
+          "note": "All 6 assertions executed and verified"
+        }
+      }
+    },
+    {
+      "name": "Code Safety & Secrets Scan",
+      "dimension_id": "EV-05",
+      "earned": 15,
+      "max_points": 15,
+      "items": {
+        "clean_secret_scan": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero credentials, API tokens, or private keys detected"
+        },
+        "ast_safety_check": {
+          "earned": 5,
+          "max": 5,
+          "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
+        },
+        "manifest_integrity": {
+          "earned": 5,
+          "max": 5,
+          "note": "All files match their recorded SHA-256 manifest hashes"
+        }
+      }
+    }
+  ],
+  "summary": "Skill Quality Score: 98 / 100 [Grade A]",
+  "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
+  "test_result": {
+    "success": true,
+    "tests_run": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_sec": 0.009,
+    "timed_out": false,
+    "error_message": null,
+    "stdout": "Spreadsheet Comparison Report\n============================================================\nBase File:     /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmphfouuam7/base.csv (2 rows)\nCompared File: /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmphfouuam7/updated.csv (2 rows)\nStatus:        DIFFERENCES FOUND\n------------------------------------------------------------\nSummary:       1 identical, 1 modified, 0 added, 0 removed\n\nDiscrepancy Details:\n  [MODIFIED] 101: role: 'Engineer' -> 'Senior Engineer', salary: '120000' -> '140000'\nSpreadsheet Comparison Report\n============================================================\nBase File:     /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpa8i1n93s/base.csv (2 rows)\nCompared File: /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpa8i1n93s/copy.csv (2 rows)\nStatus:        IDENTICAL\n------------------------------------------------------------\nSummary:       2 identical, 0 modified, 0 added, 0 removed\n\n",
+    "stderr": "test_cli_json_and_output_file (test_main.ExcelComparisonTests.test_cli_json_and_output_file)\nCLI flags --json and --output generate valid structured output file. ... ok\ntest_csv_added_and_removed_rows (test_main.ExcelComparisonTests.test_csv_added_and_removed_rows)\nAdded and removed rows are detected accurately based on primary key. ... ok\ntest_csv_modifications_detected (test_main.ExcelComparisonTests.test_csv_modifications_detected)\nModified cells are accurately detected with old and new values. ... ok\ntest_file_not_found_handling (test_main.ExcelComparisonTests.test_file_not_found_handling)\nMissing input file exits cleanly with return code 2 without stack trace. ... Error: File 1 does not exist: /nonexistent/f1.csv\nok\ntest_identical_csv_comparison (test_main.ExcelComparisonTests.test_identical_csv_comparison)\nComparing identical CSV spreadsheets returns is_identical=True and exit code 0. ... ok\ntest_xlsx_spreadsheets_comparison (test_main.ExcelComparisonTests.test_xlsx_spreadsheets_comparison)\nVerify native .xlsx spreadsheet comparison works without third-party dependencies. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.009s\n\nOK\n",
+    "test_files_found": 1
+  },
+  "safety_summary": {
+    "is_clean": true,
+    "files_scanned": 11,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 0,
+    "findings": []
+  },
+  "timestamp": "2026-10-20T13:32:03.781325+00:00"
+}

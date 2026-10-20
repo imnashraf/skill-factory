@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-10-20
+
+### Added
+
+- **PyPI Distribution Readiness (Workstream A)**:
+  - Packaging configuration verified in `pyproject.toml` with dual console scripts: `skillfactory` and `skill-factory`.
+  - Comprehensive bundled package data rules ensuring `data/*/*.json` and subdirectories are fully included in wheels.
+  - PyPI namespace collision audit documented; publication pathway configured via GitHub Actions OIDC Trusted Publishing (`.github/workflows/pypi-publish.yml`).
+  - Isolated clean-environment installation testing verified outside source tree.
+- **Beginner Onboarding & Guided UX (Workstream B)**:
+  - Interactive step-by-step onboarding wizard (`skillfactory guide`) covering diagnostic pre-flight, assistant selection, specification, generation, and optional installation.
+  - Enhanced top-level interactive menu with choices 0–12 and zero required flags.
+- **Curated Domain Skill Packs (Workstream D)**:
+  - 3-tier domain taxonomy schema (Personal, Professional, Developer) covering 31 domain specializations.
+  - 5 curated domain packs (`office-productivity`, `finance-erp`, `hr-workforce`, `project-management`, `developer-security`) defined in `skillfactory/data/packs.json`.
+  - Full pack lifecycle CLI manager (`skillfactory pack list`, `install`, `verify`, `uninstall`) with atomic rollback on partial batch failures.
+  - 9 new production-grade reference skills (total 14 skills in library), all achieving Grade A (≥90/100) on the quality rubric.
+- **Optional AI-Assisted Skill Creation (Workstream E)**:
+  - Provider-neutral AI creation engine (`skillfactory ai-create`) supporting local Ollama, OpenAI-compatible APIs, and offline deterministic mock providers.
+  - Pre-execution AST safety quarantine scanning for dangerous calls before running tests.
+  - Isolated subprocess execution sandbox (10.0s timeout) with bounded self-repair loop (up to 3 retries).
+- **Multi-Agent Platform Expansion (Workstream F)**:
+  - Expanded compatibility to 8 AI coding assistants: Claude Code, Google Antigravity, Cursor, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
+  - Added native detection rules, directory schemas, and shorthand alias normalization (`windsurf`, `codeium`, `continue`, `cline`, `copilot`, `github-copilot`).
+- **Security & Quality Hardening (Workstream G)**:
+  - Symlink escape defense in file installer and package importer preventing access to files outside skill directory.
+  - 3 new prompt injection rules (`INJ005` system prompt extraction, `INJ006` webhook exfiltration, `INJ007` adversarial roleplay).
+  - Multiagent validation suite expanded to test all 8 platforms through 6-stage lifecycle (`install`, `validate`, `execute`, `update`, `rollback`, `uninstall`).
+- **Natural-Language Requirements & Behavioral Testing (Phase 16)**:
+  - Natural-language requirement parser (`skillfactory/ai/requirements.py`) extracting intent, constraints, inputs/outputs, and generating an automated assumption register.
+  - Automated behavioral unit test generation (`skillfactory/ai/test_gen.py`) establishing traceability matrices mapped directly to user acceptance criteria.
+  - Deterministic non-AI fallback synthesis engine and bounded self-repair loop with automated code modification diffing.
+- **Skill Library, Multi-Attribute Discovery & Community Quarantine (Phase 17)**:
+  - 3-tier domain taxonomy and multi-attribute catalog search filtering by tags, author, platform, and minimum quality score.
+  - Pack installation preview CLI with target filesystem inspection and destination collision detection.
+  - Community submission quarantine gate with pre-execution AST screening and manifest integrity verification.
+- **Production Hardening & 16-Vector Threat Model (Phase 18)**:
+  - Comprehensive 16-vector security audit (`docs/final-development/securityFindings.md`) covering Zip-Slip, symlink escapes, AST dangerous calls, secrets, prompt injection, and host isolation.
+  - Multiagent validation suite expanded to 8 platforms across all 6 lifecycle stages (`install`, `validate`, `execute`, `update`, `rollback`, `uninstall`).
+  - Production benchmark harness confirming sub-10ms CLI launch and high-throughput AST scanning.
+- **Markdown Quality & CI Regression Suite**:
+  - Full remediation of 179 Markdown formatting violations across all 152 repository documentation files and skills.
+  - Template engine updates ensuring zero blank-line or heading violations (MD022, MD031, MD032, MD040, MD058, MD060).
+  - Automated CI regression test suite (`tests/test_markdown_lint.py`) integrated into GitHub Actions across Ubuntu, macOS, and Windows.
+- **Community & Launch Kit (Workstreams C & H)**:
+  - Community launch preparation kit with platform-tailored announcements for Hacker News, Reddit, and LinkedIn.
+  - GitHub issue forms (`bug_report.yml`, `feature_request.yml`) and pull request template (`pull_request_template.md`).
+  - Zero-telemetry adoption measurement policy.
+
+---
+
 ## [1.1.0] - 2026-10-19
 
 ### Added

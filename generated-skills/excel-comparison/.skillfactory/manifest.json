@@ -1,0 +1,45 @@
+{
+  "skill_name": "excel-comparison",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "014e3667f12b7ffe57ea76c474c03b2194d790c26c2143f62cef12dc4d934a99",
+      "bytes": 625
+    },
+    "LICENSE": {
+      "sha256": "2974baf80d5207630114cbeaff0c6d7f362b7a7fb8b3056306c6713c4e2676bb",
+      "bytes": 1071
+    },
+    "README.md": {
+      "sha256": "f76f4065295274f73c48553eeaa5974e5d89626407ccd52fcfca42ee79d74894",
+      "bytes": 1034
+    },
+    "SKILL.md": {
+      "sha256": "3e026cace93a9b5056dd2ac503c5310bfa1cf98be3a7a0c9a665003926c91374",
+      "bytes": 1373
+    },
+    "examples/example.md": {
+      "sha256": "29f18e75ff102f08ddd8340ec2517a7a8126d910863cb385cc39baf8582e7095",
+      "bytes": 307
+    },
+    "references/guide.md": {
+      "sha256": "79bdcac1f434e4beb6b92f8b0d8d7a25c26c7c39eb7ea6d4ddbab13d822f8a15",
+      "bytes": 389
+    },
+    "scripts/main.py": {
+      "sha256": "601bbd36074d4360823c59ab6f1a29616327104c59bcc30d1f4153b50995027a",
+      "bytes": 12635
+    },
+    "tests/test_main.py": {
+      "sha256": "aa9eae82f9230c30bbf7e30cd31da799864418e4e2cb604bf003716e09dda7db",
+      "bytes": 9366
+    }
+  }
+}

@@ -17,43 +17,54 @@ Skill Factory is built to be a rock-solid, dependable tool. Because users will r
 ## 2. Test Levels & Categories (`TS-xx`)
 
 ### TS-01: Unit Tests
+
 Test individual functions and classes in isolation:
+
 - `SkillSpec` schema validation (invalid names, missing descriptions).
 - Safe YAML serializer handling problematic strings (colons, hashtags, quotes, unicode).
 - Path sanitization and name normalization.
 - AST safety scanner node detection.
 
 ### TS-02: Integration Tests
+
 Test multi-step workflows end-to-end:
+
 - `new` -> `validate` -> `test` -> `eval` -> `install` -> `update` -> `rollback` -> `uninstall`.
 - Verify that registry files and manifests are updated accurately at each step.
 
 ### TS-03: Golden-File Determinism Tests
+
 Verify that given a fixed `skill-spec.json`, the generated folder produces byte-identical files against a verified "golden" reference directory (excluding timestamp fields in `manifest.json`).
 
 ### TS-04: Negative & Failure-Recovery Tests
+
 Verify graceful failure handling and no half-written states:
+
 - Write failure during atomic generation (simulated by read-only permissions in temp dir).
 - Refusal to overwrite an unmanaged directory.
 - Rejection of malicious zip archives containing Zip-Slip paths (`../../`).
 
 ### TS-05: Zero External Runtime Dependencies Test (`tests/test_no_third_party_imports.py`)
+
 An automated test that scans all imports in the `skillfactory/` package and verifies that 100% of imported modules belong to Python's standard library. Fails immediately if any third-party package is imported.
 
 ### TS-06: Strict Offline Test (`tests/test_offline.py`)
+
 An automated test that temporarily monkey-patches `socket.socket` to raise an error if any network connection is attempted. All core commands (`new`, `validate`, `test`, `eval`, `install`) are executed under this constraint to prove 100% offline capability.
 
 ### TS-07: Cross-Platform Path & Encoding Tests (`tests/test_paths.py`)
+
 Tests executing operations inside paths with spaces (e.g., `C:\My Documents\Skill Factory`), non-ASCII characters (`/tmp/skills-测试`), and long path structures. Enforces UTF-8 file reading and LF line endings.
 
 ### TS-08: Subprocess Timeout & Crash Protection Tests
+
 Tests that the test runner correctly catches and kills scripts with infinite loops (`while True: pass`), reports memory or exit-code errors, and does not hang the CLI.
 
 ---
 
 ## 3. Test Suite Directory Layout
 
-```
+```text
 tests/
 ├── __init__.py
 ├── test_generator.py             # Existing Phase 0 tests + Core generation tests
@@ -73,15 +84,18 @@ tests/
 
 ## 4. How to Run Tests
 
-### Run all tests:
+### Run all tests
+
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-### Run a specific test module:
+### Run a specific test module
+
 ```bash
 python3 -m unittest tests/test_validator.py -v
 ```
 
-### Run in CI:
+### Run in CI
+
 Automated across `ubuntu-latest`, `macos-latest`, and `windows-latest` on Python 3.9, 3.11, and 3.13 on every push and pull request.

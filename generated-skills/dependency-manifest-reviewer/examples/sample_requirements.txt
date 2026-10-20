@@ -1,0 +1,8 @@
+# Core production dependencies
+packaging==24.0
+setuptools==69.2.0
+
+# Risky entries for demonstration
+unpinned-library
+fastapi>=0.100.0
+git+https://github.com/org/helper.git

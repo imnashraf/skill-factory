@@ -39,7 +39,16 @@ class PlatformDatabaseTests(unittest.TestCase):
         self.assertIn("platforms", self.db)
 
         platforms = self.db["platforms"]
-        expected_platforms = {"claude-code", "cursor", "codex", "antigravity"}
+        expected_platforms = {
+            "claude-code",
+            "cursor",
+            "codex",
+            "antigravity",
+            "windsurf",
+            "continue",
+            "cline",
+            "copilot",
+        }
         self.assertEqual(set(platforms.keys()), expected_platforms)
 
     def test_required_platform_fields(self):
@@ -275,6 +284,13 @@ class PlatformAliasNormalizationTests(unittest.TestCase):
         self.assertEqual(normalize_platform_id("google"), "antigravity")
         self.assertEqual(normalize_platform_id("agy"), "antigravity")
         self.assertEqual(normalize_platform_id("antigravity"), "antigravity")
+        self.assertEqual(normalize_platform_id("codeium"), "windsurf")
+        self.assertEqual(normalize_platform_id("windsurf"), "windsurf")
+        self.assertEqual(normalize_platform_id("continuedev"), "continue")
+        self.assertEqual(normalize_platform_id("continue"), "continue")
+        self.assertEqual(normalize_platform_id("cline"), "cline")
+        self.assertEqual(normalize_platform_id("github-copilot"), "copilot")
+        self.assertEqual(normalize_platform_id("copilot"), "copilot")
 
     def test_get_platform_with_aliases(self):
         claude_def = get_platform("claude")

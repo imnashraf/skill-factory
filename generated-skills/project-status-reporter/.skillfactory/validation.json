@@ -1,0 +1,13 @@
+{
+  "is_valid": true,
+  "skill_name": "project-status-reporter",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/generated-skills/project-status-reporter",
+  "errors": [],
+  "warnings": [],
+  "metadata": {
+    "frontmatter": {
+      "name": "project-status-reporter",
+      "description": "Generates executive weekly project status reports from milestone and task CSV files, computing completion percentage, tracking progress, and flagging blocked deliverables."
+    }
+  }
+}

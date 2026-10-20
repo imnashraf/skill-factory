@@ -55,6 +55,14 @@ PLATFORM_ALIASES: Dict[str, str] = {
     "google": "antigravity",
     "google-antigravity": "antigravity",
     "gemini": "antigravity",
+    "windsurf": "windsurf",
+    "codeium": "windsurf",
+    "continue": "continue",
+    "continuedev": "continue",
+    "cline": "cline",
+    "copilot": "copilot",
+    "github-copilot": "copilot",
+    "github": "copilot",
 }
 
 

@@ -1,0 +1,45 @@
+{
+  "skill_name": "security-config-scanner",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "fd53029eb45a4c9a0afd99b059875d5b47f1a487f778b8287073d19b020d6c06",
+      "bytes": 579
+    },
+    "LICENSE": {
+      "sha256": "2974baf80d5207630114cbeaff0c6d7f362b7a7fb8b3056306c6713c4e2676bb",
+      "bytes": 1071
+    },
+    "README.md": {
+      "sha256": "9c74ea57f1247874f6fa24a8ec96ea42d2bf9a8fc0801ae010d565e6b064ece4",
+      "bytes": 1009
+    },
+    "SKILL.md": {
+      "sha256": "a73015d3ad1c49f0788aeadb79702efaffea0da2ac3354c40721205a894176ac",
+      "bytes": 1251
+    },
+    "examples/example.md": {
+      "sha256": "04c32fce5d2a1a08a89880b74bdad082c551428cffab1a2e26fac344df0fe233",
+      "bytes": 268
+    },
+    "references/guide.md": {
+      "sha256": "98e4fbb12f8ef0dba65ee030d8aa591c8977f3c0286abe5361992feacad6fcde",
+      "bytes": 403
+    },
+    "scripts/main.py": {
+      "sha256": "45ed0dd4a12e80aae7b4f598fe4058d06cd56d030b715e6400c40159a6011693",
+      "bytes": 8021
+    },
+    "tests/test_main.py": {
+      "sha256": "f04b27c5f920c906d334ca934a748c37d797af4b40301559992efdaed4a5e01a",
+      "bytes": 3724
+    }
+  }
+}

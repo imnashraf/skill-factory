@@ -1,0 +1,45 @@
+{
+  "skill_name": "attendance-csv-validator",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.0",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-19T20:00:00+00:00",
+  "updated_at": "2026-10-20T00:00:00+00:00",
+  "files": {
+    "LICENSE": {
+      "sha256": "ec60eb0312c0c1922a15e9b63d35eb4f00962e5cde89ca2e5fb2be6e2356888f",
+      "bytes": 1085
+    },
+    "README.md": {
+      "sha256": "ce00d5e35c8fabff2695cae2923478907ddb0ad5fe6077726d9cdd13bd0b4ae0",
+      "bytes": 236
+    },
+    "SKILL.md": {
+      "sha256": "9eb5643e122b378aace3f27e46be14fbc2f8e0df0d7ec64e20b0be44bc963d78",
+      "bytes": 1114
+    },
+    "examples/example.md": {
+      "sha256": "432375171f25dfe4b2679be9f765a21515cfe57a44a33ec50f1ba5eb0b132e8c",
+      "bytes": 113
+    },
+    "examples/sample_attendance.csv": {
+      "sha256": "709e4868ea0384bc58a1c8d64943f4b351c2deefe2c1a0287cdb1d1a33c27ab4",
+      "bytes": 186
+    },
+    "references/guide.md": {
+      "sha256": "a8a1841d6ab96fcbf07bca3276fedd313c4dc55dca9170b4247218301a9f9122",
+      "bytes": 391
+    },
+    "scripts/main.py": {
+      "sha256": "44ec5dd64d8ddbc44ddecafcafff15bb0a7caa509cf9f035df76046526199c81",
+      "bytes": 5915
+    },
+    "tests/test_main.py": {
+      "sha256": "fef4683a4492724ba711175c7d53c0755d70f71de96e02193d21828c2beceacb",
+      "bytes": 1593
+    }
+  }
+}

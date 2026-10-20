@@ -13,6 +13,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from skillfactory.compat.detect import detect_all_platforms
 from skillfactory.compat.platform_db import (
     detect_os_key,
+    get_all_platforms,
     get_platform,
     get_project_skill_paths,
     get_user_skill_path,
@@ -88,6 +89,15 @@ def copy_allow_listed_files(
         if item.name not in ALLOW_LIST_NAMES or is_ignored(item.name):
             continue
 
+        # Prevent symlink escape outside source skill folder
+        if item.is_symlink():
+            try:
+                resolved_target = item.resolve()
+                if not resolved_target.is_relative_to(src_dir.resolve()):
+                    continue
+            except Exception:
+                continue
+
         if item.is_file():
             dest_file = dest_dir / item.name
             try:
@@ -105,6 +115,16 @@ def copy_allow_listed_files(
                     if is_ignored(file_name):
                         continue
                     full_src_file = Path(root) / file_name
+
+                    # Prevent symlink escape inside subdirectories
+                    if full_src_file.is_symlink():
+                        try:
+                            resolved_target = full_src_file.resolve()
+                            if not resolved_target.is_relative_to(src_dir.resolve()):
+                                continue
+                        except Exception:
+                            continue
+
                     rel_to_skill = full_src_file.relative_to(src_dir)
                     dest_file = dest_dir / rel_to_skill
                     dest_file.parent.mkdir(parents=True, exist_ok=True)
@@ -141,8 +161,9 @@ def install_skill(
     canonical_platform = normalize_platform_id(target_platform)
     pdef = get_platform(canonical_platform)
     if not pdef:
+        all_p = ", ".join(sorted(get_all_platforms().keys()))
         raise ValueError(
-            f"Unknown platform '{target_platform}'. Supported platforms: claude-code, cursor, codex, antigravity (or aliases 'claude', 'openai', 'google')."
+            f"Unknown platform '{target_platform}'. Supported platforms: {all_p}."
         )
 
     # Determine destination directory

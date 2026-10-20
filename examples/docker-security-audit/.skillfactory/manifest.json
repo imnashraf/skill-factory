@@ -2,17 +2,13 @@
   "skill_name": "docker-security-audit",
   "skill_version": "0.1.0",
   "generator_name": "skillfactory",
-  "generator_version": "0.1.0",
+  "generator_version": "1.2.0",
   "template_id": "checklist-review",
   "template_version": "1.0.0",
   "spec_schema_version": 1,
   "created_at": "2026-10-18T22:15:12.228286+00:00",
-  "updated_at": "2026-10-18T22:15:12.228286+00:00",
+  "updated_at": "2026-10-19T22:01:09.685847+00:00",
   "files": {
-    ".skillfactory/evaluation.json": {
-      "sha256": "6cae18aadc23a19a1f5a9a746439d144584c1f1c8b4a151a72b89de601c857ff",
-      "bytes": 4410
-    },
     ".skillfactory/skill-spec.json": {
       "sha256": "8d53a166b120a01e07a8c6a060d5fe55b91cfb7bc81c9a020d363cfe50868198",
       "bytes": 630
@@ -22,20 +18,20 @@
       "bytes": 1075
     },
     "README.md": {
-      "sha256": "6e29b0db6bb131be77ee339f3d7d3c313867a06d81eef79e8f96b7af386af3aa",
-      "bytes": 890
+      "sha256": "1fb99de6ab5ef23c1b0adedf47f72ece47c60bbabd0f8ae904a8341523cab6df",
+      "bytes": 900
     },
     "SKILL.md": {
-      "sha256": "72a92921d38e99de013ffdc4ec95bf681ce7f004b789aa98e3941b9968556614",
-      "bytes": 1851
+      "sha256": "330126cbb7862517c6d6fd7641227f031ef29f4a1159aea58ff6fc4942ca2ece",
+      "bytes": 1859
     },
     "examples/example.md": {
-      "sha256": "fc68c2bbe26f60db39c4a05d687036928698c78e2e312df756d8bda02eff2c10",
-      "bytes": 754
+      "sha256": "8b5dfaea1502364fc6faf7d3a8acd5620429289bd2d61376aa1b7a6f5958ee30",
+      "bytes": 756
     },
     "references/guide.md": {
-      "sha256": "7f2cd1bdf6878e5108ed41c044d2d2fb990665725ea7743cb25a0e24e1bd4a61",
-      "bytes": 690
+      "sha256": "01b69d4a789393db1305ac443b00b72e9e34cd6354ee20d74f47025baa7e3905",
+      "bytes": 692
     },
     "tests/test_audit_rules.py": {
       "sha256": "72e6bfdb5e858907ec39db63daba6e47673d3b5e59a1870e463b8f290bb53b05",

@@ -33,7 +33,9 @@ $$\text{Format: } \mathbf{MAJOR}.\mathbf{MINOR}.\mathbf{PATCH}$$
 ## 3. Automated CI / CD Pipeline
 
 ### 3.1 Push & Pull Request Workflow (`.github/workflows/tests.yml`)
+
 Runs automatically on every push to `main` and on all Pull Requests:
+
 1. **OS Matrix:** Runs parallel jobs on:
    - `ubuntu-latest` (Linux)
    - `macos-latest` (macOS)
@@ -49,7 +51,9 @@ Runs automatically on every push to `main` and on all Pull Requests:
    - Run a live generator smoke test.
 
 ### 3.2 Automated Release Workflow (`.github/workflows/release.yml`)
+
 Triggered automatically when a tag matching `v*` is pushed:
+
 1. Runs full test matrix across all 3 operating systems.
 2. Generates release assets:
    - `skill-factory-<version>.zip` (clean source package excluding `.git` and caches).
@@ -63,20 +67,24 @@ Triggered automatically when a tag matching `v*` is pushed:
 Skill Factory provides three simple ways for users to obtain and use the tool:
 
 ### Method 1: Git Clone (Recommended for developers & early adopters)
+
 ```bash
 git clone https://github.com/imnashraf/skill-factory.git
 cd skill-factory
 python3 -m skillfactory
 ```
+
 - **Benefits:** Instant updates via `git pull`; easy contribution; zero package managers needed.
 
 ### Method 2: Standalone Zip Download (For beginners without Git)
+
 - Download `skill-factory-v1.0.0.zip` from GitHub Releases.
 - Extract anywhere on your machine.
 - Double-click or run `python3 -m skillfactory`.
 - Requires zero installation, compilation, or root privileges.
 
 ### Method 3: Optional PyPI Package (Phase 9+)
+
 - For users who prefer global CLI installation: `pip install skill-factory`.
 - Uses a lightweight, standard `pyproject.toml` (PEP 517/621).
 - Maintained with **zero runtime dependencies** so it installs in seconds without polluting the user's Python environment.
@@ -86,6 +94,7 @@ python3 -m skillfactory
 ## 5. Pre-Release Verification Checklist (Phase 9 Gate)
 
 Before tagging any release:
+
 - [ ] All 10 phases completed and accepted against `docs/acceptanceCriteria.md`.
 - [ ] All automated tests passing across Linux, macOS, Windows on Python 3.9, 3.11, 3.13.
 - [ ] No hardcoded secrets, personal paths, or credentials in any file (`SEC-02`).

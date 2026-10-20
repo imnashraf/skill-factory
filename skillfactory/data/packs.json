@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-10-19T00:00:00Z",
+  "packs": [
+    {
+      "id": "office-productivity",
+      "name": "Office Productivity Pack",
+      "category": "personal",
+      "description": "Essential desktop and office productivity skills for file organization, documentation, spreadsheets, and structured note taking.",
+      "skills": [
+        "file-organizer",
+        "csv-to-report",
+        "markdown-doc-validator",
+        "excel-comparison",
+        "structured-notes-formatter"
+      ]
+    },
+    {
+      "id": "finance-erp",
+      "name": "Finance & ERP Pack",
+      "category": "professional",
+      "description": "Deterministic financial analysis and document reconciliation tools for actuals vs. budget variance and invoice matching.",
+      "skills": [
+        "financial-variance-analyzer",
+        "invoice-reconciliation"
+      ]
+    },
+    {
+      "id": "hr-workforce",
+      "name": "HR & Workforce Pack",
+      "category": "professional",
+      "description": "Workforce operations skills for attendance log validation and timesheet-to-payroll reconciliation using synthetic data.",
+      "skills": [
+        "attendance-csv-validator",
+        "timesheet-reconciliation"
+      ]
+    },
+    {
+      "id": "project-management",
+      "name": "Project Management Pack",
+      "category": "professional",
+      "description": "Deterministic project governance skills for RAID log audits, milestone variance, and weekly status reporting.",
+      "skills": [
+        "raid-log-validator",
+        "project-status-reporter"
+      ]
+    },
+    {
+      "id": "developer-security",
+      "name": "Developer & Security Pack",
+      "category": "developer",
+      "description": "Engineering and DevSecOps skills for security configuration scanning, dependency manifest review, and test inventory audits.",
+      "skills": [
+        "security-config-scanner",
+        "dependency-manifest-reviewer",
+        "test-inventory-analyzer"
+      ]
+    }
+  ]
+}

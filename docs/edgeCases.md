@@ -1,6 +1,6 @@
 # Edge-Case & Pitfall Catalogue
 
-Building a robust, cross-platform CLI requires anticipating messy real-world inputs, tricky operating system quirks, and adversarial scenarios. 
+Building a robust, cross-platform CLI requires anticipating messy real-world inputs, tricky operating system quirks, and adversarial scenarios.
 
 This catalogue defines known edge cases (`EC-xx`), the expected technical defense, and the automated test verifying each behavior.
 
@@ -9,7 +9,7 @@ This catalogue defines known edge cases (`EC-xx`), the expected technical defens
 ## Edge-Case Matrix
 
 | ID | Edge-Case Scenario | Trigger / Example | Expected System Behavior | Technical Defense & Verification |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **EC-01** | **YAML Break Characters in Description** (Fixes `DEF-01`) | User enters: `Compare files: report diffs` or `#1 tool for PDFs` or `'quoted'` | Frontmatter is valid YAML; description parses back to the exact original string. | `skillfactory/yaml_util.py` uses safe string quoting/folding; verified by `tests/test_yaml_util.py`. |
 | **EC-02** | **Invalid Skill Name Format** | User inputs: `MySkill`, `pdf--tool`, `-test`, `excel tool` | Rejects immediately with clear explanation of naming rules (`[a-z0-9-]`, 1–64 chars, no consecutive hyphens). | Regex validation in `skillfactory/validator.py`; verified in `tests/test_validator.py`. |
 | **EC-03** | **Windows & Platform Reserved Names** (Fixes `DEF-02`) | Skill named `con`, `aux`, `nul`, `prn`, `com1`, `lpt1`, or `synced` | Rejects with error: *"Name is reserved by Windows or target platform."* | Hardened blacklist in `validator.py`; verified in `tests/test_validator.py`. |
