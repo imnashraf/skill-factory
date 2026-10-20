@@ -122,7 +122,7 @@ pip install --upgrade skillfactory
 
 | Distribution Artifact | Size (Bytes) | SHA-256 Checksum |
 | --- | --- | --- |
-| `skillfactory-1.2.0-py3-none-any.whl` | 133,756 | `d7eaaa439c887e148c20eb08222cbe24a7f5c6e51de36b642ce03d48d91d31f1` |
-| `skillfactory-1.2.0.tar.gz` | 159,709 | `6b76f55b3569dd83beea5d999fafcd5b80e3fcbcbeb246d0083f7c11540a3920` |
+| `skillfactory-1.2.0-py3-none-any.whl` | 133,756 | `3c5cde162c2a685841993b952079a6909ff92f275ee2dfad2e850cb95ec0a544` |
+| `skillfactory-1.2.0.tar.gz` | 159,708 | `18a63dd2f7d2bd62298c0021164334f221f7f3cc7b7d2aa5bca8341506b1607a` |
 
-Source commit: `bf3caa60b4b205391a2fc33c5a610f63b2f56b27`
+Source commit: `9f81cfa0e7f722cb984591a47ce39e145eb5ce82`
