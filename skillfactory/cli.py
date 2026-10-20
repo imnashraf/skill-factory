@@ -352,6 +352,7 @@ def cmd_install(args: argparse.Namespace) -> int:
             if not getattr(args, "json", False):
                 print(format_msg("INFO", "No AI platform detected; targeting shared project directory (Cursor / Codex / Antigravity)."))
 
+    dry_run = getattr(args, "dry_run", False)
     try:
         res = install_skill(
             skill_path=args.path,
@@ -359,11 +360,13 @@ def cmd_install(args: argparse.Namespace) -> int:
             scope=args.scope,
             link=args.link,
             force=args.force,
+            dry_run=dry_run,
             project_dir=getattr(args, "project", "."),
         )
         if getattr(args, "json", False):
             print(json.dumps({
                 "status": "success",
+                "dry_run": dry_run,
                 "skill_name": res.skill_name,
                 "target_platform": res.target_platform,
                 "installed_path": str(res.installed_path),
@@ -374,7 +377,8 @@ def cmd_install(args: argparse.Namespace) -> int:
         else:
             if res.warning:
                 print(format_msg("WARN", res.warning))
-            print(format_msg("OK", f"Installed '{res.skill_name}' for {res.target_platform} at {res.installed_path} ({len(res.copied_files)} files, mode: {res.mode})"))
+            prefix = "[DRY RUN] Would install" if dry_run else "Installed"
+            print(format_msg("OK", f"{prefix} '{res.skill_name}' for {res.target_platform} at {res.installed_path} ({len(res.copied_files)} files, mode: {res.mode})"))
         return 0
     except SkillFactoryError as sfe:
         if getattr(args, "json", False):
@@ -467,19 +471,23 @@ def cmd_uninstall(args: argparse.Namespace) -> int:
     """Handle `skillfactory uninstall` command (Phase 4, Task T4.05, AC4.05)."""
     from skillfactory.installer import uninstall_skill
 
+    dry_run = getattr(args, "dry_run", False)
     try:
         removed = uninstall_skill(
             skill_name=args.name,
             target_platform=args.target,
+            dry_run=dry_run,
         )
         if getattr(args, "json", False):
             print(json.dumps({
                 "status": "success",
+                "dry_run": dry_run,
                 "skill_name": args.name,
                 "removed_files": removed,
             }, indent=2))
         else:
-            print(format_msg("OK", f"Uninstalled '{args.name}' ({len(removed)} files removed, user data preserved)"))
+            prefix = "[DRY RUN] Would remove" if dry_run else "Uninstalled"
+            print(format_msg("OK", f"{prefix} '{args.name}' ({len(removed)} files, user data preserved)"))
         return 0
     except Exception as err:
         if getattr(args, "json", False):

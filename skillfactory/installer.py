@@ -76,13 +76,15 @@ def is_ignored(name: str) -> bool:
 def copy_allow_listed_files(
     src_dir: Path,
     dest_dir: Path,
+    dry_run: bool = False,
 ) -> List[str]:
     """Copy only allow-listed files and subdirectories from src to dest.
     
     Normalizes line endings to LF and enforces UTF-8 encoding for text.
     Returns list of copied relative file paths.
     """
-    dest_dir.mkdir(parents=True, exist_ok=True)
+    if not dry_run:
+        dest_dir.mkdir(parents=True, exist_ok=True)
     copied_files: List[str] = []
 
     for item in src_dir.iterdir():
@@ -100,12 +102,13 @@ def copy_allow_listed_files(
 
         if item.is_file():
             dest_file = dest_dir / item.name
-            try:
-                text = item.read_text(encoding="utf-8")
-                dest_file.write_text(text.replace("\r\n", "\n"), encoding="utf-8")
-            except (UnicodeDecodeError, ValueError):
-                # Binary file fallback
-                shutil.copy2(item, dest_file)
+            if not dry_run:
+                try:
+                    text = item.read_text(encoding="utf-8")
+                    dest_file.write_text(text.replace("\r\n", "\n"), encoding="utf-8")
+                except (UnicodeDecodeError, ValueError):
+                    # Binary file fallback
+                    shutil.copy2(item, dest_file)
             copied_files.append(item.name)
 
         elif item.is_dir():
@@ -127,13 +130,13 @@ def copy_allow_listed_files(
 
                     rel_to_skill = full_src_file.relative_to(src_dir)
                     dest_file = dest_dir / rel_to_skill
-                    dest_file.parent.mkdir(parents=True, exist_ok=True)
-
-                    try:
-                        text = full_src_file.read_text(encoding="utf-8")
-                        dest_file.write_text(text.replace("\r\n", "\n"), encoding="utf-8")
-                    except (UnicodeDecodeError, ValueError):
-                        shutil.copy2(full_src_file, dest_file)
+                    if not dry_run:
+                        dest_file.parent.mkdir(parents=True, exist_ok=True)
+                        try:
+                            text = full_src_file.read_text(encoding="utf-8")
+                            dest_file.write_text(text.replace("\r\n", "\n"), encoding="utf-8")
+                        except (UnicodeDecodeError, ValueError):
+                            shutil.copy2(full_src_file, dest_file)
 
                     copied_files.append(rel_to_skill.as_posix())
 
@@ -146,6 +149,7 @@ def install_skill(
     scope: str = "project",
     link: bool = False,
     force: bool = False,
+    dry_run: bool = False,
     project_dir: Optional[Path | str] = None,
     home_dir: Optional[Path | str] = None,
     os_name: Optional[str] = None,
@@ -193,6 +197,18 @@ def install_skill(
                 f"Skill '{skill_name}' is already installed at '{dest_path}'. "
                 "Use 'skillfactory update' or pass --force to overwrite."
             )
+
+    if dry_run:
+        actual_mode = "symlink" if link else "copy"
+        copied_files = copy_allow_listed_files(src, dest_path, dry_run=True)
+        return InstallResult(
+            skill_name=skill_name,
+            target_platform=canonical_platform,
+            installed_path=dest_path,
+            mode=actual_mode,
+            copied_files=copied_files,
+            warning=None,
+        )
 
     # Perform install (symlink or copy)
     warning_msg: Optional[str] = None
@@ -392,6 +408,7 @@ def uninstall_skill(
     skill_name: str,
     target_platform: Optional[str] = None,
     registry_path: Optional[Path | str] = None,
+    dry_run: bool = False,
 ) -> List[str]:
     """Remove only manifest/registry tracked files, preserving user data (AC4.05)."""
     canonical_platform = normalize_platform_id(target_platform) if target_platform else None
@@ -401,13 +418,15 @@ def uninstall_skill(
 
     installed_path = Path(reg_entry["installed_path"])
     if not installed_path.exists():
-        unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
+        if not dry_run:
+            unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
         return []
 
     # If it's a symlink, just unlink
     if installed_path.is_symlink():
-        installed_path.unlink()
-        unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
+        if not dry_run:
+            installed_path.unlink()
+            unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
         return [str(installed_path)]
 
     # Collect tracked files
@@ -428,30 +447,33 @@ def uninstall_skill(
     for rel in sorted(tracked_files, reverse=True):
         f_path = installed_path / rel
         if f_path.is_file() or f_path.is_symlink():
-            try:
-                f_path.unlink()
-                removed.append(rel)
-            except Exception:
-                pass
+            if not dry_run:
+                try:
+                    f_path.unlink()
+                except Exception:
+                    pass
+            removed.append(rel)
 
-    # Clean empty directories
-    for root, dirs, files in os.walk(str(installed_path), topdown=False):
-        for d in dirs:
-            dir_to_check = Path(root) / d
-            try:
-                if not any(dir_to_check.iterdir()):
-                    dir_to_check.rmdir()
-            except Exception:
-                pass
+    if not dry_run:
+        # Clean empty directories
+        for root, dirs, files in os.walk(str(installed_path), topdown=False):
+            for d in dirs:
+                dir_to_check = Path(root) / d
+                try:
+                    if not any(dir_to_check.iterdir()):
+                        dir_to_check.rmdir()
+                except Exception:
+                    pass
 
-    # If installed_path is now empty, remove it too
-    try:
-        if not any(installed_path.iterdir()):
-            installed_path.rmdir()
-    except Exception:
-        pass
+        # If installed_path is now empty, remove it too
+        try:
+            if not any(installed_path.iterdir()):
+                installed_path.rmdir()
+        except Exception:
+            pass
 
-    unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
+        unregister_installation(skill_name, platform=canonical_platform, registry_path=registry_path)
+
     return removed
 
 
