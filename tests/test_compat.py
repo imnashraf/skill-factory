@@ -81,9 +81,12 @@ class PlatformDatabaseTests(unittest.TestCase):
 
     def test_os_path_resolution(self):
         user_path_mac = get_user_skill_path("claude-code", os_name="macos", home_override="/tmp/mockhome")
+        self.assertIsNotNone(user_path_mac)
         self.assertEqual(user_path_mac, str(Path("/tmp/mockhome/.claude/skills").resolve()))
 
         user_path_win = get_user_skill_path("claude-code", os_name="windows", home_override="/tmp/mockhome")
+        self.assertIsNotNone(user_path_win)
+        assert user_path_win is not None
         self.assertTrue(user_path_win.endswith(".claude/skills") or user_path_win.endswith(".claude\\skills"))
 
 
@@ -99,6 +102,8 @@ class PlatformDetectionTests(unittest.TestCase):
             results = detect_all_platforms(project_dir=p_dir, home_dir=h_dir)
             # Since system binary might exist, we check specific mock directories
             claude_def = get_platform("claude-code")
+            self.assertIsNotNone(claude_def)
+            assert claude_def is not None
             # Overwrite binary check to avoid host contamination in unit test
             isolated_claude = dict(claude_def)
             isolated_claude["detection_rules"] = {"project_dirs": [".claude"], "user_dirs": ["~/.claude"], "binaries": []}
@@ -114,6 +119,8 @@ class PlatformDetectionTests(unittest.TestCase):
 
             # Create mock project directory for Antigravity (.agents)
             agy_def = get_platform("antigravity")
+            self.assertIsNotNone(agy_def)
+            assert agy_def is not None
             isolated_agy = dict(agy_def)
             isolated_agy["detection_rules"] = {"project_dirs": [".agents"], "user_dirs": [], "binaries": []}
             (p_dir / ".agents").mkdir()
