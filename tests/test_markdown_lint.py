@@ -247,6 +247,64 @@ class MarkdownQualityRegressionTests(unittest.TestCase):
                 f"File '{md_file.relative_to(_REPO_ROOT)}' has Markdown violations: {violations}",
             )
 
+    def test_nine_affected_reference_skills_have_zero_lint_violations(self):
+        """Explicitly verify that each of the nine reported skills has zero MD022, MD031, MD032 violations."""
+        gen_dir = _REPO_ROOT / "generated-skills"
+        if not gen_dir.exists():
+            self.skipTest("generated-skills directory not present")
+
+        nine_skills = [
+            "attendance-csv-validator",
+            "dependency-manifest-reviewer",
+            "financial-variance-analyzer",
+            "invoice-reconciliation",
+            "project-status-reporter",
+            "raid-log-validator",
+            "structured-notes-formatter",
+            "test-inventory-analyzer",
+            "timesheet-reconciliation",
+        ]
+
+        expected_docs = ["SKILL.md", "README.md", "examples/example.md", "references/guide.md"]
+        total_files_checked = 0
+
+        for skill_name in nine_skills:
+            skill_dir = gen_dir / skill_name
+            self.assertTrue(skill_dir.is_dir(), f"Skill directory '{skill_name}' must exist on disk")
+
+            for rel_path in expected_docs:
+                doc_path = skill_dir / rel_path
+                self.assertTrue(doc_path.is_file(), f"Document '{rel_path}' in skill '{skill_name}' must exist")
+                content = doc_path.read_text(encoding="utf-8")
+                violations = check_markdown_lint_rules(f"{skill_name}/{rel_path}", content)
+                self.assertEqual(
+                    violations,
+                    [],
+                    f"Skill '{skill_name}' file '{rel_path}' has Markdown violations: {violations}",
+                )
+                total_files_checked += 1
+
+        self.assertEqual(total_files_checked, 9 * 4)
+
+    def test_ondisk_generated_markdown_files_including_ignored_have_zero_lint_violations(self):
+        """Verify on-disk generated Markdown files, including uncommitted or ignored files, are lint-clean."""
+        gen_dir = _REPO_ROOT / "generated-skills"
+        if not gen_dir.exists():
+            self.skipTest("generated-skills directory not present")
+
+        # Gather every markdown file under generated-skills without skipping untracked or ignored
+        all_md_files = sorted(gen_dir.rglob("*.md"))
+        self.assertGreaterEqual(len(all_md_files), 56)  # 14 skills * 4 docs = 56 docs
+
+        for md_path in all_md_files:
+            content = md_path.read_text(encoding="utf-8")
+            violations = check_markdown_lint_rules(str(md_path.resolve()), content)
+            self.assertEqual(
+                violations,
+                [],
+                f"On-disk file '{md_path.resolve()}' has Markdown violations: {violations}",
+            )
+
     def test_all_documentation_files_have_zero_lint_violations(self):
         """Verify documentation files across docs/ and repository root have zero Markdown lint violations."""
         docs_files = sorted((_REPO_ROOT / "docs").rglob("*.md"))
