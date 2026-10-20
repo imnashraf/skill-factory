@@ -1,0 +1,6 @@
+id,name,owner,due_date,status,completion_pct
+M-201,Cloud Infrastructure Baseline,DevOps Lead,2026-10-01,COMPLETED,100.0
+M-202,Core Engine API Delivery,Backend Squad,2026-10-10,IN_PROGRESS,85.0
+M-203,Data Migration Pipeline,Data Chapter,2026-10-14,IN_PROGRESS,70.0
+M-204,Payment Gateway Integration,Integration Team,2026-10-25,BLOCKED,40.0
+M-205,Mobile Client Validation,QA Chapter,2026-11-01,NOT_STARTED,0.0

@@ -213,6 +213,22 @@ Skill Factory organizes reference skills into a 3-tier taxonomy (**Personal**, *
 
 ---
 
+## Real-World Use Cases Showcase
+
+Skill Factory includes five comprehensive, post-release real-world use case demonstrations. Each demonstration packages an end-to-end business problem, synthetic datasets, deterministic reference execution workflows, automated unit test suites, expected golden outputs, and video recording scripts:
+
+| Domain | Business Problem | Skill | Inputs | Outputs | Demonstration Link |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Finance & Accounting** | Manual spreadsheet reconciliation causes rounding drift, formula breaks, and division-by-zero on unbudgeted items. | `financial-variance` | `budget.csv`, `actuals.csv` | Executive Variance Register (Markdown/JSON) | [Finance Showcase](showcase/finance/financial-variance/README.md) |
+| **HR & Payroll** | Biometric badge swipe files have duplicate taps, missing clock-outs, and cross-midnight overnight shift calculation errors. | `attendance-validation` | `attendance.csv` | HR Exception Register & Summary (Markdown/JSON) | [HR Showcase](showcase/hr-payroll/attendance-validation/README.md) |
+| **Project Management** | Subjective project health reporting conceals overdue deliverables, active blockers, and unmitigated risks. | `project-status` | `milestones.csv`, `raid.csv` | Executive Status Dashboard & Action Summary | [PMO Showcase](showcase/project-management/project-status/README.md) |
+| **Cybersecurity & AppSec** | Insecure protocols, mutable VCS links, duplicate versions, and unpinned dependencies introduce build risks. | `dependency-review` | `requirements.txt`, `package.json` | Supply Chain Audit Report & Guidance | [Security Showcase](showcase/cybersecurity/dependency-review/README.md) |
+| **Software Engineering** | Teams lack quick visibility into which modules lack test suites and where duplicate or skipped tests exist. | `test-inventory` | Codebase (`src/`, `tests/`) | Test Suite Catalog & Gap Analysis | [QA Showcase](showcase/software-engineering/test-inventory/README.md) |
+
+For comprehensive beginner walkthroughs, architecture notes, and video recording scripts, visit the [Showcase Documentation Landing Page](showcase/README.md).
+
+---
+
 ## CLI Command Reference
 
 All commands are available via `skillfactory <command>` or `skill-factory <command>`:

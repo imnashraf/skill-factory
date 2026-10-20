@@ -1,0 +1,4 @@
+employee_id,shift_id,date,clock_in,clock_out
+,SH-99,2026-10-19,09:00:00,17:00:00
+EMP-1002,SH-99,2026-10-19,INVALID_CLOCK_IN,17:00:00
+EMP-1003,SH-99,NOT_A_DATE,09:00:00,17:00:00

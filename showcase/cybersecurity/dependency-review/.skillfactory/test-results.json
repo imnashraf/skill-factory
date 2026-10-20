@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T19:30:47.027567+00:00",
+  "success": true,
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.001,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_edge_case_findings_and_rules (test_main.TestDependencyManifestReviewer.test_edge_case_findings_and_rules)\nVerify detection of insecure HTTP, mutable VCS, conflicts, duplicates, unpinned, and wildcards. ... ok\ntest_markdown_report_matches_expected (test_main.TestDependencyManifestReviewer.test_markdown_report_matches_expected)\nVerify markdown report matches expected golden report. ... ok\ntest_package_json_parsing_and_audit (test_main.TestDependencyManifestReviewer.test_package_json_parsing_and_audit)\nVerify package.json dependency auditing. ... ok\ntest_valid_pinned_requirements (test_main.TestDependencyManifestReviewer.test_valid_pinned_requirements)\nVerify cleanly pinned requirements have 0 findings and is_clean == True. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+}

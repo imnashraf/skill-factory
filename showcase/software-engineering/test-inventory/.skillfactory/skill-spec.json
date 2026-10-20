@@ -1,0 +1,25 @@
+{
+  "name": "test-inventory",
+  "description": "Scans codebases using AST to catalog test suites, detect duplicate test cases, and identify untested source modules without unverified coverage claims.",
+  "template_family": "python-script",
+  "version": "0.1.0",
+  "author": "Skill Factory Showcase Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

@@ -1,0 +1,5 @@
+{
+  "name": "corrupted-manifest",
+  "dependencies": {
+    "express": "4.18.2",
+    UNTERMINATED_JSON_STRING

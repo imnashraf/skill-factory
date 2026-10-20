@@ -1,0 +1,12 @@
+account,cost_center,department,budget_amount
+GL-5100,CC-101,Engineering,150000.00
+GL-5200,CC-101,Engineering,45000.00
+GL-5300,CC-101,Engineering,12000.00
+GL-5400,CC-102,Product Design,30000.00
+GL-5200,CC-201,Marketing Operations,60000.00
+GL-5300,CC-201,Marketing Operations,25000.00
+GL-5100,CC-301,Sales Enablement,18000.00
+GL-5300,CC-301,Sales Enablement,35000.00
+GL-5200,CC-401,Customer Support,22000.00
+GL-5500,CC-501,Corporate IT,40000.00
+GL-5600,CC-501,Corporate IT,8000.00

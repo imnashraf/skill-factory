@@ -1,0 +1,77 @@
+{
+  "skill_name": "project-status",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.2",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-20T19:27:25.751897+00:00",
+  "updated_at": "2026-10-20T19:27:25.751897+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "5db17f1c8c0d1901655b4bd47ba1ed69a3f40fc779a908a068b8a5535a05d168",
+      "bytes": 641
+    },
+    "README.md": {
+      "sha256": "b94970d1d25a0e33ad793283b375d2028feff026cab26d342cdc5f99d99100b2",
+      "bytes": 1905
+    },
+    "SKILL.md": {
+      "sha256": "6aac95fd1d1f62e5e70cf6f2f2e64a585e6d0578fea79deec7122b837530e303",
+      "bytes": 1748
+    },
+    "demo-guide.md": {
+      "sha256": "bd8fb20b05be5c98312064a7759b869927eb58a85e8c03fa54ad4d73357fa791",
+      "bytes": 4806
+    },
+    "expected-outputs/edge_case_project_report.json": {
+      "sha256": "b77b7b18d9c4664f2b28938427360aee89de080ae80d6454d6273f53a948279f",
+      "bytes": 2543
+    },
+    "expected-outputs/edge_case_project_report.md": {
+      "sha256": "365e3cff3a4747d8bd5cbf741f506300ef1c10c4482402c43ff93d3de03c279e",
+      "bytes": 2080
+    },
+    "expected-outputs/valid_project_report.json": {
+      "sha256": "5eb739f3662e672e8635e2f99dd7faec19030ddf0b5628ec2f27e1fc1f05a728",
+      "bytes": 1936
+    },
+    "expected-outputs/valid_project_report.md": {
+      "sha256": "028d54737260aeb59f452dac4e3201c2da142916fe8d9bcc59d02ccdc7c9c945",
+      "bytes": 1582
+    },
+    "problem-statement.md": {
+      "sha256": "0f351ba33b3fb45940553b509553d6df2bae2d20209b0101ac2a021641280ae9",
+      "bytes": 2580
+    },
+    "sample-inputs/edge_case_milestones.csv": {
+      "sha256": "792fba1a4cabc946eb1594f0f413a6fd127de35abff5cd25b84cceaf67732be2",
+      "bytes": 408
+    },
+    "sample-inputs/edge_case_raid.csv": {
+      "sha256": "b013a15a3ec82c61f253aefc5604d67439552d380903112adad70e9dbf583c83",
+      "bytes": 382
+    },
+    "sample-inputs/invalid_milestones.csv": {
+      "sha256": "b96ea909ca08dfc80d95924657ff1b1c5ecaada47a13c341496f263be129c5be",
+      "bytes": 311
+    },
+    "sample-inputs/valid_milestones.csv": {
+      "sha256": "05c4bb44329d31037b1dcf19ab87976c4ca5d1aa80d078097b30878aea281c18",
+      "bytes": 493
+    },
+    "sample-inputs/valid_raid.csv": {
+      "sha256": "375e6e934c8a74197be5db5f0b2e6c03b6f318102f8781e81eda509617c03793",
+      "bytes": 410
+    },
+    "scripts/main.py": {
+      "sha256": "06ae5c562291c270c435420e6e83f8a947661ad38e6f192989d35eb2f77b4f80",
+      "bytes": 15167
+    },
+    "tests/test_main.py": {
+      "sha256": "89c8d4f82216fa5c2a0ebd64c9c629db8cd5d78bc2f8b186e8cb5798ed6b98e1",
+      "bytes": 4543
+    }
+  }
+}

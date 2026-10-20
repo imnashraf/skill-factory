@@ -1,0 +1,173 @@
+{
+  "skill_name": "attendance-validation",
+  "skill_dir": "/Users/mna/skill-factory/skill-factory/showcase/hr-payroll/attendance-validation",
+  "total_score": 98,
+  "grade": "Grade A",
+  "dimensions": [
+    {
+      "name": "Spec Compliance & Structure",
+      "dimension_id": "EV-01",
+      "earned": 23,
+      "max_points": 25,
+      "items": {
+        "mandatory_files": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md and README.md both exist"
+        },
+        "valid_frontmatter": {
+          "earned": 5,
+          "max": 5,
+          "note": "YAML frontmatter parsed without errors"
+        },
+        "name_conformance": {
+          "earned": 5,
+          "max": 5,
+          "note": "Skill name conforms to lowercase kebab-case rules"
+        },
+        "description_quality": {
+          "earned": 3,
+          "max": 5,
+          "note": "Description present but could be more specific regarding trigger conditions"
+        },
+        "relative_file_links": {
+          "earned": 5,
+          "max": 5,
+          "note": "All markdown file links resolve successfully"
+        }
+      }
+    },
+    {
+      "name": "Cross-Platform Portability",
+      "dimension_id": "EV-02",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "no_absolute_paths": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero hardcoded absolute paths found"
+        },
+        "reserved_names": {
+          "earned": 5,
+          "max": 5,
+          "note": "Clean of Windows and platform-reserved names"
+        },
+        "line_endings_and_encoding": {
+          "earned": 5,
+          "max": 5,
+          "note": "All text files are valid UTF-8 with standard LF line endings"
+        },
+        "portable_interpreters": {
+          "earned": 5,
+          "max": 5,
+          "note": "Portable invocation patterns used"
+        }
+      }
+    },
+    {
+      "name": "Documentation & Progressive Disclosure",
+      "dimension_id": "EV-03",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "concise_main_file": {
+          "earned": 5,
+          "max": 5,
+          "note": "SKILL.md is concise (45 lines <= 500 limit)"
+        },
+        "progressive_disclosure": {
+          "earned": 5,
+          "max": 5,
+          "note": "Progressive disclosure utilized with modular subdirectories"
+        },
+        "examples_included": {
+          "earned": 5,
+          "max": 5,
+          "note": "Concrete usage examples provided"
+        },
+        "limitations_documented": {
+          "earned": 5,
+          "max": 5,
+          "note": "Operational constraints and prerequisites documented"
+        }
+      }
+    },
+    {
+      "name": "Test Coverage & Execution",
+      "dimension_id": "EV-04",
+      "earned": 20,
+      "max_points": 20,
+      "items": {
+        "test_suite_present": {
+          "earned": 5,
+          "max": 5,
+          "note": "Test suite present with 1 test file(s)"
+        },
+        "structural_tests_pass": {
+          "earned": 5,
+          "max": 5,
+          "note": "Baseline test suite executes without failures"
+        },
+        "behavioral_execution": {
+          "earned": 5,
+          "max": 5,
+          "note": "Tests ran successfully in 0.00s (< 10.0s timeout)"
+        },
+        "honest_reporting": {
+          "earned": 5,
+          "max": 5,
+          "note": "All 5 assertions executed and verified"
+        }
+      }
+    },
+    {
+      "name": "Code Safety & Secrets Scan",
+      "dimension_id": "EV-05",
+      "earned": 15,
+      "max_points": 15,
+      "items": {
+        "clean_secret_scan": {
+          "earned": 5,
+          "max": 5,
+          "note": "Zero credentials, API tokens, or private keys detected"
+        },
+        "ast_safety_check": {
+          "earned": 5,
+          "max": 5,
+          "note": "AST scan clean: 0 dangerous dynamic execution or shell=True calls"
+        },
+        "manifest_integrity": {
+          "earned": 5,
+          "max": 5,
+          "note": "All files match their recorded SHA-256 manifest hashes"
+        }
+      }
+    }
+  ],
+  "summary": "Skill Quality Score: 98 / 100 [Grade A]",
+  "recommendation": "Production Ready. Safe, portable, fully tested, and ready for publication.",
+  "test_result": {
+    "success": true,
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_sec": 0.004,
+    "timed_out": false,
+    "error_message": null,
+    "stdout": "",
+    "stderr": "test_edge_cases_and_anomaly_detection (test_main.TestAttendanceValidator.test_edge_cases_and_anomaly_detection)\nVerify duplicate swipe, missing punches, short/excessive shift, and overnight handling. ... ok\ntest_invalid_records_and_missing_employee_id (test_main.TestAttendanceValidator.test_invalid_records_and_missing_employee_id)\nVerify detection of missing employee IDs and unparseable times. ... ok\ntest_markdown_report_matches_expected (test_main.TestAttendanceValidator.test_markdown_report_matches_expected)\nVerify markdown output matches expected golden report. ... ok\ntest_parse_timestamp_and_overnight (test_main.TestAttendanceValidator.test_parse_timestamp_and_overnight)\nVerify time parsing and date-combining logic. ... ok\ntest_valid_attendance_dataset (test_main.TestAttendanceValidator.test_valid_attendance_dataset)\nVerify clean dataset with 10 records passes 100%. ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.004s\n\nOK\n",
+    "test_files_found": 1
+  },
+  "safety_summary": {
+    "is_clean": true,
+    "files_scanned": 16,
+    "critical_count": 0,
+    "high_count": 0,
+    "medium_count": 0,
+    "low_count": 0,
+    "findings": []
+  },
+  "timestamp": "2026-10-20T19:19:31.924767+00:00"
+}

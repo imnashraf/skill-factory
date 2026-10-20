@@ -1,0 +1,87 @@
+{
+  "project_root": "/Users/mna/skill-factory/skill-factory/showcase/software-engineering/test-inventory/sample-inputs/edge_case_repo",
+  "test_files_count": 2,
+  "total_test_cases": 4,
+  "total_assertions": 4,
+  "total_skipped_tests": 1,
+  "source_modules_count": 4,
+  "tested_modules_count": 2,
+  "untested_modules_count": 2,
+  "duplicate_tests_count": 1,
+  "test_files": [
+    {
+      "file": "tests/test_auth.py",
+      "inferred_module": "auth",
+      "test_count": 2,
+      "assertions_count": 2,
+      "skipped_count": 0,
+      "tests": [
+        {
+          "name": "test_token_validation",
+          "class_name": "TestAuth",
+          "line": 4,
+          "is_skipped": false
+        },
+        {
+          "name": "test_auth_header_parsing",
+          "class_name": "TestAuth",
+          "line": 7,
+          "is_skipped": false
+        }
+      ]
+    },
+    {
+      "file": "tests/test_billing.py",
+      "inferred_module": "billing",
+      "test_count": 2,
+      "assertions_count": 2,
+      "skipped_count": 1,
+      "tests": [
+        {
+          "name": "test_token_validation",
+          "class_name": "TestBilling",
+          "line": 4,
+          "is_skipped": false
+        },
+        {
+          "name": "test_stripe_webhook_processing",
+          "class_name": "TestBilling",
+          "line": 9,
+          "is_skipped": true
+        }
+      ]
+    }
+  ],
+  "duplicate_tests": [
+    {
+      "test_name": "test_token_validation",
+      "occurrences_count": 2,
+      "locations": [
+        {
+          "file": "tests/test_auth.py",
+          "line": 4,
+          "class": "TestAuth",
+          "is_skipped": false
+        },
+        {
+          "file": "tests/test_billing.py",
+          "line": 4,
+          "class": "TestBilling",
+          "is_skipped": false
+        }
+      ]
+    }
+  ],
+  "untested_modules": [
+    {
+      "module_name": "analytics",
+      "file": "src/analytics.py",
+      "has_test_file": false
+    },
+    {
+      "module_name": "reporting",
+      "file": "src/reporting.py",
+      "has_test_file": false
+    }
+  ]
+}

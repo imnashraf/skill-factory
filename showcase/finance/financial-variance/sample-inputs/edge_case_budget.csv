@@ -1,0 +1,8 @@
+account,cost_center,department,budget_amount
+GL-9001,CC-999,Research Lab,0.00
+GL-9002,CC-999,Research Lab,15000.00
+GL-9003,CC-999,Research Lab,0.00
+GL-9004,CC-999,Research Lab,1042.42
+GL-9005,CC-999,Research Lab,20000.00
+GL-9006,CC-999,Research Lab,20000.00
+GL-9007,CC-888,Innovation Fund,50000.00

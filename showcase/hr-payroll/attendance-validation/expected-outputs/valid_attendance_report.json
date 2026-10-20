@@ -1,0 +1,9 @@
+{
+  "total_records": 10,
+  "valid_records": 10,
+  "anomalies_count": 0,
+  "is_clean": true,
+  "max_shift_hours": 14.0,
+  "min_shift_hours": 1.0,
+  "anomalies": []
+}

@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T19:16:36.085856+00:00",
+  "success": true,
+  "tests_run": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.001,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_currency_formatting (test_main.TestFinancialVarianceAnalyzer.test_currency_formatting)\nVerify currency display formatting. ... ok\ntest_edge_cases_zero_budget_and_boundaries (test_main.TestFinancialVarianceAnalyzer.test_edge_cases_zero_budget_and_boundaries)\nVerify zero-budget allocations, unbudgeted spend, and exact threshold boundaries. ... ok\ntest_invalid_input_validation (test_main.TestFinancialVarianceAnalyzer.test_invalid_input_validation)\nVerify malformed input detection. ... ok\ntest_markdown_report_matches_expected (test_main.TestFinancialVarianceAnalyzer.test_markdown_report_matches_expected)\nVerify markdown report matches recorded expected output. ... ok\ntest_to_decimal_conversion (test_main.TestFinancialVarianceAnalyzer.test_to_decimal_conversion)\nVerify safe decimal conversions and error handling. ... ok\ntest_valid_dataset_reconciliation (test_main.TestFinancialVarianceAnalyzer.test_valid_dataset_reconciliation)\nVerify end-to-end reconciliation on valid sample inputs. ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+}

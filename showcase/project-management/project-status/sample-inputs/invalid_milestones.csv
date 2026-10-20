@@ -1,0 +1,5 @@
+id,name,owner,due_date,status,completion_pct
+M-901,Architecture Assessment,Lead Architect,INVALID_DATE,COMPLETED,100.0
+M-902,Database Schema Review,Data Eng,2026-10-15,UNKNOWN_STATUS,50.0
+M-903,Performance Benchmark,QA Team,2026-10-20,IN_PROGRESS,150.0
+,Missing ID Deliverable,Nobody,2026-10-25,NOT_STARTED,0.0

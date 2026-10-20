@@ -1,0 +1,6 @@
+id,type,title,severity,status,owner
+R-01,RISK,External partner API rate limits,MEDIUM,OPEN,Integration Team
+R-02,RISK,Legacy database migration latency,LOW,OPEN,Data Chapter
+A-01,ASSUMPTION,Single Sign-On identity provider available 99.9%,LOW,VALIDATED,SecOps Lead
+I-01,ISSUE,Staging environment test data refresh,LOW,RESOLVED,QA Chapter
+D-01,DEPENDENCY,Compliance signoff from legal,MEDIUM,OPEN,Legal Counsel
