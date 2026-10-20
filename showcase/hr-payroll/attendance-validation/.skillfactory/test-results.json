@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T19:19:31.923458+00:00",
+  "success": true,
+  "tests_run": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.004,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_edge_cases_and_anomaly_detection (test_main.TestAttendanceValidator.test_edge_cases_and_anomaly_detection)\nVerify duplicate swipe, missing punches, short/excessive shift, and overnight handling. ... ok\ntest_invalid_records_and_missing_employee_id (test_main.TestAttendanceValidator.test_invalid_records_and_missing_employee_id)\nVerify detection of missing employee IDs and unparseable times. ... ok\ntest_markdown_report_matches_expected (test_main.TestAttendanceValidator.test_markdown_report_matches_expected)\nVerify markdown output matches expected golden report. ... ok\ntest_parse_timestamp_and_overnight (test_main.TestAttendanceValidator.test_parse_timestamp_and_overnight)\nVerify time parsing and date-combining logic. ... ok\ntest_valid_attendance_dataset (test_main.TestAttendanceValidator.test_valid_attendance_dataset)\nVerify clean dataset with 10 records passes 100%. ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.004s\n\nOK\n"
+}

@@ -1,0 +1,7 @@
+id,name,owner,due_date,status,completion_pct
+M-101,Cloud Infrastructure Provisioning,DevOps Team,2026-10-01,COMPLETED,100.0
+M-102,Core Processing Engine Alpha,Backend Squad,2026-10-15,COMPLETED,100.0
+M-103,Partner Integration API,Integration Team,2026-10-25,IN_PROGRESS,80.0
+M-104,Security Compliance Audit,SecOps Lead,2026-10-28,IN_PROGRESS,65.0
+M-105,User Acceptance Testing,QA Chapter,2026-11-05,NOT_STARTED,0.0
+M-106,Production Release Readiness,Release Manager,2026-11-15,NOT_STARTED,0.0

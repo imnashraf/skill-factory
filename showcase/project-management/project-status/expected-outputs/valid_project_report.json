@@ -1,0 +1,80 @@
+{
+  "as_of_date": "2026-10-20",
+  "overall_health": "GREEN",
+  "health_reasons": [
+    "All milestones on schedule with zero unmitigated high/critical risks"
+  ],
+  "total_milestones": 6,
+  "completed_count": 2,
+  "in_progress_count": 2,
+  "blocked_count": 0,
+  "overdue_count": 0,
+  "completion_rate": 33.3,
+  "total_raid_items": 5,
+  "critical_risks_count": 0,
+  "high_risks_count": 0,
+  "active_issues_count": 0,
+  "milestones": [
+    {
+      "line": 2,
+      "id": "M-101",
+      "name": "Cloud Infrastructure Provisioning",
+      "owner": "DevOps Team",
+      "due_date": "2026-10-01",
+      "status": "COMPLETED",
+      "completion_pct": 100.0,
+      "is_overdue": false
+    },
+    {
+      "line": 3,
+      "id": "M-102",
+      "name": "Core Processing Engine Alpha",
+      "owner": "Backend Squad",
+      "due_date": "2026-10-15",
+      "status": "COMPLETED",
+      "completion_pct": 100.0,
+      "is_overdue": false
+    },
+    {
+      "line": 4,
+      "id": "M-103",
+      "name": "Partner Integration API",
+      "owner": "Integration Team",
+      "due_date": "2026-10-25",
+      "status": "IN_PROGRESS",
+      "completion_pct": 80.0,
+      "is_overdue": false
+    },
+    {
+      "line": 5,
+      "id": "M-104",
+      "name": "Security Compliance Audit",
+      "owner": "SecOps Lead",
+      "due_date": "2026-10-28",
+      "status": "IN_PROGRESS",
+      "completion_pct": 65.0,
+      "is_overdue": false
+    },
+    {
+      "line": 6,
+      "id": "M-105",
+      "name": "User Acceptance Testing",
+      "owner": "QA Chapter",
+      "due_date": "2026-11-05",
+      "status": "NOT_STARTED",
+      "completion_pct": 0.0,
+      "is_overdue": false
+    },
+    {
+      "line": 7,
+      "id": "M-106",
+      "name": "Production Release Readiness",
+      "owner": "Release Manager",
+      "due_date": "2026-11-15",
+      "status": "NOT_STARTED",
+      "completion_pct": 0.0,
+      "is_overdue": false
+    }
+  ],
+  "action_summary": []
+}

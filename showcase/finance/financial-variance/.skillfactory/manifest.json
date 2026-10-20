@@ -1,0 +1,77 @@
+{
+  "skill_name": "financial-variance",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.2",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-20T19:45:46.362990+00:00",
+  "updated_at": "2026-10-20T19:45:46.362990+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "3357fbba3d1f64f54c0e1e36875785d36e7d3cd2189ae68b3b2adaaa6002309e",
+      "bytes": 671
+    },
+    "README.md": {
+      "sha256": "3a4fe5d3a164364dff129de7610e50f9532633925806269fa77399609c88b132",
+      "bytes": 1829
+    },
+    "SKILL.md": {
+      "sha256": "010fe4261cded0bb4d8ee1dd94d99bdfa0734d89b41463967bff796304e94f25",
+      "bytes": 1753
+    },
+    "demo-guide.md": {
+      "sha256": "97a9d15fbd85931e297d56479211cde7ebe297d85c59fb1127f01c3babbd866f",
+      "bytes": 4695
+    },
+    "expected-outputs/edge_case_variance_report.json": {
+      "sha256": "6dddf09fd3a700b5ad50274e24cee749a50b794e6a47ed4e8798d886d6ef8ed5",
+      "bytes": 3004
+    },
+    "expected-outputs/edge_case_variance_report.md": {
+      "sha256": "8128a93d30f3fc57681a533c6740fcb407f10f4a9bfb5f146046c1cfcef4eefc",
+      "bytes": 1653
+    },
+    "expected-outputs/valid_variance_report.json": {
+      "sha256": "0b4ee58e85564fcfd9ab5b9e0300d105841dbd85a4ce907ffb2b51361db0f617",
+      "bytes": 4054
+    },
+    "expected-outputs/valid_variance_report.md": {
+      "sha256": "d8bb040d4d2293e5dc089ce08aea234a451193704bc34cb0b98358c85f9a23a0",
+      "bytes": 2046
+    },
+    "problem-statement.md": {
+      "sha256": "f68ccd71d0f4f08e5a231780e15086f7250f14880bcb57941a79ff274312f9d4",
+      "bytes": 2714
+    },
+    "sample-inputs/edge_case_actuals.csv": {
+      "sha256": "de088f1d5385343582732c4860370bd3118d6d0a087c1c7ff995bcbd8cf79170",
+      "bytes": 298
+    },
+    "sample-inputs/edge_case_budget.csv": {
+      "sha256": "b197d836cba23ca7134cec4617385a512d229e90b2fc14c71871f81973fdd747",
+      "bytes": 298
+    },
+    "sample-inputs/invalid_budget.csv": {
+      "sha256": "25e411c470095034bde55ca11a9fb800ec69cc8e5ac782c2cbf1adc2b6c42815",
+      "bytes": 196
+    },
+    "sample-inputs/valid_actuals.csv": {
+      "sha256": "23b2833c1c28b5036346f0bf9514f5191fccebe7438ea4f07e5f04d8effc5ca8",
+      "bytes": 479
+    },
+    "sample-inputs/valid_budget.csv": {
+      "sha256": "cc64e1d66e175a73424283baa6c2f87ec5b786911bcae6f5397eb4fd0918ca2d",
+      "bytes": 479
+    },
+    "scripts/main.py": {
+      "sha256": "eaab2ccfdfa9160d7e957a4d50abb06054151445686efb8d28a528dbeb264a99",
+      "bytes": 13119
+    },
+    "tests/test_main.py": {
+      "sha256": "d59486f2a23d4de64d06693fc110e4d65ad25df81f1ad6263047656d6f88de30",
+      "bytes": 6975
+    }
+  }
+}

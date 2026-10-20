@@ -1,0 +1,97 @@
+{
+  "as_of_date": "2026-10-20",
+  "overall_health": "RED",
+  "health_reasons": [
+    "1 deliverable(s) BLOCKED",
+    "2 milestones overdue",
+    "1 CRITICAL risk(s) unmitigated"
+  ],
+  "total_milestones": 5,
+  "completed_count": 1,
+  "in_progress_count": 2,
+  "blocked_count": 1,
+  "overdue_count": 2,
+  "completion_rate": 20.0,
+  "total_raid_items": 4,
+  "critical_risks_count": 1,
+  "high_risks_count": 1,
+  "active_issues_count": 1,
+  "milestones": [
+    {
+      "line": 2,
+      "id": "M-201",
+      "name": "Cloud Infrastructure Baseline",
+      "owner": "DevOps Lead",
+      "due_date": "2026-10-01",
+      "status": "COMPLETED",
+      "completion_pct": 100.0,
+      "is_overdue": false
+    },
+    {
+      "line": 3,
+      "id": "M-202",
+      "name": "Core Engine API Delivery",
+      "owner": "Backend Squad",
+      "due_date": "2026-10-10",
+      "status": "IN_PROGRESS",
+      "completion_pct": 85.0,
+      "is_overdue": true
+    },
+    {
+      "line": 4,
+      "id": "M-203",
+      "name": "Data Migration Pipeline",
+      "owner": "Data Chapter",
+      "due_date": "2026-10-14",
+      "status": "IN_PROGRESS",
+      "completion_pct": 70.0,
+      "is_overdue": true
+    },
+    {
+      "line": 5,
+      "id": "M-204",
+      "name": "Payment Gateway Integration",
+      "owner": "Integration Team",
+      "due_date": "2026-10-25",
+      "status": "BLOCKED",
+      "completion_pct": 40.0,
+      "is_overdue": false
+    },
+    {
+      "line": 6,
+      "id": "M-205",
+      "name": "Mobile Client Validation",
+      "owner": "QA Chapter",
+      "due_date": "2026-11-01",
+      "status": "NOT_STARTED",
+      "completion_pct": 0.0,
+      "is_overdue": false
+    }
+  ],
+  "action_summary": [
+    {
+      "type": "BLOCKED_MILESTONE",
+      "id": "M-204",
+      "owner": "Integration Team",
+      "action": "Unblock deliverable 'Payment Gateway Integration' (assigned to Integration Team)"
+    },
+    {
+      "type": "CRITICAL_RISK",
+      "id": "R-99",
+      "owner": "Procurement Lead",
+      "action": "Execute mitigation plan for risk 'Payment processor regulatory licensing approval delay' (Procurement Lead)"
+    },
+    {
+      "type": "HIGH_RISK",
+      "id": "R-98",
+      "owner": "Architecture Chapter",
+      "action": "Execute mitigation plan for risk 'Performance degradation under high concurrency' (Architecture Chapter)"
+    },
+    {
+      "type": "ACTIVE_ISSUE",
+      "id": "I-99",
+      "owner": "SecOps Lead",
+      "action": "Resolve project issue 'Staging environment SSL certificate expired' (SecOps Lead)"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "total_records": 8,
+  "valid_records": 3,
+  "anomalies_count": 5,
+  "is_clean": false,
+  "max_shift_hours": 14.0,
+  "min_shift_hours": 1.0,
+  "anomalies": [
+    {
+      "line": 3,
+      "employee_id": "EMP-2001",
+      "shift_id": "SH-01",
+      "type": "DUPLICATE_SWIPE",
+      "severity": "HIGH",
+      "message": "Duplicate clock-in punch '09:00:00' already recorded on line 2."
+    },
+    {
+      "line": 4,
+      "employee_id": "EMP-2002",
+      "shift_id": "SH-02",
+      "type": "MISSING_CLOCK_OUT",
+      "severity": "HIGH",
+      "message": "Incomplete shift: clock-in at '08:30:00' without corresponding clock-out."
+    },
+    {
+      "line": 5,
+      "employee_id": "EMP-2003",
+      "shift_id": "SH-03",
+      "type": "MISSING_CLOCK_IN",
+      "severity": "HIGH",
+      "message": "Missing clock-in punch for shift ending at '17:00:00'."
+    },
+    {
+      "line": 7,
+      "employee_id": "EMP-2005",
+      "shift_id": "SH-05",
+      "type": "EXCESSIVE_SHIFT_HOURS",
+      "severity": "HIGH",
+      "message": "Recorded shift duration is 16.50 hours (> 14.0h threshold)."
+    },
+    {
+      "line": 8,
+      "employee_id": "EMP-2006",
+      "shift_id": "SH-06",
+      "type": "SHORT_SHIFT_ANOMALY",
+      "severity": "MEDIUM",
+      "message": "Recorded shift duration is 0.42 hours (< 1.0h minimum)."
+    }
+  ]
+}

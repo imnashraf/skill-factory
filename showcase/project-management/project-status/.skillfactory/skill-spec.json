@@ -1,0 +1,25 @@
+{
+  "name": "project-status",
+  "description": "Consolidates project milestone trackers and RAID logs, calculating RAG delivery health and action summaries from documented governance rules.",
+  "template_family": "python-script",
+  "version": "0.1.0",
+  "author": "Skill Factory Showcase Team",
+  "license": "MIT",
+  "inputs": [],
+  "outputs": [],
+  "steps": [],
+  "examples": [],
+  "edge_cases": [],
+  "required_tools": [],
+  "scripts_needed": true,
+  "script_language": "python",
+  "target_platforms": [
+    "claude-code",
+    "cursor",
+    "codex",
+    "antigravity"
+  ],
+  "compatibility": null,
+  "metadata": {},
+  "schema_version": 1
+}

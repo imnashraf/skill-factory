@@ -1,0 +1,5 @@
+account,cost_center,department,budget_amount
+GL-5100,CC-101,Engineering,150000.00
+,CC-101,Engineering,45000.00
+GL-5300,CC-101,Engineering,NOT_A_VALID_NUMBER
+GL-5400,CC-102,Product Design,30000.00

@@ -1,0 +1,9 @@
+{
+  "manifest_file": "valid_requirements.txt",
+  "manifest_type": "requirements.txt",
+  "total_dependencies_declared": 6,
+  "unique_packages_count": 6,
+  "total_findings": 0,
+  "is_clean": true,
+  "findings": []
+}

@@ -1,0 +1,69 @@
+{
+  "skill_name": "attendance-validation",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.2",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-20T19:19:25.382389+00:00",
+  "updated_at": "2026-10-20T19:19:25.382389+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "4d256b0fe7e874d9733c0cd3592cfc951e836d42dc51c1d7139581d93ab38a48",
+      "bytes": 647
+    },
+    "README.md": {
+      "sha256": "3ff95aed1a6433a787ae479d3b6cabceb8660f1476ee75fac71bfb5a8cd2e8e0",
+      "bytes": 1784
+    },
+    "SKILL.md": {
+      "sha256": "d9b04e4a1c13b9755e09e00cebc05d500cdc8bf78ada53776645687222cbcb43",
+      "bytes": 1567
+    },
+    "demo-guide.md": {
+      "sha256": "6c9f0d6f67572d6dc50a84eeb8e6ad04a3f2c47a794bb4cd87476417d97d62e4",
+      "bytes": 4503
+    },
+    "expected-outputs/edge_case_attendance_report.json": {
+      "sha256": "3827d464365ac67711959a9c1d4432a01b606037243dcba696a4b40c35f8dc65",
+      "bytes": 1329
+    },
+    "expected-outputs/edge_case_attendance_report.md": {
+      "sha256": "f11b4f42b24acb8521cd252d06385f212c943b0dfbe993b4f626d1bf7830189d",
+      "bytes": 1251
+    },
+    "expected-outputs/valid_attendance_report.json": {
+      "sha256": "b0eff21644093a1b18ae53692c63f109f7cb31dc1f905aa55b9abde761cbc928",
+      "bytes": 164
+    },
+    "expected-outputs/valid_attendance_report.md": {
+      "sha256": "6803f4dd995764344204f0ac17536616b9c7b21f00f0eef6693bc5da4f883a95",
+      "bytes": 460
+    },
+    "problem-statement.md": {
+      "sha256": "84c5f06e7942c90dbe90eca0490ded21218a1df4fa6951cbc7dbacc16cc41b22",
+      "bytes": 2401
+    },
+    "sample-inputs/edge_case_attendance.csv": {
+      "sha256": "31cd830b29f9c032ac8eb86b66045a601d4e4abc7792fd761f31afbbdc392926",
+      "bytes": 381
+    },
+    "sample-inputs/invalid_attendance.csv": {
+      "sha256": "e94344d7c805d6c00b07db78c29624ffd5546c89d130d6266f579d04ebf6a707",
+      "bytes": 177
+    },
+    "sample-inputs/valid_attendance.csv": {
+      "sha256": "3475dd6d635a31653e3c0d40c07a08afd9fc6fdfd72ff2e71fd716c403d801a4",
+      "bytes": 485
+    },
+    "scripts/main.py": {
+      "sha256": "acad29cb21f0a18079b1982602a372563069b29cd144d7e60adeedfc1ea226ce",
+      "bytes": 12011
+    },
+    "tests/test_main.py": {
+      "sha256": "76c51b7ace7087b3e9c1c1aa8a9d2f8070e244a42e7d72f01d9e348bfc73b17d",
+      "bytes": 4069
+    }
+  }
+}

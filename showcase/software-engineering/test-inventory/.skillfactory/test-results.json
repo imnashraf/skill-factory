@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-20T19:36:01.761220+00:00",
+  "success": true,
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_sec": 0.004,
+  "timed_out": false,
+  "test_files_found": 1,
+  "error_message": null,
+  "stdout": "",
+  "stderr": "test_edge_case_untested_modules_and_duplicates (test_main.TestTestInventoryAnalyzer.test_edge_case_untested_modules_and_duplicates)\nVerify detection of untested modules, duplicate tests, and skipped suites. ... ok\ntest_infer_module_name (test_main.TestTestInventoryAnalyzer.test_infer_module_name)\nVerify module naming conventions. ... ok\ntest_markdown_report_matches_expected (test_main.TestTestInventoryAnalyzer.test_markdown_report_matches_expected)\nVerify markdown report matches expected golden report. ... ok\ntest_valid_repo_complete_mapping (test_main.TestTestInventoryAnalyzer.test_valid_repo_complete_mapping)\nVerify valid synthetic repo has 100% test coverage mapping. ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.004s\n\nOK\n"
+}

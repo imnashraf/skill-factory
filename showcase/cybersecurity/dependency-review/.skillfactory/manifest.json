@@ -1,0 +1,69 @@
+{
+  "skill_name": "dependency-review",
+  "skill_version": "0.1.0",
+  "generator_name": "skillfactory",
+  "generator_version": "1.2.2",
+  "template_id": "python-script",
+  "template_version": "1.0.0",
+  "spec_schema_version": 1,
+  "created_at": "2026-10-20T19:45:46.368328+00:00",
+  "updated_at": "2026-10-20T19:45:46.368328+00:00",
+  "files": {
+    ".skillfactory/skill-spec.json": {
+      "sha256": "e49b3ab2be234dadd87be16a61b35bc022e9aeaeefe5036b34abe6e8620ad56e",
+      "bytes": 661
+    },
+    "README.md": {
+      "sha256": "59f0e0a58cb15cfc718ab96ef85500419573aa720ad421afa3fc1f6f98399017",
+      "bytes": 1843
+    },
+    "SKILL.md": {
+      "sha256": "833d1427551e8f09140885a6cac5bb9c98c83dc9df779457c5853a7f05146627",
+      "bytes": 1504
+    },
+    "demo-guide.md": {
+      "sha256": "f23182a226d959ef3d82bd90cee8927cb191b07fc97821feae2bc8b844dd235b",
+      "bytes": 4577
+    },
+    "expected-outputs/edge_case_review_report.json": {
+      "sha256": "c86b61a2ba08908182db656ebf4f891d964aeb2ba41812a4b1799066754dbf0c",
+      "bytes": 2867
+    },
+    "expected-outputs/edge_case_review_report.md": {
+      "sha256": "8cd7a2b04a470a57ed8e997daba729dcb2fabd8a99c057b64df7ba5237d18c62",
+      "bytes": 2667
+    },
+    "expected-outputs/valid_review_report.json": {
+      "sha256": "2f7c3c8f1eded871f58dcc8ead8b0da3105a91b9467b1f8ce729d2fa3cd26317",
+      "bytes": 213
+    },
+    "expected-outputs/valid_review_report.md": {
+      "sha256": "415e4284a1c33934c5baddd441fd30a7091f64c419ef80ee691f32938810eda3",
+      "bytes": 743
+    },
+    "problem-statement.md": {
+      "sha256": "d59e8841fb39ed15e4e90c0a9dcfa3f5abb7fb0ef97c91789a74e847b4383e32",
+      "bytes": 3013
+    },
+    "sample-inputs/edge_case_requirements.txt": {
+      "sha256": "dc67166bd846172f5786a6d3e0ea9bef7f87a093fca2867bd7ea65b84813df61",
+      "bytes": 438
+    },
+    "sample-inputs/invalid_requirements.txt": {
+      "sha256": "bd960c0c181ba6bb1cc915bdad10788af720b9291192bdee06f0931c51a0c92e",
+      "bytes": 108
+    },
+    "sample-inputs/valid_requirements.txt": {
+      "sha256": "4ba041ead18b57a526158fabe4d6cd8e3c362f3de196fbe9db8de0fe27c5dbd4",
+      "bytes": 163
+    },
+    "scripts/main.py": {
+      "sha256": "a6b309c8d7fde92834b8996601a2a4b7ab7a68526969810c410f29d68a7d6f5c",
+      "bytes": 12814
+    },
+    "tests/test_main.py": {
+      "sha256": "eb4db1cba55510db4c5c4f0a9c265154dec8bf74609f4c6a44e66c9df99f3152",
+      "bytes": 3621
+    }
+  }
+}

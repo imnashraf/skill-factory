@@ -1,0 +1,5 @@
+id,type,title,severity,status,owner
+R-99,RISK,Payment processor regulatory licensing approval delay,CRITICAL,OPEN,Procurement Lead
+R-98,RISK,Performance degradation under high concurrency,HIGH,OPEN,Architecture Chapter
+I-99,ISSUE,Staging environment SSL certificate expired,HIGH,OPEN,SecOps Lead
+D-99,DEPENDENCY,Third-party identity token service endpoint,HIGH,OPEN,External Vendor
