@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.1] - 2026-10-20
+
+### Changed
+
+- **PyPI Distribution Package Renamed**: Updated distribution package name in `pyproject.toml` to `agent-skill-factory` to avoid PyPI namespace similarity collisions with legacy packages.
+- **Python Import & CLI Preserved**: The Python runtime import package remains `skillfactory` and both existing CLI commands (`skillfactory` and `skill-factory`) remain unchanged.
+- **PyPI OIDC Publishing**: Updated workflow `.github/workflows/pypi-publish.yml` environment target URL to `https://pypi.org/p/agent-skill-factory`.
+- **Documentation Updates**: Updated `README.md` and quickstart guides with `pip install agent-skill-factory`.
+
+---
+
 ## [1.2.0] - 2026-10-20
 
 ### Added

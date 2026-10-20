@@ -1,46 +1,35 @@
 # Release Execution State Checkpoint
 
 - **Project**: Skill Factory
-- **Target Release**: `v1.2.0`
+- **Target Release**: `v1.2.1` (Patch Release for PyPI Distribution `agent-skill-factory`)
 - **Current Active Branch**: `main`
-- **Latest Commit**: `95725fc8a26b2b7ea089e9d690a6f881f1d1b326` (Merge PR #1 into main)
-- **Release Tag**: `v1.2.0` (pushed to origin)
-- **Current Stage**: Stage 7 — Post-Release Verification Complete & Maintenance Mode Handover
+- **Latest Release Tag**: `v1.2.0` (published on GitHub)
+- **Target Release Tag**: `v1.2.1` (pending maintainer authorization)
+- **Current Stage**: Stage 8 — v1.2.1 Patch Release Prepared (Pending Publication Authorization)
 - **Completed Tasks**:
   - [x] Verified repository state, remote URL, branch tracking, and commit history.
   - [x] Ran full Markdown lint audit across all 152 Markdown files in repo (0 violations).
   - [x] Ran full unit test suite (172/172 tests passed).
-  - [x] Executed 5 real-world reference skill demonstrations (`scripts/run_demos.py`) — all passed.
-  - [x] Executed production benchmark suite (`scripts/run_benchmarks.py`) — all budgets satisfied.
-  - [x] Executed security validation harness (`tests/run_security_validation.py`) — 8/8 threat vectors passed.
-  - [x] Executed multiagent validation matrix (`tests/run_multiagent_validation.py`) — 8/8 platforms passed across all 6 stages.
-  - [x] Validated all 19 skills (14 in `generated-skills/`, 5 in `examples/`) — 100% valid, SHA-256 manifests intact, AST clean, all scoring Grade A (≥93/100), all test suites passed.
-  - [x] Validated all 5 curated skill packs across preview, conflict detection, install, verify, update, and uninstall lifecycle.
-  - [x] Resolved Windows cross-platform test execution (CRLF manifest hashing in `skillfactory/manifest.py`, `.gitattributes`, and `npx` execution in `tests/test_markdown_lint.py`).
-  - [x] Updated `CHANGELOG.md` with comprehensive Phase 16–18 and Markdown lint details.
-  - [x] Pushed development branch `feat/phase-15-master-execution` to GitHub origin.
-  - [x] Created pull request #1 on GitHub (`https://github.com/imnashraf/skill-factory/pull/1`).
-  - [x] Verified full GitHub Actions CI matrix (Run ID `39432685236`): 9/9 jobs passed across Ubuntu, macOS, and Windows on Python 3.9, 3.11, and 3.13.
-  - [x] Rebuilt wheel and source distribution from source commit in clean environment:
-    - Wheel: `skillfactory-1.2.0-py3-none-any.whl` (133,756 bytes, SHA-256: `3c5cde162c2a685841993b952079a6909ff92f275ee2dfad2e850cb95ec0a544`)
-    - Sdist: `skillfactory-1.2.0.tar.gz` (159,708 bytes, SHA-256: `18a63dd2f7d2bd62298c0021164334f221f7f3cc7b7d2aa5bca8341506b1607a`)
-  - [x] Verified archive contents (all 24 templates included, both CLI entry points verified, license, clean metadata).
-  - [x] Executed clean installation tests in isolated virtual environments from both wheel and sdist outside the repository working directory.
-  - [x] Verified PyPI publishing workflow safety (`.github/workflows/pypi-publish.yml` and `release.yml`).
-  - [x] Prepared complete GitHub release documentation, release notes, and checksum manifests (`docs/final-development/releaseNotes_v1.2.0.md`).
-  - [x] Received explicit maintainer authorization to merge, tag, and publish.
-  - [x] Merged PR #1 into `main` (`95725fc8a26b2b7ea089e9d690a6f881f1d1b326`).
-  - [x] Created signed release tag `v1.2.0` on `main` and pushed to origin.
-  - [x] Monitored GitHub Actions Release workflow run `39435392907`: 9/9 matrix jobs passed + `build-and-release` job succeeded.
-  - [x] Verified GitHub Release `v1.2.0` published with release assets and SHA-256 checksums (`https://github.com/imnashraf/skill-factory/releases/tag/v1.2.0`).
-  - [x] Verified PyPI publishing workflow (`pypi-publish.yml`, Run ID `39436469422`). Package building, twine validation, and isolated smoke tests passed; PyPI OIDC upload awaits maintainer registration of pending publisher on pypi.org for new package `skillfactory`.
-  - [x] Performed post-release validation using published GitHub Release wheel in fresh isolated venv outside repo:
-    - `skillfactory --version` & `skill-factory --version` (1.2.0)
-    - `skillfactory doctor` (All checks OK)
-    - `skillfactory search --tag automation` (OK)
-    - Generated sample skill, validated, tested (2 tests, 0 fails), scanned (clean), evaluated (Grade A, 97/100).
+  - [x] Rebuilt distribution packages from source with PyPI distribution name `agent-skill-factory` and version `1.2.1`:
+    - Wheel: `dist/agent_skill_factory-1.2.1-py3-none-any.whl` (131 KB, SHA-256: `1e0ea5604624ad85d224fadd91fbf5f7e2bb542914e9a9fa3ab99c1c22638463`)
+    - Sdist: `dist/agent_skill_factory-1.2.1.tar.gz` (149 KB, SHA-256: `ed03fc49fd1bc792b9e217dfe45c751009361048dab3d5079c094f733eb481da`)
+  - [x] Verified distribution archive contents: package data, templates, license, entry points `skillfactory` and `skill-factory`.
+  - [x] Verified clean isolated venv installation outside repository tree:
+    - Installed `agent-skill-factory-1.2.1`.
+    - `skillfactory --version` returned `skillfactory 1.2.1`.
+    - `skill-factory --version` returned `skillfactory 1.2.1`.
+    - Python import `import skillfactory; print(skillfactory.__version__)` returned `1.2.1`.
+    - `skillfactory search --tag automation` returned reference skill.
+  - [x] Updated `.github/workflows/pypi-publish.yml` to target `https://pypi.org/p/agent-skill-factory`.
+  - [x] Updated `README.md` and `CHANGELOG.md` with `agent-skill-factory` installation.
+  - [x] Prepared release notes for v1.2.1 (`docs/final-development/releaseNotes_v1.2.1.md`).
+- **Pending Tasks (Protected Maintainer Actions)**:
+  - [ ] Commit and push v1.2.1 changes to `main`.
+  - [ ] Tag `v1.2.1` and push tag to origin.
+  - [ ] Trigger GitHub Release and PyPI publication via OIDC Trusted Publisher.
+  - [ ] Perform post-release validation on published PyPI package `agent-skill-factory`.
 - **Latest Test Results**: 172/172 passing (100% pass rate).
-- **CI Workflow Status**: Run `39435392907` succeeded (Release published).
-- **Build Artifact Status**: Wheel and sdist verified and attached to GitHub Release.
-- **Release Blockers**: None. Release lifecycle v1.2.0 fully completed.
-- **Next Action**: Handover project to maintainer and enter normal maintenance mode.
+- **CI Workflow Status**: Ready for v1.2.1 workflow run.
+- **Build Artifact Status**: Wheel and sdist rebuilt, verified, and checksummed.
+- **Release Blockers**: Awaiting explicit maintainer authorization before tagging and publishing v1.2.1.
+- **Next Action**: Present v1.2.1 Release Authorization Summary to maintainer.

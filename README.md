@@ -115,7 +115,10 @@ skillfactory guide
 ### 3. Install via pip
 
 ```bash
-# Install the package locally or from distribution
+# Install from PyPI
+pip install agent-skill-factory
+
+# Or install locally from source
 pip install .
 
 # Run from anywhere via either command
