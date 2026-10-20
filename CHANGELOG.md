@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.2] - 2026-10-20
+
+### Added
+
+- **CLI Simulation Support (`--dry-run`)**: Added `--dry-run` simulation to `skillfactory install` and `skillfactory uninstall`, accurately predicting file operations without creating directories or writing/removing files on disk.
+- **Dry-Run Regression Test Suite**: Added dedicated test coverage in `tests/test_installer.py`.
+
+### Fixed
+
+- **Static Type Checking & Diagnostics**: Remediated Pyrefly and type analysis warnings in `skillfactory/yaml_util.py` and `tests/test_compat.py`.
+
+---
+
 ## [1.2.1] - 2026-10-20
 
 ### Changed

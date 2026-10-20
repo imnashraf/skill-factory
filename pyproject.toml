@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agent-skill-factory"
-version = "1.2.1"
+version = "1.2.2"
 description = "Free, open-source Agent Skills generation and management for Claude Code, Cursor, Codex, Antigravity, Windsurf, Continue, Cline, and Copilot."
 readme = "README.md"
 license = "MIT"
