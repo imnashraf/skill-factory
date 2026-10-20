@@ -4,6 +4,7 @@ from __future__ import annotations
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -192,21 +193,27 @@ class MarkdownQualityRegressionTests(unittest.TestCase):
         config_path = _REPO_ROOT / ".markdownlint.json"
         self.assertTrue(config_path.is_file(), ".markdownlint.json must exist")
 
-        all_md_files = [
-            str(p)
-            for p in _REPO_ROOT.rglob("*.md")
-            if "node_modules" not in p.parts and ".git" not in p.parts
+        cmd = [
+            npx_path,
+            "--yes",
+            "markdownlint-cli",
+            "-c",
+            str(config_path),
+            "**/*.md",
+            "--ignore",
+            "node_modules/**",
         ]
-
         res = subprocess.run(
-            ["npx", "--yes", "markdownlint-cli", "-c", str(config_path)] + all_md_files,
+            cmd,
+            cwd=str(_REPO_ROOT),
             capture_output=True,
             text=True,
+            shell=(sys.platform == "win32"),
         )
         self.assertEqual(
             res.returncode,
             0,
-            f"markdownlint-cli reported violations:\n{res.stderr}",
+            f"markdownlint-cli reported violations:\n{res.stderr or res.stdout}",
         )
 
 
