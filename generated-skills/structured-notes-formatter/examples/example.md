@@ -21,9 +21,11 @@ Action: Write test suite @Sarah
 **Attendees:** Sarah, Dev, Liam
 
 ## Key Decisions
+
 - [x] **Decision:** Use abstract base class for AI providers.
 
 ## Action Items
+
 - [ ] Implement provider base class *(Assignee: Dev)*
 - [ ] Write test suite *(Assignee: Sarah)*
 ```

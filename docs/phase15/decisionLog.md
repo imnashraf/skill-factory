@@ -38,6 +38,7 @@ Workstream A requires preparing Skill Factory for simple, secure PyPI distributi
    ```
 
    This ensures that once installed, users can type either `skillfactory` or `skill-factory` interchangeably.
+
 3. In documentation and onboarding guides, clearly instruct users:
 
    ```bash
@@ -45,6 +46,7 @@ Workstream A requires preparing Skill Factory for simple, secure PyPI distributi
    ```
 
    Explicitly warn users that running `pip install skill-factory` installs an unrelated third-party package (`francois@chastel.co`).
+
 4. Document the exact steps required for human maintainers if namespace transfer or disambiguation (`skillfactory-cli`) is pursued.
 
 ---

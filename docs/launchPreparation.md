@@ -43,6 +43,7 @@ This document provides a launch kit for introducing Skill Factory to developers,
 Skill Factory transforms how developers and non-programmers create, validate, test, install, and share reusable Agent Skills.
 
 ### Highlights in v1.2.0:
+
 - **Zero Runtime Dependencies:** Runs on pure Python standard library (Python 3.9+).
 - **8 Supported AI Coding Assistants:** Full lifecycle compatibility with Claude Code, Google Antigravity, Cursor, OpenAI Codex, Windsurf, Continue, Cline, and GitHub Copilot.
 - **5 Curated Domain Skill Packs (14 Grade A Reference Skills):**

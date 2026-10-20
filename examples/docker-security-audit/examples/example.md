@@ -8,11 +8,13 @@ Run `docker-security-audit` to achieve: Audits Dockerfiles and container configu
 
 ```markdown
 # Review Findings: Candidate Artifact
+
 - Status: ACTION REQUIRED
 - Critical Issues: 1
 - Warnings: 1
 
 ### Detailed Findings
+
 1. Unescaped special character in configuration (High)
    - Detail: Configuration parameter contains raw quotes that break downstream parsing.
    - Recommendation: Use double quotes or standard escaping.

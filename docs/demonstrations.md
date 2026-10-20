@@ -288,6 +288,7 @@ echo 'unannotated fence'
 
 ```markdown
 # Guide
+
 All good.
 ```
 

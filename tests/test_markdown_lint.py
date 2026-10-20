@@ -17,83 +17,138 @@ from skillfactory.spec import VALID_TEMPLATE_FAMILIES, SkillSpec
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def check_markdown_lint_rules(filepath: Path | str, content: str) -> list[str]:
+def check_markdown_lint_rules(filepath: Path | str, content: str, check_embedded: bool = True) -> list[str]:
     """Inspect Markdown text for MD022, MD031, MD032, MD058, MD060 violations."""
     lines = content.splitlines()
-    violations = []
+    violations: list[str] = []
     in_frontmatter = False
-    in_fence = False
 
-    for idx, line in enumerate(lines):
+    # Fence tracking stack: elements are [fence_char, fence_len, fence_lang, start_line, lines_inside]
+    fence_stack: list[list] = []
+    in_list = False
+    list_indent = 0
+
+    idx = 0
+    while idx < len(lines):
+        line = lines[idx]
         line_num = idx + 1
         stripped = line.strip()
 
-        # Handle YAML frontmatter
+        # Handle YAML frontmatter at document start
         if idx == 0 and stripped == "---":
             in_frontmatter = True
+            idx += 1
             continue
         if in_frontmatter:
             if stripped == "---":
                 in_frontmatter = False
+            idx += 1
             continue
 
-        # Handle Code Fences (MD031)
-        if stripped.startswith("```"):
-            if not in_fence:
-                # Opening fence: previous line must be blank if not at start
-                if idx > 0 and lines[idx - 1].strip() != "" and not lines[idx - 1].strip() == "---":
+        # Code fences (MD031) with nested block and backtick length support
+        fence_match = re.match(r"^(`{3,}|~{3,})(.*)$", stripped)
+        if fence_match:
+            f_delim = fence_match.group(1)
+            f_char = f_delim[0]
+            f_len = len(f_delim)
+            f_info = fence_match.group(2).strip().lower()
+
+            if fence_stack and fence_stack[-1][0] == f_char and f_len >= fence_stack[-1][1]:
+                # Closing fence
+                closing_fence = fence_stack.pop()
+                if not fence_stack:
+                    if idx + 1 < len(lines) and lines[idx + 1].strip() != "":
+                        violations.append(
+                            f"{filepath}:{line_num}: MD031 Fenced code block closing must be followed by a blank line"
+                        )
+                if check_embedded and closing_fence[2] in ("markdown", "md"):
+                    embedded_text = "\n".join(closing_fence[4])
+                    sub_violations = check_markdown_lint_rules(
+                        f"{filepath}[embedded L{closing_fence[3]}]",
+                        embedded_text,
+                        check_embedded=True,
+                    )
+                    violations.extend(sub_violations)
+                in_list = False
+                idx += 1
+                continue
+            elif not fence_stack:
+                # Opening top-level fence
+                if idx > 0 and lines[idx - 1].strip() != "" and lines[idx - 1].strip() != "---":
                     violations.append(
                         f"{filepath}:{line_num}: MD031 Fenced code block opening must be preceded by a blank line"
                     )
-                in_fence = True
+                fence_stack.append([f_char, f_len, f_info, line_num, []])
+                in_list = False
+                idx += 1
+                continue
             else:
-                # Closing fence: next line must be blank if not at end
-                if idx + 1 < len(lines) and lines[idx + 1].strip() != "":
-                    violations.append(
-                        f"{filepath}:{line_num}: MD031 Fenced code block closing must be followed by a blank line"
-                    )
-                in_fence = False
+                # Nested fence inside outer fence
+                fence_stack.append([f_char, f_len, f_info, line_num, []])
+                fence_stack[-2][4].append(line)
+                idx += 1
+                continue
+
+        if fence_stack:
+            fence_stack[-1][4].append(line)
+            idx += 1
             continue
 
-        if in_fence:
-            continue
-
-        # Handle Headings (MD022)
+        # Headings (MD022)
         if stripped.startswith("#") and re.match(r"^#{1,6}\s+", stripped):
-            # Preceding line must be blank unless at start or after frontmatter
+            in_list = False
             if idx > 0 and lines[idx - 1].strip() != "" and lines[idx - 1].strip() != "---":
                 violations.append(
                     f"{filepath}:{line_num}: MD022 Heading must be preceded by a blank line"
                 )
-            # Following line must be blank unless at end
             if idx + 1 < len(lines) and lines[idx + 1].strip() != "":
                 violations.append(
                     f"{filepath}:{line_num}: MD022 Heading must be followed by a blank line"
                 )
+            idx += 1
             continue
 
-        # Handle Lists (MD032)
-        is_list = bool(re.match(r"^\s*([*\-+]|\d+\.)\s+", line))
-        prev_is_list = bool(idx > 0 and re.match(r"^\s*([*\-+]|\d+\.)\s+", lines[idx - 1]))
-        next_is_list = bool(idx + 1 < len(lines) and re.match(r"^\s*([*\-+]|\d+\.)\s+", lines[idx + 1]))
-
-        if is_list and not prev_is_list:
-            if idx > 0 and lines[idx - 1].strip() != "":
-                violations.append(
-                    f"{filepath}:{line_num}: MD032 List start must be preceded by a blank line"
-                )
-        if is_list and not next_is_list:
-            if idx + 1 < len(lines) and lines[idx + 1].strip() != "":
+        # Lists (MD032)
+        list_match = re.match(r"^(\s*)([*\-+]|\d+\.)\s+", line)
+        if list_match:
+            cur_indent = len(list_match.group(1))
+            if not in_list:
+                if idx > 0 and lines[idx - 1].strip() != "" and lines[idx - 1].strip() != "---":
+                    violations.append(
+                        f"{filepath}:{line_num}: MD032 List start must be preceded by a blank line"
+                    )
+                in_list = True
+                list_indent = cur_indent
+            idx += 1
+            continue
+        elif in_list:
+            if stripped == "":
+                # Blank line within or ending list; lookahead for continuation
+                next_is_list = False
+                for j in range(idx + 1, len(lines)):
+                    if lines[j].strip() == "":
+                        continue
+                    if re.match(r"^(\s*)([*\-+]|\d+\.)\s+", lines[j]):
+                        next_is_list = True
+                    break
+                if not next_is_list:
+                    in_list = False
+            elif len(line) - len(line.lstrip()) > list_indent or stripped.startswith(("|", ">")):
+                pass
+            else:
                 violations.append(
                     f"{filepath}:{line_num}: MD032 List end must be followed by a blank line"
                 )
+                in_list = False
 
-        # Handle Table delimiter pipe style (MD060) and table boundaries (MD058)
+        # Table delimiter pipe style (MD060) and table boundaries (MD058)
         if stripped.startswith("|") and "---" in stripped:
             if re.search(r"\|---", stripped) or re.search(r"---\|", stripped):
                 violations.append(
                     f"{filepath}:{line_num}: MD060 Table column style missing space padding around pipes"
                 )
+
+        idx += 1
 
     return violations
 
@@ -126,6 +181,45 @@ class MarkdownQualityRegressionTests(unittest.TestCase):
                         f"Template family '{family}' file '{md_file.name}' has Markdown violations: {violations}",
                     )
 
+    def test_all_raw_markdown_templates_have_zero_lint_violations(self):
+        """Verify all raw markdown templates in skillfactory/templates/ have zero lint violations."""
+        templates_dir = _REPO_ROOT / "skillfactory" / "templates"
+        tmpl_files = sorted(templates_dir.rglob("*.md.tmpl"))
+        self.assertGreaterEqual(len(tmpl_files), 15)
+
+        for tmpl_file in tmpl_files:
+            content = tmpl_file.read_text(encoding="utf-8")
+            violations = check_markdown_lint_rules(str(tmpl_file.relative_to(_REPO_ROOT)), content)
+            self.assertEqual(
+                violations,
+                [],
+                f"Template file '{tmpl_file.relative_to(_REPO_ROOT)}' has Markdown violations: {violations}",
+            )
+
+    def test_repeated_generation_and_regeneration_remains_lint_clean(self):
+        """Verify skills generated repeatedly and regenerated with updates remain 100% lint-clean."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = Path(tmpdir)
+            spec = SkillSpec(
+                name="regeneration-test-skill",
+                description="Testing repeated generation consistency and markdown lint hygiene.",
+                template_family="checklist-review",
+                author="Skill Factory CI",
+                license="MIT",
+            )
+            # Initial generation
+            res1 = generate_skill(spec, tmp_root)
+            for md_file in res1.target_path.rglob("*.md"):
+                content = md_file.read_text(encoding="utf-8")
+                self.assertEqual(check_markdown_lint_rules(md_file.name, content), [])
+
+            # Second generation into another location
+            tmp_sub = tmp_root / "second_run"
+            res2 = generate_skill(spec, tmp_sub)
+            for md_file in res2.target_path.rglob("*.md"):
+                content = md_file.read_text(encoding="utf-8")
+                self.assertEqual(check_markdown_lint_rules(md_file.name, content), [])
+
     def test_all_examples_have_zero_lint_violations(self):
         """Verify all skills in examples/ have zero Markdown lint violations."""
         examples_dir = _REPO_ROOT / "examples"
@@ -151,6 +245,86 @@ class MarkdownQualityRegressionTests(unittest.TestCase):
                 violations,
                 [],
                 f"File '{md_file.relative_to(_REPO_ROOT)}' has Markdown violations: {violations}",
+            )
+
+    def test_nine_affected_reference_skills_have_zero_lint_violations(self):
+        """Explicitly verify that each of the nine reported skills has zero MD022, MD031, MD032 violations."""
+        gen_dir = _REPO_ROOT / "generated-skills"
+        if not gen_dir.exists():
+            self.skipTest("generated-skills directory not present")
+
+        nine_skills = [
+            "attendance-csv-validator",
+            "dependency-manifest-reviewer",
+            "financial-variance-analyzer",
+            "invoice-reconciliation",
+            "project-status-reporter",
+            "raid-log-validator",
+            "structured-notes-formatter",
+            "test-inventory-analyzer",
+            "timesheet-reconciliation",
+        ]
+
+        expected_docs = ["SKILL.md", "README.md", "examples/example.md", "references/guide.md"]
+        total_files_checked = 0
+
+        for skill_name in nine_skills:
+            skill_dir = gen_dir / skill_name
+            self.assertTrue(skill_dir.is_dir(), f"Skill directory '{skill_name}' must exist on disk")
+
+            for rel_path in expected_docs:
+                doc_path = skill_dir / rel_path
+                self.assertTrue(doc_path.is_file(), f"Document '{rel_path}' in skill '{skill_name}' must exist")
+                content = doc_path.read_text(encoding="utf-8")
+                violations = check_markdown_lint_rules(f"{skill_name}/{rel_path}", content)
+                self.assertEqual(
+                    violations,
+                    [],
+                    f"Skill '{skill_name}' file '{rel_path}' has Markdown violations: {violations}",
+                )
+                total_files_checked += 1
+
+        self.assertEqual(total_files_checked, 9 * 4)
+
+    def test_ondisk_generated_markdown_files_including_ignored_have_zero_lint_violations(self):
+        """Verify on-disk generated Markdown files, including uncommitted or ignored files, are lint-clean."""
+        gen_dir = _REPO_ROOT / "generated-skills"
+        if not gen_dir.exists():
+            self.skipTest("generated-skills directory not present")
+
+        # Gather every markdown file under generated-skills without skipping untracked or ignored
+        all_md_files = sorted(gen_dir.rglob("*.md"))
+        self.assertGreaterEqual(len(all_md_files), 56)  # 14 skills * 4 docs = 56 docs
+
+        for md_path in all_md_files:
+            content = md_path.read_text(encoding="utf-8")
+            violations = check_markdown_lint_rules(str(md_path.resolve()), content)
+            self.assertEqual(
+                violations,
+                [],
+                f"On-disk file '{md_path.resolve()}' has Markdown violations: {violations}",
+            )
+
+    def test_all_documentation_files_have_zero_lint_violations(self):
+        """Verify documentation files across docs/ and repository root have zero Markdown lint violations."""
+        docs_files = sorted((_REPO_ROOT / "docs").rglob("*.md"))
+        root_docs = [
+            _REPO_ROOT / "README.md",
+            _REPO_ROOT / "CHANGELOG.md",
+            _REPO_ROOT / "CONTRIBUTING.md",
+            _REPO_ROOT / "SECURITY.md",
+            _REPO_ROOT / "CODE_OF_CONDUCT.md",
+            _REPO_ROOT / "SKILL.md",
+        ]
+        target_files = [f for f in docs_files + root_docs if f.is_file()]
+
+        for doc_file in target_files:
+            content = doc_file.read_text(encoding="utf-8")
+            violations = check_markdown_lint_rules(str(doc_file.relative_to(_REPO_ROOT)), content)
+            self.assertEqual(
+                violations,
+                [],
+                f"Documentation file '{doc_file.relative_to(_REPO_ROOT)}' has Markdown violations: {violations}",
             )
 
     def test_root_skill_md_has_zero_lint_violations(self):
@@ -183,6 +357,20 @@ class MarkdownQualityRegressionTests(unittest.TestCase):
         md = req.to_markdown()
         violations = check_markdown_lint_rules("spec.md", md)
         self.assertEqual(violations, [], f"Requirement spec.to_markdown() has violations: {violations}")
+
+    def test_ai_assisted_and_deterministic_fallback_generation_produces_clean_markdown(self):
+        """Verify deterministic fallback specification renders fully lint-clean markdown artifacts."""
+        req = parse_natural_language_requirement(
+            "Build a log anomaly detector for syslog files with severity thresholds."
+        )
+        spec = req.to_spec(author="Automated Fallback Test")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = Path(tmpdir)
+            res = generate_skill(spec, tmp_root)
+            for md_file in res.target_path.rglob("*.md"):
+                content = md_file.read_text(encoding="utf-8")
+                violations = check_markdown_lint_rules(md_file.name, content)
+                self.assertEqual(violations, [], f"AI fallback artifact '{md_file.name}' has violations: {violations}")
 
     def test_markdownlint_cli_execution_if_available(self):
         """If npx is available, verify full repository passes markdownlint-cli with zero errors."""
