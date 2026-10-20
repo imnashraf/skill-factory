@@ -35,6 +35,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Symlink escape defense in file installer and package importer preventing access to files outside skill directory.
   - 3 new prompt injection rules (`INJ005` system prompt extraction, `INJ006` webhook exfiltration, `INJ007` adversarial roleplay).
   - Multiagent validation suite expanded to test all 8 platforms through 6-stage lifecycle (`install`, `validate`, `execute`, `update`, `rollback`, `uninstall`).
+- **Natural-Language Requirements & Behavioral Testing (Phase 16)**:
+  - Natural-language requirement parser (`skillfactory/ai/requirements.py`) extracting intent, constraints, inputs/outputs, and generating an automated assumption register.
+  - Automated behavioral unit test generation (`skillfactory/ai/test_gen.py`) establishing traceability matrices mapped directly to user acceptance criteria.
+  - Deterministic non-AI fallback synthesis engine and bounded self-repair loop with automated code modification diffing.
+- **Skill Library, Multi-Attribute Discovery & Community Quarantine (Phase 17)**:
+  - 3-tier domain taxonomy and multi-attribute catalog search filtering by tags, author, platform, and minimum quality score.
+  - Pack installation preview CLI with target filesystem inspection and destination collision detection.
+  - Community submission quarantine gate with pre-execution AST screening and manifest integrity verification.
+- **Production Hardening & 16-Vector Threat Model (Phase 18)**:
+  - Comprehensive 16-vector security audit (`docs/final-development/securityFindings.md`) covering Zip-Slip, symlink escapes, AST dangerous calls, secrets, prompt injection, and host isolation.
+  - Multiagent validation suite expanded to 8 platforms across all 6 lifecycle stages (`install`, `validate`, `execute`, `update`, `rollback`, `uninstall`).
+  - Production benchmark harness confirming sub-10ms CLI launch and high-throughput AST scanning.
+- **Markdown Quality & CI Regression Suite**:
+  - Full remediation of 179 Markdown formatting violations across all 152 repository documentation files and skills.
+  - Template engine updates ensuring zero blank-line or heading violations (MD022, MD031, MD032, MD040, MD058, MD060).
+  - Automated CI regression test suite (`tests/test_markdown_lint.py`) integrated into GitHub Actions across Ubuntu, macOS, and Windows.
 - **Community & Launch Kit (Workstreams C & H)**:
   - Community launch preparation kit with platform-tailored announcements for Hacker News, Reddit, and LinkedIn.
   - GitHub issue forms (`bug_report.yml`, `feature_request.yml`) and pull request template (`pull_request_template.md`).

@@ -74,7 +74,7 @@
         "concise_main_file": {
           "earned": 5,
           "max": 5,
-          "note": "SKILL.md is concise (40 lines <= 500 limit)"
+          "note": "SKILL.md is concise (47 lines <= 500 limit)"
         },
         "progressive_disclosure": {
           "earned": 5,
@@ -112,7 +112,7 @@
         "behavioral_execution": {
           "earned": 5,
           "max": 5,
-          "note": "Tests ran successfully in 0.04s (< 10.0s timeout)"
+          "note": "Tests ran successfully in 0.05s (< 10.0s timeout)"
         },
         "honest_reporting": {
           "earned": 5,
@@ -153,21 +153,21 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "duration_sec": 0.042,
+    "duration_sec": 0.053,
     "timed_out": false,
     "error_message": null,
     "stdout": "",
-    "stderr": "test_required_files_present (test_runbook.GitReleaseHelperTests) ... ok\ntest_runbook_content_has_release_phases (test_runbook.GitReleaseHelperTests) ... ok\ntest_runbook_references_exist (test_runbook.GitReleaseHelperTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+    "stderr": "test_required_files_present (test_runbook.GitReleaseHelperTests.test_required_files_present) ... ok\ntest_runbook_content_has_release_phases (test_runbook.GitReleaseHelperTests.test_runbook_content_has_release_phases) ... ok\ntest_runbook_references_exist (test_runbook.GitReleaseHelperTests.test_runbook_references_exist) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
     "test_files_found": 1
   },
   "safety_summary": {
     "is_clean": true,
-    "files_scanned": 9,
+    "files_scanned": 10,
     "critical_count": 0,
     "high_count": 0,
     "medium_count": 0,
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-18T22:15:12.326240+00:00"
+  "timestamp": "2026-10-20T13:32:03.010741+00:00"
 }

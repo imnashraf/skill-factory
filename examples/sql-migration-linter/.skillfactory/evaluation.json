@@ -74,7 +74,7 @@
         "concise_main_file": {
           "earned": 5,
           "max": 5,
-          "note": "SKILL.md is concise (29 lines <= 500 limit)"
+          "note": "SKILL.md is concise (34 lines <= 500 limit)"
         },
         "progressive_disclosure": {
           "earned": 5,
@@ -153,21 +153,21 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "duration_sec": 0.046,
+    "duration_sec": 0.048,
     "timed_out": false,
     "error_message": null,
     "stdout": "",
-    "stderr": "test_migration_guidelines_content (test_migration_linter.SqlMigrationLinterTests) ... ok\ntest_references_and_examples_exist (test_migration_linter.SqlMigrationLinterTests) ... ok\ntest_required_files_present (test_migration_linter.SqlMigrationLinterTests) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+    "stderr": "test_migration_guidelines_content (test_migration_linter.SqlMigrationLinterTests.test_migration_guidelines_content) ... ok\ntest_references_and_examples_exist (test_migration_linter.SqlMigrationLinterTests.test_references_and_examples_exist) ... ok\ntest_required_files_present (test_migration_linter.SqlMigrationLinterTests.test_required_files_present) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
     "test_files_found": 1
   },
   "safety_summary": {
     "is_clean": true,
-    "files_scanned": 9,
+    "files_scanned": 10,
     "critical_count": 0,
     "high_count": 0,
     "medium_count": 0,
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-18T22:15:12.432537+00:00"
+  "timestamp": "2026-10-20T13:32:03.234999+00:00"
 }

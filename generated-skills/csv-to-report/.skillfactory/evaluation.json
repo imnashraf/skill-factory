@@ -156,7 +156,7 @@
     "duration_sec": 0.004,
     "timed_out": false,
     "error_message": null,
-    "stdout": "[OK] Report written to /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpi71ittb8/report.json\n",
+    "stdout": "[OK] Report written to /var/folders/cy/xc8sm4pj18gbnss2zy6tnjzc0000gn/T/tmpin3i_1tn/report.json\n",
     "stderr": "test_cli_json_and_output_file (test_main.CsvToReportTests.test_cli_json_and_output_file) ... ok\ntest_markdown_rendering (test_main.CsvToReportTests.test_markdown_rendering) ... ok\ntest_missing_file_error (test_main.CsvToReportTests.test_missing_file_error) ... [ERROR] Failed to analyze CSV: Input file not found: /nonexistent/sample.csv\nok\ntest_numeric_and_categorical_analysis (test_main.CsvToReportTests.test_numeric_and_categorical_analysis) ... ok\ntest_tsv_delimiter_detection (test_main.CsvToReportTests.test_tsv_delimiter_detection) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.004s\n\nOK\n",
     "test_files_found": 1
   },
@@ -169,5 +169,5 @@
     "low_count": 0,
     "findings": []
   },
-  "timestamp": "2026-10-19T20:39:26.598112+00:00"
+  "timestamp": "2026-10-20T13:32:03.490561+00:00"
 }
